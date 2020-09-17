@@ -44,4 +44,7 @@ public interface FalsehoodRepo extends JpaRepository<Falsehood, BigInteger> {
 	
 	@Query("select f from Falsehood f where f.author1 = ?1 or f.author2 = ?1")
 	List<Falsehood> getFalsehoodsByAuthor(String author);
+	
+	@Query("select max(f.id) from Falsehood f")
+	BigInteger getMaxId();
 }

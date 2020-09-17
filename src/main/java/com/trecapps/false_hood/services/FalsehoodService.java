@@ -80,4 +80,38 @@ public class FalsehoodService {
 	{
 		return fRepo.getFalsehoodsByAuthor(author);
 	}
+	
+	public Falsehood insertNewFalsehood(Falsehood f)
+	{
+		BigInteger id = fRepo.getMaxId();
+		
+		if(id == null)
+		{
+			byte[] param = {0};
+			id = new BigInteger(param);
+		}
+		else
+		{
+			id.add(BigInteger.ONE);
+		}
+		
+		f.setId(id);
+		
+		return fRepo.save(f);
+	}
+	
+	public Falsehood updateNewFalsehood(Falsehood f)
+	{
+		return fRepo.save(f);
+	}
+	
+	public boolean insertEntryToStorage(String contents, Falsehood f)
+	{
+		return false;
+	}
+	
+	public boolean appendEntryToStorage(String contents, Falsehood f)
+	{
+		return false;
+	}
 }
