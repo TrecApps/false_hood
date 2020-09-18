@@ -42,7 +42,7 @@ public class FalsehoodStorageAws {
 		return s3 != null;
 	}
 	
-	String addNewFile(String key, String content)
+	public String addNewFile(String key, String content)
 	{
 		try {
 			s3.putObject(bucketName, key, content);
@@ -54,7 +54,7 @@ public class FalsehoodStorageAws {
 		return "Success";
 	}
 	
-	String appendFile(String key, String content)
+	public String appendFile(String key, String content)
 	{		
 		String newContent = "";
 		

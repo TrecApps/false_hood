@@ -11,12 +11,16 @@ import org.springframework.stereotype.Service;
 import com.trecapps.false_hood.model.Falsehood;
 import com.trecapps.false_hood.model.MediaOutlet;
 import com.trecapps.false_hood.repos.FalsehoodRepo;
+import com.trecapps.false_hood.repos.FalsehoodStorageAws;
 
 @Service
 public class FalsehoodService {
 	
 	@Autowired
 	FalsehoodRepo fRepo;
+	
+	@Autowired
+	FalsehoodStorageAws s3BucketManager;
 	
 	public FalsehoodService()
 	{
@@ -92,10 +96,14 @@ public class FalsehoodService {
 		}
 		else
 		{
-			id.add(BigInteger.ONE);
+			System.out.println("Current id " + id);
+			id = id.add(BigInteger.ONE);
+			System.out.println("New id " + id);
 		}
 		
 		f.setId(id);
+		
+		f.setContentId(f.getId().toString() + "-" + f.getSource());
 		
 		return fRepo.save(f);
 	}
@@ -107,7 +115,12 @@ public class FalsehoodService {
 	
 	public boolean insertEntryToStorage(String contents, Falsehood f)
 	{
-		return false;
+		String objectId = f.getContentId();
+		
+		System.out.println("Object ID inserting is " + objectId);
+		
+		return "Success".equals(s3BucketManager.addNewFile(objectId, contents));
+		
 	}
 	
 	public boolean appendEntryToStorage(String contents, Falsehood f)

@@ -21,6 +21,7 @@ import com.trecapps.false_hood.model.FalsehoodUser;
 import com.trecapps.false_hood.model.FullFalsehood;
 import com.trecapps.false_hood.services.FalsehoodService;
 import com.trecapps.false_hood.services.FalsehoodUserService;
+import com.trecapps.false_hood.services.KeywordService;
 import com.trecapps.false_hood.services.MediaOutletService;
 
 @RestController
@@ -35,6 +36,9 @@ public class AuthFalsehoodController {
 	
 	@Autowired
 	FalsehoodUserService userService;
+	
+	@Autowired
+	KeywordService keyService;
 	
 	public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 	
@@ -78,7 +82,7 @@ public class AuthFalsehoodController {
 		
 		meta.setDateMade(new Date(Calendar.getInstance().getTime().getTime()));
 		
-		meta.setContentId(meta.getId().toString() + "-" + meta.getSource());
+		
 		
 		meta = service.insertNewFalsehood(meta);
 		
@@ -89,8 +93,12 @@ public class AuthFalsehoodController {
 			return new ResponseEntity<String>("Failed to Write Falsehood to Storage!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+		String keys = falsehood.getKeywords();
 		
-		
+		if(keys != null)
+		{
+			keyService.addKeywords(keys, meta);
+		}
 		
 		
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);

@@ -20,6 +20,28 @@ public class KeywordService {
 	@Autowired
 	KeywordRepo kRepo;
 	
+	public boolean addKeywords(String keywords, Falsehood f)
+	{
+		String[] words = keywords.split(";;");
+		
+		for(String word: words)
+		{
+			word = word.trim();
+			if(word.length() > 0)
+			{
+				Keyword keyword = (kRepo.existsById(word)) ? kRepo.getOne(word) : new Keyword(word, new ArrayList<Falsehood>());
+
+				List<Falsehood> l = keyword.getFalsehoods();
+				l.add(f);
+				keyword.setFalsehoods(l);
+				
+				kRepo.save(keyword);
+			}
+		}
+		
+		return true;
+	}
+	
 	public List<Falsehood> GetFalsehoodsBySearchTerms(List<String> query)
 	{
 		List<Falsehood> falsehoods = new ArrayList<>();

@@ -8,15 +8,18 @@ public class FullFalsehood {
 	String contents;
 	
 	Falsehood metadata;
+	
+	String keywords;
 
 	/**
 	 * @param contents
 	 * @param metadata
 	 */
-	public FullFalsehood(String contents, Falsehood metadata) {
+	public FullFalsehood(String contents, Falsehood metadata, String keywords) {
 		super();
 		this.contents = contents;
 		this.metadata = metadata;
+		this.keywords = keywords;
 	}
 
 	/**
@@ -53,6 +56,20 @@ public class FullFalsehood {
 	 */
 	public void setMetadata(Falsehood metadata) {
 		this.metadata = metadata;
+	}
+
+	/**
+	 * @return the keywords
+	 */
+	public String getKeywords() {
+		return keywords;
+	}
+
+	/**
+	 * @param keywords the keywords to set
+	 */
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 	
 	
