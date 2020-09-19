@@ -125,3 +125,56 @@ Once your application runs, it should have some data to work with.
     Insert into ADMIN.KEYWORD_FALSEHOODS (KEYWORD_WORD,FALSEHOODS_ID) values ('ukraine',6);
 
 **Note: if you use a name other than _admin_ for ${DBUsername}, you may want to replace _ADMIN_ in the above _Insert_ statements accordingly.**
+
+## Available Endpoints
+
+#### Retrieve list of falsehoods
+
+* Purpose: Retrieves list of falsehoods according to parameters
+* Method: POST
+* Endpoint: /Falsehood/list
+* Token required: No
+* Example Input:
+
+```
+{
+	"terms": "Russiagate",
+	"to": "2020-01-01T18:25:43.511Z",
+	"from": null,
+	"outlets": ["Fox News", "MSNBC"],
+	"numberOfEntries": 5,
+	"minimum": null,
+	"maximum": null,
+	"authors": ["author1"]
+}
+```
+
+#### Retrieve falsehood by ID
+
+* Purpose: retireves 1 falsehood
+* Method: GET
+* Endpoint: /Falsehood/id/{id}
+* Token Required: No
+
+#### Add a new falsehood
+
+* Purpose: Submits a new falsehood to the service
+* Method: POST
+* Endpoint: /Update/Falsehood/Insert
+* Token Required: Yes
+* Example Input:
+
+```
+{
+    "metadata": {
+        "outlet": {
+            "outletId": 9
+        },
+        "mediaType": 0,
+        "severity": 4,
+        "author1": "",
+        "source": ""
+    },
+    "contents": ""
+}
+```
