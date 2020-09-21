@@ -13,4 +13,6 @@ public interface CommonLieRepo extends JpaRepository<CommonLie, Long>
 {
 	@Query("select cl from CommonLie cl where ?1 like cl.title")
 	List<CommonLie> getCommonLieByTitleStart(String title);
+	
+	
 }
