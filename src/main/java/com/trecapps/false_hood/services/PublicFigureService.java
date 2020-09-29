@@ -1,8 +1,13 @@
 package com.trecapps.false_hood.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.trecapps.false_hood.model.FalsehoodUser;
 import com.trecapps.false_hood.model.PublicFigure;
 import com.trecapps.false_hood.model.PublicFigureEntry;
 import com.trecapps.false_hood.repos.FalsehoodStorageAws;
@@ -17,8 +22,11 @@ public class PublicFigureService
 	@Autowired
 	PublicFigureRepo figureRepo;
 	
+	@Autowired
+	FalsehoodUserService userService;
 	
-	public String submitPublicFigure(PublicFigureEntry publicFigure)
+	
+	public String submitPublicFigure(PublicFigureEntry publicFigure, FalsehoodUser user)
 	{
 		if(publicFigure == null)
 		{
@@ -37,6 +45,8 @@ public class PublicFigureService
 		
 		PublicFigure pFigure = publicFigure.getFigure();
 		
+		pFigure.setSubmitter(user);
+		
 		pFigure = figureRepo.save(pFigure);
 		
 		if(!"Success".equals(awsStorage.addNewFile("PublicFigure-" + pFigure.getId(), publicFigure.getText())))
@@ -48,5 +58,47 @@ public class PublicFigureService
 		
 		
 		return "";
+	}
+	
+	
+	public String approveRejectPublicFigure(Long id, boolean approve)
+	{
+		if(id == null)
+		{
+			return "Id of Public Figure was null!";
+		}
+		
+		if(!figureRepo.existsById(id))
+		{
+			return "Id of Public Figure does not currently exist in our Records!";
+		}
+		
+		PublicFigure pFigure = figureRepo.getOne(id);
+		
+		
+		byte setApproval = (byte) (pFigure.getApproved() + (byte)((approve) ? 1:-1));
+		
+		pFigure.setApproved(setApproval);
+		
+		figureRepo.save(pFigure);
+		
+		FalsehoodUser fUser = pFigure.getSubmitter();
+		
+		if(fUser != null)
+		{
+			int points = (approve) ? 5 : -3;
+			userService.adjustCredibility(fUser, points);
+		}
+		
+		return "";
+	}
+	
+	public List<PublicFigure> getPublicFigures(boolean showAll, int page, int pageSize)
+	{
+		
+		Page<PublicFigure> figureList = showAll ? figureRepo.findAll(PageRequest.of(page, pageSize)):
+			figureRepo.findAllApproved(PageRequest.of(page, pageSize));
+		
+		return figureList.getContent();
 	}
 }

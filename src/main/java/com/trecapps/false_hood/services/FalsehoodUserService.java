@@ -120,4 +120,15 @@ public class FalsehoodUserService {
 		
 		return user;
 	}
+	
+	public void adjustCredibility(FalsehoodUser user, int points)
+	{
+		long id = user.getUserId();
+		
+		if(!userRepo.existsById(id))return;
+		
+		user.setCredit(user.getCredit() + points);
+		
+		userRepo.save(user);
+	}
 }

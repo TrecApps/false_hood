@@ -24,6 +24,9 @@ public class PublicFigure
 	
 	@Column
 	byte approved;
+	
+	@Column
+	FalsehoodUser submitter;
 
 	/**
 	 * @param id
@@ -41,6 +44,27 @@ public class PublicFigure
 	}
 	
 	
+	
+
+	/**
+	 * @return the submitter
+	 */
+	public FalsehoodUser getSubmitter() {
+		return submitter;
+	}
+
+
+
+
+	/**
+	 * @param submitter the submitter to set
+	 */
+	public void setSubmitter(FalsehoodUser submitter) {
+		this.submitter = submitter;
+	}
+
+
+
 
 	/**
 	 * @return the approved
