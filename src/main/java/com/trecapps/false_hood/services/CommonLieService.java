@@ -12,6 +12,7 @@ import com.trecapps.false_hood.model.CommonLieSubmission;
 import com.trecapps.false_hood.model.Falsehood;
 import com.trecapps.false_hood.repos.CommonLieRepo;
 import com.trecapps.false_hood.repos.FalsehoodRepo;
+import com.trecapps.false_hood.repos.FalsehoodStorageAws;
 
 @Service
 public class CommonLieService {
@@ -21,6 +22,9 @@ public class CommonLieService {
 	
 	@Autowired
 	FalsehoodRepo falsehoodRepo;
+	
+	@Autowired
+	FalsehoodStorageAws awsStorageRepo;
 	
 	CommonLie GetLieById(long id)
 	{
@@ -56,6 +60,14 @@ public class CommonLieService {
 			falsehoods.add(falsehoodRepo.getOne(bInt));
 		}
 		
+		String storageKey = "common_lie-" + lie.getId();
+		
+		if(!"Success".equals(awsStorageRepo.addNewFile(storageKey, cls.getContents())))
+		{
+			clRepo.delete(lie);
+			return "Failed to write Common Lie to storage";
+		}
+		
 		for(Falsehood f: falsehoods)
 		{
 			f.setCommonLie(lie);
@@ -66,4 +78,6 @@ public class CommonLieService {
 		
 		return "";
 	}
+	
+	
 }

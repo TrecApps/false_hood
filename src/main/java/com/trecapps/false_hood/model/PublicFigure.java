@@ -21,6 +21,9 @@ public class PublicFigure
 	
 	@Column
 	String lastName;
+	
+	@Column
+	byte approved;
 
 	/**
 	 * @param id
@@ -34,7 +37,28 @@ public class PublicFigure
 		this.firstname = firstname;
 		this.middleNames = middleNames;
 		this.lastName = lastName;
+		approved = (byte)0;
 	}
+	
+	
+
+	/**
+	 * @return the approved
+	 */
+	public byte getApproved() {
+		return approved;
+	}
+
+
+
+	/**
+	 * @param approved the approved to set
+	 */
+	public void setApproved(byte approved) {
+		this.approved = approved;
+	}
+
+
 
 	/**
 	 * 

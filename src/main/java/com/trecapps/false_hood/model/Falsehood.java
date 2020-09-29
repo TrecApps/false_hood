@@ -83,10 +83,10 @@ public class Falsehood {
 	byte severity;
 	
 	@Column
-	String author1;
+	PublicFigure author1;
 	
 	@Column
-	String author2;
+	PublicFigure author2;
 	
 	@Column
 	String source;
@@ -98,7 +98,7 @@ public class Falsehood {
 	String contentId;
 
 
-	public Falsehood(BigInteger id, MediaOutlet outlet, byte status, byte mediaType, CommonLie commonLie, byte severity, String author1, String author2,
+	public Falsehood(BigInteger id, MediaOutlet outlet, byte status, byte mediaType, CommonLie commonLie, byte severity, PublicFigure author1, PublicFigure author2,
 			 String source, Date dateMade, String contentId) {
 		super();
 		this.id = id;
@@ -174,19 +174,19 @@ public class Falsehood {
 		this.severity = severity;
 	}
 
-	public String getAuthor1() {
+	public PublicFigure getAuthor1() {
 		return author1;
 	}
 
-	public void setAuthor1(String author1) {
+	public void setAuthor1(PublicFigure author1) {
 		this.author1 = author1;
 	}
 
-	public String getAuthor2() {
+	public PublicFigure getAuthor2() {
 		return author2;
 	}
 
-	public void setAuthor2(String author2) {
+	public void setAuthor2(PublicFigure author2) {
 		this.author2 = author2;
 	}
 

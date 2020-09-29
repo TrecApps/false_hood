@@ -11,15 +11,18 @@ public class CommonLieSubmission {
 	CommonLie lie;
 	
 	List<BigInteger> falsehoods;
+	
+	String contents;
 
 	/**
 	 * @param lie
 	 * @param falsehoods
 	 */
-	public CommonLieSubmission(CommonLie lie, List<BigInteger> falsehoods) {
+	public CommonLieSubmission(CommonLie lie, List<BigInteger> falsehoods, String contents) {
 		super();
 		this.lie = lie;
 		this.falsehoods = falsehoods;
+		this.contents = contents;
 	}
 
 	/**
@@ -28,6 +31,22 @@ public class CommonLieSubmission {
 	public CommonLieSubmission() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	/**
+	 * @return the contents
+	 */
+	public String getContents() {
+		return contents;
+	}
+
+	/**
+	 * @param contents the contents to set
+	 */
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	/**
