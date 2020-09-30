@@ -26,7 +26,8 @@ import com.trecapps.false_hood.services.MediaOutletService;
 
 @RestController
 @RequestMapping("/Update/Falsehood")
-public class AuthFalsehoodController {
+public class AuthFalsehoodController extends AuthenticationControllerBase 
+{
 
 	@Autowired
 	FalsehoodService service;
@@ -34,15 +35,18 @@ public class AuthFalsehoodController {
 	@Autowired
 	MediaOutletService mediaService;
 	
-	@Autowired
-	FalsehoodUserService userService;
-	
+
 	@Autowired
 	KeywordService keyService;
 	
 	public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 	
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
+	
+	public AuthFalsehoodController(@Autowired FalsehoodUserService service)
+	{
+		super(service);
+	}
 	
 	@GetMapping("/GetUser")
 	ResponseEntity<FalsehoodUser> getUser(@RequestParam("userId")BigInteger userId)
@@ -52,22 +56,13 @@ public class AuthFalsehoodController {
 	
 	@PostMapping("/Insert")
 	ResponseEntity<String> insertFalsehood(RequestEntity<FullFalsehood> entity)
-	{
-		HttpHeaders headers = entity.getHeaders();
+	{		
+		FalsehoodUser user = super.getUser(entity);
 		
-		String token = headers.getFirst("Authorization");
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_SUBMIT_NEW);
 		
-		FalsehoodUser user = userService.getUserFromToken(token);
-		
-		if(user == null)
-		{
-			return new ResponseEntity<String>("Could Not Authenticate User", HttpStatus.UNAUTHORIZED);
-		}
-		
-		if( user.getCredit() < MIN_CREDIT_SUBMIT_NEW)
-		{
-			return new ResponseEntity<String>("User did not have the Credibility needed", HttpStatus.FORBIDDEN);
-		}
+		if(ret != null)
+			return ret;
 		
 		FullFalsehood falsehood = entity.getBody();
 		
@@ -107,21 +102,12 @@ public class AuthFalsehoodController {
 	@PutMapping("/Update")
 	ResponseEntity<String> approveFalsehood(RequestEntity<FullFalsehood> entity)
 	{
-		HttpHeaders headers = entity.getHeaders();
+		FalsehoodUser user = super.getUser(entity);
 		
-		String token = headers.getFirst("Authorization");
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
 		
-		FalsehoodUser user = userService.getUserFromToken(token);
-		
-		if(user == null)
-		{
-			return new ResponseEntity<String>("Could Not Authenticate User", HttpStatus.UNAUTHORIZED);
-		}
-		
-		if( user.getCredit() < MIN_CREDIT_APPROVE_REJECT)
-		{
-			return new ResponseEntity<String>("Could Not Authenticate User", HttpStatus.FORBIDDEN);
-		}
+		if(ret != null)
+			return ret;
 		
 		FullFalsehood falsehood = entity.getBody();
 		

@@ -1,7 +1,6 @@
 package com.trecapps.false_hood.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +15,23 @@ import com.trecapps.false_hood.services.FalsehoodUserService;
 
 @RestController
 @RequestMapping("/CommonLie")
-public class CommonLieController {
+public class CommonLieController extends AuthenticationControllerBase
+{
 	
 	@Autowired
 	CommonLieService clService;
 	
-	@Autowired
-	FalsehoodUserService userService;
-	
 	public static final int MIN_CREDIT_PROPOSE_COMMON_LIE = 40;
+	
+	public CommonLieController(@Autowired FalsehoodUserService service)
+	{
+		super(service);
+	}
 	
 	@PostMapping("/insert")
 	ResponseEntity<String> insertCommonLie(RequestEntity<CommonLieSubmission> sub)
 	{
-		HttpHeaders headers = sub.getHeaders();
-		
-		String token = headers.getFirst("Authorization");
-		
-		FalsehoodUser user = userService.getUserFromToken(token);
+		FalsehoodUser user = super.getUser(sub);
 		
 		if(user == null)
 		{

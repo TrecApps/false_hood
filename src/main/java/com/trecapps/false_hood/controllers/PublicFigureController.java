@@ -3,7 +3,6 @@ package com.trecapps.false_hood.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import com.trecapps.false_hood.services.PublicFigureService;
 
 @RestController
 @RequestMapping("/PublicFigure")
-public class PublicFigureController
+public class PublicFigureController extends AuthenticationControllerBase
 {
 
 	@Autowired
@@ -38,24 +37,20 @@ public class PublicFigureController
 	
 	public static final int MIN_CREDIT_VIEW_NON_APPROVE = 20;
 	
+	public PublicFigureController(@Autowired FalsehoodUserService service)
+	{
+		super(service);
+	}
+	
 	@PostMapping("/Add")
 	ResponseEntity<String> addPublicFigure(RequestEntity<PublicFigureEntry> entry)
 	{
-		HttpHeaders headers = entry.getHeaders();
+		FalsehoodUser user = super.getUser(entry);
 		
-		String token = headers.getFirst("Authorization");
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_ADD_FIGURE);
 		
-		FalsehoodUser user = userService.getUserFromToken(token);
-		
-		if(user == null)
-		{
-			return new ResponseEntity<String>("Could Not Authenticate User", HttpStatus.UNAUTHORIZED);
-		}
-		
-		if( user.getCredit() < MIN_CREDIT_ADD_FIGURE)
-		{
-			return new ResponseEntity<String>("User did not have the Credibility needed", HttpStatus.FORBIDDEN);
-		}
+		if(ret != null)
+			return ret;
 		
 		String response = pfService.submitPublicFigure(entry.getBody(), user);
 		
@@ -68,21 +63,12 @@ public class PublicFigureController
 	@PutMapping("/Approve")
 	ResponseEntity<String> approvePublicFigure(RequestEntity<Long> entry)
 	{
-		HttpHeaders headers = entry.getHeaders();
+		FalsehoodUser user = super.getUser(entry);
 		
-		String token = headers.getFirst("Authorization");
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_FIGURE);
 		
-		FalsehoodUser user = userService.getUserFromToken(token);
-		
-		if(user == null)
-		{
-			return new ResponseEntity<String>("Could Not Authenticate User", HttpStatus.UNAUTHORIZED);
-		}
-		
-		if( user.getCredit() < MIN_CREDIT_APPROVE_FIGURE)
-		{
-			return new ResponseEntity<String>("User did not have the Credibility needed", HttpStatus.FORBIDDEN);
-		}
+		if(ret != null)
+			return ret;
 		
 		String response = pfService.approveRejectPublicFigure(entry.getBody(), true);
 		
@@ -95,21 +81,12 @@ public class PublicFigureController
 	@PutMapping("/Reject")
 	ResponseEntity<String> rejectPublicFigure(RequestEntity<Long> entry)
 	{
-		HttpHeaders headers = entry.getHeaders();
+		FalsehoodUser user = super.getUser(entry);
 		
-		String token = headers.getFirst("Authorization");
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_FIGURE);
 		
-		FalsehoodUser user = userService.getUserFromToken(token);
-		
-		if(user == null)
-		{
-			return new ResponseEntity<String>("Could Not Authenticate User", HttpStatus.UNAUTHORIZED);
-		}
-		
-		if( user.getCredit() < MIN_CREDIT_APPROVE_FIGURE)
-		{
-			return new ResponseEntity<String>("User did not have the Credibility needed", HttpStatus.FORBIDDEN);
-		}
+		if(ret != null)
+			return ret;
 		
 		String response = pfService.approveRejectPublicFigure(entry.getBody(), false);
 		
@@ -122,11 +99,7 @@ public class PublicFigureController
 	@GetMapping("/list")
 	ResponseEntity<List<PublicFigure>> getFigures(@SuppressWarnings("rawtypes") RequestEntity entry, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "20")int pageSize)
 	{
-		HttpHeaders headers = entry.getHeaders();
-		
-		String token = headers.getFirst("Authorization");
-		
-		FalsehoodUser user = userService.getUserFromToken(token);
+		FalsehoodUser user = super.getUser(entry);
 		
 		boolean viewAll = (user != null && user.getCredit() > MIN_CREDIT_VIEW_NON_APPROVE);
 		

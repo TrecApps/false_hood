@@ -42,6 +42,27 @@ public class FalsehoodStorageAws {
 		return s3 != null;
 	}
 	
+	public String retrieveContents(String key) throws IOException
+	{
+		String newContent;
+		
+		try(S3Object obj = s3.getObject(bucketName, key);
+				S3ObjectInputStream objContent = obj.getObjectContent();)
+		{			
+			byte[] bytes = objContent.readAllBytes();
+		
+			newContent = new String(bytes);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+			
+			throw e;
+		}
+		
+		return newContent;
+	}
+	
 	public String addNewFile(String key, String content)
 	{
 		try {
