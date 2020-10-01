@@ -86,7 +86,7 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
-		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_SUBMIT_APPEAL);
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_PETITION_APPEAL);
 		if(ret != null)
 			return ret;
 		
@@ -97,7 +97,7 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 		
 		sign.setUser(user);
 		
-		String retString = appealService.signAppeal(sign);
+		String retString = appealService.signAppeal(sign, user.getEmail());
 		
 		if("".equals(retString))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
@@ -108,6 +108,37 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	@PutMapping(value= "/Petition", consumes="application/x-www-form-urlencoded")
 	ResponseEntity<String> verifyPetitionSignature(RequestEntity<MultiValueMap<String, String>> entry)
 	{
-		return null;
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_PETITION_APPEAL);
+		if(ret != null)
+			return ret;
+		
+		MultiValueMap<String, String> map = entry.getBody();
+		
+		if(map == null)
+			return new ResponseEntity<String>("Null Body Provided!", HttpStatus.BAD_REQUEST);
+		
+		String idStr = map.getFirst("appealId");
+		String token = map.getFirst("validation");
+		
+		String result;
+		
+		try
+		{
+			BigInteger id = new BigInteger(idStr);
+			
+			result = appealService.verifySignature(user, id, token);
+			
+		}
+		catch(NumberFormatException e)
+		{
+			return new ResponseEntity<String>("The 'appealId' needs to be a number!", HttpStatus.BAD_REQUEST);
+		}
+		
+		if("".equals(result))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return  new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
 	}
 }

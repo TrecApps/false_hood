@@ -14,16 +14,40 @@ public class FalsehoodUser {
 	
 	@Column
 	int credit;
+	
+	@Column
+	String email;
 
 	/**
 	 * @param userId
 	 * @param credit
 	 */
-	public FalsehoodUser(long userId, int credit) {
+	public FalsehoodUser(long userId, int credit, String email) {
 		super();
 		this.userId = userId;
 		this.credit = credit;
+		this.email = email;
 	}
+	
+	
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 
 	/**
 	 * 

@@ -97,16 +97,37 @@ public class FalsehoodUserService {
 			e.printStackTrace();
 			return null;
 		}
+		
+		// If the Account isn't validated, then the email account cannot be verified
+		Claim validClaim = decodedJwt.getClaim("Validated");
+		Boolean validBool = validClaim.asBoolean();
+		
+		if(validBool == null || !validBool.booleanValue())
+		{
+			return null;
+		}
+		
 			
 		Claim idClaim = decodedJwt.getClaim("ID");
 		
 		Long idLong = idClaim.asLong();
+		
+		Claim emailClaim = decodedJwt.getClaim("MainEmail");
+		
+		String emailStr = emailClaim.asString();
+		
+
 		
 		if(idLong == null)
 		{
 			System.out.println("User ID turned out to be null");
 			return null;
 		}
+		
+				if(emailStr == null)
+			return null;
+		
+		
 		FalsehoodUser user;
 		
 		if(userRepo.existsById(idLong))
@@ -115,7 +136,7 @@ public class FalsehoodUserService {
 		}
 		else
 		{
-			user = userRepo.save(new FalsehoodUser(idLong, 5));
+			user = userRepo.save(new FalsehoodUser(idLong, 5, emailStr));
 		}
 		
 		return user;
