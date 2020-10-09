@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trecapps.false_hood.model.FalsehoodUser;
-import com.trecapps.false_hood.model.PublicFigure;
-import com.trecapps.false_hood.model.PublicFigureEntry;
-import com.trecapps.false_hood.services.FalsehoodUserService;
-import com.trecapps.false_hood.services.PublicFigureService;
+import com.trecapps.false_hood.publicFigure.PublicFigure;
+import com.trecapps.false_hood.publicFigure.PublicFigureEntry;
+import com.trecapps.false_hood.publicFigure.PublicFigureService;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
 
 @RestController
 @RequestMapping("/PublicFigure")

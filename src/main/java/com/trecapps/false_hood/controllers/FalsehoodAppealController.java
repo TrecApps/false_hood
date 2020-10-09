@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trecapps.false_hood.model.FalsehoodAppeal;
-import com.trecapps.false_hood.model.FalsehoodAppealEntry;
-import com.trecapps.false_hood.model.FalsehoodAppealSignature;
-import com.trecapps.false_hood.model.FalsehoodUser;
-import com.trecapps.false_hood.services.FalsehoodAppealService;
-import com.trecapps.false_hood.services.FalsehoodUserService;
+import com.trecapps.false_hood.appeals.FalsehoodAppeal;
+import com.trecapps.false_hood.appeals.FalsehoodAppealEntry;
+import com.trecapps.false_hood.appeals.FalsehoodAppealService;
+import com.trecapps.false_hood.appeals.FalsehoodAppealSignature;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
 
 @RestController
 @RequestMapping("/Appeal")

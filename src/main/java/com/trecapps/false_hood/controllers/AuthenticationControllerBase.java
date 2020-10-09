@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
-import com.trecapps.false_hood.model.FalsehoodUser;
-import com.trecapps.false_hood.services.FalsehoodUserService;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
 
 public class AuthenticationControllerBase {
 	

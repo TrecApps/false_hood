@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trecapps.false_hood.model.Falsehood;
-import com.trecapps.false_hood.model.MediaOutlet;
-import com.trecapps.false_hood.model.SearchFalsehood;
-import com.trecapps.false_hood.model.Severity;
-import com.trecapps.false_hood.services.FalsehoodService;
-import com.trecapps.false_hood.services.KeywordService;
-import com.trecapps.false_hood.services.MediaOutletService;
+import com.trecapps.false_hood.falsehoods.Falsehood;
+import com.trecapps.false_hood.falsehoods.FalsehoodService;
+import com.trecapps.false_hood.falsehoods.MediaOutlet;
+import com.trecapps.false_hood.falsehoods.MediaOutletService;
+import com.trecapps.false_hood.falsehoods.SearchFalsehood;
+import com.trecapps.false_hood.keywords.KeywordService;
+import com.trecapps.false_hood.miscellanous.Severity;
 
 @RestController
 @RequestMapping("/Falsehood")

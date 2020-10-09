@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trecapps.false_hood.model.CommonLieSubmission;
-import com.trecapps.false_hood.model.FalsehoodUser;
-import com.trecapps.false_hood.services.CommonLieService;
-import com.trecapps.false_hood.services.FalsehoodUserService;
+import com.trecapps.false_hood.commonLie.CommonLieService;
+import com.trecapps.false_hood.commonLie.CommonLieSubmission;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
 
 @RestController
 @RequestMapping("/CommonLie")
