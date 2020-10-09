@@ -50,7 +50,8 @@ public class PublicFalsehood {
 	@Transient
 	public static final byte REJECTED = 6;
 	
-	@Column
+	@ManyToOne
+	@JoinColumn
 	PublicFigure official;
 	
 	@Column
@@ -74,11 +75,13 @@ public class PublicFalsehood {
 	@Transient
 	public static final byte OTHER = 15;
 	
-	@Column
-	String region;
+	@ManyToOne
+	@JoinColumn
+	Region region;
 	
-	@Column
-	String institution;
+	@ManyToOne
+	@JoinColumn
+	Institution institution;
 	
 	@Column
 	byte severity;
@@ -106,7 +109,7 @@ public class PublicFalsehood {
 	 * @param severity
 	 */
 	public PublicFalsehood(BigInteger id, CommonLie commonLie, byte status, PublicFigure official, byte officialType,
-			String region, String institution, byte severity, Date dateMade) {
+			Region region, Institution institution, byte severity, Date dateMade) {
 		super();
 		this.id = id;
 		this.commonLie = commonLie;
@@ -192,28 +195,28 @@ public class PublicFalsehood {
 	/**
 	 * @return the region
 	 */
-	public String getRegion() {
+	public Region getRegion() {
 		return region;
 	}
 
 	/**
 	 * @param region the region to set
 	 */
-	public void setRegion(String region) {
+	public void setRegion(Region region) {
 		this.region = region;
 	}
 
 	/**
 	 * @return the institution
 	 */
-	public String getInstitution() {
+	public Institution getInstitution() {
 		return institution;
 	}
 
 	/**
 	 * @param institution the institution to set
 	 */
-	public void setInstitution(String institution) {
+	public void setInstitution(Institution institution) {
 		this.institution = institution;
 	}
 

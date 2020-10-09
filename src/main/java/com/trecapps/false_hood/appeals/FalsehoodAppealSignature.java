@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.trecapps.false_hood.users.FalsehoodUser;
@@ -16,10 +18,12 @@ public class FalsehoodAppealSignature {
 	@Id
 	BigInteger id;
 	
-	@Column
+	@ManyToOne
+	@JoinColumn
 	FalsehoodAppeal appeal;
 	
-	@Column
+	@ManyToOne
+	@JoinColumn
 	FalsehoodUser user;
 	
 	@Column

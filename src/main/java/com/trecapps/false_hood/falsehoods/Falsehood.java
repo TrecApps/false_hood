@@ -83,10 +83,12 @@ public class Falsehood {
 	@Column
 	byte severity;
 	
-	@Column
+	@ManyToOne
+	@JoinColumn
 	PublicFigure author1;
 	
-	@Column
+	@ManyToOne
+	@JoinColumn
 	PublicFigure author2;
 	
 	@Column

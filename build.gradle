@@ -45,7 +45,7 @@ dependencies {
     // AWS S3
     implementation 'com.amazonaws:aws-java-sdk:+'
     // Azure Storage
-    implementation 'com.microsoft.azure:spring-starter-azure-storage:+'
+    // implementation 'com.microsoft.azure:spring-starter-azure-storage:+'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.0-jre'
