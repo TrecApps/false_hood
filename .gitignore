@@ -16,3 +16,6 @@ gradlew
 .classpath
 
 gradle/**
+
+# Ignore IntelliJ
+.idea

@@ -3,6 +3,7 @@ package com.trecapps.false_hood.falsehoods;
 import java.sql.Date;
 import java.util.List;
 
+import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.stereotype.Component;
 
 import com.trecapps.false_hood.miscellanous.Severity;
@@ -38,7 +39,7 @@ public class SearchFalsehood
 	/**
 	 * Authors involved in the list
 	 */
-	List<String> authors;
+	List<PublicFigure> authors;
 	
 	
 
@@ -53,7 +54,7 @@ public class SearchFalsehood
 	 * @param authors
 	 */
 	public SearchFalsehood(String terms, Date to, Date from, List<String> outlets, int numberOfEntries,
-			Severity minimum, Severity maximum, List<String> authors) {
+			Severity minimum, Severity maximum, List<PublicFigure> authors) {
 		super();
 		this.terms = terms;
 		this.to = to;
@@ -171,14 +172,14 @@ public class SearchFalsehood
 	/**
 	 * @return the authors
 	 */
-	public List<String> getAuthors() {
+	public List<PublicFigure> getAuthors() {
 		return authors;
 	}
 
 	/**
 	 * @param authors the authors to set
 	 */
-	public void setAuthors(List<String> authors) {
+	public void setAuthors(List<PublicFigure> authors) {
 		this.authors = authors;
 	}
 	

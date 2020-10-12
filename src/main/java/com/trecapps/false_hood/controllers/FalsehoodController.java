@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,7 @@ public class FalsehoodController {
 	}
 	
 	
-	@GetMapping("id/{id}")
+	@GetMapping("/id/{id}")
 	Falsehood GetFalsehood(@PathVariable("id")BigInteger id)
 	{
 		System.out.println("id endpoint hit! id = " + id);
@@ -57,7 +58,7 @@ public class FalsehoodController {
 	@PostMapping("/list")
 	List<Falsehood> GetFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
-		List<String> authors = searchObj.getAuthors();
+		List<PublicFigure> authors = searchObj.getAuthors();
 		List<String> outletsStr = searchObj.getOutlets();
 		
 		List<MediaOutlet> outlets = null; 
@@ -152,9 +153,6 @@ public class FalsehoodController {
 		if(terms != null && !terms.trim().equals(""))
 		{
 			List<String> termList = new LinkedList<String>();
-			
-		//	if(terms)
-			
 			while(terms.indexOf(" ") != -1)
 			{
 				boolean inQuotes = false;

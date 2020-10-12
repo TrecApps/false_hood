@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.List;
 
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
+import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,8 +42,6 @@ public interface FalsehoodRepo extends JpaRepository<Falsehood, BigInteger> {
 	List<Falsehood> getConfirmedFalsehoods();
 	
 	@Query("select f from Falsehood f where f.author1 = ?1 or f.author2 = ?1")
-	List<Falsehood> getFalsehoodsByAuthor(String author);
-	
-	@Query("select max(f.id) from Falsehood f")
-	BigInteger getMaxId();
+	List<Falsehood> getFalsehoodsByPublicFigure(PublicFigure author);
+
 }

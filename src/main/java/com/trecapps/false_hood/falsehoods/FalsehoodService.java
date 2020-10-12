@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,7 @@ public class FalsehoodService {
 	@Autowired
 	FalsehoodRepo fRepo;
 	
-	@Autowired
-	PublicFalsehoodRepo pFalsehoodRepo;
+
 	
 	@Autowired
 	FalsehoodStorageAws s3BucketManager;
@@ -83,28 +83,14 @@ public class FalsehoodService {
 		return fRepo.getOne(id);
 	}
 	
-	public List<Falsehood> getFalsehoodsByAuthor(String author)
+	public List<Falsehood> getFalsehoodsByAuthor(PublicFigure author)
 	{
-		return fRepo.getFalsehoodsByAuthor(author);
+		return fRepo.getFalsehoodsByPublicFigure(author);
 	}
 	
 	public Falsehood insertNewFalsehood(Falsehood f)
 	{
-		BigInteger id = fRepo.getMaxId();
-		
-		if(id == null)
-		{
-			byte[] param = {0};
-			id = new BigInteger(param);
-		}
-		else
-		{
-			System.out.println("Current id " + id);
-			id = id.add(BigInteger.ONE);
-			System.out.println("New id " + id);
-		}
-		
-		f.setId(id);
+		f.setId(null);
 		
 		f.setContentId(f.getId().toString() + "-" + f.getSource());
 		
