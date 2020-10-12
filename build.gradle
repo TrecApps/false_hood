@@ -49,12 +49,14 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.0-jre'
+
+    // Spring Boot features
     implementation 'org.springframework.boot:spring-boot-starter-web:+'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:+'
     
 	implementation 'org.springframework.boot:spring-boot-starter-mail:+'
     
-    
+    // DB Support
     implementation 'org.hibernate:hibernate-core:5.4.11.Final'
     implementation 'org.hibernate:hibernate-entitymanager:5.4.11.Final'
     implementation 'javax.validation:validation-api:+'
@@ -65,6 +67,9 @@ dependencies {
 	implementation files("app/ojdbc7-12.1.0.jar") // oracle
 	
 	implementation 'mysql:mysql-connector-java:+' // mySQL
+
+    // JSON Object Mapping
+    implementation 'org.json:json:20200518'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
