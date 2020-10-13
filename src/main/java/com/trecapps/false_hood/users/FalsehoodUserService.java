@@ -150,4 +150,9 @@ public class FalsehoodUserService {
 		
 		userRepo.save(user);
 	}
+
+	public Long getUserCountAboveCredibility(int credit)
+	{
+		return userRepo.getUsersAboveCredit(credit);
+	}
 }

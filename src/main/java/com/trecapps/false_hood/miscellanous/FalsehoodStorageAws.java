@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,28 @@ public class FalsehoodStorageAws {
 		
 		builder.setRegion(region);
 		s3 = builder.build();
+	}
+
+	public String addJsonFile(String key, JSONObject obj)
+	{
+		if(!key.endsWith(".json"))
+			key = key + ".json";
+
+		try {
+			s3.putObject(bucketName, key, obj.toString());
+		}
+		catch (Exception e)
+		{
+			return e.getMessage();
+		}
+		return "Success";
+	}
+
+	public JSONObject getJSONObj(String key) throws IOException {
+		if(!key.endsWith(".json"))
+			key = key + ".json";
+
+		return new JSONObject(retrieveContents(key));
 	}
 	
 	boolean isValid()

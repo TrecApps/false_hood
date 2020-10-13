@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Calendar;
 
+import com.trecapps.false_hood.miscellanous.VerdictSubmission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/Update/Falsehood")
@@ -98,9 +101,50 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 		
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
+
+	@PutMapping("/Approve")
+	ResponseEntity<String> approveFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
+	{
+		FalsehoodUser user = super.getUser(entity);
+
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+
+		if(ret != null)
+			return ret;
+
+		VerdictSubmission falsehood = entity.getBody();
+		String remote = req.getRemoteAddr();
+
+		String result = service.addVerdict(falsehood.getFalsehood(), true, falsehood.getComment(), user, remote);
+
+		if("".equals(result))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+	}
+
+	@PutMapping("/Reject")
+	ResponseEntity<String> rejectFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
+	{
+		FalsehoodUser user = super.getUser(entity);
+
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+
+		if(ret != null)
+			return ret;
+
+		VerdictSubmission falsehood = entity.getBody();
+		String remote = req.getRemoteAddr();
+
+		String result = service.addVerdict(falsehood.getFalsehood(), false, falsehood.getComment(), user, remote);
+
+		if("".equals(result))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+	}
+
 	
 	@PutMapping("/Update")
-	ResponseEntity<String> approveFalsehood(RequestEntity<FullFalsehood> entity)
+	ResponseEntity<String> updateFalsehood(RequestEntity<FullFalsehood> entity)
 	{
 		FalsehoodUser user = super.getUser(entity);
 		

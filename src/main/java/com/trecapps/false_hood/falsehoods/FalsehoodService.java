@@ -5,7 +5,12 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import com.trecapps.false_hood.json.VerdictListObj;
+import com.trecapps.false_hood.json.VerdictObj;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +23,14 @@ public class FalsehoodService {
 	
 	@Autowired
 	FalsehoodRepo fRepo;
-	
 
-	
+	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
+
 	@Autowired
 	FalsehoodStorageAws s3BucketManager;
+
+	@Autowired
+	FalsehoodUserService userService;
 	
 	public FalsehoodService()
 	{
@@ -110,6 +118,71 @@ public class FalsehoodService {
 		
 		return "Success".equals(s3BucketManager.addNewFile(objectId, contents));
 		
+	}
+
+	public String addVerdict(BigInteger id, boolean approve, String comment, FalsehoodUser user, String ip)
+	{
+		if(user.getCredit() < MIN_CREDIT_APPROVE_REJECT)
+			return "Not Enough Credit";
+
+		if(!fRepo.existsById(id))
+			return "Falsehood Doesn't exist";
+
+		Falsehood f = fRepo.getOne(id);
+		if(f.getStatus() != Falsehood.SUBMITTED)
+			return "Cannot cast Verdict on established Falsehood! File an Appeal to update the status";
+
+		JSONObject verdictJson = null;
+		VerdictListObj verdicts = new VerdictListObj();
+		try {
+			verdictJson = s3BucketManager.getJSONObj(f.getContentId());
+			verdicts.initializeFromJson(verdictJson);
+
+			List<VerdictObj> verdictList = verdicts.getVerdicts();
+
+			for(int rust = 0; rust < verdictList.size(); rust++)
+			{
+				if(verdictList.get(rust).getUserId() == user.getUserId())
+				{
+					verdictList.remove(rust);
+					break;
+				}
+			}
+			verdicts.setVerdicts(verdictList);
+		} catch(Exception e)
+		{
+
+		}
+
+		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
+
+		VerdictObj newVerdict = new VerdictObj(approve, user.getUserId(),
+				new Date(Calendar.getInstance().getTime().getTime()), comment, ip);
+
+		List<VerdictObj> verdictList = verdicts.getVerdicts();
+		verdictList.add(newVerdict);
+		verdicts.setVerdicts(verdictList);
+
+		verdictJson = verdicts.toJsonObject();
+
+		if(!"Success".equals(s3BucketManager.addJsonFile(f.getContentId(), verdictJson)))
+		{
+			return "failed to Write Verdict to storage!";
+		}
+
+		if(verdicts.isApproved())
+		{
+			f.setStatus(Falsehood.VERIFIED);
+			fRepo.save(f);
+		}
+		else if(verdicts.isRejected())
+		{
+			f.setStatus(Falsehood.REJECTED);
+			fRepo.save(f);
+		}
+
+
+		return "";
 	}
 	
 	public boolean appendEntryToStorage(String contents, Falsehood f)
