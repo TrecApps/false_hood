@@ -13,11 +13,14 @@ public class VerdictListObj implements FalsehoodJsonObj
 {
     List<VerdictObj> verdicts;
 
+    List<EventObj> events;
+
     long approversAvailable;
 
-    public VerdictListObj(@NotNull List<VerdictObj> verdicts, long approversAvailable) {
+    public VerdictListObj(@NotNull List<VerdictObj> verdicts, @NotNull List<EventObj> events,long approversAvailable) {
         this.verdicts = verdicts;
         this.approversAvailable = approversAvailable;
+        this.events = events;
     }
 
     public boolean isApproved()
@@ -64,6 +67,14 @@ public class VerdictListObj implements FalsehoodJsonObj
         return (float)approveCount / (float)totalCount > 0.66f;
     }
 
+    public List<EventObj> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventObj> events) {
+        this.events = events;
+    }
+
     public List<VerdictObj> getVerdicts() {
         return verdicts;
     }
@@ -99,6 +110,16 @@ public class VerdictListObj implements FalsehoodJsonObj
         }
 
         ret.put("Verdicts", jList);
+
+        jList = new JSONArray();
+
+        for(EventObj verdict: events)
+        {
+            jList.put(verdict.toJsonObject());
+        }
+
+        ret.put("Events", jList);
+
         return ret;
     }
 
@@ -133,6 +154,26 @@ public class VerdictListObj implements FalsehoodJsonObj
                     newVerdict.initializeFromJson((JSONObject)verdictObj);
 
                     verdicts.add(newVerdict);
+                }
+                else throw new JSONException("Needed JSON object in Verdicts array element");
+            }
+        }
+        else throw new JSONException("Needed JSON Array in Verdicts field");
+
+        o = obj.get("Events");
+
+        if(o instanceof JSONArray)
+        {
+            JSONArray arr = (JSONArray)o;
+
+            for(Object eventObj: arr)
+            {
+                if(eventObj instanceof JSONObject)
+                {
+                    EventObj newEvent = new EventObj();
+                    newEvent.initializeFromJson((JSONObject)eventObj);
+
+                    events.add(newEvent);
                 }
                 else throw new JSONException("Needed JSON object in Verdicts array element");
             }

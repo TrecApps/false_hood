@@ -3,23 +3,22 @@ package com.trecapps.false_hood.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
-public class VerdictObj extends JsonMarker implements FalsehoodJsonObj
+public class EventObj extends JsonMarker implements FalsehoodJsonObj
 {
-    public VerdictObj(boolean approve, long userId, Date made, String explaination, String ipAddress) {
-        super(approve, userId, made, explaination, ipAddress);
+    public EventObj() {
     }
 
-    public VerdictObj() {
+    public EventObj(boolean approve, long userId, Date made, String explaination, String ipAddress) {
+        super(approve, userId, made, explaination, ipAddress);
     }
 
     @Override
     public JSONObject toJsonObject() {
         JSONObject ret = new JSONObject();
 
-        ret.accumulate("Verdict", (approve) ? "approve": "reject");
+        ret.accumulate("EventType", (approve) ? "Created": "Updated");
         ret.accumulate("User", (Long)userId);
         ret.accumulate("IpAddress", ipAddress);
         ret.accumulate("Date", (Long)made.getTime());
@@ -30,11 +29,11 @@ public class VerdictObj extends JsonMarker implements FalsehoodJsonObj
 
     @Override
     public void initializeFromJson(JSONObject obj) throws JSONException {
-        Object o = obj.get("Verdict");
+        Object o = obj.get("EventType");
 
         if(o instanceof String)
         {
-            approve = "approve".equalsIgnoreCase((String)o);
+            approve = "Created".equalsIgnoreCase((String)o);
         }
         else if(o instanceof Boolean)
         {
