@@ -113,9 +113,8 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 			return ret;
 
 		VerdictSubmission falsehood = entity.getBody();
-		String remote = req.getRemoteAddr();
 
-		String result = service.addVerdict(falsehood.getFalsehood(), true, falsehood.getComment(), user, remote);
+		String result = service.addVerdict(falsehood.getFalsehood(), true, falsehood.getComment(), user, req);
 
 		if("".equals(result))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
@@ -133,9 +132,8 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 			return ret;
 
 		VerdictSubmission falsehood = entity.getBody();
-		String remote = req.getRemoteAddr();
 
-		String result = service.addVerdict(falsehood.getFalsehood(), false, falsehood.getComment(), user, remote);
+		String result = service.addVerdict(falsehood.getFalsehood(), false, falsehood.getComment(), user, req);
 
 		if("".equals(result))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);

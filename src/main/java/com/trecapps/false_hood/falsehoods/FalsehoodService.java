@@ -18,6 +18,8 @@ import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class FalsehoodService {
 	
@@ -120,7 +122,7 @@ public class FalsehoodService {
 		
 	}
 
-	public String addVerdict(BigInteger id, boolean approve, String comment, FalsehoodUser user, String ip)
+	public String addVerdict(BigInteger id, boolean approve, String comment, FalsehoodUser user, HttpServletRequest ip)
 	{
 		if(user.getCredit() < MIN_CREDIT_APPROVE_REJECT)
 			return "Not Enough Credit";
@@ -157,7 +159,9 @@ public class FalsehoodService {
 		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
 
 		VerdictObj newVerdict = new VerdictObj(approve, user.getUserId(),
-				new Date(Calendar.getInstance().getTime().getTime()), comment, ip);
+				new Date(Calendar.getInstance().getTime().getTime()), comment, null);
+
+		newVerdict.setIpAddress(ip);
 
 		List<VerdictObj> verdictList = verdicts.getVerdicts();
 		verdictList.add(newVerdict);
