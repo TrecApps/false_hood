@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class CommonLie {
 
 	@Id
-	long id;
+	Long id;
 	
 	@Column
 	String title;
@@ -25,17 +25,17 @@ public class CommonLie {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommonLie(long id, String title) {
+	public CommonLie(Long id, String title) {
 		super();
 		this.id = id;
 		this.title = title;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

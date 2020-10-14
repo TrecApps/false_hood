@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class FalsehoodUser {
 	
 	@Id
-	long userId;
+	Long userId;
 	
 	@Column
 	int credit;
@@ -22,7 +22,7 @@ public class FalsehoodUser {
 	 * @param userId
 	 * @param credit
 	 */
-	public FalsehoodUser(long userId, int credit, String email) {
+	public FalsehoodUser(Long userId, int credit, String email) {
 		super();
 		this.userId = userId;
 		this.credit = credit;
@@ -60,14 +60,14 @@ public class FalsehoodUser {
 	/**
 	 * @return the userId
 	 */
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

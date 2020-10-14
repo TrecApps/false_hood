@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class MediaOutlet {
 
 	@Id
-	int outletId;
+	Integer outletId;
 	
 	@Column
 	short foundationYear;
@@ -25,18 +25,18 @@ public class MediaOutlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MediaOutlet(int outletId, short foundationYear, String name) {
+	public MediaOutlet(Integer outletId, short foundationYear, String name) {
 		super();
 		this.outletId = outletId;
 		this.foundationYear = foundationYear;
 		this.name = name;
 	}
 
-	public int getOutletId() {
+	public Integer getOutletId() {
 		return outletId;
 	}
 
-	public void setOutletId(int outletId) {
+	public void setOutletId(Integer outletId) {
 		this.outletId = outletId;
 	}
 
