@@ -14,14 +14,21 @@ import com.trecapps.false_hood.users.FalsehoodUserService;
 @Service
 public class PublicFigureService 
 {
-	@Autowired
 	FalsehoodStorageAws awsStorage;
-	
-	@Autowired
+
 	PublicFigureRepo figureRepo;
-	
-	@Autowired
+
 	FalsehoodUserService userService;
+
+	@Autowired
+	public PublicFigureService(@Autowired FalsehoodUserService userService,
+							   @Autowired PublicFigureRepo figureRepo,
+							   @Autowired FalsehoodStorageAws awsStorage)
+	{
+		this.awsStorage = awsStorage;
+		this.figureRepo = figureRepo;
+		this.userService = userService;
+	}
 	
 	
 	public String submitPublicFigure(PublicFigureEntry publicFigure, FalsehoodUser user)

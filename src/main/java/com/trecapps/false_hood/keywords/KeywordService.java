@@ -15,11 +15,17 @@ import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 @Service
 public class KeywordService {
 
-	@Autowired
 	PublicKeywordRepo pkRepo;
-	
-	@Autowired
+
 	KeywordRepo kRepo;
+
+	@Autowired
+	public KeywordService(@Autowired PublicKeywordRepo pkRepo,
+						  @Autowired KeywordRepo kRepo)
+	{
+		this.kRepo = kRepo;
+		this.pkRepo = pkRepo;
+	}
 	
 	public boolean addKeywords(String keywords, Falsehood f)
 	{

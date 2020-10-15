@@ -8,14 +8,21 @@ import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
 @Service
 public class PublicAttributeService {
 
-	@Autowired
 	InstitutionRepo iRepo;
-	
-	@Autowired
+
 	RegionRepo rRepo;
-	
-	@Autowired
+
 	FalsehoodStorageAws storage;
+
+	@Autowired
+	public PublicAttributeService(@Autowired FalsehoodStorageAws storage,
+									@Autowired RegionRepo rRepo,
+									@Autowired InstitutionRepo iRepo)
+	{
+		this.iRepo = iRepo;
+		this.rRepo = rRepo;
+		this.storage = storage;
+	}
 	
 	public String InsertAttribute(InstitutionEntry i)
 	{

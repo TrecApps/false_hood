@@ -20,23 +20,33 @@ import com.trecapps.false_hood.users.FalsehoodUserRepo;
 @Service
 public class FalsehoodAppealService {
 
-	@Autowired
 	FalsehoodAppealRepo appealRepo;
-	
-	@Autowired
+
 	FalsehoodAppealSignatureRepo signatureRepo;
-	
-	@Autowired
+
 	FalsehoodRepo falsehoodRepo;
-	
-	@Autowired
+
 	FalsehoodUserRepo userRepo;
-	
-	@Autowired
+
 	FalsehoodEmailService emailService;
-	
-	@Autowired
+
 	FalsehoodStorageAws awsStorage;
+
+	@Autowired
+	public FalsehoodAppealService(@Autowired FalsehoodAppealRepo appealRepo,
+								  @Autowired FalsehoodAppealSignatureRepo signatureRepo,
+								  @Autowired FalsehoodRepo falsehoodRepo,
+								  @Autowired FalsehoodUserRepo userRepo,
+								  @Autowired FalsehoodEmailService emailService,
+								  @Autowired FalsehoodStorageAws awsStorage)
+	{
+		this.appealRepo = appealRepo;
+		this.signatureRepo = signatureRepo;
+		this.falsehoodRepo = falsehoodRepo;
+		this.userRepo = userRepo;
+		this.emailService = emailService;
+		this.awsStorage = awsStorage;
+	}
 	
     final String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "0123456789"

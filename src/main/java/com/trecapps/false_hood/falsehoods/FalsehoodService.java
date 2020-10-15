@@ -22,21 +22,22 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class FalsehoodService {
-	
-	@Autowired
-	FalsehoodRepo fRepo;
-
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
 
-	@Autowired
+	FalsehoodRepo fRepo;
+
 	FalsehoodStorageAws s3BucketManager;
 
-	@Autowired
 	FalsehoodUserService userService;
-	
-	public FalsehoodService()
+
+	@Autowired
+	public FalsehoodService(@Autowired FalsehoodRepo fRepo,
+							@Autowired FalsehoodStorageAws s3BucketManager,
+							@Autowired FalsehoodUserService userService)
 	{
-		System.out.println("Falsehood Service Constructor Called!");
+		this.s3BucketManager = s3BucketManager;
+		this.fRepo = fRepo;
+		this.userService = userService;
 	}
 	
 

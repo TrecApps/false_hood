@@ -14,14 +14,22 @@ import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
 @Service
 public class CommonLieService {
 
-	@Autowired
 	CommonLieRepo clRepo;
-	
-	@Autowired
+
 	FalsehoodRepo falsehoodRepo;
-	
-	@Autowired
+
 	FalsehoodStorageAws awsStorageRepo;
+
+	@Autowired
+	public CommonLieService(@Autowired CommonLieRepo clRepo,
+							@Autowired FalsehoodRepo falsehoodRepo,
+							@Autowired FalsehoodStorageAws awsStorageRepo)
+	{
+		this.awsStorageRepo = awsStorageRepo;
+		this.clRepo = clRepo;
+		this.falsehoodRepo = falsehoodRepo;
+	}
+
 	
 	CommonLie GetLieById(long id)
 	{

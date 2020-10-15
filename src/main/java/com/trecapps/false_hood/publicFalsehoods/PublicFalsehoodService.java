@@ -14,11 +14,17 @@ import java.util.List;
 @Service
 public class PublicFalsehoodService {
 
-    @Autowired
     PublicFalsehoodRepo pFalsehoodRepo;
 
-    @Autowired
     FalsehoodStorageAws s3BucketManager;
+
+    @Autowired
+    public PublicFalsehoodService(@Autowired FalsehoodStorageAws s3BucketManager,
+                                  @Autowired PublicFalsehoodRepo pFalsehoodRepo)
+    {
+        this.pFalsehoodRepo = pFalsehoodRepo;
+        this.s3BucketManager = s3BucketManager;
+    }
 
     public List<PublicFalsehood> getFalseHoodByMinimumSeverity(byte severity)
     {

@@ -26,13 +26,19 @@ import com.auth0.jwt.interfaces.RSAKeyProvider;
 @Service
 public class FalsehoodUserService {
 
-	@Autowired
 	FalsehoodUserRepo userRepo;
-	
-	@Value("${trec.key.public}")
+
 	String publicKeyStr;
 	
 	RSAPublicKey publicKey;
+
+	@Autowired
+	public FalsehoodUserService(@Value("${trec.key.public}")String publicKeyStr,
+								@Autowired FalsehoodUserRepo userRepo)
+	{
+		this.publicKeyStr = publicKeyStr;
+		this.userRepo = userRepo;
+	}
 	
 	private boolean setKeys()
 	{
