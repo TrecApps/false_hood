@@ -24,10 +24,6 @@ import com.trecapps.false_hood.users.FalsehoodUserService;
 public class PublicFigureController extends AuthenticationControllerBase
 {
 
-	@Autowired
-	FalsehoodUserService userService;
-	
-	@Autowired
 	PublicFigureService pfService;
 	
 
@@ -36,10 +32,13 @@ public class PublicFigureController extends AuthenticationControllerBase
 	public static final int MIN_CREDIT_APPROVE_FIGURE = 60;
 	
 	public static final int MIN_CREDIT_VIEW_NON_APPROVE = 20;
-	
-	public PublicFigureController(@Autowired FalsehoodUserService service)
+
+	@Autowired
+	public PublicFigureController(@Autowired FalsehoodUserService service,
+								  @Autowired PublicFigureService pfService)
 	{
 		super(service);
+		this.pfService = pfService;
 	}
 	
 	@PostMapping("/Add")

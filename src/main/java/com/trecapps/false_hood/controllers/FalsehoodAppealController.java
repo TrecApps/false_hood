@@ -27,12 +27,14 @@ import com.trecapps.false_hood.users.FalsehoodUserService;
 @RequestMapping("/Appeal")
 public class FalsehoodAppealController extends AuthenticationControllerBase
 {
-	@Autowired
+
 	FalsehoodAppealService appealService;
-	
-	public FalsehoodAppealController(@Autowired FalsehoodUserService service)
+	@Autowired
+	public FalsehoodAppealController(@Autowired FalsehoodUserService service,
+									 @Autowired FalsehoodAppealService appealService)
 	{
 		super(service);
+		this.appealService = appealService;
 	}
 	
 	private static final int MIN_CREDIT_SUBMIT_APPEAL = 25;

@@ -18,11 +18,17 @@ import java.util.stream.Collectors;
 @RequestMapping("/PublicFalsehood")
 public class PublicFalsehoodController
 {
-    @Autowired
     KeywordService keyService;
 
-    @Autowired
     PublicFalsehoodService service;
+
+    @Autowired
+    public PublicFalsehoodController(@Autowired KeywordService keyService,
+                                     @Autowired PublicFalsehoodService service)
+    {
+        this.keyService = keyService;
+        this.service = service;
+    }
 
     @GetMapping("/id/{id}")
     PublicFalsehood GetFalsehood(@PathVariable("id") BigInteger id)

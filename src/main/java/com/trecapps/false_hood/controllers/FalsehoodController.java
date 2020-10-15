@@ -29,18 +29,20 @@ import com.trecapps.false_hood.miscellanous.Severity;
 @RequestMapping("/Falsehood")
 public class FalsehoodController {
 
-	@Autowired
 	FalsehoodService service;
-	
-	@Autowired
+
 	KeywordService keyService;
 	
-	@Autowired
 	MediaOutletService mediaService;
-	
-	public FalsehoodController()
+
+	@Autowired
+	public FalsehoodController(@Autowired FalsehoodService service,
+							   @Autowired KeywordService keyService,
+							   @Autowired MediaOutletService mediaService)
 	{
-		System.out.println("Falsehood Controller Constructor Called!");
+		this.service = service;
+		this.keyService = keyService;
+		this.mediaService = mediaService;
 	}
 	
 	

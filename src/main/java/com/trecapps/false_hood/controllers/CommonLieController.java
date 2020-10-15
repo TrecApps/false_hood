@@ -17,15 +17,16 @@ import com.trecapps.false_hood.users.FalsehoodUserService;
 @RequestMapping("/CommonLie")
 public class CommonLieController extends AuthenticationControllerBase
 {
-	
-	@Autowired
 	CommonLieService clService;
 	
 	public static final int MIN_CREDIT_PROPOSE_COMMON_LIE = 40;
-	
-	public CommonLieController(@Autowired FalsehoodUserService service)
+
+	@Autowired
+	public CommonLieController(@Autowired FalsehoodUserService service,
+							   @Autowired CommonLieService clService)
 	{
 		super(service);
+		this.clService = clService;
 	}
 	
 	@PostMapping("/insert")

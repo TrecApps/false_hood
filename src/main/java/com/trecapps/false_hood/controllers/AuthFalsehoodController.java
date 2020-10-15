@@ -31,24 +31,26 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/Update/Falsehood")
 public class AuthFalsehoodController extends AuthenticationControllerBase 
 {
-
-	@Autowired
 	FalsehoodService service;
-	
-	@Autowired
-	MediaOutletService mediaService;
-	
 
-	@Autowired
+	MediaOutletService mediaService;
+
 	KeywordService keyService;
 	
 	public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 	
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
-	
-	public AuthFalsehoodController(@Autowired FalsehoodUserService service)
+
+	@Autowired
+	public AuthFalsehoodController(@Autowired FalsehoodUserService userService,
+								   @Autowired FalsehoodService service,
+								   @Autowired MediaOutletService mediaService,
+								   @Autowired KeywordService keyService)
 	{
-		super(service);
+		super(userService);
+		this.service = service;
+		this.mediaService = mediaService;
+		this.keyService = keyService;
 	}
 	
 	@GetMapping("/GetUser")

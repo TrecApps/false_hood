@@ -24,19 +24,22 @@ import java.util.Calendar;
 @RequestMapping("/Update/PublicFalsehood")
 public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 {
-    @Autowired
     PublicFalsehoodService service;
 
-    @Autowired
     KeywordService keyService;
 
     public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 
     public static final int MIN_CREDIT_APPROVE_REJECT = 60;
 
-    public AuthPublicFalsehoodController(@Autowired FalsehoodUserService service)
+    @Autowired
+    public AuthPublicFalsehoodController(@Autowired FalsehoodUserService userService,
+                                         @Autowired PublicFalsehoodService service,
+                                         @Autowired KeywordService keyService)
     {
-        super(service);
+        super(userService);
+        this.service = service;
+        this.keyService = keyService;
     }
 
     @PostMapping("/Insert")
