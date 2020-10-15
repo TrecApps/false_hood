@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import com.trecapps.false_hood.json.EventObj;
 import com.trecapps.false_hood.json.VerdictListObj;
 import com.trecapps.false_hood.json.VerdictObj;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
@@ -113,12 +114,52 @@ public class FalsehoodService {
 		return fRepo.save(f);
 	}
 	
-	public boolean insertEntryToStorage(String contents, Falsehood f)
+	public boolean insertEntryToStorage(String contents, Falsehood f,FalsehoodUser user,HttpServletRequest ip)
 	{
 		String objectId = f.getContentId();
 		
 		System.out.println("Object ID inserting is " + objectId);
-		
+
+		JSONObject insertJson = null;
+		VerdictListObj verdicts = new VerdictListObj();
+		try {
+			insertJson = s3BucketManager.getJSONObj(f.getContentId());
+			verdicts.initializeFromJson(insertJson);
+
+			List<EventObj> verdictList = verdicts.getEvents();
+
+			for(int rust = 0; rust < verdictList.size(); rust++)
+			{
+				if(verdictList.get(rust).getUserId() == user.getUserId())
+				{
+					verdictList.remove(rust);
+					break;
+				}
+			}
+			verdicts.setEvents(verdictList);
+		} catch(Exception e)
+		{
+
+		}
+
+		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
+
+		EventObj event = new EventObj(true, user.getUserId(),
+				new Date(Calendar.getInstance().getTime().getTime()), null, null);
+
+		event.setIpAddress(ip);
+
+		List<EventObj> eventList = verdicts.getEvents();
+		eventList.add(event);
+		verdicts.setEvents(eventList);
+
+		insertJson = verdicts.toJsonObject();
+
+		if(!"Success".equals(s3BucketManager.addJsonFile(f.getContentId(), insertJson)))
+		{
+			return false;
+		}
+
 		return "Success".equals(s3BucketManager.addNewFile(objectId, contents));
 		
 	}
@@ -190,8 +231,52 @@ public class FalsehoodService {
 		return "";
 	}
 	
-	public boolean appendEntryToStorage(String contents, Falsehood f)
+	public boolean appendEntryToStorage(String contents, Falsehood f, FalsehoodUser user, HttpServletRequest ip)
 	{
-		return false;
+		String objectId = f.getContentId();
+
+		System.out.println("Object ID inserting is " + objectId);
+
+		JSONObject insertJson = null;
+		VerdictListObj verdicts = new VerdictListObj();
+		try {
+			insertJson = s3BucketManager.getJSONObj(f.getContentId());
+			verdicts.initializeFromJson(insertJson);
+
+			List<EventObj> verdictList = verdicts.getEvents();
+
+			for(int rust = 0; rust < verdictList.size(); rust++)
+			{
+				if(verdictList.get(rust).getUserId() == user.getUserId())
+				{
+					verdictList.remove(rust);
+					break;
+				}
+			}
+			verdicts.setEvents(verdictList);
+		} catch(Exception e)
+		{
+
+		}
+
+		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
+
+		EventObj event = new EventObj(false, user.getUserId(),
+				new Date(Calendar.getInstance().getTime().getTime()), null, null);
+
+		event.setIpAddress(ip);
+
+		List<EventObj> eventList = verdicts.getEvents();
+		eventList.add(event);
+		verdicts.setEvents(eventList);
+
+		insertJson = verdicts.toJsonObject();
+
+		if(!"Success".equals(s3BucketManager.addJsonFile(f.getContentId(), insertJson)))
+		{
+			return false;
+		}
+
+		return "Success".equals(s3BucketManager.appendFile(objectId, contents));
 	}
 }

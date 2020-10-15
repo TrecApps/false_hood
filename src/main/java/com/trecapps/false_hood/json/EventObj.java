@@ -73,6 +73,6 @@ public class EventObj extends JsonMarker implements FalsehoodJsonObj
         {
             explaination = o.toString();
         }
-        else throw new JSONException("'Explaination' field needed to be a String");
+
     }
 }
