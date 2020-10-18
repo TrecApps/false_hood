@@ -148,7 +148,7 @@ public class FalsehoodRepository implements FalsehoodRepo
     @Override
     public <S extends Falsehood> S save(S entity) {
         if(entity == null)
-            return null;
+            throw new IllegalArgumentException("Entity passed to Save Method must not ne null");
 
         boolean add = entity.getId() == null;
         if(add)

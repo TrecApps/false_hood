@@ -22,9 +22,14 @@ import com.trecapps.false_hood.publicFigure.PublicFigure;
 
 @Entity
 @Table
-public class Falsehood {
+public class Falsehood implements Comparable<Falsehood>{
 
-	
+
+	public int compareTo(Falsehood f)
+	{
+		return id.compareTo(f.getId());
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	BigInteger id;
