@@ -22,7 +22,13 @@ import com.trecapps.false_hood.publicFigure.PublicFigure;
 
 @Entity
 @Table
-public class PublicFalsehood {
+public class PublicFalsehood implements Comparable<PublicFalsehood>{
+
+	@Override
+	public int compareTo(PublicFalsehood o) {
+		return id.compareTo(o.getId());
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	BigInteger id;
@@ -63,14 +69,16 @@ public class PublicFalsehood {
 	public static final byte LAW_ENFORCEMENT = 1;
 	@Transient
 	public static final byte INTELLIGENCE = 2;
+	@Transient
+	public static final byte MILITARY = 3;
 	@Transient 
-	public static final byte PUBLIC_HEALTH = 3;
+	public static final byte PUBLIC_HEALTH = 4;
 	@Transient
-	public static final byte ECONOMIST = 4;
+	public static final byte ECONOMIST = 5;
 	@Transient
-	public static final byte ENVIRONMENTALIST = 5;
+	public static final byte ENVIRONMENTALIST = 6;
 	@Transient
-	public static final byte CORPORATE_EXECUTIVE = 6;
+	public static final byte CORPORATE_EXECUTIVE = 7;
 	
 	@Transient
 	public static final byte OTHER = 15;

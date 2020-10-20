@@ -2,6 +2,8 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
 import com.trecapps.false_hood.falsehoods.MediaOutletRepo;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,7 +81,10 @@ public class MediaOutletRepository implements MediaOutletRepo
 
     @Override
     public void deleteAll(Iterable<? extends MediaOutlet> entities) {
-        appeals.clear();
+        for(MediaOutlet u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -89,8 +94,8 @@ public class MediaOutletRepository implements MediaOutletRepo
 
     @Override
     public <S extends MediaOutlet> S save(S entity) {
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getOutletId() == null;
         if(add)

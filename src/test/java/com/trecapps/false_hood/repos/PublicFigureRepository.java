@@ -2,6 +2,8 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 import com.trecapps.false_hood.publicFigure.PublicFigureRepo;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,7 +69,10 @@ public class PublicFigureRepository implements PublicFigureRepo {
 
     @Override
     public void deleteAll(Iterable<? extends PublicFigure> entities) {
-        appeals.clear();
+        for(PublicFigure u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -77,9 +82,8 @@ public class PublicFigureRepository implements PublicFigureRepo {
 
     @Override
     public <S extends PublicFigure> S save(S entity) {
-
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getId() == null;
         if(add)

@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.trecapps.false_hood.commonLie.CommonLie;
+
 @Table
 @Entity
-public class FalsehoodUser {
+public class FalsehoodUser implements Comparable<FalsehoodUser>{
 	
 	@Id
 	Long userId;
@@ -85,5 +87,9 @@ public class FalsehoodUser {
 		this.credit = credit;
 	}
 	
-	
+
+	@Override
+	public int compareTo(FalsehoodUser o) {
+		return userId.compareTo(o.getUserId());
+	}
 }

@@ -3,6 +3,8 @@ package com.trecapps.false_hood.repos;
 import com.trecapps.false_hood.appeals.FalsehoodAppeal;
 import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.commonLie.CommonLieRepo;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -75,7 +77,10 @@ public class CommonLieRepository implements CommonLieRepo
 
     @Override
     public void deleteAll(Iterable<? extends CommonLie> entities) {
-        appeals.clear();
+        for(CommonLie u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -85,8 +90,8 @@ public class CommonLieRepository implements CommonLieRepo
 
     @Override
     public <S extends CommonLie> S save(S entity) {
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getId() == null;
         if(add)

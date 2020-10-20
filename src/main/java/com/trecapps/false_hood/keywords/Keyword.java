@@ -7,11 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 
 @Entity
 @Table
-public class Keyword {
+public class Keyword implements Comparable<Keyword>{
 
 	@Id
 	String word;
@@ -51,5 +52,9 @@ public class Keyword {
 		this.falsehoods = falsehoods;
 	}
 	
-	
+
+	@Override
+	public int compareTo(Keyword o) {
+		return word.compareTo(o.getWord());
+	}
 }

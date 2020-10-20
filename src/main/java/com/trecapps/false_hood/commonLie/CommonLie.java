@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Table
 @Entity
-public class CommonLie {
+public class CommonLie implements Comparable<CommonLie>{
 
 	@Id
 	Long id;
@@ -45,6 +45,11 @@ public class CommonLie {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Override
+	public int compareTo(CommonLie o) {
+		return id.compareTo(o.getId());
 	}
 	
 	

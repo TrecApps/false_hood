@@ -67,7 +67,10 @@ public class FalsehoodUserRepository implements FalsehoodUserRepo {
 
     @Override
     public void deleteAll(Iterable<? extends FalsehoodUser> entities) {
-        appeals.clear();
+        for(FalsehoodUser u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -77,16 +80,13 @@ public class FalsehoodUserRepository implements FalsehoodUserRepo {
 
     @Override
     public <S extends FalsehoodUser> S save(S entity) {
-
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getUserId() == null;
         if(add)
         {
-            List<FalsehoodUser> l = new ArrayList<FalsehoodUser>(appeals);
-
-            Long i = new Long("0");
+            Long i = Long.valueOf("0");
 
             for(FalsehoodUser app: appeals)
             {
@@ -94,6 +94,9 @@ public class FalsehoodUserRepository implements FalsehoodUserRepo {
                     entity.setUserId(i);
                 i = i + 1;
             }
+            
+            if(entity.getUserId() == null)
+            	entity.setUserId(i);
         }
 
         appeals.removeIf((app) -> entity.getUserId().equals(app.getUserId()));

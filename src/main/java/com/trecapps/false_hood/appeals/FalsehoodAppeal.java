@@ -9,12 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.users.FalsehoodUser;
 
 @Entity
 @Table
-public class FalsehoodAppeal 
+public class FalsehoodAppeal implements Comparable<FalsehoodAppeal>
 {
 	@Id
 	BigInteger id;
@@ -126,5 +127,9 @@ public class FalsehoodAppeal
 		this.ratified = ratified;
 	}
 	
-	
+
+	@Override
+	public int compareTo(FalsehoodAppeal o) {
+		return id.compareTo(o.getId());
+	}
 }

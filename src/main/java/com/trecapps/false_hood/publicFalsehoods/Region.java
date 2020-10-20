@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Table
 @Entity
-public class Region {
+public class Region implements Comparable<Region> {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -64,5 +64,8 @@ public class Region {
 		this.name = name;
 	}
 	
-	
+	@Override
+	public int compareTo(Region o) {
+		return id.compareTo(o.getId());
+	}
 }

@@ -2,6 +2,8 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.appeals.FalsehoodAppeal;
 import com.trecapps.false_hood.appeals.FalsehoodAppealRepo;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -74,7 +76,10 @@ public class FalsehoodAppealRepository implements FalsehoodAppealRepo
 
     @Override
     public void deleteAll(Iterable<? extends FalsehoodAppeal> entities) {
-        appeals.clear();
+        for(FalsehoodAppeal u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -84,9 +89,8 @@ public class FalsehoodAppealRepository implements FalsehoodAppealRepo
 
     @Override
     public <S extends FalsehoodAppeal> S save(S entity) {
-
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getId() == null;
         if(add)

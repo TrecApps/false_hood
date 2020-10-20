@@ -8,6 +8,8 @@ import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 import com.trecapps.false_hood.publicFalsehoods.Region;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -146,7 +148,10 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 
     @Override
     public void deleteAll(Iterable<? extends PublicFalsehood> entities) {
-        appeals.clear();
+        for(PublicFalsehood u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -156,14 +161,12 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 
     @Override
     public <S extends PublicFalsehood> S save(S entity) {
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getId() == null;
         if(add)
         {
-            List<PublicFalsehood> l = new ArrayList<PublicFalsehood>(appeals);
-
             BigInteger i = new BigInteger("0");
 
             for(PublicFalsehood app: appeals)
@@ -172,6 +175,9 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
                     entity.setId(i);
                 i = i.add(BigInteger.ONE);
             }
+            
+            if(entity.getId() == null)
+            	entity.setId(i);
         }
 
         appeals.removeIf((app) -> entity.getId().equals(app.getId()));

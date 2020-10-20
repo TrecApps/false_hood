@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Table
 @Entity
-public class Institution {
+public class Institution implements Comparable<Institution>{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
@@ -61,5 +61,10 @@ public class Institution {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int compareTo(Institution o) {
+		return id.compareTo(o.getId());
 	}
 }

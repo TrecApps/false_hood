@@ -5,10 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.trecapps.false_hood.commonLie.CommonLie;
+
 @Entity
 @Table
-public class MediaOutlet {
+public class MediaOutlet implements Comparable<MediaOutlet>{
 
+
+	@Override
+	public int compareTo(MediaOutlet o) {
+		return outletId.compareTo(o.getOutletId());
+	}
+	
 	@Id
 	Integer outletId;
 	

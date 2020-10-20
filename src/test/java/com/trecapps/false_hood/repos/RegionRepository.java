@@ -2,6 +2,8 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.publicFalsehoods.Region;
 import com.trecapps.false_hood.publicFalsehoods.RegionRepo;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,7 +69,10 @@ public class RegionRepository implements RegionRepo
 
     @Override
     public void deleteAll(Iterable<? extends Region> entities) {
-        appeals.clear();
+        for(Region u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -77,15 +82,13 @@ public class RegionRepository implements RegionRepo
 
     @Override
     public <S extends Region> S save(S entity) {
-        if(entity == null)
-            return null;
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
 
         boolean add = entity.getId() == null;
         if(add)
         {
-            List<Region> l = new ArrayList<Region>(appeals);
-
-            Long i = Long.valueOf("0");
+        	Long i = Long.valueOf("0");
 
             for(Region app: appeals)
             {
@@ -93,6 +96,9 @@ public class RegionRepository implements RegionRepo
                     entity.setId(i);
                 i = i + 1;
             }
+            
+            if(entity.getId() == null)
+            	entity.setId(i);
         }
 
         appeals.removeIf((app) -> entity.getId().equals(app.getId()));

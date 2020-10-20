@@ -2,6 +2,8 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.keywords.PublicKeyword;
 import com.trecapps.false_hood.keywords.PublicKeywordRepo;
+import com.trecapps.false_hood.users.FalsehoodUser;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,7 +69,10 @@ public class PublicKeywordsRepository implements PublicKeywordRepo {
 
     @Override
     public void deleteAll(Iterable<? extends PublicKeyword> entities) {
-        appeals.clear();
+        for(PublicKeyword u : entities)
+        {
+        	delete(u);
+        }
     }
 
     @Override
@@ -77,6 +82,8 @@ public class PublicKeywordsRepository implements PublicKeywordRepo {
 
     @Override
     public <S extends PublicKeyword> S save(S entity) {
+    	if(entity == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must not be null");
         for(PublicKeyword k: appeals)
         {
             if(entity.equals(k.getWord()))

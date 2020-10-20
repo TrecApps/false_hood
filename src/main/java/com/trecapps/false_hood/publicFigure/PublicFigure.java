@@ -7,12 +7,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.users.FalsehoodUser;
 
 @Table
 @Entity
-public class PublicFigure
+public class PublicFigure implements Comparable<PublicFigure>
 {
+	@Override
+	public int compareTo(PublicFigure o) {
+		return id.compareTo(o.getId());
+	}
 
 	@Id
 	Long id;
