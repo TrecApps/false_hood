@@ -2,7 +2,6 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 import com.trecapps.false_hood.publicFigure.PublicFigureRepo;
-import com.trecapps.false_hood.users.FalsehoodUser;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -88,8 +87,6 @@ public class PublicFigureRepository implements PublicFigureRepo {
         boolean add = entity.getId() == null;
         if(add)
         {
-            List<PublicFigure> l = new ArrayList<PublicFigure>(appeals);
-
             Long i = Long.valueOf("0");
 
             for(PublicFigure app: appeals)
@@ -98,6 +95,8 @@ public class PublicFigureRepository implements PublicFigureRepo {
                     entity.setId(i);
                 i = i + 1;
             }
+            if(entity.getId() == null)
+            	entity.setId(i);
         }
 
         appeals.removeIf((app) -> entity.getId().equals(app.getId()));

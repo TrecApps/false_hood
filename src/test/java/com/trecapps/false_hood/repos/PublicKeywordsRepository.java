@@ -84,14 +84,17 @@ public class PublicKeywordsRepository implements PublicKeywordRepo {
     public <S extends PublicKeyword> S save(S entity) {
     	if(entity == null)
             throw new IllegalArgumentException("Entity passed to Save Method must not be null");
+    	if(entity.getWord() == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must have a valid word!");
         for(PublicKeyword k: appeals)
         {
-            if(entity.equals(k.getWord()))
+            if(entity.getWord().equals(k.getWord()))
             {
                 k.setFalsehoods(entity.getFalsehoods());
-                break;
+                return entity;
             }
         }
+        appeals.add(entity);
 
         return entity;
     }

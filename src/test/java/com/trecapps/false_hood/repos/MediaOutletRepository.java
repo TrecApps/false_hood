@@ -2,14 +2,12 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
 import com.trecapps.false_hood.falsehoods.MediaOutletRepo;
-import com.trecapps.false_hood.users.FalsehoodUser;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.math.BigInteger;
 import java.util.*;
 
 public class MediaOutletRepository implements MediaOutletRepo
@@ -100,8 +98,6 @@ public class MediaOutletRepository implements MediaOutletRepo
         boolean add = entity.getOutletId() == null;
         if(add)
         {
-            List<MediaOutlet> l = new ArrayList<MediaOutlet>(appeals);
-
             Integer i = Integer.valueOf("0");
 
             for(MediaOutlet app: appeals)
@@ -110,6 +106,8 @@ public class MediaOutletRepository implements MediaOutletRepo
                     entity.setOutletId(i);
                 i = i + 1;
             }
+            if(entity.getOutletId() == null)
+            	entity.setOutletId(i);
         }
 
         appeals.removeIf((app) -> entity.getOutletId().equals(app.getOutletId()));

@@ -95,8 +95,6 @@ public class FalsehoodAppealRepository implements FalsehoodAppealRepo
         boolean add = entity.getId() == null;
         if(add)
         {
-            List<FalsehoodAppeal> l = new ArrayList<FalsehoodAppeal>(appeals);
-
             BigInteger i = new BigInteger("0");
 
             for(FalsehoodAppeal app: appeals)
@@ -105,6 +103,8 @@ public class FalsehoodAppealRepository implements FalsehoodAppealRepo
                     entity.setId(i);
                 i = i.add(BigInteger.ONE);
             }
+            if(entity.getId() == null)
+            	entity.setId(i);
         }
 
         appeals.removeIf((app) -> entity.getId().equals(app.getId()));

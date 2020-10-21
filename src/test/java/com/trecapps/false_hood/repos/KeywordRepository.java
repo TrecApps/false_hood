@@ -86,15 +86,18 @@ public class KeywordRepository implements KeywordRepo
     public <S extends Keyword> S save(S entity) {
     	if(entity == null)
             throw new IllegalArgumentException("Entity passed to Save Method must not be null");
+    	if(entity.getWord() == null)
+            throw new IllegalArgumentException("Entity passed to Save Method must have a valid word!");
     	
         for(Keyword k: appeals)
         {
-            if(entity.equals(k.getWord()))
+            if(entity.getWord().equals(k.getWord()))
             {
                 k.setFalsehoods(entity.getFalsehoods());
-                break;
+                return entity;
             }
         }
+        appeals.add(entity);
 
         return entity;
     }

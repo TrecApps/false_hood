@@ -96,8 +96,6 @@ public class CommonLieRepository implements CommonLieRepo
         boolean add = entity.getId() == null;
         if(add)
         {
-            List<CommonLie> l = new ArrayList<CommonLie>(appeals);
-
             Long i = Long.valueOf("0");
 
             for(CommonLie app: appeals)
@@ -106,6 +104,9 @@ public class CommonLieRepository implements CommonLieRepo
                     entity.setId(i);
                 i = i + 1;
             }
+            
+            if(entity.getId() == null)
+            	entity.setId(i);
         }
 
         appeals.removeIf((app) -> entity.getId().equals(app.getId()));
