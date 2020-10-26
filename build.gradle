@@ -17,12 +17,15 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
     id 'org.springframework.boot' version '2.2.6.RELEASE'
+    
+    id 'jacoco'
 }
 
 
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -73,8 +76,24 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
 }
 
+jacoco {
+	toolVersion = '0.8.5'
+}
+
+jacocoTestReport {
+	def buildDir = "$buildDir".toString()
+	reports {
+		xml.setEnabled(true)
+		xml.destination file(buildDir + "/jacoco/jacoco.xml")
+		csv.setEnabled(false)
+		html.setEnabled(true)
+	}
+}
+// Make sure Jacoco Test report runs
+test.finalizedBy(project.tasks.jacocoTestReport)
 
 application {
     // Define the main class for the application.
