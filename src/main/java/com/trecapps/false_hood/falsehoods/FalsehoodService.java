@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 
@@ -27,13 +27,13 @@ public class FalsehoodService {
 
 	FalsehoodRepo fRepo;
 
-	FalsehoodStorageAws s3BucketManager;
+	FalsehoodStorageHolder s3BucketManager;
 
 	FalsehoodUserService userService;
 
 	@Autowired
 	public FalsehoodService(@Autowired FalsehoodRepo fRepo,
-							@Autowired FalsehoodStorageAws s3BucketManager,
+							@Autowired FalsehoodStorageHolder s3BucketManager,
 							@Autowired FalsehoodUserService userService)
 	{
 		this.s3BucketManager = s3BucketManager;

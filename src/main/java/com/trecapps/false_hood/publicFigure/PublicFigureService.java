@@ -8,13 +8,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 
 @Service
 public class PublicFigureService 
 {
-	FalsehoodStorageAws awsStorage;
+	FalsehoodStorageHolder awsStorage;
 
 	PublicFigureRepo figureRepo;
 
@@ -23,7 +24,7 @@ public class PublicFigureService
 	@Autowired
 	public PublicFigureService(@Autowired FalsehoodUserService userService,
 							   @Autowired PublicFigureRepo figureRepo,
-							   @Autowired FalsehoodStorageAws awsStorage)
+							   @Autowired FalsehoodStorageHolder awsStorage)
 	{
 		this.awsStorage = awsStorage;
 		this.figureRepo = figureRepo;

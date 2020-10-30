@@ -1,5 +1,7 @@
 package com.trecapps.false_hood.test_obj;
 
+import java.io.File;
+
 import com.trecapps.false_hood.appeals.FalsehoodAppealService;
 import com.trecapps.false_hood.commonLie.CommonLieService;
 import com.trecapps.false_hood.controllers.AuthFalsehoodController;
@@ -13,6 +15,7 @@ import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.falsehoods.FalsehoodService;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.keywords.KeywordService;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodService;
 import com.trecapps.false_hood.publicFigure.PublicFigureService;
@@ -31,6 +34,8 @@ import com.trecapps.false_hood.users.FalsehoodUserRepo;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 
 public class FalsehoodApp {
+	
+	static FalsehoodStorageHolder storageHolder;
 	
 	FalsehoodUserService userService;
 	
@@ -66,24 +71,30 @@ public class FalsehoodApp {
 	
 	public FalsehoodApp()
 	{
+		if(storageHolder == null)
+			storageHolder = new FalsehoodStorageHolder(System.getProperty("user.dir") + File.separator + "build" + File.separator + "storage",
+					null,
+					null,
+					null);
+		
 		FalsehoodUserRepo userRepo = new FalsehoodUserRepository();
 		userService = new FalsehoodUserService(System.getenv("TEST_PUBLIC_KEY"), userRepo);
-		publicFigureService = new PublicFigureService(userService, new PublicFigureRepository(), null);
-		attService = new PublicAttributeService(null, new RegionRepository(), new InstitutionRepository());
-		publicFalsehoodService = new PublicFalsehoodService(null, new PublicFalsehoodRepository());
+		publicFigureService = new PublicFigureService(userService, new PublicFigureRepository(), storageHolder);
+		attService = new PublicAttributeService(storageHolder, new RegionRepository(), new InstitutionRepository());
+		publicFalsehoodService = new PublicFalsehoodService(storageHolder, new PublicFalsehoodRepository());
 		keyService = new KeywordService(new PublicKeywordsRepository(), new KeywordRepository());
 		outletService = new MediaOutletService(new MediaOutletRepository());
 		
 		FalsehoodRepo fRepo = new FalsehoodRepository();
 		
-		falsehoodService = new FalsehoodService(fRepo, null, userService);
-		cLieService = new CommonLieService(new CommonLieRepository(), fRepo, null);
+		falsehoodService = new FalsehoodService(fRepo, storageHolder, userService);
+		cLieService = new CommonLieService(new CommonLieRepository(), fRepo, storageHolder);
 		appealService = new FalsehoodAppealService(new FalsehoodAppealRepository(),
 					null,
 					fRepo,
 					userRepo,
 					null,
-					null);
+					storageHolder);
 		
 		// Initialize the Controllers now that the Services are initialized
 		pFigureController = new PublicFigureController(userService, publicFigureService);

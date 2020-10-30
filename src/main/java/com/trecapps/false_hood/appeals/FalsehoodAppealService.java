@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.miscellanous.FalsehoodEmailService;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserRepo;
 
@@ -30,7 +31,7 @@ public class FalsehoodAppealService {
 
 	FalsehoodEmailService emailService;
 
-	FalsehoodStorageAws awsStorage;
+	FalsehoodStorageHolder awsStorage;
 
 	@Autowired
 	public FalsehoodAppealService(@Autowired FalsehoodAppealRepo appealRepo,
@@ -38,7 +39,7 @@ public class FalsehoodAppealService {
 								  @Autowired FalsehoodRepo falsehoodRepo,
 								  @Autowired FalsehoodUserRepo userRepo,
 								  @Autowired FalsehoodEmailService emailService,
-								  @Autowired FalsehoodStorageAws awsStorage)
+								  @Autowired FalsehoodStorageHolder awsStorage)
 	{
 		this.appealRepo = appealRepo;
 		this.signatureRepo = signatureRepo;

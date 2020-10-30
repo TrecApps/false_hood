@@ -1,7 +1,6 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
-import com.trecapps.false_hood.falsehoods.Falsehood;
-import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,10 @@ public class PublicFalsehoodService {
 
     PublicFalsehoodRepo pFalsehoodRepo;
 
-    FalsehoodStorageAws s3BucketManager;
+    FalsehoodStorageHolder s3BucketManager;
 
     @Autowired
-    public PublicFalsehoodService(@Autowired FalsehoodStorageAws s3BucketManager,
+    public PublicFalsehoodService(@Autowired FalsehoodStorageHolder s3BucketManager,
                                   @Autowired PublicFalsehoodRepo pFalsehoodRepo)
     {
         this.pFalsehoodRepo = pFalsehoodRepo;

@@ -20,15 +20,13 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
-@Component
 public class FalsehoodStorageAws {
 
 	AmazonS3 s3;
 	
 	String bucketName = "temp-falsehoods-bucket";
 	
-	@Autowired
-	public FalsehoodStorageAws(@Value("${S3_ACCESS}")String keyId, @Value("${S3_SECRET}")String secret, @Value("${S3_REGION:us-east-1}")String region)
+	public FalsehoodStorageAws(String keyId, String secret, String region)
 	{
 		AWSCredentialsProvider provide = new AWSStaticCredentialsProvider(new BasicAWSCredentials(keyId, secret));
 		AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard();
@@ -60,7 +58,7 @@ public class FalsehoodStorageAws {
 		return new JSONObject(retrieveContents(key));
 	}
 	
-	boolean isValid()
+	public boolean isValid()
 	{
 		return s3 != null;
 	}

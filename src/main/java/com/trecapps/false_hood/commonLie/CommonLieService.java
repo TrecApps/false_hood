@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
-import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 
 @Service
 public class CommonLieService {
@@ -18,12 +18,12 @@ public class CommonLieService {
 
 	FalsehoodRepo falsehoodRepo;
 
-	FalsehoodStorageAws awsStorageRepo;
+	FalsehoodStorageHolder awsStorageRepo;
 
 	@Autowired
 	public CommonLieService(@Autowired CommonLieRepo clRepo,
 							@Autowired FalsehoodRepo falsehoodRepo,
-							@Autowired FalsehoodStorageAws awsStorageRepo)
+							@Autowired FalsehoodStorageHolder awsStorageRepo)
 	{
 		this.awsStorageRepo = awsStorageRepo;
 		this.clRepo = clRepo;

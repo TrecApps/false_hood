@@ -3,7 +3,7 @@ package com.trecapps.false_hood.publicFalsehoods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
+import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 
 @Service
 public class PublicAttributeService {
@@ -12,10 +12,10 @@ public class PublicAttributeService {
 
 	RegionRepo rRepo;
 
-	FalsehoodStorageAws storage;
+	FalsehoodStorageHolder storage;
 
 	@Autowired
-	public PublicAttributeService(@Autowired FalsehoodStorageAws storage,
+	public PublicAttributeService(@Autowired FalsehoodStorageHolder storage,
 									@Autowired RegionRepo rRepo,
 									@Autowired InstitutionRepo iRepo)
 	{
