@@ -35,6 +35,15 @@ public class FalsehoodStorageHolder {
 		
 	}
 	
+	public JSONObject getJSONObj(String key) throws IOException {
+	
+		if(awsStorage != null)
+			return awsStorage.getJSONObj(key);
+		if(localStorage != null)
+			return localStorage.getJSONObj(key);
+		return null;
+	}
+	
 	public String addJsonFile(String key, JSONObject obj)
 	{		
 		if(awsStorage != null)
