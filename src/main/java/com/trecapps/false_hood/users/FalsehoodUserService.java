@@ -32,12 +32,22 @@ public class FalsehoodUserService {
 	
 	RSAPublicKey publicKey;
 
+	boolean isKey;
+	
+	public FalsehoodUserService(String publicKeyStr,
+								FalsehoodUserRepo userRepo,
+								boolean isKey)
+	{
+		this.publicKeyStr = publicKeyStr;
+		this.userRepo = userRepo;
+		this.isKey = isKey;
+	}
+	
 	@Autowired
 	public FalsehoodUserService(@Value("${trec.key.public}")String publicKeyStr,
 								@Autowired FalsehoodUserRepo userRepo)
 	{
-		this.publicKeyStr = publicKeyStr;
-		this.userRepo = userRepo;
+		this(publicKeyStr, userRepo, false);
 	}
 	
 	private boolean setKeys()
@@ -45,21 +55,29 @@ public class FalsehoodUserService {
 		if(publicKey == null)
 		{
 			System.out.println("Key location is " + publicKeyStr);
-			File publicFile = new File(publicKeyStr);
+			
 
 			Scanner keyfis;
 			try {
 				String encKey = "";
 				
-				keyfis = new Scanner(publicFile);
 				
-				while(keyfis.hasNext())
+				if(isKey)
 				{
-					encKey += keyfis.next();
+					encKey = publicKeyStr;
 				}
-				
-				keyfis.close();
-				
+				else
+				{
+					File publicFile = new File(publicKeyStr);
+					keyfis = new Scanner(publicFile);
+
+					while(keyfis.hasNext())
+					{
+						encKey += keyfis.next();
+					}
+
+					keyfis.close();
+				}
 				System.out.println("Private Key is " + encKey);
 				
 				X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(Base64.getDecoder().decode(encKey));

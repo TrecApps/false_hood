@@ -78,7 +78,7 @@ public class FalsehoodApp {
 					null);
 		
 		FalsehoodUserRepo userRepo = new FalsehoodUserRepository();
-		userService = new FalsehoodUserService(System.getenv("TEST_PUBLIC_KEY"), userRepo);
+		userService = new FalsehoodUserService(UserTokens.testKey, userRepo, true);
 		publicFigureService = new PublicFigureService(userService, new PublicFigureRepository(), storageHolder);
 		attService = new PublicAttributeService(storageHolder, new RegionRepository(), new InstitutionRepository());
 		publicFalsehoodService = new PublicFalsehoodService(storageHolder, new PublicFalsehoodRepository());
