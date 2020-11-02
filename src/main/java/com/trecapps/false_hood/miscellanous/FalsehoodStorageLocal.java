@@ -21,7 +21,7 @@ public class FalsehoodStorageLocal {
 		directory = new File(directoryStr);
 		
 		if(!directory.exists() || !directory.isDirectory())
-			throw new RuntimeException("Needed a real Directory to operate in!");
+			throw new RuntimeException("Needed a real Directory to operate in! Not: " + directoryStr);
 	}
 	
 	public String addJsonFile(String key, JSONObject obj)

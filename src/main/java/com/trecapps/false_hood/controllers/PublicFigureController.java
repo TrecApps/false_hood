@@ -42,7 +42,7 @@ public class PublicFigureController extends AuthenticationControllerBase
 	}
 	
 	@PostMapping("/Add")
-	ResponseEntity<String> addPublicFigure(RequestEntity<PublicFigureEntry> entry)
+	public ResponseEntity<String> addPublicFigure(RequestEntity<PublicFigureEntry> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
@@ -60,7 +60,7 @@ public class PublicFigureController extends AuthenticationControllerBase
 	}
 	
 	@PutMapping("/Approve")
-	ResponseEntity<String> approvePublicFigure(RequestEntity<Long> entry)
+	public ResponseEntity<String> approvePublicFigure(RequestEntity<Long> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
@@ -78,7 +78,7 @@ public class PublicFigureController extends AuthenticationControllerBase
 	}
 	
 	@PutMapping("/Reject")
-	ResponseEntity<String> rejectPublicFigure(RequestEntity<Long> entry)
+	public ResponseEntity<String> rejectPublicFigure(RequestEntity<Long> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
@@ -96,7 +96,7 @@ public class PublicFigureController extends AuthenticationControllerBase
 	}
 	
 	@GetMapping("/list")
-	ResponseEntity<List<PublicFigure>> getFigures(@SuppressWarnings("rawtypes") RequestEntity entry, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "20")int pageSize)
+	public ResponseEntity<List<PublicFigure>> getFigures(@SuppressWarnings("rawtypes") RequestEntity entry, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "20")int pageSize)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		

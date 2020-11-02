@@ -83,7 +83,7 @@ task prepareStorage {
 	mkdir "$buildDir/storage"
 }
 
-tasks.test.dependsOn(prepareStorage)
+test.dependsOn(prepareStorage)
 
 jacoco {
 	toolVersion = '0.8.5'
