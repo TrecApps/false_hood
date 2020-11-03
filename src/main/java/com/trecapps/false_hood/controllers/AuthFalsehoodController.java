@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.Calendar;
 
 import com.trecapps.false_hood.miscellanous.VerdictSubmission;
+import com.trecapps.false_hood.publicFigure.PublicFigureEntry;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodService;
 import com.trecapps.false_hood.falsehoods.FullFalsehood;
+import com.trecapps.false_hood.falsehoods.MediaOutletEntry;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.users.FalsehoodUser;
@@ -40,6 +43,8 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 	
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
+	
+	public static final int MIN_CREDIT_ADD_OUTLET = 40;
 
 	@Autowired
 	public AuthFalsehoodController(@Autowired FalsehoodUserService userService,
@@ -168,5 +173,59 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 		service.updateNewFalsehood(falsehood.getMetadata());
 		
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PostMapping("/AddOutlet")
+	public ResponseEntity<String> addMediaOutlet(RequestEntity<MediaOutletEntry> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_ADD_OUTLET);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = this.mediaService.submitMediaOutlet(entry.getBody(), user);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping("/ApproveOutlet")
+	public ResponseEntity<String> approvePublicFigure(RequestEntity<Integer> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = mediaService.approveRejectMediaOutlet(entry.getBody(), true);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping("/RejectOutlet")
+	public ResponseEntity<String> rejectPublicFigure(RequestEntity<Integer> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = mediaService.approveRejectMediaOutlet(entry.getBody(), false);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
 	}
 }

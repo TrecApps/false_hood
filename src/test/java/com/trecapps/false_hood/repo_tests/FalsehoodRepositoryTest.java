@@ -30,7 +30,7 @@ public class FalsehoodRepositoryTest {
     static public void initializeArray()
     {
         falsehoods[0] = new Falsehood(null,
-                new MediaOutlet(0, (short) 1998, "Fox News"),
+                new MediaOutlet(0, (short) 1998, "Fox News",(byte)0, null),
                 Falsehood.SUBMITTED,
                 (byte)1,
                 null,
@@ -42,7 +42,7 @@ public class FalsehoodRepositoryTest {
                 "");
         
         falsehoods[1] = new Falsehood(null,
-                new MediaOutlet(0, (short) 1998, "Fox News"),
+                new MediaOutlet(0, (short) 1998, "Fox News",(byte)0, null),
                 Falsehood.VERIFIED,
                 (byte)1,
                 null,
@@ -54,7 +54,7 @@ public class FalsehoodRepositoryTest {
                 "");
         
         falsehoods[2] = new Falsehood(null,
-                new MediaOutlet(0, (short) 1996, "MSNBC"),
+                new MediaOutlet(0, (short) 1996, "MSNBC",(byte)0, null),
                 Falsehood.SUBMITTED,
                 (byte)1,
                 null,
@@ -66,7 +66,7 @@ public class FalsehoodRepositoryTest {
                 "");
         
         falsehoods[3] = new Falsehood(null,
-                new MediaOutlet(0, (short) 1998, "CNN"),
+                new MediaOutlet(0, (short) 1998, "CNN",(byte)0, null),
                 Falsehood.VERIFIED,
                 (byte)1,
                 null,
@@ -78,7 +78,7 @@ public class FalsehoodRepositoryTest {
                 "");
         
         falsehoods[4] = new Falsehood(null,
-                new MediaOutlet(0, (short) 1996, "MSNBC"),
+                new MediaOutlet(0, (short) 1996, "MSNBC",(byte)0, null),
                 Falsehood.SUBMITTED,
                 (byte)1,
                 null,

@@ -23,15 +23,15 @@ public class MediaOutletRepositoryTest {
     @BeforeClass
     static public void initializeArray()
     {
-        mediaOutlets[0] = new MediaOutlet(null, (short) 1998, "Fox News");
+        mediaOutlets[0] = new MediaOutlet(null, (short) 1998, "Fox News",(byte)0, null);
         
-        mediaOutlets[1] = new MediaOutlet(null, (short) 1996, "MSNBC");
+        mediaOutlets[1] = new MediaOutlet(null, (short) 1996, "MSNBC",(byte)0, null);
         
-        mediaOutlets[2] = new MediaOutlet(null, (short) 1980, "CNN");
+        mediaOutlets[2] = new MediaOutlet(null, (short) 1980, "CNN",(byte)0, null);
         
-        mediaOutlets[3] = new MediaOutlet(null, (short) 1943, "ABC");
+        mediaOutlets[3] = new MediaOutlet(null, (short) 1943, "ABC",(byte)0, null);
         
-        mediaOutlets[4] = new MediaOutlet(null, (short) 1851, "The New York Times");
+        mediaOutlets[4] = new MediaOutlet(null, (short) 1851, "The New York Times",(byte)0, null);
     }
 
     @Test
