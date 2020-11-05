@@ -28,13 +28,6 @@ public class PublicFigureTest {
 	@BeforeClass
 	public static void setUpSharedApp() throws URISyntaxException
 	{
-		pubEntries[0] = new PublicFigureEntry(new PublicFigure(null, "Darth", null, "Vader"),
-				"This man is second in command to the Galactic Empire");
-		pubEntries[1] = new PublicFigureEntry(new PublicFigure(null, "Tom", "Marvelo", "Riddle"), 
-				"He prefers to be known as Lord Voldemort, but don't use his name!");
-		pubEntries[2] = new PublicFigureEntry(new PublicFigure(null, "General", "Thunderbolt", "Ross"),
-				"This man is a General who was obsessed with capturing the Hulk but moved on to pursue other ambitions like the Sokovia Accords");
-		
 		sharedApp = new FalsehoodApp();
 		
 		FalsehoodUserService userService = sharedApp.getUserService();
@@ -43,6 +36,21 @@ public class PublicFigureTest {
 		
 		// This should get the user 1 enough credibility to do what needs to be done
 		userService.adjustCredibility(user, 60);
+		
+		initializePublicFigures(sharedApp);
+	}
+	
+	public static void initializePublicFigures(FalsehoodApp sharedApp) throws URISyntaxException
+	{
+		if(pubEntries[0] == null)
+		pubEntries[0] = new PublicFigureEntry(new PublicFigure(null, "Darth", null, "Vader"),
+				"This man is second in command to the Galactic Empire");
+		if(pubEntries[1] == null)
+		pubEntries[1] = new PublicFigureEntry(new PublicFigure(null, "Tom", "Marvelo", "Riddle"), 
+				"He prefers to be known as Lord Voldemort, but don't use his name!");
+		if(pubEntries[2] == null)
+		pubEntries[2] = new PublicFigureEntry(new PublicFigure(null, "General", "Thunderbolt", "Ross"),
+				"This man is a General who was obsessed with capturing the Hulk but moved on to pursue other ambitions like the Sokovia Accords");
 		
 		PublicFigureController pfController = sharedApp.getpFigureController();
 		

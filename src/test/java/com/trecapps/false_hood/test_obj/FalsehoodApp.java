@@ -102,7 +102,7 @@ public class FalsehoodApp {
 		falsehoodController = new FalsehoodController(falsehoodService, keyService, outletService);
 		appealController = new FalsehoodAppealController(userService, appealService);
 		cLieController = new CommonLieController(userService, cLieService);
-		authPFalsehoodController = new AuthPublicFalsehoodController(userService, publicFalsehoodService, keyService);
+		authPFalsehoodController = new AuthPublicFalsehoodController(userService, publicFalsehoodService, keyService, attService);
 		authFalsehoodController = new AuthFalsehoodController(userService, falsehoodService, outletService, keyService);
 	}
 

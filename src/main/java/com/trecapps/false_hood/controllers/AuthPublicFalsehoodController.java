@@ -4,8 +4,11 @@ import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
+import com.trecapps.false_hood.publicFalsehoods.InstitutionEntry;
+import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodService;
+import com.trecapps.false_hood.publicFalsehoods.RegionEntry;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +30,29 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
     PublicFalsehoodService service;
 
     KeywordService keyService;
+    
+    PublicAttributeService attService;
 
     public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 
     public static final int MIN_CREDIT_APPROVE_REJECT = 60;
+    
+    public static final int MIN_CREDIT_ADD_RECOURSE = 70;
 
     @Autowired
     public AuthPublicFalsehoodController(@Autowired FalsehoodUserService userService,
                                          @Autowired PublicFalsehoodService service,
-                                         @Autowired KeywordService keyService)
+                                         @Autowired KeywordService keyService,
+                                         @Autowired PublicAttributeService attService)
     {
         super(userService);
         this.service = service;
         this.keyService = keyService;
+        this.attService = attService;
     }
 
     @PostMapping("/Insert")
-    ResponseEntity<String> insertFalsehood(RequestEntity<FullPublicFalsehood> entity)
+    public ResponseEntity<String> insertFalsehood(RequestEntity<FullPublicFalsehood> entity)
     {
         FalsehoodUser user = super.getUser(entity);
 
@@ -88,7 +97,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
     }
 
     @PutMapping("/Update")
-    ResponseEntity<String> approveFalsehood(RequestEntity<FullPublicFalsehood> entity)
+    public ResponseEntity<String> approveFalsehood(RequestEntity<FullPublicFalsehood> entity)
     {
         FalsehoodUser user = super.getUser(entity);
 
@@ -112,5 +121,43 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
         service.updateNewFalsehood(falsehood.getMetadata());
 
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PostMapping("/AddRegion")
+    public ResponseEntity<String> addRegion(RequestEntity<RegionEntry> entity)
+    {
+    	FalsehoodUser user = super.getUser(entity);
+
+        ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_ADD_RECOURSE);
+
+        if(ret != null)
+            return ret;
+
+        RegionEntry region = entity.getBody();
+        
+        String resp = attService.InsertAttribute(region);
+        
+        if("".equals(resp))
+        	return new ResponseEntity<String>(resp, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<String>(resp, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    @PostMapping("/AddInstitution")
+    public ResponseEntity<String> addInstitution(RequestEntity<InstitutionEntry> entity)
+    {
+    	FalsehoodUser user = super.getUser(entity);
+
+        ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_ADD_RECOURSE);
+
+        if(ret != null)
+            return ret;
+
+        InstitutionEntry inst = entity.getBody();
+        
+        String resp = attService.InsertAttribute(inst);
+        
+        if("".equals(resp))
+        	return new ResponseEntity<String>(resp, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<String>(resp, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

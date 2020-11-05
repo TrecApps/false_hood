@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class InstitutionEntry {
 
-	Institution insitution;
+	Institution institution;
 	
 	String contents;
 
@@ -21,24 +21,24 @@ public class InstitutionEntry {
 	 * @param insitution
 	 * @param contents
 	 */
-	public InstitutionEntry(Institution insitution, String contents) {
+	public InstitutionEntry(Institution institution, String contents) {
 		super();
-		this.insitution = insitution;
+		this.institution = institution;
 		this.contents = contents;
 	}
 
 	/**
 	 * @return the insitution
 	 */
-	public Institution getInsitution() {
-		return insitution;
+	public Institution getInstitution() {
+		return institution;
 	}
 
 	/**
 	 * @param insitution the insitution to set
 	 */
-	public void setInsitution(Institution insitution) {
-		this.insitution = insitution;
+	public void setInstitution(Institution insitution) {
+		this.institution = insitution;
 	}
 
 	/**

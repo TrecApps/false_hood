@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 import org.json.JSONObject;
 
@@ -91,19 +92,19 @@ public class FalsehoodStorageLocal {
 		
 		File objectFile = new File(file);
 	
-		BufferedReader is = null;
+		Scanner is = null;
 		
 		String ret = "";
 		
 		try 
 		{
-			is = new BufferedReader (new FileReader(objectFile));
-			
-			char buff[] = new char[100];
+			is = new Scanner (new FileReader(objectFile));
 		
-			while(is.read(buff) > 0)
+			while(is.hasNextLine())
 			{
-				ret += buff;
+				ret += is.nextLine();
+				if(is.hasNextLine())
+					ret += "\n";
 			}
 		}
 		finally
