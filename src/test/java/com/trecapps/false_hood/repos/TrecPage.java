@@ -49,7 +49,7 @@ public class TrecPage<T> implements Page {
 
     @Override
     public List getContent() {
-        return null;
+        return items;
     }
 
     @Override

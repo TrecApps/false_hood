@@ -65,7 +65,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	}
 	
 	@PostMapping("/Insert")
-	ResponseEntity<String> insertFalsehood(RequestEntity<FullFalsehood> entity, HttpServletRequest req)
+	public ResponseEntity<String> insertFalsehood(RequestEntity<FullFalsehood> entity, HttpServletRequest req)
 	{		
 		FalsehoodUser user = super.getUser(entity);
 		
@@ -110,7 +110,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	}
 
 	@PutMapping("/Approve")
-	ResponseEntity<String> approveFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
+	public ResponseEntity<String> approveFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
 	{
 		FalsehoodUser user = super.getUser(entity);
 
@@ -129,7 +129,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	}
 
 	@PutMapping("/Reject")
-	ResponseEntity<String> rejectFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
+	public ResponseEntity<String> rejectFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
 	{
 		FalsehoodUser user = super.getUser(entity);
 
@@ -149,7 +149,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 
 	
 	@PutMapping("/Update")
-	ResponseEntity<String> updateFalsehood(RequestEntity<FullFalsehood> entity,HttpServletRequest ip)
+	public ResponseEntity<String> updateFalsehood(RequestEntity<FullFalsehood> entity,HttpServletRequest ip)
 	{
 		FalsehoodUser user = super.getUser(entity);
 		

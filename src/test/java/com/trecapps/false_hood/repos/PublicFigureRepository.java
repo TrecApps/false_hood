@@ -30,11 +30,14 @@ public class PublicFigureRepository implements PublicFigureRepo {
 
         int start = number * size;
 
-        int end = start + number;
+        int end = start + size;
 
         List<PublicFigure> preRet = new ArrayList<>(appeals);
 
-        return new TrecPage<PublicFigure>( preRet.subList(start, end));
+        System.out.println("PublicFigureRepository.findAll has total entries of " + preRet.size());
+        System.out.println("StartIndex = " + start + " EndIndex = " + end);
+        
+        return new TrecPage<PublicFigure>( preRet.subList(start, Math.min(end, preRet.size())));
     }
 
     @Override

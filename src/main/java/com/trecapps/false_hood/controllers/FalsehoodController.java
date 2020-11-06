@@ -47,7 +47,7 @@ public class FalsehoodController {
 	
 	
 	@GetMapping("/id/{id}")
-	Falsehood GetFalsehood(@PathVariable("id")BigInteger id)
+	public Falsehood GetFalsehood(@PathVariable("id")BigInteger id)
 	{
 		System.out.println("id endpoint hit! id = " + id);
 		return service.getFalsehoodById(id);
@@ -58,7 +58,7 @@ public class FalsehoodController {
 	};
 	
 	@PostMapping("/list")
-	List<Falsehood> GetFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
+	public List<Falsehood> GetFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
 		List<PublicFigure> authors = searchObj.getAuthors();
 		List<String> outletsStr = searchObj.getOutlets();

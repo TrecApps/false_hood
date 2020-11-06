@@ -3,6 +3,7 @@ package com.trecapps.false_hood.falsehoods;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.trecapps.false_hood.json.EventObj;
@@ -104,6 +105,10 @@ public class FalsehoodService {
 	{
 		f.setId(null);
 		
+		
+		
+		f = fRepo.save(f);
+		
 		f.setContentId(f.getId().toString() + "-" + f.getSource());
 		
 		return fRepo.save(f);
@@ -139,7 +144,7 @@ public class FalsehoodService {
 			verdicts.setEvents(verdictList);
 		} catch(Exception e)
 		{
-
+			System.out.println(e.getMessage());
 		}
 
 		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
@@ -150,6 +155,11 @@ public class FalsehoodService {
 		event.setIpAddress(ip);
 
 		List<EventObj> eventList = verdicts.getEvents();
+		if(eventList == null)
+		{
+			eventList = new LinkedList<>();
+			System.out.println("Detected Null EventList Somehow!");
+		}
 		eventList.add(event);
 		verdicts.setEvents(eventList);
 
