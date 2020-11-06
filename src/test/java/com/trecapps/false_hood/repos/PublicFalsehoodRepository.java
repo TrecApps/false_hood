@@ -25,12 +25,13 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 
     @Override
     public List<PublicFalsehood> getFalsehoodsBetween(Date begin, Date end) {
-        return new LinkedList<>(appeals);
+    	return new LinkedList<>(appeals.stream().filter((f)-> (begin == null) ? true: (f.getDateMade().getTime() >= begin.getTime()))
+        		.filter((f)-> (end == null) ? true : (f.getDateMade().getTime() <= end.getTime())).collect(Collectors.toList()));
     }
 
     @Override
     public List<PublicFalsehood> getFalsehoodsBefore(Date end) {
-        return new LinkedList<>(appeals);
+    	return new LinkedList<>(appeals.stream().filter((f)-> (end == null) ? true : (f.getDateMade().getTime() <= end.getTime())).collect(Collectors.toList()));
     }
 
     @Override
@@ -68,7 +69,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
     @Override
     public List<PublicFalsehood> getFalsehoodsByPublicFigure(PublicFigure author) {
         return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)->{
-            return f.getOfficial().getId().equals(author.getId());
+            return f.getOfficial() == null ? false : f.getOfficial().getId().equals(author.getId());
         }).collect(Collectors.toList()));
     }
 

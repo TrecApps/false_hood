@@ -32,7 +32,7 @@ public class InstitutionRepository implements InstitutionRepo
 
         int start = number * size;
 
-        int end = start + number;
+        int end = start + size;
 
         List<Institution> preRet = new ArrayList<>(appeals);
 

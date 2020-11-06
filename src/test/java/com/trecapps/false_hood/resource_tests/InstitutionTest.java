@@ -44,7 +44,7 @@ public class InstitutionTest {
 		initializePublicFigures(sharedApp);
 	}
 	
-	public static void initializePublicFigures(FalsehoodApp sharedApp) throws URISyntaxException
+	public static void initializePublicFigures(FalsehoodApp app) throws URISyntaxException
 	{
 		if(intEntries[0] == null)
 			intEntries[0] = new InstitutionEntry(new Institution(null, "Coruscant"), 
@@ -56,7 +56,7 @@ public class InstitutionTest {
 			intEntries[2] = new InstitutionEntry(new Institution(null, "Morag"), 
 					"Old planet, known for intense flooding, once held the Power Stone");
 		
-		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
+		AuthPublicFalsehoodController apfController = app.getAuthPFalsehoodController();
 		
 		apfController.addInstitution(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(intEntries[0]));
 		apfController.addInstitution(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(intEntries[1]));

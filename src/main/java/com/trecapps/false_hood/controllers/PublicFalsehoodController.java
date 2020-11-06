@@ -29,7 +29,7 @@ public class PublicFalsehoodController
     }
 
     @GetMapping("/id/{id}")
-    PublicFalsehood GetFalsehood(@PathVariable("id") BigInteger id)
+    public PublicFalsehood GetFalsehood(@PathVariable("id") BigInteger id)
     {
         System.out.println("id endpoint hit! id = " + id);
         return service.getFalsehoodById(id);
@@ -40,7 +40,7 @@ public class PublicFalsehoodController
     };
 
     @PostMapping("/list")
-    List<PublicFalsehood> GetFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
+    public List<PublicFalsehood> GetFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
     {
         // Get variables from Search Object
         List<PublicFigure> authors = searchObj.getAuthors();

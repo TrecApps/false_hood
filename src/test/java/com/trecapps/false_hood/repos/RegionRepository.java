@@ -31,7 +31,7 @@ public class RegionRepository implements RegionRepo
 
         int start = number * size;
 
-        int end = start + number;
+        int end = start + size;
 
         List<Region> preRet = new ArrayList<>(appeals);
 

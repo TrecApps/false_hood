@@ -98,6 +98,7 @@ public class PublicFalsehoodService {
 
     public boolean appendEntryToStorage(String contents, PublicFalsehood f)
     {
-        return false;
+    	String objectId = "publicFalsehood-" + f.getId();
+        return "Success".equals(s3BucketManager.appendFile(objectId, contents));
     }
 }

@@ -129,6 +129,11 @@ public class PublicFalsehood implements Comparable<PublicFalsehood>{
 		this.severity = severity;
 		this.dateMade = dateMade;
 	}
+	
+	public PublicFalsehood clone()
+	{
+		return new PublicFalsehood(id, commonLie, status, official, officialType, region, institution, severity, dateMade);
+	}
 
 	/**
 	 * @return the id

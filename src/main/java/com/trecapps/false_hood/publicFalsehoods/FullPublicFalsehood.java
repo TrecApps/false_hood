@@ -19,6 +19,11 @@ public class FullPublicFalsehood {
         this.metadata = metadata;
         this.keywords = keywords;
     }
+    
+    public FullPublicFalsehood clone()
+    {
+    	return new FullPublicFalsehood(contents, metadata.clone(), keywords);
+    }
 
     public String getContents() {
         return contents;

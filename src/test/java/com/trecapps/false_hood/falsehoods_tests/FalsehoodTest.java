@@ -229,15 +229,15 @@ public class FalsehoodTest {
 	{
 		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
 		
-		ResponseEntity<String> resp1 = afController.rejectFalsehood(RequestEntity.post(
+		ResponseEntity<String> resp1 = afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(0))), null);
-		ResponseEntity<String> resp2 = afController.rejectFalsehood(RequestEntity.post(
+		ResponseEntity<String> resp2 = afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(1))), null);
-		ResponseEntity<String> resp3 = afController.rejectFalsehood(RequestEntity.post(
+		ResponseEntity<String> resp3 = afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(2))), null);
-		ResponseEntity<String> resp4 = afController.rejectFalsehood(RequestEntity.post(
+		ResponseEntity<String> resp4 = afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(3))), null);
-		ResponseEntity<String> resp5 = afController.rejectFalsehood(RequestEntity.post(
+		ResponseEntity<String> resp5 = afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(4))), null);
 		
 		assertTrue(resp1.getStatusCode().is4xxClientError());

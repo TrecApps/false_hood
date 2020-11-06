@@ -45,7 +45,7 @@ public class RegionTest {
 		initializePublicFigures(sharedApp);
 	}
 	
-	public static void initializePublicFigures(FalsehoodApp sharedApp) throws URISyntaxException
+	public static void initializePublicFigures(FalsehoodApp app) throws URISyntaxException
 	{
 		if(regEntries[0] == null)
 			regEntries[0] = new RegionEntry(new Region(null, "Coruscant"), 
@@ -57,7 +57,7 @@ public class RegionTest {
 			regEntries[2] = new RegionEntry(new Region(null, "Morag"), 
 					"Old planet, known for intense flooding, once held the Power Stone");
 		
-		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
+		AuthPublicFalsehoodController apfController = app.getAuthPFalsehoodController();
 		
 		apfController.addRegion(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(regEntries[0]));
 		apfController.addRegion(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(regEntries[1]));
