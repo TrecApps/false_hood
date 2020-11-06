@@ -21,6 +21,11 @@ public class FullFalsehood {
 		this.metadata = metadata;
 		this.keywords = keywords;
 	}
+	
+	public FullFalsehood clone()
+	{
+		return new FullFalsehood(contents, metadata.clone(), keywords);
+	}
 
 	/**
 	 * 

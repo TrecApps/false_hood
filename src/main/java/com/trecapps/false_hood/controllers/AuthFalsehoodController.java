@@ -85,7 +85,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 		
 		meta.setStatus(Falsehood.SUBMITTED);
 		
-		meta.setDateMade(new Date(Calendar.getInstance().getTime().getTime()));
+		// meta.setDateMade(new Date(Calendar.getInstance().getTime().getTime()));
 		
 		
 		

@@ -125,14 +125,17 @@ public class FalsehoodController {
 		if(from != null && to != null)
 		{
 			fromDates = service.getFalsehoodByDateRange(from, to);
+			System.out.println("fromDates has " + fromDates.size());
 		}
 		else if(from != null)
 		{
 			fromDates = service.getFalsehoodByDateRange(from);
+			System.out.println("fromDates has " + fromDates.size());
 		}
 		else if(to != null)
 		{
 			fromDates = service.getFalsehoodsBefore(to);
+			System.out.println("fromDates has " + fromDates.size());
 		}
 		
 		List<Falsehood> fromSeverity = null;

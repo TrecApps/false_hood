@@ -94,6 +94,7 @@ public class VerdictListObj implements FalsehoodJsonObj
     public VerdictListObj()
     {
         verdicts = new LinkedList<>();
+        events = new LinkedList<>();
     }
 
     @Override

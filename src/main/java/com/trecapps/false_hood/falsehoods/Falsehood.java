@@ -122,6 +122,10 @@ public class Falsehood implements Comparable<Falsehood>{
 		this.commonLie = commonLie;
 	}
 
+	public Falsehood clone()
+	{
+		return new Falsehood(id, outlet, status, mediaType, commonLie, severity, author1, author2, source, dateMade, contentId);
+	}
 	
 	
 	public CommonLie getCommonLie() {

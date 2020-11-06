@@ -76,6 +76,15 @@ public class PublicFigure implements Comparable<PublicFigure>
 
 
 
+	@Override
+	public String toString() {
+		return "PublicFigure [id=" + id + ", firstname=" + firstname + ", middleNames=" + middleNames + ", lastName="
+				+ lastName + ", approved=" + approved + ", submitter=" + submitter + "]";
+	}
+
+
+
+
 	/**
 	 * @return the approved
 	 */

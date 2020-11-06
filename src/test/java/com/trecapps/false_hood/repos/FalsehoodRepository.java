@@ -20,12 +20,13 @@ public class FalsehoodRepository implements FalsehoodRepo
     
     @Override
     public List<Falsehood> getFalsehoodsBetween(Date begin, Date end) {
-        return new LinkedList<>(appeals);
+        return new LinkedList<>(appeals.stream().filter((f)-> (begin == null) ? true: (f.getDateMade().getTime() >= begin.getTime()))
+        		.filter((f)-> (end == null) ? true : (f.getDateMade().getTime() <= end.getTime())).collect(Collectors.toList()));
     }
 
     @Override
     public List<Falsehood> getFalsehoodsBefore(Date end) {
-        return new LinkedList<>(appeals);
+        return new LinkedList<>(appeals.stream().filter((f)-> (end == null) ? true : (f.getDateMade().getTime() <= end.getTime())).collect(Collectors.toList()));
     }
 
     @Override
@@ -76,9 +77,13 @@ public class FalsehoodRepository implements FalsehoodRepo
 
     @Override
     public List<Falsehood> getFalsehoodsByPublicFigure(PublicFigure author) {
+    	
+    	System.out.println("In FalsehoodRepository.getFalsehoodsByPublicFigure!");
+    	System.out.println("Author is " + author);
+    	
         return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getAuthor1().getId().equals(author.getId()) ||
-                    f.getAuthor2().getId().equals(author.getId());
+            return ((f.getAuthor1() == null)? false : f.getAuthor1().getId().equals(author.getId())) ||
+                    ((f.getAuthor2() == null) ? false: f.getAuthor2().getId().equals(author.getId()));
         }).collect(Collectors.toList()));
     }
 
