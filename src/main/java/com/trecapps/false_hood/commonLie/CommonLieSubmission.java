@@ -10,7 +10,7 @@ public class CommonLieSubmission {
 
 	CommonLie lie;
 	
-	List<BigInteger> falsehoods;
+	List<BigInteger> falsehoods, publicFalsehoods;
 	
 	String contents;
 
@@ -18,11 +18,12 @@ public class CommonLieSubmission {
 	 * @param lie
 	 * @param falsehoods
 	 */
-	public CommonLieSubmission(CommonLie lie, List<BigInteger> falsehoods, String contents) {
+	public CommonLieSubmission(CommonLie lie, List<BigInteger> falsehoods, List<BigInteger> publicFalsehoods, String contents) {
 		super();
 		this.lie = lie;
 		this.falsehoods = falsehoods;
 		this.contents = contents;
+		this.publicFalsehoods = publicFalsehoods;
 	}
 
 	/**
@@ -34,7 +35,20 @@ public class CommonLieSubmission {
 	}
 
 	
-	
+	/**
+	 * @return the publicFalsehoods
+	 */
+	public List<BigInteger> getPublicFalsehoods() {
+		return publicFalsehoods;
+	}
+
+	/**
+	 * @param publicFalsehoods the publicFalsehoods to set
+	 */
+	public void setPublicFalsehoods(List<BigInteger> publicFalsehoods) {
+		this.publicFalsehoods = publicFalsehoods;
+	}
+
 	/**
 	 * @return the contents
 	 */

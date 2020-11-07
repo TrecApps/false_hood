@@ -17,6 +17,7 @@ import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodService;
 import com.trecapps.false_hood.publicFigure.PublicFigureService;
 import com.trecapps.false_hood.repos.CommonLieRepository;
@@ -78,17 +79,18 @@ public class FalsehoodApp {
 					null);
 		
 		FalsehoodUserRepo userRepo = new FalsehoodUserRepository();
+		PublicFalsehoodRepo pfRepo = new PublicFalsehoodRepository();
 		userService = new FalsehoodUserService(UserTokens.testKey, userRepo, true);
 		publicFigureService = new PublicFigureService(userService, new PublicFigureRepository(), storageHolder);
 		attService = new PublicAttributeService(storageHolder, new RegionRepository(), new InstitutionRepository());
-		publicFalsehoodService = new PublicFalsehoodService(storageHolder, new PublicFalsehoodRepository());
+		publicFalsehoodService = new PublicFalsehoodService(storageHolder, pfRepo);
 		keyService = new KeywordService(new PublicKeywordsRepository(), new KeywordRepository());
 		outletService = new MediaOutletService(new MediaOutletRepository(), storageHolder, userService);
 		
 		FalsehoodRepo fRepo = new FalsehoodRepository();
 		
 		falsehoodService = new FalsehoodService(fRepo, storageHolder, userService);
-		cLieService = new CommonLieService(new CommonLieRepository(), fRepo, storageHolder);
+		cLieService = new CommonLieService(new CommonLieRepository(), fRepo, pfRepo, storageHolder);
 		appealService = new FalsehoodAppealService(new FalsehoodAppealRepository(),
 					null,
 					fRepo,

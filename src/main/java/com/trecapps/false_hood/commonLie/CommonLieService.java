@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 
 @Service
 public class CommonLieService {
@@ -19,15 +21,18 @@ public class CommonLieService {
 	FalsehoodRepo falsehoodRepo;
 
 	FalsehoodStorageHolder awsStorageRepo;
+	PublicFalsehoodRepo publicFalsehoodRepo;
 
 	@Autowired
 	public CommonLieService(@Autowired CommonLieRepo clRepo,
 							@Autowired FalsehoodRepo falsehoodRepo,
+							@Autowired PublicFalsehoodRepo publicFalsehoodRepo, 
 							@Autowired FalsehoodStorageHolder awsStorageRepo)
 	{
 		this.awsStorageRepo = awsStorageRepo;
 		this.clRepo = clRepo;
 		this.falsehoodRepo = falsehoodRepo;
+		this.publicFalsehoodRepo = publicFalsehoodRepo;
 	}
 
 	
@@ -44,15 +49,17 @@ public class CommonLieService {
 	
 	public String submitCommonLie(CommonLieSubmission cls)
 	{
-		if(cls.getFalsehoods().size() < 5)
+		if(cls.getFalsehoods().size() + cls.getPublicFalsehoods().size() < 5)
 		{
 			return "Need five Falsehoods to establish a Common Lie!";
 		}
 		
 		List<Falsehood> falsehoods = new LinkedList<Falsehood>();
+		List<PublicFalsehood> pFalsehoods = new LinkedList<>();
 		
 		CommonLie lie = clRepo.save(cls.getLie());
 		
+		// Update Regular Media Falsehoods to point to the Common Lie
 		for(BigInteger bInt: cls.getFalsehoods())
 		{
 			if(!falsehoodRepo.existsById(bInt))
@@ -65,6 +72,18 @@ public class CommonLieService {
 			falsehoods.add(falsehoodRepo.getOne(bInt));
 		}
 		
+		// Update Public Falsehoods to point to the common Lie
+		for(BigInteger bInt: cls.getPublicFalsehoods())
+		{
+			if(!publicFalsehoodRepo.existsById(bInt))
+			{
+				clRepo.delete(lie);
+				return "Falsehood " + bInt + " does not exist in our records!";
+			}
+			
+			
+			pFalsehoods.add(publicFalsehoodRepo.getOne(bInt));
+		}
 		String storageKey = "common_lie-" + lie.getId();
 		
 		if(!"Success".equals(awsStorageRepo.addNewFile(storageKey, cls.getContents())))
@@ -79,7 +98,11 @@ public class CommonLieService {
 			falsehoodRepo.save(f);
 		}
 		
-		
+		for(PublicFalsehood f: pFalsehoods)
+		{
+			f.setCommonLie(lie);
+			publicFalsehoodRepo.save(f);
+		}
 		
 		return "";
 	}
