@@ -31,19 +31,19 @@ public class FalsehoodRepository implements FalsehoodRepo
 
     @Override
     public List<Falsehood> getFalsehoodsByMinimumSeverity(byte minSeverity) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)-> f.getSeverity() >= minSeverity).collect(Collectors.toList()));
+        return new ArrayList<Falsehood>(appeals.stream().filter((f)-> f.getSeverity() <= minSeverity).collect(Collectors.toList()));
 
     }
 
     @Override
     public List<Falsehood> getFalsehoodsByMaximumSeverity(byte maxSeverity) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)-> f.getSeverity() <= maxSeverity).collect(Collectors.toList()));
+        return new ArrayList<Falsehood>(appeals.stream().filter((f)-> f.getSeverity() >= maxSeverity).collect(Collectors.toList()));
     }
 
     @Override
     public List<Falsehood> getFalshoodBySeverity(byte maxSeverity, byte minSeverity) {
         return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getSeverity() >= minSeverity && f.getSeverity() <= maxSeverity;
+            return f.getSeverity() <= minSeverity && f.getSeverity() >= maxSeverity;
         }).collect(Collectors.toList()));
     }
 
@@ -77,9 +77,6 @@ public class FalsehoodRepository implements FalsehoodRepo
 
     @Override
     public List<Falsehood> getFalsehoodsByPublicFigure(PublicFigure author) {
-    	
-    	System.out.println("In FalsehoodRepository.getFalsehoodsByPublicFigure!");
-    	System.out.println("Author is " + author);
     	
         return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
             return ((f.getAuthor1() == null)? false : f.getAuthor1().getId().equals(author.getId())) ||

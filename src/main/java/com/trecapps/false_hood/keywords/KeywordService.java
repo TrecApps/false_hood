@@ -58,7 +58,7 @@ public class KeywordService {
 			word = word.trim();
 			if(word.length() > 0)
 			{
-				PublicKeyword keyword = (kRepo.existsById(word)) ? pkRepo.getOne(word) : new PublicKeyword(word, new ArrayList<PublicFalsehood>());
+				PublicKeyword keyword = (pkRepo.existsById(word)) ? pkRepo.getOne(word) : new PublicKeyword(word, new ArrayList<PublicFalsehood>());
 
 				List<PublicFalsehood> l = keyword.getFalsehoods();
 				l.add(f);
@@ -99,7 +99,6 @@ public class KeywordService {
 			.filter(obj -> obj != null)												// Null filter, just in case
 			.forEach(obj-> falsehoods.add(obj));									// Add it to the return object
 		
-		System.out.println("Search terms uncovered: " + falsehoods.size());
 		
 		return falsehoods;
 	}
@@ -131,8 +130,6 @@ public class KeywordService {
 			.map(list -> list.size() > 0 ? list.get(0) : null) 						// All entries represent the same falsehood - so just get the first in each list
 			.filter(obj -> obj != null)												// Null filter, just in case
 			.forEach(obj-> falsehoods.add(obj));									// Add it to the return object
-		
-		System.out.println("Search terms uncovered: " + falsehoods.size());
 		
 		return falsehoods;
 	}

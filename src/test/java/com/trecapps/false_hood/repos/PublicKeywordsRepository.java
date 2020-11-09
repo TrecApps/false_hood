@@ -31,7 +31,7 @@ public class PublicKeywordsRepository implements PublicKeywordRepo {
 
         int start = number * size;
 
-        int end = start + number;
+        int end = start + size;
 
         List<PublicKeyword> preRet = new ArrayList<>(appeals);
 
@@ -82,6 +82,7 @@ public class PublicKeywordsRepository implements PublicKeywordRepo {
 
     @Override
     public <S extends PublicKeyword> S save(S entity) {
+    	
     	if(entity == null)
             throw new IllegalArgumentException("Entity passed to Save Method must not be null");
     	if(entity.getWord() == null)
@@ -154,9 +155,10 @@ public class PublicKeywordsRepository implements PublicKeywordRepo {
         for(PublicKeyword app: appeals)
         {
             if(s.equals(app.getWord()))
+            {
                 return app;
+            }
         }
-
         return new PublicKeyword();
     }
 

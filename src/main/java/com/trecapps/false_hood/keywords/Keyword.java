@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.keywords;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class Keyword implements Comparable<Keyword>{
 	public Keyword() {
 		super();
 		// TODO Auto-generated constructor stub
+		falsehoods = new LinkedList<>();
 	}
 
 	public Keyword(String word, List<Falsehood> falsehoods) {

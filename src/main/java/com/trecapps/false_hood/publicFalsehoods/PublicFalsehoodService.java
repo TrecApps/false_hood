@@ -80,8 +80,6 @@ public class PublicFalsehoodService {
     {
         String objectId = "publicFalsehood-" + f.getId();
 
-        System.out.println("Object ID inserting is " + objectId);
-
         return "Success".equals(s3BucketManager.addNewFile(objectId, contents));
 
     }

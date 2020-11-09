@@ -33,7 +33,7 @@ public class KeywordRepository implements KeywordRepo
 
         int start = number * size;
 
-        int end = start + number;
+        int end = start + size;
 
         List<Keyword> preRet = new ArrayList<>(appeals);
 

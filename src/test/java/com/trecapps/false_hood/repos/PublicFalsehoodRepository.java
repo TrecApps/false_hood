@@ -36,19 +36,19 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 
     @Override
     public List<PublicFalsehood> getFalsehoodsByMinimumSeverity(byte minSeverity) {
-        return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)-> f.getSeverity() >= minSeverity).collect(Collectors.toList()));
+        return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)-> f.getSeverity() <= minSeverity).collect(Collectors.toList()));
 
     }
 
     @Override
     public List<PublicFalsehood> getFalsehoodsByMaximumSeverity(byte maxSeverity) {
-        return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)-> f.getSeverity() <= maxSeverity).collect(Collectors.toList()));
+        return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)-> f.getSeverity() >= maxSeverity).collect(Collectors.toList()));
     }
 
     @Override
     public List<PublicFalsehood> getFalsehoodBySeverity(byte maxSeverity, byte minSeverity) {
         return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)->{
-            return f.getSeverity() >= minSeverity && f.getSeverity() <= maxSeverity;
+            return f.getSeverity() <= minSeverity && f.getSeverity() >= maxSeverity;
         }).collect(Collectors.toList()));
     }
 

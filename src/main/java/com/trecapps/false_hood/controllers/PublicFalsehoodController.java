@@ -31,7 +31,6 @@ public class PublicFalsehoodController
     @GetMapping("/id/{id}")
     public PublicFalsehood GetFalsehood(@PathVariable("id") BigInteger id)
     {
-        System.out.println("id endpoint hit! id = " + id);
         return service.getFalsehoodById(id);
     }
 

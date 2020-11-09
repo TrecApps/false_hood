@@ -21,6 +21,7 @@ import com.trecapps.false_hood.controllers.FalsehoodController;
 import com.trecapps.false_hood.controllers.PublicFalsehoodController;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.SearchFalsehood;
+import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.Institution;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
@@ -113,6 +114,73 @@ public class PublicFalsehoodTest {
 		assertEquals(6, f.size());
 	}
 	
+	@Test
+	public void searchByTerms()
+	{
+		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
+		
+		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		
+		search.setTerms("Vader Serena");
+		
+		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
+		
+		assertEquals(8, f.size());
+		
+		search.setTerms("Dumbledore Voldemort");
+		
+		f = fController.GetFalsehoodByParams(search);
+		
+		assertEquals(4, f.size());
+	}
+	
+	@Test
+	public void searchBySeverity()
+	{
+		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
+		
+		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		
+		search.setMaximum(Severity.FABRICATION);
+		
+		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
+		
+		assertEquals(8, f.size());
+		
+		search.setMinimum(Severity.DOUBLE_STANDARD);;
+		
+		f = fController.GetFalsehoodByParams(search);
+		
+		assertEquals(4, f.size());
+		
+		search.setMaximum(null);
+		
+		f = fController.GetFalsehoodByParams(search);
+		
+		assertEquals(6, f.size());
+	}
+	
+	@Test
+	public void searchByInstitutions()
+	{
+		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
+		
+		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		
+		List<Institution> localInts = new ArrayList<>();
+		localInts.add(institutions.get(0));
+		
+		search.setInstitutions(localInts);
+		
+		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
+		localInts.add(institutions.get(1));
+		
+		f = fController.GetFalsehoodByParams(search);
+		assertEquals(6, f.size());
+	}
+	
 	public static void initializeFalsehoods(FalsehoodApp app) throws URISyntaxException
 	{
 		PublicAttributeService attService = app.getAttService();
@@ -131,23 +199,23 @@ public class PublicFalsehoodTest {
 		if(falsehoods[0] == null)
 			falsehoods[0] = new FullPublicFalsehood("Public Falsehood 1",
 					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.POLITICIAN, regions.get(1), institutions.get(2), (byte)1, new Date(DATE_2010)),
-					"Vader;Palpatine;Empire");
+					"Vader;;Palpatine;;Empire");
 		if(falsehoods[1] == null)
 			falsehoods[1] = new FullPublicFalsehood("Public Falsehood 2",
-					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.LAW_ENFORCEMENT, regions.get(2), institutions.get(0), (byte)1, new Date(DATE_2017)),
-					"Vader;Voldemort;Thanos");
+					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.LAW_ENFORCEMENT, regions.get(2), institutions.get(0), (byte)3, new Date(DATE_2017)),
+					"Vader;;Voldemort;;Thanos");
 		if(falsehoods[2] == null)
 			falsehoods[2] = new FullPublicFalsehood("Public Falsehood 3",
-					new PublicFalsehood(null, null, (byte)0, figures.get(2), PublicFalsehood.ECONOMIST, regions.get(0), institutions.get(1), (byte)1, new Date(DATE_2014)),
-					"Voldemort;Dumbledore;Ministry");
+					new PublicFalsehood(null, null, (byte)0, figures.get(2), PublicFalsehood.ECONOMIST, regions.get(0), institutions.get(1), (byte)4, new Date(DATE_2014)),
+					"Voldemort;;Dumbledore;;Ministry");
 		if(falsehoods[3] == null)
 			falsehoods[3] = new FullPublicFalsehood("Public Falsehood 4",
-					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.ENVIRONMENTALIST, regions.get(1), institutions.get(2), (byte)1, new Date(DATE_2020)),
-					"Thanos;Ironman;Thor;Serena");
+					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.ENVIRONMENTALIST, regions.get(1), institutions.get(2), (byte)5, new Date(DATE_2020)),
+					"Thanos;;Ironman;;Thor;;Serena");
 		if(falsehoods[4] == null)
 			falsehoods[4] = new FullPublicFalsehood("Public Falsehood 5",
-					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.INTELLIGENCE, regions.get(2), institutions.get(0), (byte)1, new Date(DATE_2008)),
-					"Loki;Sif;Serena");
+					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.INTELLIGENCE, regions.get(2), institutions.get(0), (byte)0, new Date(DATE_2008)),
+					"Loki;;Sif;;Serena");
 		
 		AuthPublicFalsehoodController afController = app.getAuthPFalsehoodController();
 		
