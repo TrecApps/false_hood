@@ -25,15 +25,15 @@ public class FalsehoodAppealRepositoryTest {
     @BeforeClass
     static public void initializeArray()
     {
-        falsehoodAppeals[0] = new FalsehoodAppeal(null, new Falsehood(), "REJECTED", null);
+        falsehoodAppeals[0] = new FalsehoodAppeal(null, new Falsehood(), null, "REJECTED", null);
         
-        falsehoodAppeals[1] = new FalsehoodAppeal(null, new Falsehood(), "REJECTED", null);
+        falsehoodAppeals[1] = new FalsehoodAppeal(null, new Falsehood(), null, "REJECTED", null);
         
-        falsehoodAppeals[2] = new FalsehoodAppeal(null, new Falsehood(), "REJECTED", null);
+        falsehoodAppeals[2] = new FalsehoodAppeal(null, new Falsehood(), null, "REJECTED", null);
         
-        falsehoodAppeals[3] = new FalsehoodAppeal(null, new Falsehood(), "REJECTED", null);
+        falsehoodAppeals[3] = new FalsehoodAppeal(null, new Falsehood(), null, "REJECTED", null);
         
-        falsehoodAppeals[4] = new FalsehoodAppeal(null, new Falsehood(), "REJECTED", null);
+        falsehoodAppeals[4] = new FalsehoodAppeal(null, new Falsehood(), null, "REJECTED", null);
     }
 
     @Test

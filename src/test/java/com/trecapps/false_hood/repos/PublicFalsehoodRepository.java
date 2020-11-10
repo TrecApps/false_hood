@@ -3,6 +3,7 @@ package com.trecapps.false_hood.repos;
 import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.publicFalsehoods.Institution;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
@@ -55,14 +56,14 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
     @Override
     public List<PublicFalsehood> getChallengedFalsehoods() {
         return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)->{
-            return f.getStatus() == Falsehood.CHALLENGED;
+            return f.getStatus() == FalsehoodStatus.CHALLENGED.GetValue();
         }).collect(Collectors.toList()));
     }
 
     @Override
     public List<PublicFalsehood> getConfirmedFalsehoods() {
         return new ArrayList<PublicFalsehood>(appeals.stream().filter((f)->{
-            return f.getStatus() == Falsehood.VERIFIED;
+            return f.getStatus() == FalsehoodStatus.VERIFIED.GetValue();
         }).collect(Collectors.toList()));
     }
 

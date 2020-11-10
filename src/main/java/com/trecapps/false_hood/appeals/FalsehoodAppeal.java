@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.falsehoods.Falsehood;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.users.FalsehoodUser;
 
 @Entity
@@ -23,6 +24,10 @@ public class FalsehoodAppeal implements Comparable<FalsehoodAppeal>
 	@ManyToOne
 	@JoinColumn
 	Falsehood falsehood;
+	
+	@ManyToOne
+	@JoinColumn
+	PublicFalsehood pFalsehood;
 	
 	@Column
 	String desiredState;
@@ -48,13 +53,30 @@ public class FalsehoodAppeal implements Comparable<FalsehoodAppeal>
 	 * @param desiredState
 	 * @param petitioner
 	 */
-	public FalsehoodAppeal(BigInteger id, Falsehood falsehood, String desiredState, FalsehoodUser petitioner) {
+	public FalsehoodAppeal(BigInteger id, Falsehood falsehood, PublicFalsehood pFalsehood, String desiredState, FalsehoodUser petitioner) {
 		super();
+		this.pFalsehood = pFalsehood;
 		this.id = id;
 		this.falsehood = falsehood;
 		this.desiredState = desiredState;
 		this.petitioner = petitioner;
 		this.ratified = (byte)0;
+	}
+	
+	
+
+	/**
+	 * @return the pFalsehood
+	 */
+	public PublicFalsehood getpFalsehood() {
+		return pFalsehood;
+	}
+
+	/**
+	 * @param pFalsehood the pFalsehood to set
+	 */
+	public void setpFalsehood(PublicFalsehood pFalsehood) {
+		this.pFalsehood = pFalsehood;
 	}
 
 	/**

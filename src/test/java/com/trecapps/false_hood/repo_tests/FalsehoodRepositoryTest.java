@@ -4,6 +4,7 @@ package com.trecapps.false_hood.repo_tests;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 import com.trecapps.false_hood.repos.FalsehoodRepository;
 import org.junit.BeforeClass;
@@ -31,7 +32,7 @@ public class FalsehoodRepositoryTest {
     {
         falsehoods[0] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1998, "Fox News",(byte)0, null),
-                Falsehood.SUBMITTED,
+                FalsehoodStatus.SUBMITTED.GetValue(),
                 (byte)1,
                 null,
                 Falsehood.LIE,
@@ -43,7 +44,7 @@ public class FalsehoodRepositoryTest {
         
         falsehoods[1] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1998, "Fox News",(byte)0, null),
-                Falsehood.VERIFIED,
+                FalsehoodStatus.VERIFIED.GetValue(),
                 (byte)1,
                 null,
                 Falsehood.LIE,
@@ -55,7 +56,7 @@ public class FalsehoodRepositoryTest {
         
         falsehoods[2] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1996, "MSNBC",(byte)0, null),
-                Falsehood.SUBMITTED,
+                FalsehoodStatus.SUBMITTED.GetValue(),
                 (byte)1,
                 null,
                 Falsehood.LIE,
@@ -67,7 +68,7 @@ public class FalsehoodRepositoryTest {
         
         falsehoods[3] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1998, "CNN",(byte)0, null),
-                Falsehood.VERIFIED,
+                FalsehoodStatus.VERIFIED.GetValue(),
                 (byte)1,
                 null,
                 Falsehood.LIE,
@@ -79,7 +80,7 @@ public class FalsehoodRepositoryTest {
         
         falsehoods[4] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1996, "MSNBC",(byte)0, null),
-                Falsehood.SUBMITTED,
+                FalsehoodStatus.SUBMITTED.GetValue(),
                 (byte)1,
                 null,
                 Falsehood.LIE,

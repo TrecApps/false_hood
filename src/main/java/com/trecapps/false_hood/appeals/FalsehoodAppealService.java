@@ -11,10 +11,14 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.miscellanous.FalsehoodEmailService;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageAws;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserRepo;
 
@@ -26,6 +30,8 @@ public class FalsehoodAppealService {
 	FalsehoodAppealSignatureRepo signatureRepo;
 
 	FalsehoodRepo falsehoodRepo;
+	
+	PublicFalsehoodRepo pFalsehoodRepo;
 
 	FalsehoodUserRepo userRepo;
 
@@ -37,6 +43,7 @@ public class FalsehoodAppealService {
 	public FalsehoodAppealService(@Autowired FalsehoodAppealRepo appealRepo,
 								  @Autowired FalsehoodAppealSignatureRepo signatureRepo,
 								  @Autowired FalsehoodRepo falsehoodRepo,
+								  @Autowired PublicFalsehoodRepo pFalsehoodRepo,
 								  @Autowired FalsehoodUserRepo userRepo,
 								  @Autowired FalsehoodEmailService emailService,
 								  @Autowired FalsehoodStorageHolder awsStorage)
@@ -45,6 +52,7 @@ public class FalsehoodAppealService {
 		this.signatureRepo = signatureRepo;
 		this.falsehoodRepo = falsehoodRepo;
 		this.userRepo = userRepo;
+		this.pFalsehoodRepo = pFalsehoodRepo;
 		this.emailService = emailService;
 		this.awsStorage = awsStorage;
 	}
@@ -57,6 +65,16 @@ final int RANDOM_STRING_LENGTH = 30;
 	public ResponseEntity<String> addAppeal(FalsehoodAppealEntry entry, FalsehoodUser user)
 	{
 		FalsehoodAppeal appeal = entry.getAppeal();
+		
+		if(appeal == null)
+			return new ResponseEntity<String>("Null Appeal Object provided", HttpStatus.BAD_REQUEST);
+		
+		if(appeal.getFalsehood() == null && appeal.getpFalsehood() == null)
+			return new ResponseEntity<String>("Appeal needs to reference an exiting Media Falsehood OR an existing Public Falsehood", HttpStatus.BAD_REQUEST);
+		
+		if(appeal.getFalsehood() != null && appeal.getpFalsehood() != null)
+			return new ResponseEntity<String>("Appeal needs to reference an exiting Media Falsehood OR an existing Public Falsehood", HttpStatus.BAD_REQUEST);
+		
 		
 		BigInteger falsehoodId = appeal.getFalsehood().getId();
 		
@@ -213,6 +231,36 @@ final int RANDOM_STRING_LENGTH = 30;
 			
 			appealRepo.save(appeal);
 			
+			Falsehood f = appeal.getFalsehood();
+			PublicFalsehood pf = appeal.getpFalsehood();
+			
+			switch(appeal.getDesiredState())
+			{
+			case "Upgrade":
+				if(f != null)
+				{
+					f.upgrade();
+					this.falsehoodRepo.save(f);
+				}
+				else
+				{
+					pf.upgrade();
+					this.pFalsehoodRepo.save(pf);
+				}
+				break;
+			case "Challenge":
+				if(f != null)
+				{
+					f.setStatus(FalsehoodStatus.CHALLENGED.GetValue());
+					this.falsehoodRepo.save(f);
+				}
+				else
+				{
+					pf.setStatus(FalsehoodStatus.CHALLENGED.GetValue());
+					this.pFalsehoodRepo.save(pf);
+				}
+				break;
+			}
 		}
 	}
 	

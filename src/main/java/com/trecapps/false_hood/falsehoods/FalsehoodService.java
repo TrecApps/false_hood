@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
@@ -183,7 +184,7 @@ public class FalsehoodService {
 			return "Falsehood Doesn't exist";
 
 		Falsehood f = fRepo.getOne(id);
-		if(f.getStatus() != Falsehood.SUBMITTED)
+		if(f.getStatus() != FalsehoodStatus.SUBMITTED.GetValue())
 			return "Cannot cast Verdict on established Falsehood! File an Appeal to update the status";
 
 		JSONObject verdictJson = null;
@@ -228,12 +229,12 @@ public class FalsehoodService {
 
 		if(verdicts.isApproved())
 		{
-			f.setStatus(Falsehood.VERIFIED);
+			f.setStatus(FalsehoodStatus.VERIFIED.GetValue());
 			fRepo.save(f);
 		}
 		else if(verdicts.isRejected())
 		{
-			f.setStatus(Falsehood.REJECTED);
+			f.setStatus(FalsehoodStatus.REJECTED.GetValue());
 			fRepo.save(f);
 		}
 

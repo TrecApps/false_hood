@@ -94,6 +94,7 @@ public class FalsehoodApp {
 		appealService = new FalsehoodAppealService(new FalsehoodAppealRepository(),
 					null,
 					fRepo,
+					pfRepo,
 					userRepo,
 					null,
 					storageHolder);

@@ -3,6 +3,7 @@ package com.trecapps.false_hood.controllers;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.InstitutionEntry;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
@@ -70,7 +71,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 
         PublicFalsehood meta = falsehood.getMetadata();
 
-        meta.setStatus(Falsehood.SUBMITTED);
+        meta.setStatus(FalsehoodStatus.SUBMITTED.GetValue());
 
         ///meta.setDateMade(new Date(Calendar.getInstance().getTime().getTime()));
 

@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Calendar;
 
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.VerdictSubmission;
 import com.trecapps.false_hood.publicFigure.PublicFigureEntry;
 
@@ -83,7 +84,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 		
 		Falsehood meta = falsehood.getMetadata();
 		
-		meta.setStatus(Falsehood.SUBMITTED);
+		meta.setStatus(FalsehoodStatus.SUBMITTED.GetValue());
 		
 		// meta.setDateMade(new Date(Calendar.getInstance().getTime().getTime()));
 		

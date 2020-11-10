@@ -130,6 +130,19 @@ public class PublicFalsehood implements Comparable<PublicFalsehood>{
 		this.dateMade = dateMade;
 	}
 	
+	public boolean canUpgrade()
+	{
+		return severity == (byte)1 || severity == (byte)4;
+	}
+	
+	public boolean upgrade()
+	{
+		if(!canUpgrade())
+			return false;
+		severity--;
+		return true;
+	}
+	
 	public PublicFalsehood clone()
 	{
 		return new PublicFalsehood(id, commonLie, status, official, officialType, region, institution, severity, dateMade);

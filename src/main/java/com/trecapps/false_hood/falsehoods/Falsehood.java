@@ -43,20 +43,6 @@ public class Falsehood implements Comparable<Falsehood>{
 	CommonLie commonLie;
 	
 	// Verification Status
-	@Transient 
-	public static final byte SUBMITTED = 0;	// Has been submitted, but not verified as a false hood
-	@Transient 
-	public static final byte VERIFIED = 1;	// Has been verified by staff
-	@Transient 
-	public static final byte CHALLENGED = 2;	// Has been verified, but is now being challenged
-	@Transient 
-	public static final byte REVERIFIED = 3;	// Has been verified and the challenge has failed
-	@Transient 
-	public static final byte MODIFIED = 4;	// Has been modified from an earlier version
-	@Transient 
-	public static final byte OVERTURNED = 5;	// Has previously been verified, but was overturned
-	@Transient
-	public static final byte REJECTED = 6;
 	
 	
 	@Column
@@ -127,6 +113,18 @@ public class Falsehood implements Comparable<Falsehood>{
 		return new Falsehood(id, outlet, status, mediaType, commonLie, severity, author1, author2, source, dateMade, contentId);
 	}
 	
+	public boolean canUpgrade()
+	{
+		return severity == (byte)1 || severity == (byte)4;
+	}
+	
+	public boolean upgrade()
+	{
+		if(!canUpgrade())
+			return false;
+		severity--;
+		return true;
+	}
 	
 	public CommonLie getCommonLie() {
 		return commonLie;

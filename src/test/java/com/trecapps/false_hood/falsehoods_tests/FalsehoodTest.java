@@ -161,13 +161,13 @@ public class FalsehoodTest {
 		
 		SearchFalsehood search = new SearchFalsehood();
 		
-		search.setMaximum(Severity.FABRICATION);
+		search.setMaximum(Severity.OBJECTOVE_FALSEHOOD);
 		
 		List<Falsehood> f = fController.GetFalsehoodByParams(search);
 		
 		assertEquals(8, f.size());
 		
-		search.setMinimum(Severity.DOUBLE_STANDARD);;
+		search.setMinimum(Severity.HYPOCRISY);;
 		
 		f = fController.GetFalsehoodByParams(search);
 		

@@ -3,6 +3,7 @@ package com.trecapps.false_hood.repos;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -64,14 +65,14 @@ public class FalsehoodRepository implements FalsehoodRepo
     @Override
     public List<Falsehood> getChallengedFalsehoods() {
         return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getStatus() == Falsehood.CHALLENGED;
+            return f.getStatus() == FalsehoodStatus.CHALLENGED.GetValue();
         }).collect(Collectors.toList()));
     }
 
     @Override
     public List<Falsehood> getConfirmedFalsehoods() {
         return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getStatus() == Falsehood.VERIFIED;
+            return f.getStatus() == FalsehoodStatus.VERIFIED.GetValue();
         }).collect(Collectors.toList()));
     }
 
