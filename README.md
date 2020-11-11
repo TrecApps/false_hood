@@ -156,55 +156,55 @@ Used in the event the User wishes to create a new account in Trec-Apps
 
 Fields:
 
-* Field: firstName (String)
+Field: firstName (String)
 * Purpose: The first name of the User
 * Mandatory: Yes
 
-* Field: lastName (String)
+Field: lastName (String)
 * Purpose: The Last Name of the User
 * Mandatory: Yes
 
-* Field: username (String)
+Field: username (String)
 * Purpose: the user name of the user (used throughout all of Trec-Apps)
 * Mandatory: Yes
 
-* Field: mainEmail (String)
+Field: mainEmail (String)
 * Purpose: The main Email to contact, used to provide a token with which the user can verify the account (i.e. not a bot)
 * Mandatory: Yes
 
-* Field: trecEmail (String)
+Field: trecEmail (String)
 * Purpose: The eventual Trec Account should Trec-Apps launch it's own email service)
 * Mandatory: No. Leave blank for now
 
-* Field: backupEmail (String)
+Field: backupEmail (String)
 * Purpose: The back-up email to use
 * Mandatory: Yes
 
-* Field: password (Protected String)
+Field: password (Protected String)
 * Purpose: token the user can use to log in later
 * Mandatory: Yes
 
-* Field: birthday (Date)
+Field: birthday (Date)
 * Purpose: When was the user born. Can verify the age and manage content-restriction
 * Mandatory: Yes
 
-* Field: passwordMonthReset (1 byte number)
+Field: passwordMonthReset (1 byte number)
 * Purpose: How many months can pass before the User needs to reset his/her password
 * Mandatory: No
 
-* Field: timeForValidToken (1 byte number)
+Field: timeForValidToken (1 byte number)
 * Purpose: How long after each successful login that the token should be valid for
 * Mandatory: No
 
-* Field: validTimeFromActivity (1 byte number)
+Field: validTimeFromActivity (1 byte number)
 * Purpose: Whether the Service should update the token after some activity by the user (expiration is pushed back)
 * Mandatory: No
 
-* Field: maxLoginAttempts (1 byte number)
+Field: maxLoginAttempts (1 byte number)
 * Purpose: How many times Per hour the user can fail to log-in before the account is locked
 * Mandatory: No
 
-* Field: lockTime (1 byte number)
+Field: lockTime (1 byte number)
 * Purpose: How long (by ten minutes, to lock the account for)
 * Mandatory: No
 
@@ -215,11 +215,13 @@ Note: also comes with a "clientId" but is not supposed to be known by the user
 Object returned by a successful attempt to authenticate
 
 ```
+{
     "token": ""liuerhfnx23y40923y5t",
     "username": "username",
     "firstname": "User's first name",
     "lastname": "User's last name",
     "color": "info about the user's prefered style"
+}
 ```
 
 Note: the "token" field is meant to be a JWT token unique to that user and specific to the TrecApp's Falsehood Service.
