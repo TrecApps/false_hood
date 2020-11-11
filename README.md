@@ -130,11 +130,11 @@ Once your application runs, it should have some data to work with.
 
 These are objects that can be transferred over to the Falsehoods service using HTTP. You can create representations of them on the Client side (likely using JSON) and send then as part of the request body
 
-#### Account Objects
+### Account Objects
 
 These Objects are focused on managing Login and user authentication. They are used by the falsehoods service to communicate with the User Service.
 
-###### LogIn
+##### LogIn
 
 Used to manage The LogIn Process, part of a Request
 
@@ -150,67 +150,67 @@ Note that none of these values are real values, just used to provide an example.
 Note: Either the "Username" or the "email" is used. "password" is always needed.
 There is technically a fourth field called "clientId" but end user's aren't supposed to know what it is.
 
-###### NewUser
+##### NewUser
 
 Used in the event the User wishes to create a new account in Trec-Apps
 
 Fields:
 
-Field: firstName (String)
-Purpose: The first name of the User
-Mandatory: Yes
+* Field: firstName (String)
+* Purpose: The first name of the User
+* Mandatory: Yes
 
-Field: lastName (String)
-Purpose: The Last Name of the User
-Mandatory: Yes
+* Field: lastName (String)
+* Purpose: The Last Name of the User
+* Mandatory: Yes
 
-Field: username (String)
-Purpose: the user name of the user (used throughout all of Trec-Apps)
-Mandatory: Yes
+* Field: username (String)
+* Purpose: the user name of the user (used throughout all of Trec-Apps)
+* Mandatory: Yes
 
-Field: mainEmail (String)
-Purpose: The main Email to contact, used to provide a token with which the user can verify the account (i.e. not a bot)
-Mandatory: Yes
+* Field: mainEmail (String)
+* Purpose: The main Email to contact, used to provide a token with which the user can verify the account (i.e. not a bot)
+* Mandatory: Yes
 
-Field: trecEmail (String)
-Purpose: The eventual Trec Account should Trec-Apps launch it's own email service)
-Mandatory: No. Leave blank for now
+* Field: trecEmail (String)
+* Purpose: The eventual Trec Account should Trec-Apps launch it's own email service)
+* Mandatory: No. Leave blank for now
 
-Field: backupEmail (String)
-Purpose: The back-up email to use
-Mandatory: Yes
+* Field: backupEmail (String)
+* Purpose: The back-up email to use
+* Mandatory: Yes
 
-Field: password (Protected String)
-Purpose: token the user can use to log in later
-Mandatory: Yes
+* Field: password (Protected String)
+* Purpose: token the user can use to log in later
+* Mandatory: Yes
 
-Field: birthday (Date)
-Purpose: When was the user born. Can verify the age and manage content-restriction
-Mandatory: Yes
+* Field: birthday (Date)
+* Purpose: When was the user born. Can verify the age and manage content-restriction
+* Mandatory: Yes
 
-Field: passwordMonthReset (1 byte number)
-Purpose: How many months can pass before the User needs to reset his/her password
-Mandatory: No
+* Field: passwordMonthReset (1 byte number)
+* Purpose: How many months can pass before the User needs to reset his/her password
+* Mandatory: No
 
-Field: timeForValidToken (1 byte number)
-Purpose: How long after each successful login that the token should be valid for
-Mandatory: No
+* Field: timeForValidToken (1 byte number)
+* Purpose: How long after each successful login that the token should be valid for
+* Mandatory: No
 
-Field: validTimeFromActivity (1 byte number)
-Purpose: Whether the Service should update the token after some activity by the user (expiration is pushed back)
-Mandatory: No
+* Field: validTimeFromActivity (1 byte number)
+* Purpose: Whether the Service should update the token after some activity by the user (expiration is pushed back)
+* Mandatory: No
 
-Field: maxLoginAttempts (1 byte number)
-Purpose: How many times Per hour the user can fail to log-in before the account is locked
-Mandatory: No
+* Field: maxLoginAttempts (1 byte number)
+* Purpose: How many times Per hour the user can fail to log-in before the account is locked
+* Mandatory: No
 
-Field: lockTime (1 byte number)
-Purpose: How long (by ten minutes, to lock the account for)
-Mandatory: No
+* Field: lockTime (1 byte number)
+* Purpose: How long (by ten minutes, to lock the account for)
+* Mandatory: No
 
 Note: also comes with a "clientId" but is not supposed to be known by the user
 
-###### ReturnObj
+##### ReturnObj
 
 Object returned by a successful attempt to authenticate
 
@@ -224,11 +224,11 @@ Object returned by a successful attempt to authenticate
 
 Note: the "token" field is meant to be a JWT token unique to that user and specific to the TrecApp's Falsehood Service.
 
-#### Other Objects
+### Other Objects
 
 Most other objects are explained in various READMEs in the sub folders of this Repository. There is one worth mentioning here though:
 
-###### Verdict Submission
+##### Verdict Submission
 
 ```
 {
