@@ -3,6 +3,8 @@ package com.trecapps.false_hood.account;
 import java.sql.Date;
 import java.util.Calendar;
 
+import javax.validation.constraints.Email;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,8 +30,8 @@ public class NewUser {
 	byte lockTime; // How long to lock the account for 
 	
 	
-	public NewUser(String firstName, String lastName, String username, String mainEmail, String trecEmail,
-			String backupEmail, String password, Date birthday, String clientId) {
+	public NewUser(String firstName, String lastName, String username, @Email String mainEmail, String trecEmail,
+			@Email String backupEmail, String password, Date birthday, String clientId) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -66,8 +68,8 @@ public class NewUser {
 	 * @param maxLoginAttempts
 	 * @param lockTime
 	 */
-	public NewUser(String firstName, String lastName, String username, String mainEmail, String trecEmail,
-			String backupEmail, String password, Date birthday, byte passwordMonthReset, byte timeForValidToken,
+	public NewUser(String firstName, String lastName, String username, @Email String mainEmail, String trecEmail,
+			@Email String backupEmail, String password, Date birthday, byte passwordMonthReset, byte timeForValidToken,
 			byte validTimeFromActivity, byte maxLoginAttempts, byte lockTime, String clientId) {
 		super();
 		this.firstName = firstName;
