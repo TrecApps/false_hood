@@ -38,7 +38,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 
     public static final int MIN_CREDIT_APPROVE_REJECT = 60;
     
-    public static final int MIN_CREDIT_ADD_RECOURSE = 70;
+    public static final int MIN_CREDIT_ADD_RECOURSE = 35;
 
     @Autowired
     public AuthPublicFalsehoodController(@Autowired FalsehoodUserService userService,
