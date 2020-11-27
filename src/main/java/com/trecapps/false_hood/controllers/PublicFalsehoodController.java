@@ -55,7 +55,7 @@ public class PublicFalsehoodController
     }
     
     @GetMapping("/Region/{id}")
-    public RegionEntry getRegionsById(@PathVariable("name") Long id)
+    public RegionEntry getRegionsById(@PathVariable("id") Long id)
     {
     	return attService.getRegion(id);
     }
