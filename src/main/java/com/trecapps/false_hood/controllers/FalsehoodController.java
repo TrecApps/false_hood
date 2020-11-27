@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodService;
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
+import com.trecapps.false_hood.falsehoods.MediaOutletEntry;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.falsehoods.SearchFalsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
@@ -45,6 +46,17 @@ public class FalsehoodController {
 		this.mediaService = mediaService;
 	}
 	
+	@GetMapping("/outlet/{name}")
+	public List<MediaOutlet> searchOutlets(@PathVariable("name")String name)
+	{
+		return mediaService.SearchOutletByName(name.replace('_', ' ').trim());
+	}
+	
+	@GetMapping("/outletId/{id}")
+	public MediaOutletEntry getOutlet(@PathVariable("id")Integer id)
+	{
+		return mediaService.GetOutletEntry(id);
+	}
 	
 	@GetMapping("/id/{id}")
 	public Falsehood GetFalsehood(@PathVariable("id")BigInteger id)

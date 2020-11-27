@@ -206,4 +206,10 @@ public class MediaOutletRepository implements MediaOutletRepo
     public <S extends MediaOutlet> boolean exists(Example<S> example) {
         return false;
     }
+
+	@Override
+	public List<MediaOutlet> getOutletLikeName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

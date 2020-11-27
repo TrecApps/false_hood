@@ -1,6 +1,12 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +23,10 @@ public class PublicAttributeService {
 	FalsehoodStorageHolder storage;
 
 	@Autowired
+	EntityManager em;
+	
+
+	@Autowired
 	public PublicAttributeService(@Autowired FalsehoodStorageHolder storage,
 									@Autowired RegionRepo rRepo,
 									@Autowired InstitutionRepo iRepo)
@@ -26,6 +36,17 @@ public class PublicAttributeService {
 		this.storage = storage;
 	}
 	
+	public List<Institution> getInstitutionList(String name)
+	{
+		return iRepo.getLikeName(name);
+	}
+	
+	public List<Region> getRegionList(String name)
+	{
+		return rRepo.getLikeName(name);
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public String InsertAttribute(InstitutionEntry i)
 	{
 		if(i == null)
@@ -40,7 +61,10 @@ public class PublicAttributeService {
 		
 		inst.setId(null);
 		
-		inst = iRepo.save(inst);
+		inst = iRepo.saveAndFlush(inst);
+
+		
+		//iRepo.deleteById(null);
 		
 		if(!"Success".equals(storage.addNewFile("Institution-" + inst.getId(), i.getContents())))
 		{
@@ -67,6 +91,7 @@ public class PublicAttributeService {
 		}
 		return new InstitutionEntry(i,s);
 	}
+	
 	
 	public String UpdateAttribute(InstitutionEntry i)
 	{

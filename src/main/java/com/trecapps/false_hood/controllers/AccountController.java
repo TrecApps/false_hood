@@ -9,6 +9,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +19,8 @@ import com.trecapps.false_hood.users.FalsehoodUserService;
 import com.trecapps.false_hood.account.LogIn;
 import com.trecapps.false_hood.account.NewUser;
 
-@RestController("/account")
+@RestController
+@RequestMapping("/account")
 public class AccountController 
 {
 	@Autowired
@@ -49,8 +51,10 @@ public class AccountController
 		LogIn login = entity.getBody();
 		
 		if(login == null)
+		{
+			System.out.println("Login Object was null!");
 			return new ResponseEntity<ReturnObj>(HttpStatus.BAD_REQUEST);
-		
+		}
 		login.setClientId(clientId);
 		
 		return userServiceCaller.postForEntity(userServiceUrl + "/LogIn", login, ReturnObj.class);

@@ -101,7 +101,7 @@ public class FalsehoodApp {
 		
 		// Initialize the Controllers now that the Services are initialized
 		pFigureController = new PublicFigureController(userService, publicFigureService);
-		pFalsehoodController = new PublicFalsehoodController(keyService, publicFalsehoodService);
+		pFalsehoodController = new PublicFalsehoodController(keyService, publicFalsehoodService, attService);
 		falsehoodController = new FalsehoodController(falsehoodService, keyService, outletService);
 		appealController = new FalsehoodAppealController(userService, appealService);
 		cLieController = new CommonLieController(userService, cLieService);

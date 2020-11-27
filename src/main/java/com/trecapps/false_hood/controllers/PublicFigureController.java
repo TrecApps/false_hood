@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,5 +104,18 @@ public class PublicFigureController extends AuthenticationControllerBase
 		boolean viewAll = (user != null && user.getCredit() > MIN_CREDIT_VIEW_NON_APPROVE);
 		
 		return new ResponseEntity<List<PublicFigure>>(pfService.getPublicFigures(viewAll, page, pageSize), HttpStatus.OK);
+	}
+	
+	@GetMapping("/listByName/{name}")
+	public List<PublicFigure> getFigures(@PathVariable("name")String name)
+	{
+		return pfService.getPublicFigure(name);
+	}
+	
+	@GetMapping("/id/{id}")
+	public PublicFigureEntry getPublicFigure(@PathVariable("id")Long id)
+	{
+		return pfService.getEntryById(id);
+		
 	}
 }

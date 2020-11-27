@@ -85,6 +85,7 @@ public class InstitutionRepository implements InstitutionRepo
     public <S extends Institution> S save(S entity) {
     	if(entity == null)
             throw new IllegalArgumentException("Entity passed to Save Method must not be null");
+    	System.out.println("SAVING WITH THE TEST OBJECT!");
         boolean add = entity.getId() == null;
         if(add)
         {
@@ -143,7 +144,7 @@ public class InstitutionRepository implements InstitutionRepo
 
     @Override
     public <S extends Institution> S saveAndFlush(S entity) {
-        return null;
+        return save(entity);
     }
 
     @Override
@@ -196,4 +197,10 @@ public class InstitutionRepository implements InstitutionRepo
     public <S extends Institution> boolean exists(Example<S> example) {
         return false;
     }
+
+	@Override
+	public List<Institution> getLikeName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -197,4 +197,10 @@ public class RegionRepository implements RegionRepo
     public <S extends Region> boolean exists(Example<S> example) {
         return false;
     }
+
+	@Override
+	public List<Region> getLikeName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

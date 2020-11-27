@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.publicFigure;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,40 @@ public class PublicFigureService
 			figureRepo.findAllApproved(PageRequest.of(page, pageSize));
 		
 		return figureList.getContent();
+	}
+	
+	public List<PublicFigure> getPublicFigure(String entry)
+	{
+		String names[] = entry.replace('_', ' ').trim().split(" ");
+		
+		if(names.length == 0)
+			return null;
+		
+		if(names.length == 1)
+		{
+			return figureRepo.findLikeName(names[0]);
+		}
+		if(names.length == 2)
+		{
+			return figureRepo.findLikeName(names[0], names[1]);
+		}
+		String middle = "";
+		for(int rust = 1; rust < names.length -1; rust++)
+		{
+			middle += names[rust] + " ";
+		}
+		
+		return figureRepo.findLikeName(names[0], middle.trim(), names[names.length-1]);
+	}
+	
+	public PublicFigureEntry getEntryById(Long id)
+	{
+		try {
+			return new PublicFigureEntry(figureRepo.getOne(id),awsStorage.retrieveContents("PublicFigure-" + id));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

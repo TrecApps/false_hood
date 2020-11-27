@@ -19,13 +19,17 @@ public class PublicFalsehoodController
     KeywordService keyService;
 
     PublicFalsehoodService service;
+    
+    PublicAttributeService attService;
 
     @Autowired
     public PublicFalsehoodController(@Autowired KeywordService keyService,
-                                     @Autowired PublicFalsehoodService service)
+                                     @Autowired PublicFalsehoodService service,
+                                     @Autowired PublicAttributeService attService)
     {
         this.keyService = keyService;
         this.service = service;
+        this.attService = attService;
     }
 
     @GetMapping("/id/{id}")
@@ -37,6 +41,30 @@ public class PublicFalsehoodController
     Comparator<PublicFalsehood> idCompare = (PublicFalsehood f1, PublicFalsehood f2) -> {
         return f1.getId().compareTo(f2.getId());
     };
+    
+    @GetMapping("/Regions/{name}")
+    public List<Region> getRegionsBySearchTerm(@PathVariable("name") String name)
+    {
+    	return attService.getRegionList(name.replace('_', ' ').trim());
+    }
+    
+    @GetMapping("/Institutions/{name}")
+    public List<Institution> getInstitutionBySearchTerm(@PathVariable("name") String name)
+    {
+    	return attService.getInstitutionList(name.replace('_', ' ').trim());
+    }
+    
+    @GetMapping("/Region/{id}")
+    public RegionEntry getRegionsById(@PathVariable("name") Long id)
+    {
+    	return attService.getRegion(id);
+    }
+    
+    @GetMapping("/Institution/{id}")
+    public InstitutionEntry getInstitutionById(@PathVariable("id") Long id)
+    {
+    	return attService.getInstitution(id);
+    }
 
     @PostMapping("/list")
     public List<PublicFalsehood> GetFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
@@ -209,4 +237,6 @@ public class PublicFalsehoodController
 
         return ret;
     }
+    
+    
 }

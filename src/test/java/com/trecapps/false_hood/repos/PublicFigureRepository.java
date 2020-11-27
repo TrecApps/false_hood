@@ -204,4 +204,22 @@ public class PublicFigureRepository implements PublicFigureRepo {
     public Page<PublicFigure> findAllApproved(Pageable pageable) {
         return null;
     }
+
+	@Override
+	public List<PublicFigure> findLikeName(String f, String m, String l) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFigure> findLikeName(String f, String n) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFigure> findLikeName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

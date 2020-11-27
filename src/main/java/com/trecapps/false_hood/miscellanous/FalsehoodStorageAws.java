@@ -66,6 +66,7 @@ public class FalsehoodStorageAws {
 	public String retrieveContents(String key) throws IOException
 	{
 		String newContent;
+		System.out.println("Retrieving S3 Contents with key: " + key);
 		
 		try(S3Object obj = s3.getObject(bucketName, key);
 				S3ObjectInputStream objContent = obj.getObjectContent();)
