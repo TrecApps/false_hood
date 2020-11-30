@@ -23,6 +23,7 @@ import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.falsehoods.SearchFalsehood;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.miscellanous.VerdictSubmission;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
@@ -262,12 +263,14 @@ public class FalsehoodTest {
 		
 		int succeeded = 0;
 		
+		byte ver = FalsehoodStatus.VERIFIED.GetValue();
+		
 		for(Falsehood f: localFalsehoods)
 		{
-			if(f.getStatus() == 1) // 1 is approved
+			if(f.getStatus() == ver) // 
 				succeeded++;
 		}
-		
+		System.out.println("About to test 'succeedApprove', with list that has " + localFalsehoods.size() + " items in it!");
 		assertEquals(5, succeeded);
 	}
 	

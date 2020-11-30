@@ -270,4 +270,224 @@ public class FalsehoodRepository implements FalsehoodRepo
     public <S extends Falsehood> boolean exists(Example<S> example) {
         return false;
     }
+
+	@Override
+	public List<Falsehood> getSubmittedFalsehood(Pageable p) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			if(f.getStatus() == (byte)0)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoods(Pageable p) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			if(stat > 1 && stat < 5)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficial(Pageable p, PublicFigure author) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			if(stat > 1 && stat < 5 && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBySeverity(Pageable p, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			byte sev = f.getSeverity();
+			if(stat > 1 && stat < 5 && sev >= maxSeverity && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodByMinSeverity(Pageable p, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			byte sev = f.getSeverity();
+			if(stat > 1 && stat < 5 && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodByMaxSeverity(Pageable p, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			byte sev = f.getSeverity();
+			if(stat > 1 && stat < 5 & sev >= maxSeverity)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoods(Pageable p) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			if(f.getStatus() > 4)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficial(Pageable p, PublicFigure author) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			if(f.getStatus() > 4 && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsBySeverity(Pageable p, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			byte sev = f.getSeverity();
+			if(f.getStatus() > 4 && sev >= maxSeverity && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodByMinSeverity(Pageable p, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			byte sev = f.getSeverity();
+			if(f.getStatus() > 4 && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodByMaxSeverity(Pageable p, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			byte sev = f.getSeverity();
+			if(f.getStatus() > 4 && sev >= maxSeverity)
+				ret.add(f);
+		}
+		
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+		return ret.subList(start, end);
+	}
 }
