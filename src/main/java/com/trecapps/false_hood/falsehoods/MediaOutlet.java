@@ -103,6 +103,31 @@ public class MediaOutlet implements Comparable<MediaOutlet>{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((outletId == null) ? 0 : outletId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof MediaOutlet))
+			return false;
+		MediaOutlet other = (MediaOutlet) obj;
+		if (outletId == null) {
+			if (other.outletId != null)
+				return false;
+		} else if (!outletId.equals(other.outletId))
+			return false;
+		return true;
+	}
 	
 	
 }
