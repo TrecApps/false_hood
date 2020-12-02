@@ -259,7 +259,7 @@ public class FalsehoodTest {
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
-		List<Falsehood> localFalsehoods = fController.GetFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, 20, null,null, null));
+		List<Falsehood> localFalsehoods = fController.GetFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, null, 0, 20, null,null,null, null));
 		
 		int succeeded = 0;
 		
@@ -315,7 +315,7 @@ public class FalsehoodTest {
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
-		List<Falsehood> localFalsehoods = fController.GetFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, 20, null,null, null));
+		List<Falsehood> localFalsehoods = fController.GetFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, null, 0, 20, null,null,null, null));
 		
 		int succeeded = 0;
 		

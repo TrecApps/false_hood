@@ -31,8 +31,6 @@ public class FalsehoodService {
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
 
 	FalsehoodRepo fRepo;
-	
-	MediaOutletRepo moRepo;
 
 	FalsehoodStorageHolder s3BucketManager;
 
@@ -41,8 +39,7 @@ public class FalsehoodService {
 	@Autowired
 	public FalsehoodService(@Autowired FalsehoodRepo fRepo,
 							@Autowired FalsehoodStorageHolder s3BucketManager,
-							@Autowired FalsehoodUserService userService,
-							@Autowired MediaOutletRepo moRepo)
+							@Autowired FalsehoodUserService userService)
 	{
 		this.s3BucketManager = s3BucketManager;
 		this.fRepo = fRepo;
