@@ -14,10 +14,13 @@ import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
+import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.PublicFalsehoodRepo;
 
@@ -28,6 +31,8 @@ public class FalsehoodService {
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
 
 	FalsehoodRepo fRepo;
+	
+	MediaOutletRepo moRepo;
 
 	FalsehoodStorageHolder s3BucketManager;
 
@@ -36,7 +41,8 @@ public class FalsehoodService {
 	@Autowired
 	public FalsehoodService(@Autowired FalsehoodRepo fRepo,
 							@Autowired FalsehoodStorageHolder s3BucketManager,
-							@Autowired FalsehoodUserService userService)
+							@Autowired FalsehoodUserService userService,
+							@Autowired MediaOutletRepo moRepo)
 	{
 		this.s3BucketManager = s3BucketManager;
 		this.fRepo = fRepo;
@@ -54,6 +60,269 @@ public class FalsehoodService {
 			System.out.println("Falsehoods Repo returned null list with id = " + outletId + "!");
 		
 		return ret; 
+	}
+	
+	public List<Falsehood> getConfirmedFalsehoodsBySearchFeatures(SearchFalsehood s)
+	{
+		MediaOutlet mo = s.getOutlet();
+		PublicFigure pf = s.getAuthor();
+		
+		Date before = s.getTo();
+		Date after = s.getFrom();
+		
+		Severity minSev = s.getMinimum();
+		Severity maxSev = s.getMaximum();
+		
+		Pageable p = PageRequest.of(s.getPage(), s.getNumberOfEntries() == 0 ? 1 : s.getNumberOfEntries());
+		
+		
+		if(mo == null)
+		{
+			if(pf == null)
+			{
+				if(before != null && after != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsBetween(p, after, before);
+					}
+				}
+				else if(before != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsBefore(p, before);
+					}
+				}
+				else
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoods(p);
+					}
+				}
+			}
+			else // We have no Media Outlet but we do have a public figure
+			{
+				if(before != null && after != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsBetweenAndByPublicOfficial(p, pf, after, before);
+					}
+				}
+				else if(before != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsBeforeAndByPublicOfficial(p, pf, before);
+					}
+				}
+				else
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsByPublicOfficial(p, pf);
+					}
+				}
+			}
+		}
+		else // We have a media Outlet
+		{
+			if(pf == null)
+			{
+				if(before != null && after != null) // Between
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsBetweenAndByOutlet(p, mo, after, before);
+					}
+				}
+				else if(before != null) // Before
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsBeforeAndByOutlet(p, mo, before);
+					}
+				}
+				else // No time
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getConfirmedFalsehoodsByOutletAndSeverity(p, mo, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getConfirmedFalsehoodsByOutletAndMinSeverity(p, mo, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getConfirmedFalsehoodsByOutletAndMaxSeverity(p, mo, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getConfirmedFalsehoodsByOutlet(p, mo);
+					}
+				}
+			}
+			else // We have a media Outlet and a public figure
+			{
+				if(before != null && after != null) // We have a "between"
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+					
+					}
+				}
+				else if(before != null) // We only have before
+				{
+					if(minSev != null && maxSev != null)
+					{
+						
+					}
+					else if(minSev != null)
+					{
+						
+					}
+					else if(maxSev != null)
+					{
+						
+					}
+					else
+					{
+						
+					}
+				}
+				else // No Dates
+				{
+					if(minSev != null && maxSev != null)
+					{
+						fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndSeverity(p, pf, mo, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndMinSeverity(p, pf, mo, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndMaxSeverity(p, pf, mo, maxSev.GetValue());
+					}
+					else
+					{
+						fRepo.getConfirmedFalsehoodsByPublicOfficialAndOutlet(p, pf, mo);
+					}
+				}
+			}
+		}
+		
 	}
 	
 	

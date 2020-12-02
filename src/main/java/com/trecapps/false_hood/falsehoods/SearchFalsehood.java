@@ -26,10 +26,12 @@ public class SearchFalsehood
 	 */
 	List<String> outlets;
 	
+	MediaOutlet outlet;
+	
 	/**
 	 * Max Number of Entries to attempt to retrieve
 	 */
-	int numberOfEntries;
+	int numberOfEntries, page;
 	
 	/**
 	 * Minimum Severity vs Maximum severity
@@ -41,30 +43,98 @@ public class SearchFalsehood
 	 */
 	List<PublicFigure> authors;
 	
+	PublicFigure author;
 	
+	
+
+
+
 
 	/**
 	 * @param terms
 	 * @param to
 	 * @param from
 	 * @param outlets
+	 * @param outlet
 	 * @param numberOfEntries
+	 * @param page
 	 * @param minimum
 	 * @param maximum
 	 * @param authors
+	 * @param author
 	 */
-	public SearchFalsehood(String terms, Date to, Date from, List<String> outlets, int numberOfEntries,
-			Severity minimum, Severity maximum, List<PublicFigure> authors) {
+	public SearchFalsehood(String terms, Date to, Date from, List<String> outlets, MediaOutlet outlet,
+			int numberOfEntries, int page, Severity minimum, Severity maximum, List<PublicFigure> authors,
+			PublicFigure author) {
 		super();
 		this.terms = terms;
 		this.to = to;
 		this.from = from;
 		this.outlets = outlets;
+		this.outlet = outlet;
 		this.numberOfEntries = numberOfEntries;
+		this.page = page;
 		this.minimum = minimum;
 		this.maximum = maximum;
 		this.authors = authors;
+		this.author = author;
 	}
+	
+	
+
+	/**
+	 * @return the outlet
+	 */
+	public MediaOutlet getOutlet() {
+		return outlet;
+	}
+
+
+
+	/**
+	 * @param outlet the outlet to set
+	 */
+	public void setOutlet(MediaOutlet outlet) {
+		this.outlet = outlet;
+	}
+
+
+
+	/**
+	 * @return the page
+	 */
+	public int getPage() {
+		return page;
+	}
+
+
+
+	/**
+	 * @param page the page to set
+	 */
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+
+
+	/**
+	 * @return the author
+	 */
+	public PublicFigure getAuthor() {
+		return author;
+	}
+
+
+
+	/**
+	 * @param author the author to set
+	 */
+	public void setAuthor(PublicFigure author) {
+		this.author = author;
+	}
+
+
 
 	public SearchFalsehood() {
 		super();
