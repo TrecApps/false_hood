@@ -19,6 +19,17 @@ public class FalsehoodRepository implements FalsehoodRepo
 {
     Set<Falsehood> appeals = new TreeSet<>();
     
+    private static List<Falsehood> cullList(Pageable p, List<Falsehood> f)
+    {
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+        return f.subList(start, end);
+    }
+    
     @Override
     public List<Falsehood> getFalsehoodsBetween(Date begin, Date end) {
         return new LinkedList<>(appeals.stream().filter((f)-> (begin == null) ? true: (f.getDateMade().getTime() >= begin.getTime()))
@@ -97,16 +108,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 
     @Override
     public Page<Falsehood> findAll(Pageable pageable) {
-        int number = pageable.getPageNumber();
-        int size = pageable.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-
-        List<Falsehood> preRet = new ArrayList<>(appeals);
-
-        return new TrecPage<Falsehood>( preRet.subList(start, end));
+        return  new TrecPage<Falsehood>( cullList(pageable, new ArrayList<>(appeals)));
     }
 
     @Override
@@ -281,13 +283,8 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+       
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -301,13 +298,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -321,13 +312,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -342,13 +327,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -363,13 +342,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -384,13 +357,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -403,13 +370,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -422,13 +383,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -442,13 +397,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -462,13 +411,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -482,13 +425,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	
@@ -507,13 +444,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -527,13 +458,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -548,13 +473,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -571,13 +490,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -593,13 +506,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -615,13 +522,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -638,13 +539,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -659,13 +554,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -682,13 +571,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -703,13 +586,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -723,13 +600,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -744,13 +615,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -767,13 +632,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -789,13 +648,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -811,13 +664,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int end = start + number;
-		return ret.subList(start, end);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -834,13 +681,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -855,13 +696,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
-
-        int start = number * size;
-
-        int endi = start + number;
-		return ret.subList(start, endi);
+		return cullList(p, ret);
 	}
 
 	@Override
@@ -878,12 +713,295 @@ public class FalsehoodRepository implements FalsehoodRepo
 				ret.add(f);
 		}
 		
-        int number = p.getPageNumber();
-        int size = p.getPageSize();
+		return cullList(p, ret);
+	}
 
-        int start = number * size;
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndSeverity(Pageable p, PublicFigure author,
+			byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			byte sev = f.getSeverity();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+				&& sev >= maxSeverity && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
 
-        int end = start + number;
-		return ret.subList(start, end);
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndMinSeverity(Pageable p, PublicFigure author,
+			byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+				&& f.getSeverity() <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndMaxSeverity(Pageable p, PublicFigure author,
+			byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+				&& f.getSeverity() >= maxSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByPublicOfficial(Pageable p, PublicFigure author, Date begin,
+			Date end) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			MediaOutlet mo = f.getOutlet();
+			Date d = f.getDateMade();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByPublicOfficial(Pageable p, PublicFigure author, Date end) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			MediaOutlet mo = f.getOutlet();
+			Date d = f.getDateMade();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndSeverity(Pageable p, PublicFigure author,
+			MediaOutlet outletId, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			byte sev = f.getSeverity();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author)) 
+					&& sev >= maxSeverity && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndMinSeverity(Pageable p, PublicFigure author,
+			MediaOutlet outletId, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndMaxSeverity(Pageable p, PublicFigure author,
+			MediaOutlet outletId, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficialAndSeverity(Pageable p, PublicFigure author,
+			byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			byte sev = f.getSeverity();
+			if(stat > 4 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+				&& sev >= maxSeverity && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficialAndMinSeverity(Pageable p, PublicFigure author,
+			byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 4 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+				&& f.getSeverity() <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficialAndMaxSeverity(Pageable p, PublicFigure author,
+			byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 4 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+				&& f.getSeverity() >= maxSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsBetweenAndByPublicOfficial(Pageable p, PublicFigure author, Date begin,
+			Date end) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			MediaOutlet mo = f.getOutlet();
+			Date d = f.getDateMade();
+			if(stat > 4 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsBeforeAndByPublicOfficial(Pageable p, PublicFigure author, Date end) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 4 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getDateMade().getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficialOutletAndSeverity(Pageable p, PublicFigure author,
+			MediaOutlet outletId, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			byte sev = f.getSeverity();
+			if(stat > 4 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author)) 
+					&& sev >= maxSeverity && sev <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficialOutletAndMinSeverity(Pageable p, PublicFigure author,
+			MediaOutlet outletId, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 4 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() <= minSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getRejectedFalsehoodsByPublicOfficialOutletAndMaxSeverity(Pageable p, PublicFigure author,
+			MediaOutlet outletId, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 4 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity)
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
 	}
 }
