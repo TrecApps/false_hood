@@ -81,15 +81,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndBySeverity(p, after, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMinSeverity(p, after, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverity(p, after, before, maxSev.GetValue());
 					}
 					else
 					{
@@ -100,15 +100,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndBySeverity(p, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMinSeverity(p, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverity(p, before, maxSev.GetValue());
 					}
 					else
 					{
@@ -119,15 +119,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBySeverity(p, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodByMinSeverity(p, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodByMaxSeverity(p, maxSev.GetValue());
 					}
 					else
 					{
@@ -141,15 +141,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndBySeverityPublicFigure(p, pf, after, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityPublicFigure(p, pf, after, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityPublicFigure(p, pf, after, before, maxSev.GetValue());
 					}
 					else
 					{
@@ -160,15 +160,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndBySeverityPublicFigure(p, pf, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityPublicFigure(p, pf, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityPublicFigure(p, pf, before, maxSev.GetValue());
 					}
 					else
 					{
@@ -179,15 +179,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialAndSeverity(p, pf, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialAndMinSeverity(p, pf, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialAndMaxSeverity(p, pf, maxSev.GetValue());
 					}
 					else
 					{
@@ -204,15 +204,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndBySeverityOutlet(p, mo, after, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOutlet(p, mo, after, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOutlet(p, mo, after, before, maxSev.GetValue());
 					}
 					else
 					{
@@ -223,15 +223,15 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndBySeverityOutlet(p, mo, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOutlet(p, mo, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOutlet(p, mo, before, maxSev.GetValue());
 					}
 					else
 					{
@@ -264,57 +264,57 @@ public class FalsehoodService {
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndBySeverityOutletPublicFigure(p, pf, mo, after, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOutletPublicFigure(p, pf, mo, after, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOutletPublicFigure(p, pf, mo, after, before, maxSev.GetValue());
 					}
 					else
 					{
-					
+						return fRepo.getConfirmedFalsehoodsBetweenAndByOutletPublicFigure(p, pf, mo, after, before);
 					}
 				}
 				else if(before != null) // We only have before
 				{
 					if(minSev != null && maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndBySeverityOutletPublicFigure(p, pf, mo, before, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOutletPublicFigure(p, pf, mo, before, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOutletPublicFigure(p, pf, mo, before, maxSev.GetValue());
 					}
 					else
 					{
-						
+						return fRepo.getConfirmedFalsehoodsBeforeAndByOutletPublicFigure(p, pf, mo, before);
 					}
 				}
 				else // No Dates
 				{
 					if(minSev != null && maxSev != null)
 					{
-						fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndSeverity(p, pf, mo, maxSev.GetValue(), minSev.GetValue());
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndSeverity(p, pf, mo, maxSev.GetValue(), minSev.GetValue());
 					}
 					else if(minSev != null)
 					{
-						fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndMinSeverity(p, pf, mo, minSev.GetValue());
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndMinSeverity(p, pf, mo, minSev.GetValue());
 					}
 					else if(maxSev != null)
 					{
-						fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndMaxSeverity(p, pf, mo, maxSev.GetValue());
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialOutletAndMaxSeverity(p, pf, mo, maxSev.GetValue());
 					}
 					else
 					{
-						fRepo.getConfirmedFalsehoodsByPublicOfficialAndOutlet(p, pf, mo);
+						return fRepo.getConfirmedFalsehoodsByPublicOfficialAndOutlet(p, pf, mo);
 					}
 				}
 			}

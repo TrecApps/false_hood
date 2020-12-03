@@ -1004,4 +1004,468 @@ public class FalsehoodRepository implements FalsehoodRepo
 		
 		return cullList(p, ret);
 	}
+	
+	
+	
+	////////////////////////////////////////
+	
+	
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverity(Pageable p, Date begin, Date end,
+			byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity
+					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverity(Pageable p, Date begin, Date end,
+			byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverity(Pageable p, Date begin, Date end,
+			byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverity(Pageable p, Date end, byte maxSeverity,
+			byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverity(Pageable p, Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverity(Pageable p, Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityPublicFigure(Pageable p, PublicFigure author,
+			Date begin, Date end, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityPublicFigure(Pageable p, PublicFigure author,
+			Date begin, Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityPublicFigure(Pageable p, PublicFigure author,
+			Date begin, Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null  &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityPublicFigure(Pageable p, PublicFigure author,
+			Date end, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityPublicFigure(Pageable p, PublicFigure author,
+			Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityPublicFigure(Pageable p, PublicFigure author,
+			Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && (f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityOutlet(Pageable p, MediaOutlet outletId,
+			Date begin, Date end, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId)
+					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOutlet(Pageable p, MediaOutlet outletId,
+			Date begin, Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOutlet(Pageable p, MediaOutlet outletId,
+			Date begin, Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) 
+					&& f.getSeverity() >= maxSeverity  && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityOutlet(Pageable p, MediaOutlet outletId, Date end,
+			byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) 
+					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOutlet(Pageable p, MediaOutlet outletId,
+			Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOutlet(Pageable p, MediaOutlet outletId,
+			Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity  && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityOutletPublicFigure(Pageable p, PublicFigure author,
+			MediaOutlet outletId, Date begin, Date end, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOutletPublicFigure(Pageable p,
+			PublicFigure author, MediaOutlet outletId, Date begin, Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOutletPublicFigure(Pageable p,
+			PublicFigure author, MediaOutlet outletId, Date begin, Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityOutletPublicFigure(Pageable p, PublicFigure author,
+			MediaOutlet outletId, Date end, byte maxSeverity, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOutletPublicFigure(Pageable p,
+			PublicFigure author, MediaOutlet outletId, Date end, byte minSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOutletPublicFigure(Pageable p,
+			PublicFigure author, MediaOutlet outletId, Date end, byte maxSeverity) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBetweenAndByOutletPublicFigure(Pageable p, PublicFigure author,
+			MediaOutlet outletId, Date begin, Date end) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<Falsehood> getConfirmedFalsehoodsBeforeAndByOutletPublicFigure(Pageable p, PublicFigure author,
+			MediaOutlet outletId, Date end) {
+		List<Falsehood> ret = new LinkedList<>();
+		
+		for(Falsehood f: appeals)
+		{
+			int stat = f.getStatus();
+			Date d = f.getDateMade();
+			MediaOutlet mo = f.getOutlet();
+			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(f.getAuthor1().equals(author) || f.getAuthor2().equals(author))
+					&& d.getTime() <= end.getTime())
+				ret.add(f);
+		}
+		
+		return cullList(p, ret);
+	}
 }
