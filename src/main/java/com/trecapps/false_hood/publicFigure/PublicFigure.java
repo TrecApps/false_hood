@@ -2,6 +2,8 @@ package com.trecapps.false_hood.publicFigure;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +22,7 @@ public class PublicFigure implements Comparable<PublicFigure>
 	}
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
 	
 	@Column

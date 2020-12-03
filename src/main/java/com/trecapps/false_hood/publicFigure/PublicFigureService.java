@@ -114,8 +114,9 @@ public class PublicFigureService
 		String names[] = entry.replace('_', ' ').trim().split(" ");
 		
 		if(names.length == 0)
+		{
 			return null;
-		
+		}
 		if(names.length == 1)
 		{
 			return figureRepo.findLikeName(names[0]);
