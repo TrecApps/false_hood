@@ -322,6 +322,269 @@ public class FalsehoodService {
 		
 	}
 	
+	public List<Falsehood> getRejectedFalsehoodsBySearchFeatures(SearchFalsehood s)
+	{
+		MediaOutlet mo = s.getOutlet();
+		PublicFigure pf = s.getAuthor();
+		
+		Date before = s.getTo();
+		Date after = s.getFrom();
+		
+		Severity minSev = s.getMinimum();
+		Severity maxSev = s.getMaximum();
+		
+		Pageable p = PageRequest.of(s.getPage(), s.getNumberOfEntries() == 0 ? 1 : s.getNumberOfEntries());
+		
+		
+		if(mo == null)
+		{
+			if(pf == null)
+			{
+				if(before != null && after != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndBySeverity(p, after, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMinSeverity(p, after, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMaxSeverity(p, after, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBetween(p, after, before);
+					}
+				}
+				else if(before != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndBySeverity(p, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMinSeverity(p, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMaxSeverity(p, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBefore(p, before);
+					}
+				}
+				else
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBySeverity(p, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodByMinSeverity(p, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodByMaxSeverity(p, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoods(p);
+					}
+				}
+			}
+			else // We have no Media Outlet but we do have a public figure
+			{
+				if(before != null && after != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndBySeverityPublicFigure(p, pf, after, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMinSeverityPublicFigure(p, pf, after, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityPublicFigure(p, pf, after, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByPublicOfficial(p, pf, after, before);
+					}
+				}
+				else if(before != null)
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndBySeverityPublicFigure(p, pf, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMinSeverityPublicFigure(p, pf, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityPublicFigure(p, pf, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByPublicOfficial(p, pf, before);
+					}
+				}
+				else
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialAndSeverity(p, pf, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialAndMinSeverity(p, pf, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialAndMaxSeverity(p, pf, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficial(p, pf);
+					}
+				}
+			}
+		}
+		else // We have a media Outlet
+		{
+			if(pf == null)
+			{
+				if(before != null && after != null) // Between
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndBySeverityOutlet(p, mo, after, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOutlet(p, mo, after, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOutlet(p, mo, after, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByOutlet(p, mo, after, before);
+					}
+				}
+				else if(before != null) // Before
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndBySeverityOutlet(p, mo, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOutlet(p, mo, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOutlet(p, mo, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByOutlet(p, mo, before);
+					}
+				}
+				else // No time
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByOutletAndSeverity(p, mo, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByOutletAndMinSeverity(p, mo, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByOutletAndMaxSeverity(p, mo, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsByOutlet(p, mo);
+					}
+				}
+			}
+			else // We have a media Outlet and a public figure
+			{
+				if(before != null && after != null) // We have a "between"
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndBySeverityOutletPublicFigure(p, pf, mo, after, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOutletPublicFigure(p, pf, mo, after, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOutletPublicFigure(p, pf, mo, after, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBetweenAndByOutletPublicFigure(p, pf, mo, after, before);
+					}
+				}
+				else if(before != null) // We only have before
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndBySeverityOutletPublicFigure(p, pf, mo, before, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOutletPublicFigure(p, pf, mo, before, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOutletPublicFigure(p, pf, mo, before, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsBeforeAndByOutletPublicFigure(p, pf, mo, before);
+					}
+				}
+				else // No Dates
+				{
+					if(minSev != null && maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialOutletAndSeverity(p, pf, mo, maxSev.GetValue(), minSev.GetValue());
+					}
+					else if(minSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialOutletAndMinSeverity(p, pf, mo, minSev.GetValue());
+					}
+					else if(maxSev != null)
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialOutletAndMaxSeverity(p, pf, mo, maxSev.GetValue());
+					}
+					else
+					{
+						return fRepo.getRejectedFalsehoodsByPublicOfficialAndOutlet(p, pf, mo);
+					}
+				}
+			}
+		}
+		
+	}
+	
 	
 	public List<Falsehood> getFalseHoodByMinimumSeverity(byte severity)
 	{
