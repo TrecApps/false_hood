@@ -6,6 +6,9 @@ import com.trecapps.false_hood.publicFigure.PublicFigure;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SearchPublicFalsehood
 {
     /**
@@ -22,16 +25,20 @@ public class SearchPublicFalsehood
      * Regions
      */
     List<Region> regions;
+    
+    Region region;
 
     /**
      * Institution
      */
     List<Institution> institutions;
+    
+    Institution institution;
 
     /**
      * Max Number of Entries to attempt to retrieve
      */
-    int numberOfEntries;
+    int numberOfEntries, page;
 
     /**
      * Minimum Severity vs Maximum severity
@@ -60,8 +67,85 @@ public class SearchPublicFalsehood
         this.maximum = maximum;
         this.authors = authors;
     }
+    
+    
 
-    public String getTerms() {
+    /**
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
+	/**
+	 * @param region the region to set
+	 */
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * @return the institution
+	 */
+	public Institution getInstitution() {
+		return institution;
+	}
+
+	/**
+	 * @param institution the institution to set
+	 */
+	public void setInstitution(Institution institution) {
+		this.institution = institution;
+	}
+
+	
+	/**
+	 * @return the page
+	 */
+	public int getPage() {
+		return page;
+	}
+
+	/**
+	 * @param page the page to set
+	 */
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	/**
+	 * @param terms
+	 * @param to
+	 * @param from
+	 * @param regions
+	 * @param region
+	 * @param institutions
+	 * @param institution
+	 * @param numberOfEntries
+	 * @param page
+	 * @param minimum
+	 * @param maximum
+	 * @param authors
+	 */
+	public SearchPublicFalsehood(String terms, Date to, Date from, List<Region> regions, Region region,
+			List<Institution> institutions, Institution institution, int numberOfEntries, int page, Severity minimum,
+			Severity maximum, List<PublicFigure> authors) {
+		super();
+		this.terms = terms;
+		this.to = to;
+		this.from = from;
+		this.regions = regions;
+		this.region = region;
+		this.institutions = institutions;
+		this.institution = institution;
+		this.numberOfEntries = numberOfEntries;
+		this.page = page;
+		this.minimum = minimum;
+		this.maximum = maximum;
+		this.authors = authors;
+	}
+
+	public String getTerms() {
         return terms;
     }
 

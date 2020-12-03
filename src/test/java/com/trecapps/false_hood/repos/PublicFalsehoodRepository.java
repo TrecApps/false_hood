@@ -22,7 +22,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PublicFalsehoodRepository implements PublicFalsehoodRepo
-{    Set<PublicFalsehood> appeals = new TreeSet<>();
+{
+	Set<PublicFalsehood> appeals = new TreeSet<>();
+	
+    private static List<PublicFalsehood> cullList(Pageable p, List<PublicFalsehood> f)
+    {
+        int number = p.getPageNumber();
+        int size = p.getPageSize();
+
+        int start = number * size;
+
+        int end = start + number;
+        return f.subList(start, end);
+    }
 
     @Override
     public List<PublicFalsehood> getFalsehoodsBetween(Date begin, Date end) {
@@ -278,4 +290,490 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
     public <S extends PublicFalsehood> boolean exists(Example<S> example) {
         return false;
     }
+
+	@Override
+	public List<PublicFalsehood> getSubmittedFalsehoods(Pageable p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoods(Pageable p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetween(Pageable p, Date begin, Date end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByRegion(Pageable p, Date begin, Date end, Region r) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByInstitution(Pageable p, Date begin, Date end,
+			Institution i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByRegionAndInst(Pageable p, Date begin, Date end,
+			Region r, Institution i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficial(Pageable p, Date begin, Date end,
+			PublicFigure official) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialRegion(Pageable p, Date begin, Date end,
+			PublicFigure official, Region r) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialInstitution(Pageable p, Date begin, Date end,
+			PublicFigure official, Institution i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialRegionAndInst(Pageable p, Date begin,
+			Date end, PublicFigure official, Region r, Institution i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverity(Pageable p, Date begin, Date end,
+			byte maxSeverity, byte minSeverity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityRegion(Pageable p, Date begin, Date end,
+			byte maxSeverity, byte minSeverity, Region r) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityInstitution(Pageable p, Date begin, Date end,
+			byte maxSeverity, byte minSeverity, Institution i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityRegionAndInst(Pageable p, Date begin,
+			Date end, byte maxSeverity, byte minSeverity, Region r, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficial(Pageable p, Date begin, Date end,
+			byte maxSeverity, byte minSeverity, PublicFigure official) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime())
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegion(Pageable p, Date begin,
+			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialInstitution(Pageable p, Date begin,
+			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(Pageable p, Date begin,
+			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverity(Pageable p, Date begin, Date end,
+			byte minSeverity) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime())
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityRegion(Pageable p, Date begin, Date end,
+			byte minSeverity, Region r) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityInstitution(Pageable p, Date begin,
+			Date end, byte minSeverity, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityRegionAndInst(Pageable p, Date begin,
+			Date end, byte minSeverity, Region r, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficial(Pageable p, Date begin, Date end,
+			byte minSeverity, PublicFigure official) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime())
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegion(Pageable p, Date begin,
+			Date end, byte minSeverity, PublicFigure official, Region r) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(Pageable p,
+			Date begin, Date end, byte minSeverity, PublicFigure official, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(Pageable p,
+			Date begin, Date end, byte minSeverity, PublicFigure official, Region r, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverity(Pageable p, Date begin, Date end,
+			byte maxSeverity) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime())
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityRegion(Pageable p, Date begin, Date end,
+			byte maxSeverity, Region r) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityInstitution(Pageable p, Date begin,
+			Date end, byte maxSeverity, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(Pageable p, Date begin,
+			Date end, byte maxSeverity, Region r, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficial(Pageable p, Date begin, Date end,
+			byte maxSeverity, PublicFigure official) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime())
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(Pageable p, Date begin,
+			Date end, byte maxSeverity, PublicFigure official, Region r) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(Pageable p,
+			Date begin, Date end, byte maxSeverity, PublicFigure official, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
+
+	@Override
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(Pageable p,
+			Date begin, Date end, byte maxSeverity, PublicFigure official, Region r, Institution i) {
+		List<PublicFalsehood> ret = new LinkedList<>();
+		
+		for(PublicFalsehood pf: appeals)
+		{
+			byte sev = pf.getSeverity();
+			byte status = pf.getStatus();
+			
+			Date d = pf.getDateMade();
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+				ret.add(pf);
+		}
+		
+		return cullList(p, ret);
+	}
 }
