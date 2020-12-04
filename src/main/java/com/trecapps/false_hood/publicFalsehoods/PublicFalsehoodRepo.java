@@ -462,4 +462,421 @@ public interface PublicFalsehoodRepo extends JpaRepository<PublicFalsehood, BigI
     @Query("select f from PublicFalsehood f where f.status > 1 and f.status < 5 and f.severity >= :maxSeverity and f.official = :official and f.region = :region and f.institution = :inst ")
     List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialRegionAndInst(Pageable p, 
     		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    
+    
+    
+    //// Time For Rejected Falsehoods
+    
+    
+    
+    @Query("select f from PublicFalsehood f where f.status > 4")
+    List<PublicFalsehood> getRejectedFalsehoods(Pageable p);
+    
+    //// Start with Between
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetween(Pageable p, @Param("begin") Date begin, @Param("end")Date end);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficial(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Between and base Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverity(Pageable p, @Param("begin") Date begin, @Param("end")Date end, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficial(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Between and Min Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverity(Pageable p, @Param("begin") Date begin, @Param("end")Date end, @Param("minSeverity") byte minSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficial(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Between and Max Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverity(Pageable p, @Param("begin") Date begin, @Param("end")Date end, @Param("maxSeverity") byte maxSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("region") Region r);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("region") Region r, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficial(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.region = :region and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.region = :region and f.institution = :inst and f.dateMade >= :begin and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(Pageable p, @Param("begin") Date begin, @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Now do Before
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBefore(Pageable p,  @Param("end")Date end);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByRegion(Pageable p,  @Param("end")Date end,
+    		@Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficial(Pageable p,  @Param("end")Date end,
+    		@Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialRegion(Pageable p,  @Param("end")Date end,
+    		@Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Before and base Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverity(Pageable p,  @Param("end")Date end, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityRegion(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficial(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialRegion(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Before and Min Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverity(Pageable p,  @Param("end")Date end, @Param("minSeverity") byte minSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityRegion(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficial(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegion(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Before and Max Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverity(Pageable p,  @Param("end")Date end, @Param("maxSeverity") byte maxSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityRegion(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("region") Region r);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("region") Region r, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficial(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.region = :region  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.region = :region and f.institution = :inst  and f.dateMade <= :end")
+    List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(Pageable p,  @Param("end")Date end,
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    ///// Now Do no Dates
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsByRegion(Pageable p, 
+    		@Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByInstitution(Pageable p, 
+    		@Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByRegionAndInst(Pageable p, 
+    		@Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official ")
+    List<PublicFalsehood> getRejectedFalsehoodsByOfficial(Pageable p, 
+    		@Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsByOfficialRegion(Pageable p, 
+    		@Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByOfficialInstitution(Pageable p, 
+    		@Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.official = :official and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByOfficialRegionAndInst(Pageable p, 
+    		@Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Before and base Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverity(Pageable p,  @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityRegion(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityInstitution(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityRegionAndInst(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficial(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialRegion(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialInstitution(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialRegionAndInst(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Before and Min Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverity(Pageable p,  @Param("minSeverity") byte minSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityRegion(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityInstitution(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityRegionAndInst(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("region") Region region, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficial(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialRegion(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialInstitution(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity <= :minSeverity and f.official = :official and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialRegionAndInst(Pageable p, 
+    		@Param("minSeverity") byte minSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    //// Before and Max Severity
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverity(Pageable p,  @Param("maxSeverity") byte maxSeverity);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityRegion(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("region") Region r);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityInstitution(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityRegionAndInst(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("region") Region r, @Param("inst") Institution i);
+    
+
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficial(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.region = :region ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialRegion(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialInstitution(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("inst") Institution i);
+    
+    @Query("select f from PublicFalsehood f where f.status > 4 and f.severity >= :maxSeverity and f.official = :official and f.region = :region and f.institution = :inst ")
+    List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialRegionAndInst(Pageable p, 
+    		@Param("maxSeverity") byte maxSeverity, @Param("official")PublicFigure official, @Param("region") Region region, @Param("inst") Institution i);
+    
+    
 }
