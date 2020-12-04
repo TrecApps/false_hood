@@ -49,13 +49,15 @@ public class SearchPublicFalsehood
      * Authors involved in the list
      */
     List<PublicFigure> authors;
+    
+    PublicFigure official;
 
     public SearchPublicFalsehood() {
     }
 
     public SearchPublicFalsehood(String terms, Date to, Date from,
         List<Region> regions, List<Institution> institutions, int numberOfEntries,
-        Severity minimum, Severity maximum, List<PublicFigure> authors)
+        Severity minimum, Severity maximum, List<PublicFigure> authors, PublicFigure official)
     {
         this.terms = terms;
         this.to = to;
@@ -66,11 +68,26 @@ public class SearchPublicFalsehood
         this.minimum = minimum;
         this.maximum = maximum;
         this.authors = authors;
+        this.official = official;
     }
     
     
 
     /**
+	 * @return the official
+	 */
+	public PublicFigure getOfficial() {
+		return official;
+	}
+
+	/**
+	 * @param official the official to set
+	 */
+	public void setOfficial(PublicFigure official) {
+		this.official = official;
+	}
+
+	/**
 	 * @return the region
 	 */
 	public Region getRegion() {
