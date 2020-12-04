@@ -2,6 +2,8 @@ package com.trecapps.false_hood.falsehoods;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ public class MediaOutlet implements Comparable<MediaOutlet>{
 	}
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	Integer outletId;
 	
 	@Column
