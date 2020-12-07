@@ -1,5 +1,7 @@
 package com.trecapps.false_hood.controllers;
 
+import com.trecapps.false_hood.falsehoods.Falsehood;
+import com.trecapps.false_hood.falsehoods.SearchFalsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.publicFalsehoods.*;
@@ -65,6 +67,100 @@ public class PublicFalsehoodController
     {
     	return attService.getInstitution(id);
     }
+    
+	@PostMapping("/searchConfirmed")
+	public List<PublicFalsehood> searchFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
+	{
+		List<PublicFalsehood> traits = service.searchConfirmedFalsehoodsByAttribte(searchObj);
+		
+		List<String> termList = new LinkedList<String>();
+		String terms = searchObj.getTerms();
+		while(terms.indexOf(" ") != -1)
+		{
+			boolean inQuotes = false;
+			
+			for(int c = 0; c < terms.length(); c++)
+			{
+				if(terms.charAt(c) == '\"')
+				{
+					inQuotes = !inQuotes;
+					continue;
+				}
+				
+				
+				if(!inQuotes && terms.charAt(c) == ' ')
+				{
+					termList.add(terms.substring(0, c));
+					
+					terms = terms.substring(c).trim();
+					break;
+				}
+			}
+		}
+		
+		termList.add(terms);
+		
+		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
+		int end = start + searchObj.getNumberOfEntries();
+		
+		if(traits.size() == 0)
+		{
+			return keyService.GetPublicFalsehoodsBySearchTerms(termList).subList(start, end);
+			
+		}
+		else
+		{
+			return traits;
+		}
+		
+	}
+	
+	@PostMapping("/searchRejected")
+	public List<PublicFalsehood> searchRFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
+	{
+		List<PublicFalsehood> traits = service.searchRejectedFalsehoodsByAttribte(searchObj);
+		
+		List<String> termList = new LinkedList<String>();
+		String terms = searchObj.getTerms();
+		while(terms.indexOf(" ") != -1)
+		{
+			boolean inQuotes = false;
+			
+			for(int c = 0; c < terms.length(); c++)
+			{
+				if(terms.charAt(c) == '\"')
+				{
+					inQuotes = !inQuotes;
+					continue;
+				}
+				
+				
+				if(!inQuotes && terms.charAt(c) == ' ')
+				{
+					termList.add(terms.substring(0, c));
+					
+					terms = terms.substring(c).trim();
+					break;
+				}
+			}
+		}
+		
+		termList.add(terms);
+		
+		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
+		int end = start + searchObj.getNumberOfEntries();
+		
+		if(traits.size() == 0)
+		{
+			return keyService.GetPublicFalsehoodsBySearchTerms(termList).subList(start, end);
+			
+		}
+		else
+		{
+			return traits;
+		}
+		
+	}
 
     @PostMapping("/list")
     public List<PublicFalsehood> GetFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)

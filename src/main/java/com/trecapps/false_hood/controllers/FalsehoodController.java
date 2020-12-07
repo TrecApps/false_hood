@@ -69,6 +69,102 @@ public class FalsehoodController {
 		return f1.getId().compareTo(f2.getId());
 	};
 	
+	@PostMapping("/searchConfirmed")
+	public List<Falsehood> searchFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
+	{
+		List<Falsehood> traits = service.getConfirmedFalsehoodsBySearchFeatures(searchObj);
+		
+		List<String> termList = new LinkedList<String>();
+		String terms = searchObj.getTerms();
+		while(terms.indexOf(" ") != -1)
+		{
+			boolean inQuotes = false;
+			
+			for(int c = 0; c < terms.length(); c++)
+			{
+				if(terms.charAt(c) == '\"')
+				{
+					inQuotes = !inQuotes;
+					continue;
+				}
+				
+				
+				if(!inQuotes && terms.charAt(c) == ' ')
+				{
+					termList.add(terms.substring(0, c));
+					
+					terms = terms.substring(c).trim();
+					break;
+				}
+			}
+		}
+		
+		termList.add(terms);
+		
+		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
+		int end = start + searchObj.getNumberOfEntries();
+		
+		if(traits.size() == 0)
+		{
+			return keyService.GetFalsehoodsBySearchTerms(termList).subList(start, end);
+			
+		}
+		else
+		{
+			return traits;
+		}
+		
+	}
+	
+	@PostMapping("/searchRejected")
+	public List<Falsehood> searchRFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
+	{
+		List<Falsehood> traits = service.getRejectedFalsehoodsBySearchFeatures(searchObj);
+		
+		List<String> termList = new LinkedList<String>();
+		String terms = searchObj.getTerms();
+		while(terms.indexOf(" ") != -1)
+		{
+			boolean inQuotes = false;
+			
+			for(int c = 0; c < terms.length(); c++)
+			{
+				if(terms.charAt(c) == '\"')
+				{
+					inQuotes = !inQuotes;
+					continue;
+				}
+				
+				
+				if(!inQuotes && terms.charAt(c) == ' ')
+				{
+					termList.add(terms.substring(0, c));
+					
+					terms = terms.substring(c).trim();
+					break;
+				}
+			}
+		}
+		
+		termList.add(terms);
+		
+		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
+		int end = start + searchObj.getNumberOfEntries();
+		
+		if(traits.size() == 0)
+		{
+			return keyService.GetFalsehoodsBySearchTerms(termList).subList(start, end);
+			
+		}
+		else
+		{
+			return traits;
+		}
+		
+	}
+	
+	
+	
 	@PostMapping("/list")
 	public List<Falsehood> GetFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
