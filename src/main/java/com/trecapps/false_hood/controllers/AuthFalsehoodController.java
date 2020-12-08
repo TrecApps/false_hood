@@ -45,6 +45,8 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	
 	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
 	
+	public static final int MIN_CREDIT_APPROVE_REJECT_RESOURCE = 200;
+	
 	public static final int MIN_CREDIT_ADD_OUTLET = 40;
 
 	@Autowired
@@ -195,11 +197,11 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	}
 	
 	@PutMapping("/ApproveOutlet")
-	public ResponseEntity<String> approvePublicFigure(RequestEntity<Integer> entry)
+	public ResponseEntity<String> approveMediaOutlet(RequestEntity<Integer> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
-		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT_RESOURCE);
 		
 		if(ret != null)
 			return ret;
@@ -213,11 +215,11 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	}
 	
 	@PutMapping("/RejectOutlet")
-	public ResponseEntity<String> rejectPublicFigure(RequestEntity<Integer> entry)
+	public ResponseEntity<String> rejectMediaOutlet(RequestEntity<Integer> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
-		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT_RESOURCE);
 		
 		if(ret != null)
 			return ret;

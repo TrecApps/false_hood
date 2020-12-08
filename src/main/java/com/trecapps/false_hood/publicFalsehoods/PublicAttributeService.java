@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
+import com.trecapps.false_hood.publicFigure.PublicFigure;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
 
 @Service
 public class PublicAttributeService {
@@ -25,15 +28,19 @@ public class PublicAttributeService {
 	@Autowired
 	EntityManager em;
 	
+	FalsehoodUserService userService;
+	
 
 	@Autowired
 	public PublicAttributeService(@Autowired FalsehoodStorageHolder storage,
 									@Autowired RegionRepo rRepo,
-									@Autowired InstitutionRepo iRepo)
+									@Autowired InstitutionRepo iRepo,
+									@Autowired FalsehoodUserService userService)
 	{
 		this.iRepo = iRepo;
 		this.rRepo = rRepo;
 		this.storage = storage;
+		this.userService = userService;
 	}
 	
 	public List<Institution> getInstitutionList(String name)
@@ -46,11 +53,79 @@ public class PublicAttributeService {
 		return rRepo.getLikeName(name);
 	}
 	
+	
+	public String approveRejectRegion(Long id, boolean approve)
+	{
+		if(id == null)
+		{
+			return "Id of Region was null!";
+		}
+		
+		if(!rRepo.existsById(id))
+		{
+			return "Id of Region does not currently exist in our Records!";
+		}
+		
+		Region reg = rRepo.getOne(id);
+		
+		
+		byte setApproval = (byte) (reg.getApproved() + (byte)((approve) ? 1:-1));
+		
+		reg.setApproved(setApproval);
+		
+		rRepo.save(reg);
+		
+		FalsehoodUser fUser = reg.getSubmitter();
+		
+		if(fUser != null)
+		{
+			int points = (approve) ? 5 : -3;
+			userService.adjustCredibility(fUser, points);
+		}
+		
+		return "";
+	}
+	
+	public String approveRejectInstitution(Long id, boolean approve)
+	{
+		if(id == null)
+		{
+			return "Id of Institution was null!";
+		}
+		
+		if(!iRepo.existsById(id))
+		{
+			return "Id of Institution does not currently exist in our Records!";
+		}
+		
+		Institution inst = iRepo.getOne(id);
+		
+		
+		byte setApproval = (byte) (inst.getApproved() + (byte)((approve) ? 1:-1));
+		
+		inst.setApproved(setApproval);
+		
+		iRepo.save(inst);
+		
+		FalsehoodUser fUser = inst.getSubmitter();
+		
+		if(fUser != null)
+		{
+			int points = (approve) ? 5 : -3;
+			userService.adjustCredibility(fUser, points);
+		}
+		
+		return "";
+	}
+	
+	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public String InsertAttribute(InstitutionEntry i)
+	public String InsertAttribute(InstitutionEntry i, FalsehoodUser user)
 	{
 		if(i == null)
 			return "Null value detected";
+		if(user == null)
+			return "null User detected";
 		
 		if(i.getContents() == null)
 			return "Null contents detected";
@@ -60,6 +135,8 @@ public class PublicAttributeService {
 		Institution inst = i.getInstitution();
 		
 		inst.setId(null);
+		inst.setApproved((byte)0);
+		inst.setSubmitter(user);
 		
 		inst = iRepo.saveAndFlush(inst);
 
@@ -115,10 +192,12 @@ public class PublicAttributeService {
 		return "";
 	}
 	
-	public String InsertAttribute(RegionEntry i)
+	public String InsertAttribute(RegionEntry i, FalsehoodUser user)
 	{
 		if(i == null)
 			return "Null value detected";
+		if(user == null)
+			return "null User detected";
 		
 		if(i.getContents() == null)
 			return "Null contents detected";
@@ -128,6 +207,8 @@ public class PublicAttributeService {
 		Region reg = i.getRegion();
 		
 		reg.setId(null);
+		reg.setApproved((byte)0);
+		reg.setSubmitter(user);
 		
 		reg = rRepo.save(reg);
 		

@@ -30,7 +30,7 @@ public class PublicFigureController extends AuthenticationControllerBase
 
 	public static final int MIN_CREDIT_ADD_FIGURE = 40;
 	
-	public static final int MIN_CREDIT_APPROVE_FIGURE = 60;
+	public static final int MIN_CREDIT_APPROVE_FIGURE = 200;
 	
 	public static final int MIN_CREDIT_VIEW_NON_APPROVE = 20;
 
@@ -107,7 +107,7 @@ public class PublicFigureController extends AuthenticationControllerBase
 	}
 	
 	@GetMapping("/listByName/{name}")
-	public List<PublicFigure> getFigures(@PathVariable("name")String name)
+	public List<PublicFigure> getFigures(@SuppressWarnings("rawtypes") RequestEntity entry, @PathVariable("name")String name)
 	{
 		return pfService.getPublicFigure(name);
 	}

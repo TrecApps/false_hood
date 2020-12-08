@@ -37,6 +37,8 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
     public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 
     public static final int MIN_CREDIT_APPROVE_REJECT = 60;
+
+	public static final int MIN_CREDIT_APPROVE_REJECT_RESOURCE = 200;
     
     public static final int MIN_CREDIT_ADD_RECOURSE = 35;
 
@@ -136,7 +138,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 
         RegionEntry region = entity.getBody();
         
-        String resp = attService.InsertAttribute(region);
+        String resp = attService.InsertAttribute(region, user);
         
         if("".equals(resp))
         	return new ResponseEntity<String>(resp, HttpStatus.NO_CONTENT);
@@ -155,10 +157,82 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 
         InstitutionEntry inst = entity.getBody();
         
-        String resp = attService.InsertAttribute(inst);
+        String resp = attService.InsertAttribute(inst, user);
         
         if("".equals(resp))
         	return new ResponseEntity<String>(resp, HttpStatus.NO_CONTENT);
         return new ResponseEntity<String>(resp, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+	@PutMapping("/ApproveRegion")
+	public ResponseEntity<String> approveRegion(RequestEntity<Long> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT_RESOURCE);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = attService.approveRejectRegion(entry.getBody(), true);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping("/RejectRegion")
+	public ResponseEntity<String> rejectRegion(RequestEntity<Long> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT_RESOURCE);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = attService.approveRejectRegion(entry.getBody(), false);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping("/ApproveInstitution")
+	public ResponseEntity<String> approveInstitution(RequestEntity<Long> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT_RESOURCE);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = attService.approveRejectInstitution(entry.getBody(), true);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping("/RejectInstitution")
+	public ResponseEntity<String> rejectInstitution(RequestEntity<Long> entry)
+	{
+		FalsehoodUser user = super.getUser(entry);
+		
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT_RESOURCE);
+		
+		if(ret != null)
+			return ret;
+		
+		String response = attService.approveRejectInstitution(entry.getBody(), false);
+		
+		if("".equals(response))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+	}
 }

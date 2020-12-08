@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.trecapps.false_hood.users.FalsehoodUser;
 
 @Table
 @Entity
@@ -18,7 +22,12 @@ public class Region implements Comparable<Region> {
 	@Column
 	String name;
 	
+	@Column
+	byte approved;
 	
+	@ManyToOne
+	@JoinColumn
+	FalsehoodUser submitter;
 
 	@Override
 	public int hashCode() {
@@ -49,14 +58,49 @@ public class Region implements Comparable<Region> {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	/**
 	 * @param id
 	 * @param name
+	 * @param approved
+	 * @param submitter
 	 */
-	public Region(Long id, String name) {
+	public Region(Long id, String name, byte approved, FalsehoodUser submitter) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.approved = approved;
+		this.submitter = submitter;
+	}
+	
+	
+
+	/**
+	 * @return the submitter
+	 */
+	public FalsehoodUser getSubmitter() {
+		return submitter;
+	}
+
+	/**
+	 * @param submitter the submitter to set
+	 */
+	public void setSubmitter(FalsehoodUser submitter) {
+		this.submitter = submitter;
+	}
+
+	/**
+	 * @return the approved
+	 */
+	public byte getApproved() {
+		return approved;
+	}
+
+	/**
+	 * @param approved the approved to set
+	 */
+	public void setApproved(byte approved) {
+		this.approved = approved;
 	}
 
 	/**
