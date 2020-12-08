@@ -26,15 +26,15 @@ public class RegionRepositoryTest {
     @BeforeClass
     static public void initializeArray()
     {
-        regions[0] = new Region(null, "Deleware");
+        regions[0] = new Region(null, "Deleware", (byte)0, null);
         
-        regions[1] = new Region(null, "New York");
+        regions[1] = new Region(null, "New York", (byte)0, null);
         
-        regions[2] = new Region(null, "Death Star");
+        regions[2] = new Region(null, "Death Star", (byte)0, null);
         
-        regions[3] = new Region(null, "Lair");
+        regions[3] = new Region(null, "Lair", (byte)0, null);
         
-        regions[4] = new Region(null, "New Jersey");
+        regions[4] = new Region(null, "New Jersey", (byte)0, null);
     }
 
     @Test

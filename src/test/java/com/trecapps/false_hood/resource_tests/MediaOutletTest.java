@@ -34,7 +34,7 @@ public class MediaOutletTest {
 		FalsehoodUser user = userService.getUserFromToken(UserTokens.userToken1);
 		
 		// This should get the user 1 enough credibility to do what needs to be done
-		userService.adjustCredibility(user, 60);
+		userService.adjustCredibility(user, 250);
 		initializeOutlets(sharedApp);
 	}
 	
@@ -77,7 +77,7 @@ public class MediaOutletTest {
 	{
 		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
 		
-		ResponseEntity<String> resp = afController.approvePublicFigure(RequestEntity.post(
+		ResponseEntity<String> resp = afController.approveMediaOutlet(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(medEntries[0].getOutlet().getOutletId()));
 		assertTrue(resp.getStatusCode().is4xxClientError());
 		
@@ -89,7 +89,7 @@ public class MediaOutletTest {
 	{
 		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
 		
-		ResponseEntity<String> resp = afController.rejectPublicFigure(RequestEntity.post(
+		ResponseEntity<String> resp = afController.rejectMediaOutlet(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(medEntries[0].getOutlet().getOutletId()));
 		assertTrue(resp.getStatusCode().is4xxClientError());
 		
@@ -101,7 +101,7 @@ public class MediaOutletTest {
 	{
 		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
 		
-		ResponseEntity<String> resp = afController.approvePublicFigure(RequestEntity.post(
+		ResponseEntity<String> resp = afController.approveMediaOutlet(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(medEntries[1].getOutlet().getOutletId()));
 		assertTrue(resp.getStatusCode().is2xxSuccessful());
 	}
@@ -111,7 +111,7 @@ public class MediaOutletTest {
 	{
 		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
 		
-		ResponseEntity<String> resp = afController.rejectPublicFigure(RequestEntity.post(
+		ResponseEntity<String> resp = afController.rejectMediaOutlet(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(medEntries[2].getOutlet().getOutletId()));
 		assertTrue(resp.getStatusCode().is2xxSuccessful());
 	}

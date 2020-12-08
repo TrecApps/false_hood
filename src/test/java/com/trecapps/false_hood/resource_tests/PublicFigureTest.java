@@ -35,7 +35,7 @@ public class PublicFigureTest {
 		FalsehoodUser user = userService.getUserFromToken(UserTokens.userToken1);
 		
 		// This should get the user 1 enough credibility to do what needs to be done
-		userService.adjustCredibility(user, 60);
+		userService.adjustCredibility(user, 260);
 		
 		initializePublicFigures(sharedApp);
 	}

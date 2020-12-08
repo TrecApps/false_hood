@@ -31,8 +31,8 @@ public class PublicFalsehoodsRepositoryTest {
                 PublicFalsehood.SUBMITTED,				// Status
                 new PublicFigure(0l, "Joseph", null, "Biden"), // Figure
                 PublicFalsehood.POLITICIAN,								// Official type
-                new Region(null, "Deleware"),			// Region
-                new Institution(null, "U.S. Senate"),	// Institution
+                new Region(null, "Deleware", (byte)0, null),			// Region
+                new Institution(null, "U.S. Senate", (byte)0, null),	// Institution
                 (byte)0,					
                 new Date(Calendar.getInstance().getTime().getTime()));
         
@@ -41,8 +41,8 @@ public class PublicFalsehoodsRepositoryTest {
                 PublicFalsehood.VERIFIED,				// Status
                 new PublicFigure(2l, "Donald", "John", "Trump"), // Figure
                 PublicFalsehood.POLITICIAN,								// Official type
-                new Region(null, "New York"),			// Region
-                new Institution(null, "U.S. White House"),	// Institution
+                new Region(null, "New York", (byte)0, null),			// Region
+                new Institution(null, "U.S. White House", (byte)0, null),	// Institution
                 (byte)0,					
                 new Date(Calendar.getInstance().getTime().getTime()));
         
@@ -51,8 +51,8 @@ public class PublicFalsehoodsRepositoryTest {
                 PublicFalsehood.SUBMITTED,				// Status
                 new PublicFigure(3l, "Wilhuff ", null, "Tarkin"), // Figure
                 PublicFalsehood.MILITARY,								// Official type
-                new Region(null, "Death Star"),			// Region
-                new Institution(null, "Galactic Empire"),	// Institution
+                new Region(null, "Death Star", (byte)0, null),			// Region
+                new Institution(null, "Galactic Empire", (byte)0, null),	// Institution
                 (byte)0,					
                 new Date(Calendar.getInstance().getTime().getTime()));
         
@@ -61,8 +61,8 @@ public class PublicFalsehoodsRepositoryTest {
                 PublicFalsehood.SUBMITTED,				// Status
                 new PublicFigure(4l, "Dr.", null, "Evil"), // Figure
                 PublicFalsehood.PUBLIC_HEALTH,			// Official type
-                new Region(null, "Lair"),			// Region
-                new Institution(null, "Virtucon Industries"),	// Institution
+                new Region(null, "Lair", (byte)0, null),			// Region
+                new Institution(null, "Virtucon Industries", (byte)0, null),	// Institution
                 (byte)0,					
                 new Date(Calendar.getInstance().getTime().getTime()));
         
@@ -71,8 +71,8 @@ public class PublicFalsehoodsRepositoryTest {
                 PublicFalsehood.SUBMITTED,				// Status
                 new PublicFigure(5l, "Paul", "Robin", "Krugman"), // Figure
                 PublicFalsehood.ECONOMIST,								// Official type
-                new Region(null, "New Jersey"),			// Region
-                new Institution(null, "Princeton University"),	// Institution
+                new Region(null, "New Jersey", (byte)0, null),			// Region
+                new Institution(null, "Princeton University", (byte)0, null),	// Institution
                 (byte)0,					
                 new Date(Calendar.getInstance().getTime().getTime()));
     }

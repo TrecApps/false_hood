@@ -24,15 +24,15 @@ public class InstitutionRepositoryTest {
     @BeforeClass
     static public void initializeArray()
     {
-        regions[0] = new Institution(null, "Deleware");
+        regions[0] = new Institution(null, "Deleware", (byte)0, null);
         
-        regions[1] = new Institution(null, "New York");
+        regions[1] = new Institution(null, "New York", (byte)0, null);
         
-        regions[2] = new Institution(null, "Death Star");
+        regions[2] = new Institution(null, "Death Star", (byte)0, null);
         
-        regions[3] = new Institution(null, "Lair");
+        regions[3] = new Institution(null, "Lair", (byte)0, null);
         
-        regions[4] = new Institution(null, "New Jersey");
+        regions[4] = new Institution(null, "New Jersey", (byte)0, null);
     }
 
     @Test

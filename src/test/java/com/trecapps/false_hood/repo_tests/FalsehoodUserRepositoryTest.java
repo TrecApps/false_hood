@@ -24,11 +24,11 @@ public class FalsehoodUserRepositoryTest {
     @BeforeClass
     static public void initializeArray()
     {
-        users[0] = new FalsehoodUser(null, 25, "user1@gmail.com");
+        users[0] = new FalsehoodUser(null, 250, "user1@gmail.com");
         
-        users[1] = new FalsehoodUser(null, 25, "user2@outook.com");
+        users[1] = new FalsehoodUser(null, 250, "user2@outook.com");
         
-        users[2] = new FalsehoodUser(null, 25, "user3@hotmail.com");
+        users[2] = new FalsehoodUser(null, 250, "user3@hotmail.com");
         
         users[3] = new FalsehoodUser(null, 25, "user4@yahoo.com");
         

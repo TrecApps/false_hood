@@ -48,13 +48,13 @@ public class RegionTest {
 	public static void initializePublicFigures(FalsehoodApp app) throws URISyntaxException
 	{
 		if(regEntries[0] == null)
-			regEntries[0] = new RegionEntry(new Region(null, "Coruscant"), 
+			regEntries[0] = new RegionEntry(new Region(null, "Coruscant", (byte)0, null), 
 					INIT_CORU);
 		if(regEntries[1] == null)
-			regEntries[1] = new RegionEntry(new Region(null, "District 12"), 
+			regEntries[1] = new RegionEntry(new Region(null, "District 12", (byte)0, null), 
 					"Region of Panem, located in the Appalachian region and known for coal production");
 		if(regEntries[2] == null)
-			regEntries[2] = new RegionEntry(new Region(null, "Morag"), 
+			regEntries[2] = new RegionEntry(new Region(null, "Morag", (byte)0, null), 
 					"Old planet, known for intense flooding, once held the Power Stone");
 		
 		AuthPublicFalsehoodController apfController = app.getAuthPFalsehoodController();

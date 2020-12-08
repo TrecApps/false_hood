@@ -47,13 +47,13 @@ public class InstitutionTest {
 	public static void initializePublicFigures(FalsehoodApp app) throws URISyntaxException
 	{
 		if(intEntries[0] == null)
-			intEntries[0] = new InstitutionEntry(new Institution(null, "Coruscant"), 
+			intEntries[0] = new InstitutionEntry(new Institution(null, "Coruscant", (byte)0, null), 
 					INIT_CORU);
 		if(intEntries[1] == null)
-			intEntries[1] = new InstitutionEntry(new Institution(null, "District 12"), 
+			intEntries[1] = new InstitutionEntry(new Institution(null, "District 12", (byte)0, null), 
 					"Institution of Panem, located in the Appalachian region and known for coal production");
 		if(intEntries[2] == null)
-			intEntries[2] = new InstitutionEntry(new Institution(null, "Morag"), 
+			intEntries[2] = new InstitutionEntry(new Institution(null, "Morag", (byte)0, null), 
 					"Old planet, known for intense flooding, once held the Power Stone");
 		
 		AuthPublicFalsehoodController apfController = app.getAuthPFalsehoodController();
