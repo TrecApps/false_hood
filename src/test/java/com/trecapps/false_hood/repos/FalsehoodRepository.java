@@ -30,72 +30,7 @@ public class FalsehoodRepository implements FalsehoodRepo
         return f.subList(start, end);
     }
     
-    @Override
-    public List<Falsehood> getFalsehoodsBetween(Date begin, Date end) {
-        return new LinkedList<>(appeals.stream().filter((f)-> (begin == null) ? true: (f.getDateMade().getTime() >= begin.getTime()))
-        		.filter((f)-> (end == null) ? true : (f.getDateMade().getTime() <= end.getTime())).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getFalsehoodsBefore(Date end) {
-        return new LinkedList<>(appeals.stream().filter((f)-> (end == null) ? true : (f.getDateMade().getTime() <= end.getTime())).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getFalsehoodsByMinimumSeverity(byte minSeverity) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)-> f.getSeverity() <= minSeverity).collect(Collectors.toList()));
-
-    }
-
-    @Override
-    public List<Falsehood> getFalsehoodsByMaximumSeverity(byte maxSeverity) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)-> f.getSeverity() >= maxSeverity).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getFalshoodBySeverity(byte maxSeverity, byte minSeverity) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getSeverity() <= minSeverity && f.getSeverity() >= maxSeverity;
-        }).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getFalsehoodsByOutlet(MediaOutlet outletId) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getOutlet().getOutletId() == outletId.getOutletId();
-        }).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getFalsehoodsByMediaType(int mType) {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getMediaType() == mType;
-        }).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getChallengedFalsehoods() {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getStatus() == FalsehoodStatus.CHALLENGED.GetValue();
-        }).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getConfirmedFalsehoods() {
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return f.getStatus() == FalsehoodStatus.VERIFIED.GetValue();
-        }).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Falsehood> getFalsehoodsByPublicFigure(PublicFigure author) {
-    	
-        return new ArrayList<Falsehood>(appeals.stream().filter((f)->{
-            return ((f.getAuthor1() == null)? false : f.getAuthor1().getId().equals(author.getId())) ||
-                    ((f.getAuthor2() == null) ? false: f.getAuthor2().getId().equals(author.getId()));
-        }).collect(Collectors.toList()));
-    }
-
+   
     @Override
     public List<Falsehood> findAll() {
         return new ArrayList<Falsehood>(appeals);

@@ -1,15 +1,15 @@
 package com.trecapps.false_hood.repo_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.commonLie.CommonLieRepo;
@@ -20,7 +20,7 @@ public class CommonLieRepositoryTest {
 
     static CommonLie commonLies[] = new CommonLie[5];
 
-    @BeforeClass
+    @BeforeAll
     static public void initializeArray()
     {
         commonLies[0] = new CommonLie(null, "Lie1");

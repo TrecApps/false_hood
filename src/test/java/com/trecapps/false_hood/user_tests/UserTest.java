@@ -1,10 +1,10 @@
 package com.trecapps.false_hood.user_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.trecapps.false_hood.test_obj.FalsehoodApp;
 import com.trecapps.false_hood.test_obj.UserTokens;

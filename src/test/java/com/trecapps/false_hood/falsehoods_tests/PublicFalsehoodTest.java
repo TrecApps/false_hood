@@ -1,7 +1,7 @@
 package com.trecapps.false_hood.falsehoods_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigInteger;
 import java.net.URI;
@@ -11,16 +11,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
 import com.trecapps.false_hood.controllers.AuthPublicFalsehoodController;
-import com.trecapps.false_hood.controllers.FalsehoodController;
 import com.trecapps.false_hood.controllers.PublicFalsehoodController;
-import com.trecapps.false_hood.falsehoods.Falsehood;
-import com.trecapps.false_hood.falsehoods.SearchFalsehood;
 import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.Institution;
@@ -53,7 +51,7 @@ public class PublicFalsehoodTest {
 	static final long DATE_2020 = 1603000000000L;
 	static final long DATE_2008 = 1210000000000L;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void setUpSharedApp() throws URISyntaxException
 	{
 		sharedApp = new FalsehoodApp();
@@ -73,25 +71,33 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
+	@Order(2)
 	public void searchByDates()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
 		
 		search.setFrom(new Date(DATE_2017 - 50L));
-		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
-		assertEquals(4, f.size());
+		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
 		
 		search.setTo(new Date(DATE_2020 - 1L));
-		f = fController.GetFalsehoodByParams(search);
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
 		
 		search.setFrom(null);
-		f = fController.GetFalsehoodByParams(search);
-		assertEquals(8, f.size());
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
 	}
 	
 	@Test
+	@Order(2)
 	public void searchByFigure()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
@@ -102,19 +108,22 @@ public class PublicFalsehoodTest {
 		localFigures.add(figures.get(1));
 		search.setAuthors(localFigures);
 		
-		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(4, f.size());
+		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
 		
 		localFigures.add(figures.get(2));
 		search.setAuthors(localFigures);
 		
-		f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(6, f.size());
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(3, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(3, f.size());
 	}
 	
 	@Test
+	@Order(2)
 	public void searchByTerms()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
@@ -123,18 +132,21 @@ public class PublicFalsehoodTest {
 		
 		search.setTerms("Vader Serena");
 		
-		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(8, f.size());
+		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
 		
 		search.setTerms("Dumbledore Voldemort");
 		
-		f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(4, f.size());
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
 	}
 	
 	@Test
+	@Order(2)
 	public void searchBySeverity()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
@@ -143,24 +155,28 @@ public class PublicFalsehoodTest {
 		
 		search.setMaximum(Severity.OBJECTOVE_FALSEHOOD);
 		
-		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(8, f.size());
+		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
 		
 		search.setMinimum(Severity.HYPOCRISY);
 		
-		f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(4, f.size());
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
 		
 		search.setMaximum(null);
 		
-		f = fController.GetFalsehoodByParams(search);
-		
-		assertEquals(6, f.size());
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(3, f.size());
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(3, f.size());
 	}
 	
 	@Test
+	@Order(2)
 	public void searchByInstitutions()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
@@ -172,12 +188,16 @@ public class PublicFalsehoodTest {
 		
 		search.setInstitutions(localInts);
 		
-		List<PublicFalsehood> f = fController.GetFalsehoodByParams(search);
+		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(4, f.size());
 		
 		localInts.add(institutions.get(1));
 		
-		f = fController.GetFalsehoodByParams(search);
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(6, f.size());
+		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(6, f.size());
 	}
 	
@@ -232,6 +252,7 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void succeedApprove() throws URISyntaxException
 	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
@@ -266,7 +287,7 @@ public class PublicFalsehoodTest {
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.GetFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null));
+		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null));
 		
 		System.out.println("In Test with number of falsehoods: " + localFalsehoods.size());
 		
@@ -282,6 +303,7 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void failApprove() throws URISyntaxException
 	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
@@ -321,6 +343,7 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void succeedReject() throws URISyntaxException
 	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
@@ -354,7 +377,7 @@ public class PublicFalsehoodTest {
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.GetFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null,null));
+		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null,null));
 		
 		int succeeded = 0;
 		
@@ -368,6 +391,7 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void failReject() throws URISyntaxException
 	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();

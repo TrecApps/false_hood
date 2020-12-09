@@ -7,8 +7,8 @@ import com.trecapps.false_hood.falsehoods.MediaOutlet;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 import com.trecapps.false_hood.repos.FalsehoodRepository;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 import java.sql.Date;
@@ -17,9 +17,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FalsehoodRepositoryTest {
 
@@ -27,7 +27,7 @@ public class FalsehoodRepositoryTest {
 
     static Falsehood falsehoods[] = new Falsehood[5];
 
-    @BeforeClass
+    @BeforeAll
     static public void initializeArray()
     {
         falsehoods[0] = new Falsehood(null,

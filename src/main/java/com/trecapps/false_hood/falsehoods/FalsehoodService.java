@@ -46,18 +46,6 @@ public class FalsehoodService {
 		this.userService = userService;
 	}
 	
-
-	public List<Falsehood> getFalsehoodsByOutlet(MediaOutlet outletId)
-	{
-		List<Falsehood> ret = fRepo.getFalsehoodsByOutlet(outletId);
-		
-		if(ret != null)
-			System.out.println("Falsehoods Repo by outlet returned " + ret.size() + " entries with id=" + outletId + "!");
-		else
-			System.out.println("Falsehoods Repo returned null list with id = " + outletId + "!");
-		
-		return ret; 
-	}
 	
 	public List<Falsehood> getConfirmedFalsehoodsBySearchFeatures(SearchFalsehood s)
 	{
@@ -586,50 +574,14 @@ public class FalsehoodService {
 	}
 	
 	
-	public List<Falsehood> getFalseHoodByMinimumSeverity(byte severity)
-	{
-		return fRepo.getFalsehoodsByMinimumSeverity(severity);
-	}
+
 	
-	public List<Falsehood> getFalseHoodByMaximumSeverity(byte severity)
-	{
-		return fRepo.getFalsehoodsByMaximumSeverity(severity);
-	}
-	
-	public List<Falsehood> getFalsehoodBySeverityRange(byte min, byte max)
-	{
-		return fRepo.getFalshoodBySeverity(max, min);
-	}
-	
-	public List<Falsehood> getFalsehoodByDateRange(Date oldest)
-	{
-		return getFalsehoodByDateRange(oldest, new Date(Calendar.getInstance().getTime().getTime()));
-	}
-	
-	public List<Falsehood> getFalsehoodByDateRange(Date oldest, Date newest)
-	{
-		return fRepo.getFalsehoodsBetween(oldest, newest);
-	}
-	
-	public List<Falsehood> getFalsehoodsBefore(Date newest)
-	{
-		return fRepo.getFalsehoodsBefore(newest);
-	}
-	
-	public List<Falsehood> getFalsehoodByMediaType(int mt)
-	{
-		return fRepo.getFalsehoodsByMediaType(mt);
-	}
 	
 	public Falsehood getFalsehoodById(BigInteger id)
 	{
 		return fRepo.getOne(id);
 	}
 	
-	public List<Falsehood> getFalsehoodsByAuthor(PublicFigure author)
-	{
-		return fRepo.getFalsehoodsByPublicFigure(author);
-	}
 	
 	public Falsehood insertNewFalsehood(Falsehood f)
 	{

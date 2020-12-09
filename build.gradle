@@ -74,8 +74,9 @@ dependencies {
     // JSON Object Mapping
     implementation 'org.json:json:20200518'
 
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
+
     
 }
 

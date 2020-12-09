@@ -1,13 +1,13 @@
 package com.trecapps.false_hood.resource_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -25,7 +25,7 @@ public class PublicFigureTest {
 	
 	static PublicFigureEntry pubEntries[] = new PublicFigureEntry[3];
 	
-	@BeforeClass
+	@BeforeAll
 	public static void setUpSharedApp() throws URISyntaxException
 	{
 		sharedApp = new FalsehoodApp();

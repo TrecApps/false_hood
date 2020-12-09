@@ -1,21 +1,17 @@
 package com.trecapps.false_hood.repo_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.math.BigInteger;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.trecapps.false_hood.publicFalsehoods.*;
-import com.trecapps.false_hood.publicFigure.PublicFigure;
 import com.trecapps.false_hood.repos.RegionRepository;
 
 public class RegionRepositoryTest {
@@ -23,7 +19,7 @@ public class RegionRepositoryTest {
 
     static Region regions[] = new Region[5];
 
-    @BeforeClass
+    @BeforeAll
     static public void initializeArray()
     {
         regions[0] = new Region(null, "Deleware", (byte)0, null);

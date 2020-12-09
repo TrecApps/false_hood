@@ -1,14 +1,14 @@
 package com.trecapps.false_hood.resource_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -30,7 +30,7 @@ public class RegionTest {
 	static String INIT_CORU = "Planet that serves as the Capital of the Old Republic and later the Galactic Empire.";
 	static String ADD_CORU = "It was replaced by the Hosnian Prime System for the New Republic.";
 	
-	@BeforeClass
+	@BeforeAll
 	public static void setUpSharedApp() throws URISyntaxException
 	{
 		sharedApp = new FalsehoodApp();
