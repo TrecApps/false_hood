@@ -32,8 +32,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 
         int start = number * size;
 
-        int end = start + number;
-        return f.subList(start, end);
+        int end = start + size;
+        return end < f.size() ? f.subList(start, end): f;
     }
 
     @Override
@@ -333,9 +333,13 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
+			System.out.println("Ststus is " + status + " Date of Public Falsehood is " + d + " with begin " + begin + " and end " + end);
 		}
-		
-		return cullList(p, ret);
+		System.out.println("Before Public Cull, size is " + ret.size());
+		ret = cullList(p, ret);
+
+		System.out.println("After Public Cull, size is " + ret.size());
+		return ret;
 	}
 
 	@Override
@@ -1590,7 +1594,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5)
+			if(status > 1 && status < 5 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2090,6 +2094,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			if(status > 4 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
+			System.out.println("With status " + status + " and date " + d + " before= " +end+ " after= " + begin);
 		}
 		
 		return cullList(p, ret);
@@ -3347,7 +3352,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4)
+			if(status > 4 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		

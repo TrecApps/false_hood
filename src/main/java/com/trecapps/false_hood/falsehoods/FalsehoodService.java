@@ -55,6 +55,9 @@ public class FalsehoodService {
 		Date before = s.getTo();
 		Date after = s.getFrom();
 		
+		if(before == null && after != null)
+			before = new Date(Calendar.getInstance().getTime().getTime());
+		
 		Severity minSev = s.getMinimum();
 		Severity maxSev = s.getMaximum();
 		
@@ -317,6 +320,10 @@ public class FalsehoodService {
 		
 		Date before = s.getTo();
 		Date after = s.getFrom();
+		
+		if(before == null && after != null)
+			before = new Date(Calendar.getInstance().getTime().getTime());
+		
 		
 		Severity minSev = s.getMinimum();
 		Severity maxSev = s.getMaximum();

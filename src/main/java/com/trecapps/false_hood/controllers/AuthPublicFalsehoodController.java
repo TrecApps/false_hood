@@ -4,6 +4,7 @@ import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
+import com.trecapps.false_hood.miscellanous.VerdictSubmission;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.InstitutionEntry;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
 import java.util.Calendar;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/Update/PublicFalsehood")
@@ -99,32 +102,43 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/Update")
-    public ResponseEntity<String> approveFalsehood(RequestEntity<FullPublicFalsehood> entity)
-    {
-        FalsehoodUser user = super.getUser(entity);
+	@PutMapping("/Approve")
+	public ResponseEntity<String> approveFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
+	{
+		FalsehoodUser user = super.getUser(entity);
 
-        ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
 
-        if(ret != null)
-            return ret;
+		if(ret != null)
+			return ret;
 
-        FullPublicFalsehood falsehood = entity.getBody();
+		VerdictSubmission falsehood = entity.getBody();
 
-        if(falsehood == null || falsehood.getContents() == null || falsehood.getMetadata() == null)
-        {
-            return new ResponseEntity<String>("Bad Data", HttpStatus.BAD_REQUEST);
-        }
+		String result = service.addVerdict(falsehood.getFalsehood(), true, falsehood.getComment(), user, req);
 
-        if(!service.appendEntryToStorage(falsehood.getContents(), falsehood.getMetadata()))
-        {
-            return new ResponseEntity<String>("Failed to Write Falsehood to Storage!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		if("".equals(result))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+	}
 
-        service.updateNewFalsehood(falsehood.getMetadata());
+	@PutMapping("/Reject")
+	public ResponseEntity<String> rejectFalsehood(RequestEntity<VerdictSubmission> entity, HttpServletRequest req)
+	{
+		FalsehoodUser user = super.getUser(entity);
 
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-    }
+		ResponseEntity<String> ret = super.validateUser(user, MIN_CREDIT_APPROVE_REJECT);
+
+		if(ret != null)
+			return ret;
+
+		VerdictSubmission falsehood = entity.getBody();
+
+		String result = service.addVerdict(falsehood.getFalsehood(), false, falsehood.getComment(), user, req);
+
+		if("".equals(result))
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+	}
     
     @PostMapping("/AddRegion")
     public ResponseEntity<String> addRegion(RequestEntity<RegionEntry> entity)

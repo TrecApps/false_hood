@@ -75,8 +75,8 @@ dependencies {
     implementation 'org.json:json:20200518'
 
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
-
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
     
 }
 
@@ -99,6 +99,10 @@ jacocoTestReport {
 		html.setEnabled(true)
 	}
 }
+test {
+    useJUnitPlatform()
+}
+
 // Make sure Jacoco Test report runs
 test.finalizedBy(project.tasks.jacocoTestReport)
 

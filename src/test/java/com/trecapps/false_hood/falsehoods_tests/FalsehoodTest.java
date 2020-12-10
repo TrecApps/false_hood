@@ -48,6 +48,7 @@ public class FalsehoodTest {
 	static ArrayList<String> outlets = new ArrayList<>();
 	
 	static List<PublicFigure> figures;
+	static List<MediaOutlet> rOutlets = new ArrayList<>();
 	
 	static final long DATE_2010 = 1290000000000L;
 	static final long DATE_2014 = 1403000000000L;
@@ -108,22 +109,19 @@ public class FalsehoodTest {
 		
 		SearchFalsehood search = new SearchFalsehood();
 		
-		List<PublicFigure> localFigures = new ArrayList<>();
-		localFigures.add(figures.get(1));
 		
-		search.setAuthors(localFigures);
+		search.setAuthor(figures.get(1));
 		List<Falsehood> f = fController.searchFalsehoodByParams(search);
 		assertEquals(1, f.size());
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(1, f.size());
 		
-		localFigures.add(figures.get(2));
-		search.setAuthors(localFigures);
+		search.setAuthor(figures.get(2));
 		
 		f = fController.searchFalsehoodByParams(search);
-		assertEquals(3, f.size());
+		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(3, f.size());
+		assertEquals(2, f.size());
 	}
 	
 	@Test
@@ -134,46 +132,24 @@ public class FalsehoodTest {
 		
 		SearchFalsehood search = new SearchFalsehood();
 		
-		List<String> outletNames = new ArrayList<String>();
-		outletNames.add(outlets.get(0));
 		
-		search.setOutlets(outletNames);
+		search.setOutlet(rOutlets.get(0));
 		
 		List<Falsehood> f = fController.searchFalsehoodByParams(search);
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
 		
-		outletNames.add(outlets.get(1));
-		search.setOutlets(outletNames);
+		search.setOutlet(rOutlets.get(1));
 		
 		f = fController.searchFalsehoodByParams(search);
 		
-		assertEquals(4, f.size());
+		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(4, f.size());
+		assertEquals(2, f.size());
 	}
 	
-	@Test
-	@Order(2)
-	public void searchByTerms()
-	{
-		FalsehoodController fController = sharedApp.getFalsehoodController();
-		
-		SearchFalsehood search = new SearchFalsehood();
-		
-		search.setTerms("Vader Serena");
-		
-		List<Falsehood> f = fController.searchFalsehoodByParams(search);
-		
-		assertEquals(8, f.size());
-		
-		search.setTerms("Dumbledore Voldemort");
-		
-		f = fController.searchFalsehoodByParams(search);
-		
-		assertEquals(4, f.size());
-	}
+
 	
 	@Test
 	@Order(2)
@@ -212,10 +188,14 @@ public class FalsehoodTest {
 		
 		MediaOutlet outlet1 = outletService.GetMediaOutlet(0);
 		outlets.add(outlet1.getName());
+		rOutlets.add(outlet1);
 		MediaOutlet outlet2 = outletService.GetMediaOutlet(1);
 		outlets.add(outlet2.getName());
+		rOutlets.add(outlet2);
 		MediaOutlet outlet3 = outletService.GetMediaOutlet(2);
 		outlets.add(outlet3.getName());
+		rOutlets.add(outlet3);
+		
 		
 		figures = figureService.getPublicFigures(true, 0, 10);
 		assertTrue(figures.size() > 2);
@@ -342,13 +322,13 @@ public class FalsehoodTest {
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
-		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, null, 0, 20, null,null,null, null));
+		List<Falsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, null, 0, 20, null,null,null, null));
 		
 		int succeeded = 0;
 		
 		for(Falsehood f: localFalsehoods)
 		{
-			if(f.getStatus() == 6) // 6 is rejected
+			if(f.getStatus() > 4) // 6 is rejected
 				succeeded++;
 		}
 		

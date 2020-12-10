@@ -77,7 +77,7 @@ public class FalsehoodController {
 		
 		List<String> termList = new LinkedList<String>();
 		String terms = searchObj.getTerms();
-		while(terms.indexOf(" ") != -1)
+		while(terms != null && terms.indexOf(" ") != -1)
 		{
 			boolean inQuotes = false;
 			
@@ -105,7 +105,7 @@ public class FalsehoodController {
 		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
 		int end = start + searchObj.getNumberOfEntries();
 		
-		if(traits.size() == 0)
+		if(traits.size() == 0 && terms != null)
 		{
 			return keyService.GetFalsehoodsBySearchTerms(termList).subList(start, end);
 			
@@ -124,7 +124,7 @@ public class FalsehoodController {
 		
 		List<String> termList = new LinkedList<String>();
 		String terms = searchObj.getTerms();
-		while(terms.indexOf(" ") != -1)
+		while(terms != null && terms.indexOf(" ") != -1)
 		{
 			boolean inQuotes = false;
 			
@@ -152,7 +152,7 @@ public class FalsehoodController {
 		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
 		int end = start + searchObj.getNumberOfEntries();
 		
-		if(traits.size() == 0)
+		if(terms != null && traits.size() == 0)
 		{
 			return keyService.GetFalsehoodsBySearchTerms(termList).subList(start, end);
 			

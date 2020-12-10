@@ -1,25 +1,28 @@
 package com.trecapps.false_hood.falsehoods_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
 import com.trecapps.false_hood.controllers.AuthPublicFalsehoodController;
 import com.trecapps.false_hood.controllers.PublicFalsehoodController;
 import com.trecapps.false_hood.miscellanous.Severity;
+import com.trecapps.false_hood.miscellanous.VerdictSubmission;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
 import com.trecapps.false_hood.publicFalsehoods.Institution;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
@@ -36,6 +39,7 @@ import com.trecapps.false_hood.test_obj.UserTokens;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 
+@TestMethodOrder(OrderAnnotation.class)
 public class PublicFalsehoodTest {
 	static FalsehoodApp sharedApp;
 	
@@ -71,7 +75,7 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
-	@Order(2)
+	@Order(3)
 	public void searchByDates()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
@@ -87,66 +91,42 @@ public class PublicFalsehoodTest {
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(2, f.size());
+		assertEquals(1, f.size());
 		
 		search.setFrom(null);
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(4, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(2, f.size());
+		assertEquals(4, f.size());
 	}
 	
 	@Test
-	@Order(2)
+	@Order(3)
 	public void searchByFigure()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
 		
-		List<PublicFigure> localFigures = new ArrayList<>();
-		localFigures.add(figures.get(1));
-		search.setAuthors(localFigures);
+		search.setOfficial(figures.get(1));
 		
 		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
 		
-		localFigures.add(figures.get(2));
-		search.setAuthors(localFigures);
+		search.setOfficial(figures.get(2));
 		
 		f = fController.searchFalsehoodByParams(search);
-		assertEquals(3, f.size());
+		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(3, f.size());
+		assertEquals(1, f.size());
 	}
 	
-	@Test
-	@Order(2)
-	public void searchByTerms()
-	{
-		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
-		
-		SearchPublicFalsehood search = new SearchPublicFalsehood();
-		
-		search.setTerms("Vader Serena");
-		
-		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
-		assertEquals(4, f.size());
-		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(4, f.size());
-		
-		search.setTerms("Dumbledore Voldemort");
-		
-		f = fController.searchFalsehoodByParams(search);
-		assertEquals(2, f.size());
-		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(2, f.size());
-	}
+
 	
 	@Test
-	@Order(2)
+	@Order(3)
 	public void searchBySeverity()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
@@ -176,29 +156,27 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
-	@Order(2)
+	@Order(3)
 	public void searchByInstitutions()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
 		
-		List<Institution> localInts = new ArrayList<>();
-		localInts.add(institutions.get(0));
 		
-		search.setInstitutions(localInts);
+		search.setInstitution(institutions.get(0));
 		
 		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
-		assertEquals(4, f.size());
+		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(4, f.size());
+		assertEquals(2, f.size());
 		
-		localInts.add(institutions.get(1));
+		search.setInstitution(institutions.get(1));
 		
 		f = fController.searchFalsehoodByParams(search);
-		assertEquals(6, f.size());
+		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
-		assertEquals(6, f.size());
+		assertEquals(1, f.size());
 	}
 	
 	public static void initializeFalsehoods(FalsehoodApp app) throws URISyntaxException
@@ -261,29 +239,16 @@ public class PublicFalsehoodTest {
 		update.getMetadata().setId(BigInteger.valueOf(0));
 		update.getMetadata().setStatus((byte)1);
 		
-		ResponseEntity<String> resp = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		
-		update = falsehoods[1].clone();
-		update.getMetadata().setId(BigInteger.valueOf(1));
-		update.getMetadata().setStatus((byte)1);
 		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[2].clone();
-		update.getMetadata().setId(BigInteger.valueOf(2));
-		update.getMetadata().setStatus((byte)1);
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(0))), null);
 		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[3].clone();
-		update.getMetadata().setId(BigInteger.valueOf(3));
-		update.getMetadata().setStatus((byte)1);
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(1))), null);
 		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[4].clone();
-		update.getMetadata().setId(BigInteger.valueOf(4));
-		update.getMetadata().setStatus((byte)1);
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(2))), null);
 		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(3))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(4))), null);
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
@@ -291,15 +256,8 @@ public class PublicFalsehoodTest {
 		
 		System.out.println("In Test with number of falsehoods: " + localFalsehoods.size());
 		
-		int succeeded = 0;
 		
-		for(PublicFalsehood f: localFalsehoods)
-		{
-			if(f.getStatus() == 1) // 1 is approved
-				succeeded++;
-		}
-		
-		assertEquals(5, succeeded);
+		assertEquals(5, localFalsehoods.size());
 	}
 	
 	@Test
@@ -313,27 +271,27 @@ public class PublicFalsehoodTest {
 		update.getMetadata().setStatus((byte)1);
 		
 		ResponseEntity<String> resp1 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(0))), null);
 		update = falsehoods[1].clone();
 		update.getMetadata().setId(BigInteger.valueOf(6));
 		update.getMetadata().setStatus((byte)1);
 		ResponseEntity<String> resp2 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(1))), null);
 		update = falsehoods[2].clone();
 		update.getMetadata().setId(BigInteger.valueOf(7));
 		update.getMetadata().setStatus((byte)1);
 		ResponseEntity<String> resp3 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(2))), null);
 		update = falsehoods[3].clone();
 		update.getMetadata().setId(BigInteger.valueOf(8));
 		update.getMetadata().setStatus((byte)1);
 		ResponseEntity<String> resp4 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(3))), null);
 		update = falsehoods[4].clone();
 		update.getMetadata().setId(BigInteger.valueOf(9));
 		update.getMetadata().setStatus((byte)1);
 		ResponseEntity<String> resp5 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(4))), null);
 		
 		assertTrue(resp1.getStatusCode().is4xxClientError());
 		assertTrue(resp2.getStatusCode().is4xxClientError());
@@ -343,85 +301,46 @@ public class PublicFalsehoodTest {
 	}
 	
 	@Test
-	@Order(1)
+	@Order(2)
 	public void succeedReject() throws URISyntaxException
 	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
 		
-		FullPublicFalsehood update = falsehoods[0].clone();
-		update.getMetadata().setId(BigInteger.valueOf(5));
-		update.getMetadata().setStatus((byte)6);
-		
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[1].clone();
-		update.getMetadata().setId(BigInteger.valueOf(6));
-		update.getMetadata().setStatus((byte)6);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[2].clone();
-		update.getMetadata().setId(BigInteger.valueOf(7));
-		update.getMetadata().setStatus((byte)6);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[3].clone();
-		update.getMetadata().setId(BigInteger.valueOf(8));
-		update.getMetadata().setStatus((byte)6);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
-		update = falsehoods[4].clone();
-		update.getMetadata().setId(BigInteger.valueOf(9));
-		update.getMetadata().setStatus((byte)6);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(update));
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(5))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(6))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(7))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(8))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(9))), null);
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null,null));
+		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null,null, null, null, null, 20, null,null, null,null));
 		
-		int succeeded = 0;
 		
-		for(PublicFalsehood f: localFalsehoods)
-		{
-			if(f.getStatus() == 6) // 6 is rejected
-				succeeded++;
-		}
-		
-		assertEquals(5, succeeded);
+		assertEquals(5, localFalsehoods.size());
 	}
 	
 	@Test
-	@Order(1)
+	@Order(2)
 	public void failReject() throws URISyntaxException
 	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
 		
-		FullPublicFalsehood update = falsehoods[0].clone();
-		update.getMetadata().setId(BigInteger.valueOf(0));
-		update.getMetadata().setStatus((byte)6);
-		
-		ResponseEntity<String> resp1 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
-		update = falsehoods[1].clone();
-		update.getMetadata().setId(BigInteger.valueOf(1));
-		update.getMetadata().setStatus((byte)6);
-		ResponseEntity<String> resp2 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
-		update = falsehoods[2].clone();
-		update.getMetadata().setId(BigInteger.valueOf(2));
-		update.getMetadata().setStatus((byte)6);
-		ResponseEntity<String> resp3 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
-		update = falsehoods[3].clone();
-		update.getMetadata().setId(BigInteger.valueOf(3));
-		update.getMetadata().setStatus((byte)6);
-		ResponseEntity<String> resp4 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
-		update = falsehoods[4].clone();
-		update.getMetadata().setId(BigInteger.valueOf(4));
-		update.getMetadata().setStatus((byte)6);
-		ResponseEntity<String> resp5 = afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(update));
+		ResponseEntity<String> resp1 = afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(5))), null);
+		ResponseEntity<String> resp2 = afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(6))), null);
+		ResponseEntity<String> resp3 = afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(7))), null);
+		ResponseEntity<String> resp4 = afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(8))), null);
+		ResponseEntity<String> resp5 = afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(new VerdictSubmission("", BigInteger.valueOf(9))), null);
 		
 		assertTrue(resp1.getStatusCode().is4xxClientError());
 		assertTrue(resp2.getStatusCode().is4xxClientError());

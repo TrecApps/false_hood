@@ -53,6 +53,7 @@ public class SearchPublicFalsehood
     PublicFigure official;
 
     public SearchPublicFalsehood() {
+    	numberOfEntries = 20;
     }
 
     public SearchPublicFalsehood(String terms, Date to, Date from,

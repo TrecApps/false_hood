@@ -138,7 +138,7 @@ public class SearchFalsehood
 
 	public SearchFalsehood() {
 		super();
-		// TODO Auto-generated constructor stub
+		numberOfEntries = 20;
 	}
 
 	/**

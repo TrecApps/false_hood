@@ -83,7 +83,7 @@ public class FalsehoodApp {
 		userService = new FalsehoodUserService(UserTokens.testKey, userRepo, true);
 		publicFigureService = new PublicFigureService(userService, new PublicFigureRepository(), storageHolder);
 		attService = new PublicAttributeService(storageHolder, new RegionRepository(), new InstitutionRepository(), userService);
-		publicFalsehoodService = new PublicFalsehoodService(storageHolder, pfRepo);
+		publicFalsehoodService = new PublicFalsehoodService(storageHolder, pfRepo, userService);
 		keyService = new KeywordService(new PublicKeywordsRepository(), new KeywordRepository());
 		outletService = new MediaOutletService(new MediaOutletRepository(), storageHolder, userService);
 		

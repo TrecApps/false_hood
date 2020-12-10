@@ -26,8 +26,8 @@ public class FalsehoodRepository implements FalsehoodRepo
 
         int start = number * size;
 
-        int end = start + number;
-        return f.subList(start, end);
+        int end = start + size;
+        return end < f.size() ? f.subList(start, end) : f;
     }
     
    
@@ -378,8 +378,8 @@ public class FalsehoodRepository implements FalsehoodRepo
 			if(stat > 1 && stat < 5 && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
-		
-		return cullList(p, ret);
+		ret = cullList(p,ret);
+		return ret;
 	}
 
 	@Override

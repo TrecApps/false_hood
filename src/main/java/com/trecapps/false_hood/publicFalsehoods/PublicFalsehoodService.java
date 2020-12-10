@@ -1,9 +1,17 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
+import com.trecapps.false_hood.falsehoods.Falsehood;
+import com.trecapps.false_hood.json.VerdictListObj;
+import com.trecapps.false_hood.json.VerdictObj;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
+import com.trecapps.false_hood.users.FalsehoodUser;
+import com.trecapps.false_hood.users.FalsehoodUserService;
+
 import org.springframework.stereotype.Service;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,20 +21,95 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class PublicFalsehoodService {
 
+	public static final int MIN_CREDIT_APPROVE_REJECT = 60;
     PublicFalsehoodRepo pfRepo;
 
     FalsehoodStorageHolder s3BucketManager;
 
+    FalsehoodUserService uServe;
+    
     @Autowired
     public PublicFalsehoodService(@Autowired FalsehoodStorageHolder s3BucketManager,
-                                  @Autowired PublicFalsehoodRepo pfRepo)
+                                  @Autowired PublicFalsehoodRepo pfRepo,
+                                  @Autowired FalsehoodUserService uServe)
     {
         this.pfRepo = pfRepo;
         this.s3BucketManager = s3BucketManager;
+        this.uServe = uServe;
     }
+    
+	public String addVerdict(BigInteger id, boolean approve, String comment, FalsehoodUser user, HttpServletRequest ip)
+	{
+		if(user.getCredit() < MIN_CREDIT_APPROVE_REJECT)
+			return "Not Enough Credit";
+
+		if(!pfRepo.existsById(id))
+			return "Falsehood Doesn't exist";
+
+		PublicFalsehood f = pfRepo.getOne(id);
+		if(f.getStatus() != FalsehoodStatus.SUBMITTED.GetValue())
+			return "Cannot cast Verdict on established Public Falsehood! File an Appeal to update the status";
+
+		JSONObject verdictJson = null;
+		VerdictListObj verdicts = new VerdictListObj();
+		try {
+			verdictJson = s3BucketManager.getJSONObj("publicFalsehood-" + f.getId());
+			verdicts.initializeFromJson(verdictJson);
+
+			List<VerdictObj> verdictList = verdicts.getVerdicts();
+
+			for(int rust = 0; rust < verdictList.size(); rust++)
+			{
+				if(verdictList.get(rust).getUserId() == user.getUserId())
+				{
+					verdictList.remove(rust);
+					break;
+				}
+			}
+			verdicts.setVerdicts(verdictList);
+		} catch(Exception e)
+		{
+
+		}
+
+		verdicts.setApproversAvailable(uServe.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
+
+		VerdictObj newVerdict = new VerdictObj(approve, user.getUserId(),
+				new Date(Calendar.getInstance().getTime().getTime()), comment, null);
+
+		newVerdict.setIpAddress(ip);
+
+		List<VerdictObj> verdictList = verdicts.getVerdicts();
+		verdictList.add(newVerdict);
+		verdicts.setVerdicts(verdictList);
+
+		verdictJson = verdicts.toJsonObject();
+
+		if(!"Success".equals(s3BucketManager.addJsonFile("publicFalsehood-" + f.getId(), verdictJson)))
+		{
+			return "failed to Write Verdict to storage!";
+		}
+
+		if(verdicts.isApproved())
+		{
+			f.setStatus(FalsehoodStatus.VERIFIED.GetValue());
+			pfRepo.save(f);
+		}
+		else if(verdicts.isRejected())
+		{
+			System.out.println("Rejecting Public Falsehood!");
+			f.setStatus(FalsehoodStatus.REJECTED.GetValue());
+			pfRepo.save(f);
+		}
+
+
+		return "";
+	}
     
     
     public List<PublicFalsehood> searchConfirmedFalsehoodsByAttribte(SearchPublicFalsehood search)
@@ -37,11 +120,17 @@ public class PublicFalsehoodService {
     	PublicFigure official = search.getOfficial();
     	Date begin = search.getFrom();
     	Date end = search.getTo();
+		if(end == null && begin != null)
+			end = new Date(Calendar.getInstance().getTime().getTime());
+		
     	
     	Severity minSev = search.getMinimum();
     	Severity maxSev = search.getMaximum();
     	
     	Pageable p = PageRequest.of(search.getPage(), search.getNumberOfEntries() == 0 ? 1 : search.getNumberOfEntries());
+    	
+
+		System.out.println("In Public Service Search, page generted is " + p);
     	
     	if(begin != null && end != null)
     	{
@@ -337,7 +426,7 @@ public class PublicFalsehoodService {
     				else if(inst != null)
     					return pfRepo.getConfirmedFalsehoodsByInstitution(p, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBefore(p, end);
+    					return pfRepo.getConfirmedFalsehoods(p);
     			}
     			else
     			{
@@ -363,7 +452,10 @@ public class PublicFalsehoodService {
     	PublicFigure official = search.getOfficial();
     	Date begin = search.getFrom();
     	Date end = search.getTo();
-    	
+
+		if(end == null && begin != null)
+			end = new Date(Calendar.getInstance().getTime().getTime());
+		
     	Severity minSev = search.getMinimum();
     	Severity maxSev = search.getMaximum();
     	
@@ -663,7 +755,7 @@ public class PublicFalsehoodService {
     				else if(inst != null)
     					return pfRepo.getRejectedFalsehoodsByInstitution(p, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBefore(p, end);
+    					return pfRepo.getRejectedFalsehoods(p);
     			}
     			else
     			{
