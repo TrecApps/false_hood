@@ -32,7 +32,7 @@ public class MediaOutlet implements Comparable<MediaOutlet>{
 	@Column
 	String name;
 	
-	@Column
+	@Column(nullable=false, columnDefinition = "tinyint default 0")
 	byte approved;
 	
 	@ManyToOne

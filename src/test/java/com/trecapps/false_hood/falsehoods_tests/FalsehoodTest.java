@@ -181,6 +181,165 @@ public class FalsehoodTest {
 		assertEquals(3, f.size());
 	}
 	
+	@Test
+	@Order(2)
+	public void searchByDatesAndSeverity()
+	{
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		
+		SearchFalsehood search = new SearchFalsehood();
+		
+		// Start with Minimum
+		search.setMinimum(Severity.OBJECTOVE_FALSEHOOD);
+		search.setFrom(new Date(DATE_2010));
+		
+		List<Falsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setTo(new Date(DATE_2014 - 100));
+		
+		f = fController.searchFalsehoodByParams(search);
+		
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setTo(new Date(DATE_2014 + 100));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setFrom(null);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Blank Slate for Maximum Severity
+		search = new SearchFalsehood();
+		
+		search.setMaximum(Severity.MISLEADING);
+		search.setTo(new Date(DATE_2020 -100));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		search.setFrom(new Date(DATE_2014 + 200));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		// Blank Slate for minimum and maximum severity
+		search = new SearchFalsehood();
+		
+		search.setMaximum(Severity.MISLEADING);
+		search.setMinimum(Severity.SUBJECTIVE_FALSEHOOD);
+		
+		search.setTo(new Date(DATE_2017));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		search.setFrom(new Date(DATE_2014 + 200));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+	}
+	
+	@Test
+	@Order(2)
+	public void searchByDatesFigureAndSeverity()
+	{
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		
+		SearchFalsehood search = new SearchFalsehood();
+		
+		// Start with Minimum
+		search.setAuthor(figures.get(0));
+		search.setMinimum(Severity.OBJECTOVE_FALSEHOOD);
+		search.setFrom(new Date(DATE_2010));
+		
+		List<Falsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setTo(new Date(DATE_2014 - 100));
+		
+		f = fController.searchFalsehoodByParams(search);
+		
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setTo(new Date(DATE_2014 + 100));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setFrom(null);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		// Blank Slate for Maximum Severity
+		search = new SearchFalsehood();
+		search.setAuthor(figures.get(0));
+		
+		search.setMaximum(Severity.MISLEADING);
+		search.setTo(new Date(DATE_2020 -100));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setFrom(new Date(DATE_2014 + 200));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		// Blank Slate for minimum and maximum severity
+		search = new SearchFalsehood();
+		search.setAuthor(figures.get(0));
+		
+		search.setMaximum(Severity.MISLEADING);
+		search.setMinimum(Severity.SUBJECTIVE_FALSEHOOD);
+		
+		search.setTo(new Date(DATE_2017));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		search.setFrom(new Date(DATE_2014 + 200));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+	}
+	
 	public static void initializeOutlets(FalsehoodApp app) throws URISyntaxException
 	{
 		MediaOutletService outletService = app.getOutletService();

@@ -21,7 +21,7 @@ public class Institution implements Comparable<Institution>{
 	@Column
 	String name;
 	
-	@Column
+	@Column(nullable=false, columnDefinition = "tinyint default 0")
 	byte approved;
 	
 	@ManyToOne

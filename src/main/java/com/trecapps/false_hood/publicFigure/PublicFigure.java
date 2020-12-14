@@ -34,7 +34,7 @@ public class PublicFigure implements Comparable<PublicFigure>
 	@Column
 	String lastName;
 	
-	@Column
+	@Column(nullable=false, columnDefinition = "tinyint default 0")
 	byte approved;
 	
 	@ManyToOne

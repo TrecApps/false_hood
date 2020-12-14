@@ -22,7 +22,7 @@ public class Region implements Comparable<Region> {
 	@Column
 	String name;
 	
-	@Column
+	@Column(nullable=false, columnDefinition = "tinyint default 0")
 	byte approved;
 	
 	@ManyToOne
