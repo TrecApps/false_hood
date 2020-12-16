@@ -8,7 +8,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -21,6 +24,7 @@ import com.trecapps.false_hood.test_obj.UserTokens;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 
+@TestMethodOrder(OrderAnnotation.class)
 public class InstitutionTest {
 	static FalsehoodApp sharedApp;
 	
@@ -44,6 +48,48 @@ public class InstitutionTest {
 		initializePublicFigures(sharedApp);
 	}
 	
+	@Test
+	@Order(2)
+	public void upgradeUser3()
+	{
+		FalsehoodUserService userService = sharedApp.getUserService();
+		FalsehoodUser user = userService.getUserFromToken(UserTokens.userToken3);
+		userService.adjustCredibility(user, 200);
+		
+		user = userService.getUserFromToken(UserTokens.userToken1);
+		userService.adjustCredibility(user, 130);
+		
+		assertEquals(2, userService.getUserCountAboveCredibility(200));
+	}
+	
+	@Test
+	@Order(3)
+	public void failApproveReject() throws URISyntaxException
+	{
+		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
+		
+		ResponseEntity<String> resp = apfController.approveInstitution(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(0L));
+		assertTrue(resp.getStatusCode().is4xxClientError());
+		
+		resp = apfController.rejectInstitution(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(Long.getLong("0")));
+		assertTrue(resp.getStatusCode().is4xxClientError());
+	}
+	
+	@Test
+	@Order(3)
+	public void succeedApproveReject() throws URISyntaxException
+	{
+		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
+		
+		ResponseEntity<String> resp = apfController.approveInstitution(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(1L));
+		System.out.println("SucceedApproveReject: " + resp.getBody());
+		assertTrue(resp.getStatusCode().is2xxSuccessful());
+		
+		resp = apfController.rejectInstitution(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(2L));
+		System.out.println("SucceedApproveReject: " + resp.getBody());
+		assertTrue(resp.getStatusCode().is2xxSuccessful());
+	}
+	
 	public static void initializePublicFigures(FalsehoodApp app) throws URISyntaxException
 	{
 		if(intEntries[0] == null)
@@ -64,6 +110,7 @@ public class InstitutionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void getInstitution()
 	{
 		PublicAttributeService attService = sharedApp.getAttService();
@@ -77,6 +124,7 @@ public class InstitutionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void failAddInvalid()throws URISyntaxException
 	{
 		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
@@ -86,6 +134,7 @@ public class InstitutionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void failAddNotCredible()throws URISyntaxException
 	{
 		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
@@ -95,6 +144,7 @@ public class InstitutionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void succeedAdd()throws URISyntaxException
 	{
 		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
@@ -104,6 +154,7 @@ public class InstitutionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void update()
 	{
 		PublicAttributeService attService = sharedApp.getAttService();
