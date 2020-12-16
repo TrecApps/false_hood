@@ -188,7 +188,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 		if(ret != null)
 			return ret;
 		
-		String response = attService.approveRejectRegion(entry.getBody(), true);
+		String response = attService.approveRejectRegion(entry.getBody(), true, user);
 		
 		if("".equals(response))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
@@ -206,7 +206,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 		if(ret != null)
 			return ret;
 		
-		String response = attService.approveRejectRegion(entry.getBody(), false);
+		String response = attService.approveRejectRegion(entry.getBody(), false, user);
 		
 		if("".equals(response))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
@@ -224,7 +224,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 		if(ret != null)
 			return ret;
 		
-		String response = attService.approveRejectInstitution(entry.getBody(), true);
+		String response = attService.approveRejectInstitution(entry.getBody(), true, user);
 		
 		if("".equals(response))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
@@ -242,7 +242,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 		if(ret != null)
 			return ret;
 		
-		String response = attService.approveRejectInstitution(entry.getBody(), false);
+		String response = attService.approveRejectInstitution(entry.getBody(), false, user);
 		
 		if("".equals(response))
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);

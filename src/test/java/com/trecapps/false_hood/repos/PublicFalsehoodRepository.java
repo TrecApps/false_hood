@@ -2988,6 +2988,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
+		
 		for(PublicFalsehood pf: appeals)
 		{
 			byte sev = pf.getSeverity();

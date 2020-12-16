@@ -54,7 +54,7 @@ public class PublicAttributeService {
 	}
 	
 	
-	public String approveRejectRegion(Long id, boolean approve)
+	public String approveRejectRegion(Long id, boolean approve, FalsehoodUser curUser)
 	{
 		if(id == null)
 		{
@@ -67,7 +67,11 @@ public class PublicAttributeService {
 		}
 		
 		Region reg = rRepo.getOne(id);
-		
+		FalsehoodUser fUser = reg.getSubmitter();
+		if(fUser.equals(curUser))
+		{
+			return "User that Submitted the Region cannot be the same one that Approves of it!";
+		}
 		
 		byte setApproval = (byte) (reg.getApproved() + (byte)((approve) ? 1:-1));
 		
@@ -75,7 +79,7 @@ public class PublicAttributeService {
 		
 		rRepo.save(reg);
 		
-		FalsehoodUser fUser = reg.getSubmitter();
+		
 		
 		if(fUser != null)
 		{
@@ -86,7 +90,7 @@ public class PublicAttributeService {
 		return "";
 	}
 	
-	public String approveRejectInstitution(Long id, boolean approve)
+	public String approveRejectInstitution(Long id, boolean approve, FalsehoodUser curUser)
 	{
 		if(id == null)
 		{
@@ -99,15 +103,18 @@ public class PublicAttributeService {
 		}
 		
 		Institution inst = iRepo.getOne(id);
-		
-		
+		FalsehoodUser fUser = inst.getSubmitter();
+		if(fUser.equals(curUser))
+		{
+			return "User that Submitted the Institution cannot be the same one that Approves of it!";
+		}
 		byte setApproval = (byte) (inst.getApproved() + (byte)((approve) ? 1:-1));
 		
 		inst.setApproved(setApproval);
 		
 		iRepo.save(inst);
 		
-		FalsehoodUser fUser = inst.getSubmitter();
+		
 		
 		if(fUser != null)
 		{

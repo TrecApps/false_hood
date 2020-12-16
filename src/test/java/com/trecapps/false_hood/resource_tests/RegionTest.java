@@ -8,6 +8,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,15 @@ public class RegionTest {
 		initializePublicFigures(sharedApp);
 	}
 	
+	@Test
+	@Order(2)
+	public void upgradeUser3()
+	{
+		FalsehoodUserService userService = sharedApp.getUserService();
+		FalsehoodUser user3 = userService.getUserFromToken(UserTokens.userToken3);
+		userService.adjustCredibility(user3, 200);
+	}
+	
 	public static void initializePublicFigures(FalsehoodApp app) throws URISyntaxException
 	{
 		if(regEntries[0] == null)
@@ -65,6 +75,7 @@ public class RegionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void getRegion()
 	{
 		PublicAttributeService attService = sharedApp.getAttService();
@@ -78,6 +89,7 @@ public class RegionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void failAddInvalid()throws URISyntaxException
 	{
 		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
@@ -87,6 +99,7 @@ public class RegionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void failAddNotCredible()throws URISyntaxException
 	{
 		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
@@ -96,6 +109,7 @@ public class RegionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void succeedAdd()throws URISyntaxException
 	{
 		AuthPublicFalsehoodController apfController = sharedApp.getAuthPFalsehoodController();
@@ -105,6 +119,7 @@ public class RegionTest {
 	}
 	
 	@Test
+	@Order(1)
 	public void update()
 	{
 		PublicAttributeService attService = sharedApp.getAttService();
