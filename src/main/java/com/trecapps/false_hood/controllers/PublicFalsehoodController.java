@@ -1,18 +1,12 @@
 package com.trecapps.false_hood.controllers;
 
-import com.trecapps.false_hood.falsehoods.Falsehood;
-import com.trecapps.false_hood.falsehoods.SearchFalsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
-import com.trecapps.false_hood.miscellanous.Severity;
 import com.trecapps.false_hood.publicFalsehoods.*;
-import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.sql.Date;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/PublicFalsehood")

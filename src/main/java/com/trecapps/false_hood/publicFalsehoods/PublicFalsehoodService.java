@@ -1,6 +1,5 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
-import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.json.VerdictListObj;
 import com.trecapps.false_hood.json.VerdictObj;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
@@ -774,35 +773,6 @@ public class PublicFalsehoodService {
     }
     
 
-    public List<PublicFalsehood> getFalseHoodByMinimumSeverity(byte severity)
-    {
-        return pfRepo.getFalsehoodsByMinimumSeverity(severity);
-    }
-
-    public List<PublicFalsehood> getFalseHoodByMaximumSeverity(byte severity)
-    {
-        return pfRepo.getFalsehoodsByMaximumSeverity(severity);
-    }
-
-    public List<PublicFalsehood> getFalsehoodBySeverityRange(byte min, byte max)
-    {
-        return pfRepo.getFalsehoodBySeverity(max, min);
-    }
-
-    public List<PublicFalsehood> getFalsehoodByDateRange(Date oldest)
-    {
-        return getFalsehoodByDateRange(oldest, new Date(Calendar.getInstance().getTime().getTime()));
-    }
-
-    public List<PublicFalsehood> getFalsehoodByDateRange(Date oldest, Date newest)
-    {
-        return pfRepo.getFalsehoodsBetween(oldest, newest);
-    }
-    public List<PublicFalsehood> getFalsehoodsBefore(Date newest)
-    {
-        return pfRepo.getFalsehoodsBefore(newest);
-    }
-
     public PublicFalsehood getFalsehoodById(BigInteger id)
     {
         return pfRepo.getOne(id);
@@ -831,16 +801,6 @@ public class PublicFalsehoodService {
 
         return "Success".equals(s3BucketManager.addNewFile(objectId, contents));
 
-    }
-
-    public List<PublicFalsehood> getFalsehoodsByRegion(Region r)
-    {
-        return pfRepo.getFalsehoodsByRegion(r);
-    }
-
-    public List<PublicFalsehood> getFalsehoodsByInstitution(Institution i)
-    {
-        return pfRepo.getFalsehoodsByInstitution(i);
     }
 
     public boolean appendEntryToStorage(String contents, PublicFalsehood f)

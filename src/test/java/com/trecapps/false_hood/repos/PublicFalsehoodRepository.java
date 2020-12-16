@@ -406,7 +406,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -423,7 +423,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if(status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -441,7 +441,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if(status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -459,7 +459,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if(status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -555,7 +555,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -574,7 +574,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -593,7 +593,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -612,7 +612,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution())
+					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -707,7 +708,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -726,7 +727,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -745,7 +746,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -763,7 +764,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -859,7 +860,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -878,7 +879,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -897,7 +898,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -915,7 +916,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1012,7 +1013,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5	&& d.getTime() <= end.getTime())
+			if(status > 1 && status < 5	&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1029,7 +1030,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5
+			if(status > 1 && status < 5 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1047,7 +1048,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5
+			if(status > 1 && status < 5 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1065,7 +1066,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5
+			if(status > 1 && status < 5 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1161,7 +1162,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1179,7 +1180,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1198,7 +1199,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1217,7 +1218,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1312,7 +1313,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime())
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1330,7 +1331,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion())
+					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1348,7 +1350,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity
+			if(status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1367,7 +1369,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity
+			if(status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1461,7 +1463,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() <= end.getTime())
+			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1479,7 +1481,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity
+			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1498,7 +1500,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity
+			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1517,7 +1519,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity
+			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1610,7 +1612,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && r.equals(pf.getRegion()))
+			if(status > 1 && status < 5 && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1626,7 +1628,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1642,7 +1644,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1727,7 +1729,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity)
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1744,7 +1746,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()))
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+					 && official.equals(pf.getOfficial()) && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -1761,7 +1764,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1778,7 +1782,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1863,7 +1868,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity)
+			if(status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1880,7 +1885,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()))
+			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion())
+					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1897,7 +1903,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && sev <= minSeverity && i.equals(pf.getInstitution())
+					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1914,7 +1921,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()) 
+					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -2000,7 +2008,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity)
+			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2017,7 +2025,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()))
+			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2034,7 +2042,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && sev >= maxSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2051,7 +2059,8 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion())
+					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -2163,7 +2172,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -2181,7 +2190,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2199,7 +2208,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2217,7 +2226,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2313,7 +2322,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2332,7 +2341,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2351,7 +2360,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
+					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2369,7 +2378,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2465,7 +2474,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2483,7 +2492,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2502,7 +2511,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2521,7 +2530,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2617,7 +2626,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2636,7 +2645,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2654,7 +2663,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2673,7 +2682,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2770,7 +2779,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4	&& d.getTime() <= end.getTime())
+			if(status > 4	&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2787,7 +2796,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4
+			if(status > 4 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2805,7 +2814,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4
+			if(status > 4 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2823,7 +2832,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4
+			if(status > 4 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2919,7 +2928,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
-					&& d.getTime() <= end.getTime())
+					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2937,7 +2946,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2956,7 +2965,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2975,7 +2984,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3071,7 +3080,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() <= end.getTime())
+			if(status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3089,7 +3098,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+			if(status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3107,7 +3116,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity
+			if(status > 4 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3126,7 +3135,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity
+			if(status > 4 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3220,7 +3229,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() <= end.getTime())
+			if(status > 4 && sev >= maxSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3239,7 +3248,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			
 			Date d = pf.getDateMade();
 			if(status > 4 && sev >= maxSeverity
-					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3257,7 +3266,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity
+			if(status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3276,7 +3285,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity
+			if(status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3369,7 +3378,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && r.equals(pf.getRegion()))
+			if(status > 4 && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3385,7 +3394,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && i.equals(pf.getInstitution()))
+			if(status > 4 && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3401,7 +3410,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if(status > 4 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3486,7 +3495,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity)
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3503,7 +3512,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()))
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3520,7 +3529,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3537,7 +3546,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3622,7 +3631,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity)
+			if(status > 4 && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3639,7 +3648,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()))
+			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3656,7 +3665,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if(status > 4 && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3673,7 +3682,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3759,7 +3768,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity)
+			if(status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3776,7 +3785,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()))
+			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3793,7 +3802,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && i.equals(pf.getInstitution()))
+			if(status > 4 && sev >= maxSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3810,7 +3819,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
