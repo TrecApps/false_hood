@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.trecapps.false_hood.controllers.AuthFalsehoodController;
 import com.trecapps.false_hood.controllers.AuthPublicFalsehoodController;
+import com.trecapps.false_hood.controllers.PublicFalsehoodController;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
 import com.trecapps.false_hood.publicFalsehoods.Region;
 import com.trecapps.false_hood.publicFalsehoods.RegionEntry;
@@ -108,6 +110,21 @@ public class RegionTest {
 		apfController.addRegion(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(regEntries[0]));
 		apfController.addRegion(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(regEntries[1]));
 		apfController.addRegion(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(regEntries[2]));
+	}
+	
+	@Test
+	@Order(4)
+	public void searchRegions()
+	{
+		PublicFalsehoodController pfController = sharedApp.getpFalsehoodController();
+		
+		List<Region> regions = pfController.getRegionsBySearchTerm("Coru");
+		assertEquals(1, regions.size());
+		assertEquals("Coruscant", regions.get(0).getName());
+		
+		RegionEntry reg = pfController.getRegionsById(1L);
+		assertNotNull(reg);
+		assertEquals(1L,reg.getRegion().getId());
 	}
 	
 	@Test

@@ -200,7 +200,13 @@ public class RegionRepository implements RegionRepo
 
 	@Override
 	public List<Region> getLikeName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Region> regions = new ArrayList<>();
+		for(Region reg: appeals)
+		{
+			if(reg.getName().indexOf(name) != -1)
+				regions.add(reg);
+		}
+		
+		return regions;
 	}
 }

@@ -2,6 +2,7 @@ package com.trecapps.false_hood.repos;
 
 import com.trecapps.false_hood.publicFalsehoods.Institution;
 import com.trecapps.false_hood.publicFalsehoods.InstitutionRepo;
+import com.trecapps.false_hood.publicFalsehoods.Region;
 import com.trecapps.false_hood.users.FalsehoodUser;
 
 import org.springframework.data.domain.Example;
@@ -200,7 +201,15 @@ public class InstitutionRepository implements InstitutionRepo
 
 	@Override
 	public List<Institution> getLikeName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Institution> inst = new ArrayList<>();
+		for(Institution ins: appeals)
+		{
+			if(ins.getName().indexOf(name) != -1)
+				inst.add(ins);
+		}
+			
+		return inst;
+		
 	}
 }
