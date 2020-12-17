@@ -154,7 +154,7 @@ public class PublicFalsehoodTest {
 		
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(6, f.size());
-		f = fController.searchFalsehoodByParams(search);
+		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(6, f.size());
 	}
 	
@@ -547,6 +547,12 @@ public class PublicFalsehoodTest {
 		
 		// Region
 		search.setRegion(regions.get(1));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
 		
 		// Region, Before
 		search.setTo(new Date(DATE_2020));
@@ -763,6 +769,12 @@ public class PublicFalsehoodTest {
 		search.setRegion(regions.get(1));
 
 		search.setInstitution(institutions.get(2));
+		
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
 		
 		// Region, Before
 		search.setTo(new Date(DATE_2020));

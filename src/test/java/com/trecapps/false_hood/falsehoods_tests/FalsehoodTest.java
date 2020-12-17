@@ -43,7 +43,7 @@ public class FalsehoodTest {
 
 	static FalsehoodApp sharedApp;
 	
-	static FullFalsehood falsehoods[] = new FullFalsehood[5];
+	static FullFalsehood falsehoods[] = new FullFalsehood[10];
 	
 	static ArrayList<String> outlets = new ArrayList<>();
 	
@@ -499,6 +499,179 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 	}
 	
+	@Test
+	@Order(3)
+	public void succeedApprove2() throws URISyntaxException
+	{
+		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
+		
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(10))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(11))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(12))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(13))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(14))), null);
+		
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		
+		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, null, 0, 20, null,null,null, null));
+		
+		int succeeded = 0;
+		
+		byte ver = FalsehoodStatus.VERIFIED.GetValue();
+		
+		for(Falsehood f: localFalsehoods)
+		{
+			if(f.getStatus() == ver) // 
+				succeeded++;
+		}
+		assertEquals(10, succeeded);
+	}
+	
+	@Test
+	@Order(3)
+	public void succeedReject2() throws URISyntaxException
+	{
+		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
+		
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(15))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(16))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(17))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(18))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(19))), null);
+		
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		
+		List<Falsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchFalsehood(null,null, null, outlets, null, 0, 20, null,null,null, null));
+		
+		int succeeded = 0;
+		
+		for(Falsehood f: localFalsehoods)
+		{
+			if(f.getStatus() > 4) // 6 is rejected
+				succeeded++;
+		}
+		
+		assertEquals(10, succeeded);
+	}
+	
+	@Test
+	@Order(4)
+	public void searchByOutletAndFigure()
+	{
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		
+		SearchFalsehood search = new SearchFalsehood();
+		
+		// First do the most basic search specified by this mehtod's purpose
+		search.setOutlet(rOutlets.get(0));
+		search.setAuthor(figures.get(0));
+		
+		List<Falsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// By Max Severity
+		search.setMaximum(Severity.HYPOCRISY);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		
+		// By Severity
+		search.setMinimum(Severity.FAULTY_LOGIC);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		
+		// By Min Severity
+		search.setMaximum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Start Before
+		search.setTo(new Date(DATE_2020));
+		search.setMinimum(null);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Before, Min Severity
+		search.setMinimum(Severity.FAULTY_LOGIC);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Before, Severity
+		search.setMaximum(Severity.HYPOCRISY);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		
+		// Before, Max Severity
+		search.setMinimum(null);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		
+		// Between
+		search.setFrom(new Date(DATE_2010));
+		search.setMaximum(null);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Before, Min Severity
+		search.setMinimum(Severity.FAULTY_LOGIC);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Before, Severity
+		search.setMaximum(Severity.HYPOCRISY);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		
+		// Before, Max Severity
+		search.setMinimum(null);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+	}
+	
 	public static void initializeOutlets(FalsehoodApp app) throws URISyntaxException
 	{
 		MediaOutletService outletService = app.getOutletService();
@@ -549,6 +722,38 @@ public class FalsehoodTest {
 					"Loki;;Sif;;Serena");
 		}
 		
+		
+		if(falsehoods[5] == null)
+		{
+			falsehoods[5] = new FullFalsehood("The first Falsehood Detected", // Wed Nov 17 2010 06:20:00
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2017),""),
+					"Vader;;Palpatine;;Empire");
+		}
+		if(falsehoods[6] == null)
+		{
+			falsehoods[6] = new FullFalsehood("The Second Falsehood Detected", // Fri Oct 13 2017 07:06:40
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2014),""),
+					"Vader;;Voldemort;;Thanos");
+		}
+		if(falsehoods[7] == null)
+		{
+			falsehoods[7] = new FullFalsehood("The Third Falsehood Detected", // Tue Jun 17 2014 04:13:20
+					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2010),""),
+					"Voldemort;;Dumbledore;;Ministry");
+		}
+		if(falsehoods[8] == null)
+		{
+			falsehoods[8] = new FullFalsehood("The Fourth Falsehood Detected", // Sat Oct 17 2020 23:46:40
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2008),""),
+					"Thanos;;Ironman;;Thor;;Serena");
+		}
+		if(falsehoods[9] == null)
+		{
+			falsehoods[9] = new FullFalsehood("The Fifth Falsehood Detected", // Mon May 05 2008 09:06:40
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2020),""),
+					"Loki;;Sif;;Serena");
+		}
+		
 		AuthFalsehoodController afController = app.getAuthFalsehoodController();
 		
 		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[0].clone()), null);
@@ -561,6 +766,17 @@ public class FalsehoodTest {
 		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[2].clone()), null);
 		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[3].clone()), null);
 		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[4].clone()), null);
+		
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[5].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[6].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[7].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[8].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[9].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[5].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[6].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[7].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[8].clone()), null);
+		afController.insertFalsehood(RequestEntity.post(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(falsehoods[9].clone()), null);
 	}
 	
 	@Test
