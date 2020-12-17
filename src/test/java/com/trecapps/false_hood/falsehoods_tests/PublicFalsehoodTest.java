@@ -641,6 +641,222 @@ public class PublicFalsehoodTest {
 	
 	@Test
 	@Order(3)
+	public void searchByRegionsInstitutions()
+	{
+		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
+		
+		
+		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		
+		// Region And Public Figure
+		search.setRegion(regions.get(1));
+		search.setInstitution(institutions.get(2));
+		search.setOfficial(figures.get(0));
+		
+		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
+		search.setOfficial(figures.get(1));
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		
+		// Region, Public FIgure, Before
+		search.setOfficial(figures.get(0));
+		search.setTo(new Date(DATE_2020));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
+		// Region, Public Figure, Between
+		search.setFrom(new Date(DATE_2014));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Public Figure, Min Severity
+		search.setFrom(null);
+		search.setTo(null);
+		search.setMinimum(Severity.FAULTY_LOGIC);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
+		// Region, Public Figure, Severity
+		search.setMaximum(Severity.MISLEADING);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Public Figure, Max Severity
+		search.setMinimum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Public Figure, Before, Max Severity
+		search.setTo(new Date(DATE_2020));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Public Figure, Before, Severity
+		search.setMinimum(Severity.FAULTY_LOGIC);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Public Figure, Before, Min Severity
+		search.setMaximum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+	
+		// Region, Public Figure, Between, Min Severity
+		search.setFrom(new Date(DATE_2010));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(3, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(3, f.size());
+		
+		// Region, Public Figure, Between, Severity
+		search.setMaximum(Severity.MISLEADING);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		// Region, Public Figure, Between, Max Severity
+		search.setMinimum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		///////// No Public FIgure now //////////////////
+		search = new SearchPublicFalsehood();
+		
+		// Region
+		search.setRegion(regions.get(1));
+
+		search.setInstitution(institutions.get(2));
+		
+		// Region, Before
+		search.setTo(new Date(DATE_2020));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
+		// Region, Between
+		search.setFrom(new Date(DATE_2014));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Min Severity
+		search.setFrom(null);
+		search.setTo(null);
+		search.setMinimum(Severity.FAULTY_LOGIC);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		
+		// Region, Severity
+		search.setMaximum(Severity.MISLEADING);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Max Severity
+		search.setMinimum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Before, Max Severity
+		search.setTo(new Date(DATE_2020));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Before, Severity
+		search.setMinimum(Severity.FAULTY_LOGIC);
+		
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		
+		// Region, Before, Min Severity
+		search.setMaximum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(4, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(4, f.size());
+	
+		// Region, Between, Min Severity
+		search.setFrom(new Date(DATE_2010));
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(3, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(3, f.size());
+		
+		// Region, Between, Severity
+		search.setMaximum(Severity.MISLEADING);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		
+		// Region, Between, Max Severity
+		search.setMinimum(null);
+
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+	}
+	
+	@Test
+	@Order(3)
 	public void searchByInstitutionsNoRegions()
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
