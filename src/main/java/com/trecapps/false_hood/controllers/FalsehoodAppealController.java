@@ -43,13 +43,13 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	
 	
 	@GetMapping("/List")
-	ResponseEntity<List<FalsehoodAppeal>> getAppeals()
+	public ResponseEntity<List<FalsehoodAppeal>> getAppeals()
 	{
 		return new ResponseEntity<List<FalsehoodAppeal>>(appealService.getAppeals() ,HttpStatus.OK);
 	}
 	
 	@GetMapping("/entry")
-	ResponseEntity<FalsehoodAppealEntry> getAppeal(@RequestParam(required = true) BigInteger id)
+	public ResponseEntity<FalsehoodAppealEntry> getAppeal(@RequestParam(required = true) BigInteger id)
 	{
 		FalsehoodAppealEntry retEntry = appealService.getAppeal(id);
 		
@@ -63,7 +63,7 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	}
 	
 	@PostMapping(value = "/Add")
-	ResponseEntity<String> addAppeal(RequestEntity<FalsehoodAppealEntry> entry)
+	public ResponseEntity<String> addAppeal(RequestEntity<FalsehoodAppealEntry> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
@@ -84,7 +84,7 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	
 	
 	@PostMapping("/Petition")
-	ResponseEntity<String> signPetition(RequestEntity<FalsehoodAppealSignature> entry)
+	public ResponseEntity<String> signPetition(RequestEntity<FalsehoodAppealSignature> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		
@@ -108,7 +108,7 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	}
 	
 	@PutMapping(value= "/Petition", consumes="application/x-www-form-urlencoded")
-	ResponseEntity<String> verifyPetitionSignature(RequestEntity<MultiValueMap<String, String>> entry)
+	public ResponseEntity<String> verifyPetitionSignature(RequestEntity<MultiValueMap<String, String>> entry)
 	{
 		FalsehoodUser user = super.getUser(entry);
 		

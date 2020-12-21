@@ -56,6 +56,11 @@ public class FalsehoodTest {
 	static final long DATE_2020 = 1603000000000L;
 	static final long DATE_2008 = 1210000000000L;
 	
+	public static FullFalsehood GetFalsehood(int index)
+	{
+		return falsehoods[index];
+	}
+	
 	@BeforeAll
 	public static void setUpSharedApp() throws URISyntaxException
 	{
@@ -783,18 +788,7 @@ public class FalsehoodTest {
 	@Order(1)
 	public void succeedApprove() throws URISyntaxException
 	{
-		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
-		
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(0))), null);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(1))), null);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(2))), null);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(3))), null);
-		afController.approveFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(4))), null);
+		succeedApprove(sharedApp);
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
@@ -811,6 +805,22 @@ public class FalsehoodTest {
 		}
 		System.out.println("About to test 'succeedApprove', with list that has " + localFalsehoods.size() + " items in it!");
 		assertEquals(5, succeeded);
+	}
+	
+	public void succeedApprove(FalsehoodApp sharedApp)throws URISyntaxException
+	{
+		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
+		
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(0))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(1))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(2))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(3))), null);
+		afController.approveFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(4))), null);
 	}
 	
 	@Test
@@ -841,18 +851,7 @@ public class FalsehoodTest {
 	@Order(1)
 	public void succeedReject() throws URISyntaxException
 	{
-		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
-		
-		afController.rejectFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(5))), null);
-		afController.rejectFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(6))), null);
-		afController.rejectFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(7))), null);
-		afController.rejectFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(8))), null);
-		afController.rejectFalsehood(RequestEntity.post(
-				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(9))), null);
+		succeedReject(sharedApp);
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
@@ -867,6 +866,22 @@ public class FalsehoodTest {
 		}
 		
 		assertEquals(5, succeeded);
+	}
+	
+	public void succeedReject(FalsehoodApp sharedApp) throws URISyntaxException
+	{
+		AuthFalsehoodController afController = sharedApp.getAuthFalsehoodController();
+		
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(5))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(6))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(7))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(8))), null);
+		afController.rejectFalsehood(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(9))), null);
 	}
 	
 	@Test
