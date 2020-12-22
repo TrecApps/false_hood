@@ -13,7 +13,7 @@ import com.trecapps.false_hood.users.FalsehoodUser;
 
 @Entity
 @Table
-public class FalsehoodAppealSignature {
+public class FalsehoodAppealSignature implements Comparable<FalsehoodAppealSignature>{
 
 	@Id
 	BigInteger id;
@@ -125,6 +125,13 @@ public class FalsehoodAppealSignature {
 	 */
 	public void setGrantAnon(byte grantAnon) {
 		this.grantAnon = grantAnon;
+	}
+
+	@Override
+	public int compareTo(FalsehoodAppealSignature o) {
+		if(id != null)
+			return id.compareTo(o.getId());
+		return o == null ? 0 : -1;
 	}
 	
 	

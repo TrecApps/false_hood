@@ -14,6 +14,11 @@ public class FalsehoodEmailService
 	@Autowired
 	JavaMailSender mailSender;
 	
+	public FalsehoodEmailService(JavaMailSender mailSender)
+	{
+		this.mailSender = mailSender;
+	}
+	
 	public void sendValidationEmail(String to,
             String subject,
             String code, String appealId) throws MessagingException
