@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
+import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.json.VerdictListObj;
 import com.trecapps.false_hood.json.VerdictObj;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Calendar;
@@ -773,9 +775,22 @@ public class PublicFalsehoodService {
     }
     
 
-    public PublicFalsehood getFalsehoodById(BigInteger id)
+    public FullPublicFalsehood getFalsehoodById(BigInteger id)
     {
-        return pfRepo.getOne(id);
+    	if(!pfRepo.existsById(id))
+    		return null;
+        PublicFalsehood obj = pfRepo.getOne(id);
+        String contents = "";
+        try
+        {
+        	contents = s3BucketManager.retrieveContents("publicFalsehood-" + obj.getId());
+        }
+        catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return new FullPublicFalsehood(contents, obj, null);
     }
 
     public List<PublicFalsehood> getFalsehoodsByAuthor(PublicFigure author)

@@ -29,7 +29,7 @@ public class PublicFalsehoodController
     }
 
     @GetMapping("/id/{id}")
-    public PublicFalsehood GetFalsehood(@PathVariable("id") BigInteger id)
+    public FullPublicFalsehood GetFalsehood(@PathVariable("id") BigInteger id)
     {
         return service.getFalsehoodById(id);
     }

@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.falsehoods;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Calendar;
@@ -584,9 +585,21 @@ public class FalsehoodService {
 
 	
 	
-	public Falsehood getFalsehoodById(BigInteger id)
+	public FullFalsehood getFalsehoodById(BigInteger id)
 	{
-		return fRepo.getOne(id);
+		if(!fRepo.existsById(id))
+			return null;
+		
+		Falsehood obj = fRepo.getOne(id);
+		String contents = "";
+		try {
+			contents = s3BucketManager.retrieveContents(obj.getContentId());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return new FullFalsehood(contents, obj, null);
 	}
 	
 	

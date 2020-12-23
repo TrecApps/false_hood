@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FalsehoodService;
+import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.falsehoods.MediaOutlet;
 import com.trecapps.false_hood.falsehoods.MediaOutletEntry;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
@@ -59,7 +60,7 @@ public class FalsehoodController {
 	}
 	
 	@GetMapping("/id/{id}")
-	public Falsehood GetFalsehood(@PathVariable("id")BigInteger id)
+	public FullFalsehood GetFalsehood(@PathVariable("id")BigInteger id)
 	{
 		System.out.println("id endpoint hit! id = " + id);
 		return service.getFalsehoodById(id);
