@@ -49,7 +49,7 @@ public class FalsehoodAppealController extends AuthenticationControllerBase
 	}
 	
 	@GetMapping("/entry")
-	public ResponseEntity<FalsehoodAppealEntry> getAppeal(@RequestParam(required = true) BigInteger id)
+	public ResponseEntity<FalsehoodAppealEntry> getAppeal(@RequestParam(required = true, value = "id") BigInteger id)
 	{
 		FalsehoodAppealEntry retEntry = appealService.getAppeal(id);
 		

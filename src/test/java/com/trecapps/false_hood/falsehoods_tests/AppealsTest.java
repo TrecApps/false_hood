@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -22,8 +23,15 @@ import com.trecapps.false_hood.appeals.FalsehoodAppealEntry;
 import com.trecapps.false_hood.appeals.FalsehoodAppealSignature;
 import com.trecapps.false_hood.controllers.FalsehoodAppealController;
 import com.trecapps.false_hood.controllers.FalsehoodController;
+import com.trecapps.false_hood.controllers.PublicFalsehoodController;
 import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.SearchFalsehood;
+import com.trecapps.false_hood.miscellanous.Severity;
+import com.trecapps.false_hood.publicFalsehoods.Institution;
+import com.trecapps.false_hood.publicFalsehoods.PublicFalsehood;
+import com.trecapps.false_hood.publicFalsehoods.Region;
+import com.trecapps.false_hood.publicFalsehoods.SearchPublicFalsehood;
+import com.trecapps.false_hood.publicFigure.PublicFigure;
 import com.trecapps.false_hood.resource_tests.InstitutionTest;
 import com.trecapps.false_hood.resource_tests.MediaOutletTest;
 import com.trecapps.false_hood.resource_tests.PublicFigureTest;
@@ -64,7 +72,9 @@ public class AppealsTest {
 		fTest.succeedApprove(sharedApp);
 		fTest.succeedReject(sharedApp);
 		
-
+		PublicFalsehoodTest pfTest = new PublicFalsehoodTest();
+		pfTest.succeedApprove(sharedApp);
+		pfTest.succeedReject(sharedApp);
 	}
 	
 	@Test
@@ -91,6 +101,53 @@ public class AppealsTest {
 	}
 	
 	@Test
+	@Order(1)
+	public void addFaultyAppeals() throws URISyntaxException
+	{
+		FalsehoodAppealController appCont = sharedApp.getAppealController();
+		
+		// First Attempt appeal with no falsehood attached
+		
+		FalsehoodAppeal appeal = new FalsehoodAppeal(null, null, null, "Some Reason", sharedApp.getUserService().getUserFromToken(UserTokens.userToken3));
+		FalsehoodAppealEntry appealEntry = new FalsehoodAppealEntry("Testing", appeal);
+		ResponseEntity<String> resp = appCont.addAppeal(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(appealEntry));
+		
+		assertTrue(resp.getStatusCode().is4xxClientError());
+		
+		// Now Attempt appeal with both a media and a public falsehood
+		
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, null, 0, 20, null,null,null, null));
+		
+		PublicFalsehoodController pfController = sharedApp.getpFalsehoodController();
+		List<PublicFalsehood> localPubFalsehood = pfController.searchFalsehoodByParams(new SearchPublicFalsehood(null, null, null, null, null,
+				null, null, 20, 0, null, null, null));
+		
+		appeal.setFalsehood(localFalsehoods.get(0));
+		appeal.setpFalsehood(localPubFalsehood.get(0));
+		appealEntry.setAppeal(appeal);
+		
+		resp = appCont.addAppeal(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(appealEntry));
+		
+		assertTrue(resp.getStatusCode().is4xxClientError());
+	}
+	
+	@Test
+	@Order(1)
+	public void addNullAppeal() throws URISyntaxException
+	{
+		FalsehoodAppealController appCont = sharedApp.getAppealController();
+		
+		
+		ResponseEntity<String> ent = appCont.addAppeal(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(null));
+		
+		assertTrue(ent.getStatusCode().is4xxClientError());
+	}
+	
+	@Test
 	@Order(2)
 	public void petitionFirstAppeal() throws URISyntaxException
 	{
@@ -114,4 +171,20 @@ public class AppealsTest {
 		assertNotNull(sharedApp.getMessage("tormontrec@gmail.com"));
 		
 	}
+	
+	@Test
+	@Order(2)
+	public void petitionNullAppeal() throws URISyntaxException
+	{
+		FalsehoodAppealController appCont = sharedApp.getAppealController();
+		
+		
+		ResponseEntity<String> signResp = appCont.signPetition(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(null));
+		
+		assertTrue(signResp.getStatusCode().is4xxClientError());
+		
+	}
+	
+	
 }

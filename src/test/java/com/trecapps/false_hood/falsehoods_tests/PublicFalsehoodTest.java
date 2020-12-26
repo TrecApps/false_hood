@@ -1166,11 +1166,23 @@ public class PublicFalsehoodTest {
 	@Order(1)
 	public void succeedApprove() throws URISyntaxException
 	{
+		succeedApprove(sharedApp);
+		
+		
+		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
+		
+		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null));
+		
+		System.out.println("In Test with number of falsehoods: " + localFalsehoods.size());
+		
+		
+		assertEquals(10, localFalsehoods.size());
+	}
+	
+	public void succeedApprove(FalsehoodApp sharedApp) throws URISyntaxException
+	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
 		
-		FullPublicFalsehood update = falsehoods[0].clone();
-		update.getMetadata().setId(BigInteger.valueOf(0));
-		update.getMetadata().setStatus((byte)1);
 		
 		afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(0))), null);
@@ -1193,15 +1205,6 @@ public class PublicFalsehoodTest {
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(13))), null);
 		afController.approveFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("", BigInteger.valueOf(14))), null);
-		
-		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
-		
-		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null));
-		
-		System.out.println("In Test with number of falsehoods: " + localFalsehoods.size());
-		
-		
-		assertEquals(10, localFalsehoods.size());
 	}
 	
 	@Test
@@ -1248,6 +1251,18 @@ public class PublicFalsehoodTest {
 	@Order(2)
 	public void succeedReject() throws URISyntaxException
 	{
+		succeedReject(sharedApp);
+		
+		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
+		
+		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null,null, null, null, null, 20, null,null, null,null));
+		
+		
+		assertEquals(10, localFalsehoods.size());
+	}
+	
+	public void succeedReject(FalsehoodApp sharedApp) throws URISyntaxException
+	{
 		AuthPublicFalsehoodController afController = sharedApp.getAuthPFalsehoodController();
 		
 		afController.rejectFalsehood(RequestEntity.post(
@@ -1271,13 +1286,6 @@ public class PublicFalsehoodTest {
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(18))), null);
 		afController.rejectFalsehood(RequestEntity.post(
 				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(new VerdictSubmission("Duplicate", BigInteger.valueOf(19))), null);
-		
-		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
-		
-		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null,null, null, null, null, 20, null,null, null,null));
-		
-		
-		assertEquals(10, localFalsehoods.size());
 	}
 	
 	@Test
