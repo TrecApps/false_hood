@@ -65,94 +65,14 @@ public class PublicFalsehoodController
 	@PostMapping("/searchConfirmed")
 	public List<PublicFalsehood> searchFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
 	{
-		List<PublicFalsehood> traits = service.searchConfirmedFalsehoodsByAttribte(searchObj);
-		
-		List<String> termList = new LinkedList<String>();
-		String terms = searchObj.getTerms();
-		while(terms != null && terms.indexOf(" ") != -1)
-		{
-			boolean inQuotes = false;
-			
-			for(int c = 0; c < terms.length(); c++)
-			{
-				if(terms.charAt(c) == '\"')
-				{
-					inQuotes = !inQuotes;
-					continue;
-				}
-				
-				
-				if(!inQuotes && terms.charAt(c) == ' ')
-				{
-					termList.add(terms.substring(0, c));
-					
-					terms = terms.substring(c).trim();
-					break;
-				}
-			}
-		}
-		
-		termList.add(terms);
-		
-		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
-		int end = start + searchObj.getNumberOfEntries();
-		
-		if(terms != null && traits.size() == 0)
-		{
-			return keyService.GetPublicFalsehoodsBySearchTerms(termList).subList(start, end);
-			
-		}
-		else
-		{
-			return traits;
-		}
+		return service.searchConfirmedFalsehoodsByAttribte(searchObj);
 		
 	}
 	
 	@PostMapping("/searchRejected")
 	public List<PublicFalsehood> searchRFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
 	{
-		List<PublicFalsehood> traits = service.searchRejectedFalsehoodsByAttribte(searchObj);
-		
-		List<String> termList = new LinkedList<String>();
-		String terms = searchObj.getTerms();
-		while(terms != null && terms.indexOf(" ") != -1)
-		{
-			boolean inQuotes = false;
-			
-			for(int c = 0; c < terms.length(); c++)
-			{
-				if(terms.charAt(c) == '\"')
-				{
-					inQuotes = !inQuotes;
-					continue;
-				}
-				
-				
-				if(!inQuotes && terms.charAt(c) == ' ')
-				{
-					termList.add(terms.substring(0, c));
-					
-					terms = terms.substring(c).trim();
-					break;
-				}
-			}
-		}
-		
-		termList.add(terms);
-		
-		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
-		int end = start + searchObj.getNumberOfEntries();
-		
-		if(terms != null && traits.size() == 0)
-		{
-			return keyService.GetPublicFalsehoodsBySearchTerms(termList).subList(start, end);
-			
-		}
-		else
-		{
-			return traits;
-		}
+		return service.searchRejectedFalsehoodsByAttribte(searchObj);	
 		
 	}
     

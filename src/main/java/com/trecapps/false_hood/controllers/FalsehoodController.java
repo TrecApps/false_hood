@@ -74,94 +74,16 @@ public class FalsehoodController {
 	@PostMapping("/searchConfirmed")
 	public List<Falsehood> searchFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
-		List<Falsehood> traits = service.getConfirmedFalsehoodsBySearchFeatures(searchObj);
-		
-		List<String> termList = new LinkedList<String>();
-		String terms = searchObj.getTerms();
-		while(terms != null && terms.indexOf(" ") != -1)
-		{
-			boolean inQuotes = false;
-			
-			for(int c = 0; c < terms.length(); c++)
-			{
-				if(terms.charAt(c) == '\"')
-				{
-					inQuotes = !inQuotes;
-					continue;
-				}
-				
-				
-				if(!inQuotes && terms.charAt(c) == ' ')
-				{
-					termList.add(terms.substring(0, c));
-					
-					terms = terms.substring(c).trim();
-					break;
-				}
-			}
-		}
-		
-		termList.add(terms);
-		
-		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
-		int end = start + searchObj.getNumberOfEntries();
-		
-		if(traits.size() == 0 && terms != null)
-		{
-			return keyService.GetFalsehoodsBySearchTerms(termList).subList(start, end);
-			
-		}
-		else
-		{
-			return traits;
-		}
+		return service.getConfirmedFalsehoodsBySearchFeatures(searchObj);
 		
 	}
 	
 	@PostMapping("/searchRejected")
 	public List<Falsehood> searchRFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
-		List<Falsehood> traits = service.getRejectedFalsehoodsBySearchFeatures(searchObj);
+		return service.getRejectedFalsehoodsBySearchFeatures(searchObj);
 		
-		List<String> termList = new LinkedList<String>();
-		String terms = searchObj.getTerms();
-		while(terms != null && terms.indexOf(" ") != -1)
-		{
-			boolean inQuotes = false;
-			
-			for(int c = 0; c < terms.length(); c++)
-			{
-				if(terms.charAt(c) == '\"')
-				{
-					inQuotes = !inQuotes;
-					continue;
-				}
-				
-				
-				if(!inQuotes && terms.charAt(c) == ' ')
-				{
-					termList.add(terms.substring(0, c));
-					
-					terms = terms.substring(c).trim();
-					break;
-				}
-			}
-		}
 		
-		termList.add(terms);
-		
-		int start = searchObj.getNumberOfEntries() * searchObj.getPage();
-		int end = start + searchObj.getNumberOfEntries();
-		
-		if(terms != null && traits.size() == 0)
-		{
-			return keyService.GetFalsehoodsBySearchTerms(termList).subList(start, end);
-			
-		}
-		else
-		{
-			return traits;
-		}
 		
 	}
 	
