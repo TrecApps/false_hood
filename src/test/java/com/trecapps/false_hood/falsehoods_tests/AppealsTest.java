@@ -15,6 +15,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -170,6 +172,20 @@ public class AppealsTest {
 		
 		assertNotNull(sharedApp.getMessage("tormontrec@gmail.com"));
 		
+		
+		MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
+		
+		form.add("appealId", "0");
+		form.add("validation", sharedApp.getMessage("tormontrec@gmail.com"));
+		
+		signResp = appCont.verifyPetitionSignature(RequestEntity.put(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(form));
+		
+		
+		assertTrue(signResp.getStatusCode().is2xxSuccessful());
+		
+		signResp = appCont.verifyPetitionSignature(RequestEntity.put(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken3).body(form));
+		
+		assertTrue(signResp.getStatusCode().is4xxClientError());
 	}
 	
 	@Test
@@ -184,6 +200,58 @@ public class AppealsTest {
 		
 		assertTrue(signResp.getStatusCode().is4xxClientError());
 		
+	}
+	
+	@Test
+	@Order(2)
+	public void noAuthorization() throws URISyntaxException
+	{
+		FalsehoodAppealController appCont = sharedApp.getAppealController();
+		
+		
+		
+		FalsehoodController fController = sharedApp.getFalsehoodController();
+		
+		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, null, 0, 20, null,null,null, null));
+		
+		FalsehoodAppeal appeal = new FalsehoodAppeal(null, localFalsehoods.get(0), null, "Some Reason", sharedApp.getUserService().getUserFromToken(UserTokens.userToken3));
+		
+		FalsehoodAppealEntry appealEntry = new FalsehoodAppealEntry("Testing", appeal);
+		
+		var resp = appCont.addAppeal(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken2).body(appealEntry));
+		
+		assertTrue(resp.getStatusCode().is4xxClientError());
+		
+		FalsehoodAppealSignature sign = new FalsehoodAppealSignature();
+		ResponseEntity<FalsehoodAppealEntry> appeal2 = appCont.getAppeal(BigInteger.ZERO);
+		
+		sign.setAppeal(appeal2.getBody().getAppeal());
+		sign.setUser(sharedApp.getUserService().getUserFromToken(UserTokens.userToken3));
+		
+		
+		ResponseEntity<String> signResp = appCont.signPetition(RequestEntity.post(
+				new URI("/AddOutlet")).header("Authorization", UserTokens.userToken2).body(sign));
+		
+		assertTrue(signResp.getStatusCode().is4xxClientError());
+		
+		MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
+		form.add("appealId", "0");
+		form.add("validation", sharedApp.getMessage("tormontrec@gmail.com"));
+		
+		signResp = appCont.verifyPetitionSignature(RequestEntity.put(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken2).body(form));
+		
+		
+		assertTrue(signResp.getStatusCode().is4xxClientError());
+	
+		form = new LinkedMultiValueMap<String, String>();
+		form.add("appealId", "trooper");
+		form.add("validation", sharedApp.getMessage("tormontrec@gmail.com"));
+		
+		signResp = appCont.verifyPetitionSignature(RequestEntity.put(new URI("/AddOutlet")).header("Authorization", UserTokens.userToken1).body(form));
+		
+		
+		assertTrue(signResp.getStatusCode().is4xxClientError());
 	}
 	
 	

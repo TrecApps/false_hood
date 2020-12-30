@@ -195,6 +195,8 @@ final int RANDOM_STRING_LENGTH = 30;
 				}
 				else
 				{
+					System.out.println("Submitted Token: " + token);
+					System.out.println("Expected Token : " + sign.getVerificationString());
 					return "Signature token did not match!";
 				}
 			}

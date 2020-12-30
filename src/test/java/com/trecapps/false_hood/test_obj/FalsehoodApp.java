@@ -140,7 +140,7 @@ public class FalsehoodApp {
 		String[] rec = message.getTo();
 		String mainMessage = message.getText();
 		
-		inbox.put(rec[0], mainMessage.substring(mainMessage.indexOf("<h2>") + 3, mainMessage.indexOf("</h2>")));
+		inbox.put(rec[0], mainMessage.substring(mainMessage.indexOf("<h2>") + 4, mainMessage.indexOf("</h2>")));
 	}
 	
 	public String getMessage(String key)
@@ -160,7 +160,7 @@ public class FalsehoodApp {
 			rec = message.getRecipients(Message.RecipientType.TO);
 			String mainMessage;
 			mainMessage = message.getContent().toString();
-			inbox.put(rec[0].toString(), mainMessage.substring(mainMessage.indexOf("<h2>") + 3, mainMessage.indexOf("</h2>")));
+			inbox.put(rec[0].toString(), mainMessage.substring(mainMessage.indexOf("<h2>") + 4, mainMessage.indexOf("</h2>")));
 		} catch (IOException | MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
