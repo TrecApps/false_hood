@@ -214,7 +214,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		
 		for(Falsehood f: appeals)
 		{
-			if(f.getStatus() == (byte)0)
+			if(f.getStatus() == (byte)0 || f.getStatus() == (byte)2)
 				ret.add(f);
 		}
 		

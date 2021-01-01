@@ -50,7 +50,7 @@ public interface PublicFalsehoodRepo extends JpaRepository<PublicFalsehood, BigI
     
     //// Queries where falsehoods are merely submitted
     
-    @Query("select f from PublicFalsehood f where f.status = 0")
+    @Query("select f from PublicFalsehood f where f.status = 0 or f.status = 2")
 	List<PublicFalsehood> getSubmittedFalsehoods(Pageable p);
     
     //// Queries where falsehoods are considered confirmed and active

@@ -299,7 +299,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status == 0)
+			if(status == 0 || status == 2)
 				ret.add(pf);
 		}
 		
