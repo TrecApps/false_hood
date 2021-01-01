@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trecapps.false_hood.falsehoods.Falsehood;
@@ -75,16 +76,19 @@ public class FalsehoodController {
 	public List<Falsehood> searchFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
 		return service.getConfirmedFalsehoodsBySearchFeatures(searchObj);
-		
 	}
 	
 	@PostMapping("/searchRejected")
 	public List<Falsehood> searchRFalsehoodByParams(@RequestBody SearchFalsehood searchObj)
 	{
 		return service.getRejectedFalsehoodsBySearchFeatures(searchObj);
-		
-		
-		
+	}
+	
+	@GetMapping("/searchSubmitted")
+	public List<Falsehood> searchSubmittedFalsehoods(@RequestParam(value="size", defaultValue="20", required=false)int size,
+			@RequestParam(value="page", defaultValue="0", required=false)int page)
+	{
+		return service.getSubmittedFalsehoods(size, page);
 	}
 	
 

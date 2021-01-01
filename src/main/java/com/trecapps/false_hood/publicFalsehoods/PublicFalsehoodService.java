@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
+import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.json.VerdictListObj;
 import com.trecapps.false_hood.json.VerdictObj;
@@ -112,6 +113,10 @@ public class PublicFalsehoodService {
 		return "";
 	}
     
+	public List<PublicFalsehood> getSubmittedFalsehoods(int size, int page)
+	{
+		return pfRepo.getSubmittedFalsehoods(PageRequest.of(page, size));
+	}
     
     public List<PublicFalsehood> searchConfirmedFalsehoodsByAttribte(SearchPublicFalsehood search)
     {

@@ -580,10 +580,11 @@ public class FalsehoodService {
 		}
 		
 	}
-	
-	
 
-	
+	public List<Falsehood> getSubmittedFalsehoods(int size, int page)
+	{
+		return fRepo.getSubmittedFalsehood(PageRequest.of(page, size));
+	}
 	
 	public FullFalsehood getFalsehoodById(BigInteger id)
 	{

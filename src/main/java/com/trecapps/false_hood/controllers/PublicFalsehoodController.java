@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.controllers;
 
+import com.trecapps.false_hood.falsehoods.Falsehood;
 import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.publicFalsehoods.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,14 +67,19 @@ public class PublicFalsehoodController
 	public List<PublicFalsehood> searchFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
 	{
 		return service.searchConfirmedFalsehoodsByAttribte(searchObj);
-		
 	}
 	
 	@PostMapping("/searchRejected")
 	public List<PublicFalsehood> searchRFalsehoodByParams(@RequestBody SearchPublicFalsehood searchObj)
 	{
 		return service.searchRejectedFalsehoodsByAttribte(searchObj);	
-		
+	}
+	
+	@GetMapping("/searchSubmitted")
+	public List<PublicFalsehood> searchSubmittedFalsehoods(@RequestParam(value="size", defaultValue="20", required=false)int size,
+			@RequestParam(value="page", defaultValue="0", required=false)int page)
+	{
+		return service.getSubmittedFalsehoods(size, page);
 	}
     
 }
