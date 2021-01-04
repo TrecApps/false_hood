@@ -1,8 +1,5 @@
 package com.trecapps.false_hood.controllers;
 
-import com.trecapps.false_hood.falsehoods.Falsehood;
-import com.trecapps.false_hood.falsehoods.FullFalsehood;
-import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.VerdictSubmission;
 import com.trecapps.false_hood.publicFalsehoods.FullPublicFalsehood;
@@ -22,9 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
@@ -33,7 +27,6 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 {
     PublicFalsehoodService service;
 
-    KeywordService keyService;
     
     PublicAttributeService attService;
 
@@ -48,12 +41,10 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
     @Autowired
     public AuthPublicFalsehoodController(@Autowired FalsehoodUserService userService,
                                          @Autowired PublicFalsehoodService service,
-                                         @Autowired KeywordService keyService,
                                          @Autowired PublicAttributeService attService)
     {
         super(userService);
         this.service = service;
-        this.keyService = keyService;
         this.attService = attService;
     }
 
@@ -75,8 +66,13 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
         }
 
         PublicFalsehood meta = falsehood.getMetadata();
+        
+
 
         meta.setStatus(FalsehoodStatus.SUBMITTED.GetValue());
+        
+		if(meta.getTags() != null && meta.getTags().length() > 400)
+			return new ResponseEntity<String>(String.format("Falsehood keys field was %d characters (400 max)", meta.getTags().length()), HttpStatus.BAD_REQUEST);
 
         ///meta.setDateMade(new Date(Calendar.getInstance().getTime().getTime()));
 
@@ -90,14 +86,6 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
         {
             return new ResponseEntity<String>("Failed to Write Falsehood to Storage!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        String keys = falsehood.getKeywords();
-
-        if(keys != null)
-        {
-            keyService.addPublicKeywords(keys, meta);
-        }
-
 
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }

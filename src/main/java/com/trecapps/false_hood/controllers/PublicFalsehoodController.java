@@ -1,7 +1,5 @@
 package com.trecapps.false_hood.controllers;
 
-import com.trecapps.false_hood.falsehoods.Falsehood;
-import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.publicFalsehoods.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,18 +11,14 @@ import java.util.*;
 @RequestMapping("/PublicFalsehood")
 public class PublicFalsehoodController
 {
-    KeywordService keyService;
-
     PublicFalsehoodService service;
     
     PublicAttributeService attService;
 
     @Autowired
-    public PublicFalsehoodController(@Autowired KeywordService keyService,
-                                     @Autowired PublicFalsehoodService service,
+    public PublicFalsehoodController(@Autowired PublicFalsehoodService service,
                                      @Autowired PublicAttributeService attService)
     {
-        this.keyService = keyService;
         this.service = service;
         this.attService = attService;
     }

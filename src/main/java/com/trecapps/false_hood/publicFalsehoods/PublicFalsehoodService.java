@@ -1,7 +1,5 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
-import com.trecapps.false_hood.falsehoods.Falsehood;
-import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.json.VerdictListObj;
 import com.trecapps.false_hood.json.VerdictObj;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;

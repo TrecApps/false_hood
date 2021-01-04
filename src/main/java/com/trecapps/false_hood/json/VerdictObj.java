@@ -3,7 +3,6 @@ package com.trecapps.false_hood.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
 public class VerdictObj extends JsonMarker implements FalsehoodJsonObj

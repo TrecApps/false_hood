@@ -90,10 +90,13 @@ public class Falsehood implements Comparable<Falsehood>{
 	
 	@Column
 	String contentId;
+	
+	@Column(length = 400)
+	String tags;
 
 
 	public Falsehood(BigInteger id, MediaOutlet outlet, byte status, byte mediaType, CommonLie commonLie, byte severity, PublicFigure author1, PublicFigure author2,
-			 String source, Date dateMade, String contentId) {
+			 String source, Date dateMade, String contentId, String tags) {
 		super();
 		this.id = id;
 		this.outlet = outlet;
@@ -106,11 +109,32 @@ public class Falsehood implements Comparable<Falsehood>{
 		this.source = source;
 		this.dateMade = dateMade;
 		this.commonLie = commonLie;
+		this.tags = tags;
 	}
+
+	
+	
+	/**
+	 * @return the tags
+	 */
+	public String getTags() {
+		return tags;
+	}
+
+
+
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+
 
 	public Falsehood clone()
 	{
-		return new Falsehood(id, outlet, status, mediaType, commonLie, severity, author1, author2, source, dateMade, contentId);
+		return new Falsehood(id, outlet, status, mediaType, commonLie, severity, author1, author2, source, dateMade, contentId, tags);
 	}
 	
 	public boolean canUpgrade()

@@ -25,7 +25,6 @@ import com.trecapps.false_hood.controllers.PublicFigureController;
 import com.trecapps.false_hood.falsehoods.FalsehoodRepo;
 import com.trecapps.false_hood.falsehoods.FalsehoodService;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
-import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.miscellanous.FalsehoodEmailService;
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
 import com.trecapps.false_hood.publicFalsehoods.PublicAttributeService;
@@ -38,11 +37,9 @@ import com.trecapps.false_hood.repos.FalsehoodAppealSignatureRepository;
 import com.trecapps.false_hood.repos.FalsehoodRepository;
 import com.trecapps.false_hood.repos.FalsehoodUserRepository;
 import com.trecapps.false_hood.repos.InstitutionRepository;
-import com.trecapps.false_hood.repos.KeywordRepository;
 import com.trecapps.false_hood.repos.MediaOutletRepository;
 import com.trecapps.false_hood.repos.PublicFalsehoodRepository;
 import com.trecapps.false_hood.repos.PublicFigureRepository;
-import com.trecapps.false_hood.repos.PublicKeywordsRepository;
 import com.trecapps.false_hood.repos.RegionRepository;
 import com.trecapps.false_hood.users.FalsehoodUserRepo;
 import com.trecapps.false_hood.users.FalsehoodUserService;
@@ -58,8 +55,6 @@ public class FalsehoodApp {
 	PublicAttributeService attService;
 	
 	PublicFalsehoodService publicFalsehoodService;
-	
-	KeywordService keyService;
 	
 	MediaOutletService outletService;
 	
@@ -109,7 +104,6 @@ public class FalsehoodApp {
 		publicFigureService = new PublicFigureService(userService, new PublicFigureRepository(), storageHolder);
 		attService = new PublicAttributeService(storageHolder, new RegionRepository(), new InstitutionRepository(), userService);
 		publicFalsehoodService = new PublicFalsehoodService(storageHolder, pfRepo, userService);
-		keyService = new KeywordService(new PublicKeywordsRepository(), new KeywordRepository());
 		outletService = new MediaOutletService(new MediaOutletRepository(), storageHolder, userService);
 		signatureRepo = new FalsehoodAppealSignatureRepository();
 		
@@ -127,12 +121,12 @@ public class FalsehoodApp {
 		
 		// Initialize the Controllers now that the Services are initialized
 		pFigureController = new PublicFigureController(userService, publicFigureService);
-		pFalsehoodController = new PublicFalsehoodController(keyService, publicFalsehoodService, attService);
-		falsehoodController = new FalsehoodController(falsehoodService, keyService, outletService);
+		pFalsehoodController = new PublicFalsehoodController(publicFalsehoodService, attService);
+		falsehoodController = new FalsehoodController(falsehoodService, outletService);
 		appealController = new FalsehoodAppealController(userService, appealService);
 		cLieController = new CommonLieController(userService, cLieService);
-		authPFalsehoodController = new AuthPublicFalsehoodController(userService, publicFalsehoodService, keyService, attService);
-		authFalsehoodController = new AuthFalsehoodController(userService, falsehoodService, outletService, keyService);
+		authPFalsehoodController = new AuthPublicFalsehoodController(userService, publicFalsehoodService, attService);
+		authFalsehoodController = new AuthFalsehoodController(userService, falsehoodService, outletService);
 	}
 	
 	void sendEmail(SimpleMailMessage message)
@@ -198,12 +192,7 @@ public class FalsehoodApp {
 		return publicFalsehoodService;
 	}
 
-	/**
-	 * @return the keyService
-	 */
-	public KeywordService getKeyService() {
-		return keyService;
-	}
+
 
 	/**
 	 * @return the outletService

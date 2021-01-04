@@ -171,7 +171,7 @@ public class FalsehoodTest {
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(4, f.size());
 		
-		search.setMinimum(Severity.HYPOCRISY);;
+		search.setMinimum(Severity.HYPOCRISY);
 		
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(2, f.size());
@@ -699,64 +699,64 @@ public class FalsehoodTest {
 		if(falsehoods[0] == null)
 		{
 			falsehoods[0] = new FullFalsehood("The first Falsehood Detected", // Wed Nov 17 2010 06:20:00
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2010),""),
-					"Vader;;Palpatine;;Empire");
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2010),"","Vader;Palpatine;Empire"),
+					"Vader;Palpatine;Empire");
 		}
 		if(falsehoods[1] == null)
 		{
 			falsehoods[1] = new FullFalsehood("The Second Falsehood Detected", // Fri Oct 13 2017 07:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2017),""),
-					"Vader;;Voldemort;;Thanos");
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2017),"","Vader;Voldemort;Thanos"),
+					"Vader;Voldemort;Thanos");
 		}
 		if(falsehoods[2] == null)
 		{
 			falsehoods[2] = new FullFalsehood("The Third Falsehood Detected", // Tue Jun 17 2014 04:13:20
-					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2014),""),
-					"Voldemort;;Dumbledore;;Ministry");
+					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2014),"","Voldemort;Dumbledore;Ministry"),
+					"Voldemort;Dumbledore;Ministry");
 		}
 		if(falsehoods[3] == null)
 		{
 			falsehoods[3] = new FullFalsehood("The Fourth Falsehood Detected", // Sat Oct 17 2020 23:46:40
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2020),""),
-					"Thanos;;Ironman;;Thor;;Serena");
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2020),"","Thanos;Ironman;Thor;Serena"),
+					"Thanos;Ironman;Thor;Serena");
 		}
 		if(falsehoods[4] == null)
 		{
 			falsehoods[4] = new FullFalsehood("The Fifth Falsehood Detected", // Mon May 05 2008 09:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2008),""),
-					"Loki;;Sif;;Serena");
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2008),"","Loki;Sif;Serena"),
+					"Loki;Sif;Serena");
 		}
 		
 		
 		if(falsehoods[5] == null)
 		{
 			falsehoods[5] = new FullFalsehood("The first Falsehood Detected", // Wed Nov 17 2010 06:20:00
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2017),""),
-					"Vader;;Palpatine;;Empire");
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2017),"","Vader;Palpatine;Empire"),
+					"Vader;Palpatine;Empire");
 		}
 		if(falsehoods[6] == null)
 		{
 			falsehoods[6] = new FullFalsehood("The Second Falsehood Detected", // Fri Oct 13 2017 07:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2014),""),
-					"Vader;;Voldemort;;Thanos");
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2014),"","Vader;Voldemort;Thanos"),
+					"Vader;Voldemort;Thanos");
 		}
 		if(falsehoods[7] == null)
 		{
 			falsehoods[7] = new FullFalsehood("The Third Falsehood Detected", // Tue Jun 17 2014 04:13:20
-					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2010),""),
-					"Voldemort;;Dumbledore;;Ministry");
+					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2010),"","Voldemort;Dumbledore;Ministry"),
+					"Voldemort;Dumbledore;Ministry");
 		}
 		if(falsehoods[8] == null)
 		{
 			falsehoods[8] = new FullFalsehood("The Fourth Falsehood Detected", // Sat Oct 17 2020 23:46:40
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2008),""),
-					"Thanos;;Ironman;;Thor;;Serena");
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2008),"","Thanos;Ironman;Thor;Serena"),
+					"Thanos;Ironman;Thor;Serena");
 		}
 		if(falsehoods[9] == null)
 		{
 			falsehoods[9] = new FullFalsehood("The Fifth Falsehood Detected", // Mon May 05 2008 09:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2020),""),
-					"Loki;;Sif;;Serena");
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2020),"","Loki;Sif;Serena"),
+					"Loki;Sif;Serena");
 		}
 		
 		AuthFalsehoodController afController = app.getAuthFalsehoodController();

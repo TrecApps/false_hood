@@ -34,7 +34,7 @@ public class PublicFalsehoodsRepositoryTest {
                 new Region(null, "Deleware", (byte)0, null),			// Region
                 new Institution(null, "U.S. Senate", (byte)0, null),	// Institution
                 (byte)0,					
-                new Date(Calendar.getInstance().getTime().getTime()));
+                new Date(Calendar.getInstance().getTime().getTime()),"");
         
         PublicFalsehoods[1] = new PublicFalsehood(null, // Id
                 null,									// CommonLie
@@ -44,7 +44,7 @@ public class PublicFalsehoodsRepositoryTest {
                 new Region(null, "New York", (byte)0, null),			// Region
                 new Institution(null, "U.S. White House", (byte)0, null),	// Institution
                 (byte)0,					
-                new Date(Calendar.getInstance().getTime().getTime()));
+                new Date(Calendar.getInstance().getTime().getTime()),"");
         
         PublicFalsehoods[2] = new PublicFalsehood(null, // Id
                 null,									// CommonLie
@@ -54,7 +54,7 @@ public class PublicFalsehoodsRepositoryTest {
                 new Region(null, "Death Star", (byte)0, null),			// Region
                 new Institution(null, "Galactic Empire", (byte)0, null),	// Institution
                 (byte)0,					
-                new Date(Calendar.getInstance().getTime().getTime()));
+                new Date(Calendar.getInstance().getTime().getTime()),"");
         
         PublicFalsehoods[3] = new PublicFalsehood(null, // Id
                 null,									// CommonLie
@@ -64,7 +64,7 @@ public class PublicFalsehoodsRepositoryTest {
                 new Region(null, "Lair", (byte)0, null),			// Region
                 new Institution(null, "Virtucon Industries", (byte)0, null),	// Institution
                 (byte)0,					
-                new Date(Calendar.getInstance().getTime().getTime()));
+                new Date(Calendar.getInstance().getTime().getTime()),"");
         
         PublicFalsehoods[4] = new PublicFalsehood(null, // Id
                 null,									// CommonLie
@@ -74,7 +74,7 @@ public class PublicFalsehoodsRepositoryTest {
                 new Region(null, "New Jersey", (byte)0, null),			// Region
                 new Institution(null, "Princeton University", (byte)0, null),	// Institution
                 (byte)0,					
-                new Date(Calendar.getInstance().getTime().getTime()));
+                new Date(Calendar.getInstance().getTime().getTime()),"");
     }
 
     @Test

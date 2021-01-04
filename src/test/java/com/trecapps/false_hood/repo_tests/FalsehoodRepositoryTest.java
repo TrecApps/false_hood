@@ -40,7 +40,7 @@ public class FalsehoodRepositoryTest {
                 null,
                 "Hannity",
                 new Date(Calendar.getInstance().getTime().getTime()),
-                "");
+                "","");
         
         falsehoods[1] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1998, "Fox News",(byte)0, null),
@@ -52,7 +52,7 @@ public class FalsehoodRepositoryTest {
                 null,
                 "Carlson Tonight",
                 new Date(Calendar.getInstance().getTime().getTime()),
-                "");
+                "","");
         
         falsehoods[2] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1996, "MSNBC",(byte)0, null),
@@ -64,7 +64,7 @@ public class FalsehoodRepositoryTest {
                 null,
                 "The Rachel Maddow Show",
                 new Date(Calendar.getInstance().getTime().getTime()),
-                "");
+                "","");
         
         falsehoods[3] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1998, "CNN",(byte)0, null),
@@ -76,7 +76,7 @@ public class FalsehoodRepositoryTest {
                 null,
                 "Carlson Tonight",
                 new Date(Calendar.getInstance().getTime().getTime()),
-                "");
+                "","");
         
         falsehoods[4] = new Falsehood(null,
                 new MediaOutlet(0, (short) 1996, "MSNBC",(byte)0, null),
@@ -88,7 +88,7 @@ public class FalsehoodRepositoryTest {
                 null,
                 "The Rachel Maddow Show",
                 new Date(Calendar.getInstance().getTime().getTime()),
-                "");
+                "","");
     }
 
     @Test

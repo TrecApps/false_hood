@@ -1,17 +1,13 @@
 package com.trecapps.false_hood.controllers;
 
 import java.math.BigInteger;
-import java.sql.Date;
-import java.util.Calendar;
 
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.miscellanous.VerdictSubmission;
-import com.trecapps.false_hood.publicFigure.PublicFigureEntry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +21,6 @@ import com.trecapps.false_hood.falsehoods.FalsehoodService;
 import com.trecapps.false_hood.falsehoods.FullFalsehood;
 import com.trecapps.false_hood.falsehoods.MediaOutletEntry;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
-import com.trecapps.false_hood.keywords.KeywordService;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 
@@ -39,7 +34,6 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 
 	MediaOutletService mediaService;
 
-	KeywordService keyService;
 	
 	public static final int MIN_CREDIT_SUBMIT_NEW = 5;
 	
@@ -52,13 +46,11 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 	@Autowired
 	public AuthFalsehoodController(@Autowired FalsehoodUserService userService,
 								   @Autowired FalsehoodService service,
-								   @Autowired MediaOutletService mediaService,
-								   @Autowired KeywordService keyService)
+								   @Autowired MediaOutletService mediaService)
 	{
 		super(userService);
 		this.service = service;
 		this.mediaService = mediaService;
-		this.keyService = keyService;
 	}
 	
 	@GetMapping("/GetUser")
@@ -79,12 +71,17 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 		
 		FullFalsehood falsehood = entity.getBody();
 		
+		
 		if(falsehood == null || falsehood.getContents() == null || falsehood.getMetadata() == null)
 		{
 			return new ResponseEntity<String>("Bad Data", HttpStatus.BAD_REQUEST);
 		}
 		
+
+		
 		Falsehood meta = falsehood.getMetadata();
+		if(meta.getTags() != null && meta.getTags().length() > 400)
+			return new ResponseEntity<String>(String.format("Falsehood keys field was %d characters (400 max)", meta.getTags().length()), HttpStatus.BAD_REQUEST);
 		
 		meta.setStatus(FalsehoodStatus.SUBMITTED.GetValue());
 		
@@ -100,14 +97,7 @@ public class AuthFalsehoodController extends AuthenticationControllerBase
 		{
 			return new ResponseEntity<String>("Failed to Write Falsehood to Storage!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		String keys = falsehood.getKeywords();
-		
-		if(keys != null)
-		{
-			keyService.addKeywords(keys, meta);
-		}
-		
+			
 		
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}

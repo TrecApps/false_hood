@@ -97,6 +97,9 @@ public class PublicFalsehood implements Comparable<PublicFalsehood>{
 	@Column
 	Date dateMade;
 	
+	@Column(length = 400)
+	String tags;
+	
 
 	/**
 	 * 
@@ -117,7 +120,7 @@ public class PublicFalsehood implements Comparable<PublicFalsehood>{
 	 * @param severity
 	 */
 	public PublicFalsehood(BigInteger id, CommonLie commonLie, byte status, PublicFigure official, byte officialType,
-			Region region, Institution institution, byte severity, Date dateMade) {
+			Region region, Institution institution, byte severity, Date dateMade, String tags) {
 		super();
 		this.id = id;
 		this.commonLie = commonLie;
@@ -128,6 +131,7 @@ public class PublicFalsehood implements Comparable<PublicFalsehood>{
 		this.institution = institution;
 		this.severity = severity;
 		this.dateMade = dateMade;
+		this.tags = tags;
 	}
 	
 	public boolean canUpgrade()
@@ -145,7 +149,23 @@ public class PublicFalsehood implements Comparable<PublicFalsehood>{
 	
 	public PublicFalsehood clone()
 	{
-		return new PublicFalsehood(id, commonLie, status, official, officialType, region, institution, severity, dateMade);
+		return new PublicFalsehood(id, commonLie, status, official, officialType, region, institution, severity, dateMade, tags);
+	}
+	
+	
+
+	/**
+	 * @return the tags
+	 */
+	public String getTags() {
+		return tags;
+	}
+
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 	/**

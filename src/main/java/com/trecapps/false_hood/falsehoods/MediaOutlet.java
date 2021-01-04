@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.trecapps.false_hood.commonLie.CommonLie;
 import com.trecapps.false_hood.users.FalsehoodUser;
 
 @Entity

@@ -1,14 +1,8 @@
 package com.trecapps.false_hood.controllers;
 
 import java.math.BigInteger;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import com.trecapps.false_hood.publicFigure.PublicFigure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +19,6 @@ import com.trecapps.false_hood.falsehoods.MediaOutlet;
 import com.trecapps.false_hood.falsehoods.MediaOutletEntry;
 import com.trecapps.false_hood.falsehoods.MediaOutletService;
 import com.trecapps.false_hood.falsehoods.SearchFalsehood;
-import com.trecapps.false_hood.keywords.KeywordService;
-import com.trecapps.false_hood.miscellanous.Severity;
 
 @RestController
 @RequestMapping("/Falsehood")
@@ -34,17 +26,14 @@ public class FalsehoodController {
 
 	FalsehoodService service;
 
-	KeywordService keyService;
 	
 	MediaOutletService mediaService;
 
 	@Autowired
 	public FalsehoodController(@Autowired FalsehoodService service,
-							   @Autowired KeywordService keyService,
 							   @Autowired MediaOutletService mediaService)
 	{
 		this.service = service;
-		this.keyService = keyService;
 		this.mediaService = mediaService;
 	}
 	

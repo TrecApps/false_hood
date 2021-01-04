@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trecapps.false_hood.miscellanous.FalsehoodStorageHolder;
-import com.trecapps.false_hood.publicFigure.PublicFigure;
-import com.trecapps.false_hood.publicFigure.PublicFigureEntry;
 import com.trecapps.false_hood.users.FalsehoodUser;
 import com.trecapps.false_hood.users.FalsehoodUserService;
 
