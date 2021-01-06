@@ -3842,7 +3842,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 	
 	
-	//////// Now Inluding search terms
+	//////// Now Including search terms
 	
 	
 	
