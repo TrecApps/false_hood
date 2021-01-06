@@ -299,7 +299,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status == 0 || status == 2)
+			if (status == 0 || status == 2)
 				ret.add(pf);
 		}
 		
@@ -307,14 +307,14 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoods(Pageable p) {
+	public List<PublicFalsehood> getConfirmedFalsehoods(Pageable p, byte offType) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5)
 				ret.add(pf);
 		}
 		
@@ -322,7 +322,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetween(Pageable p, Date begin, Date end) {
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetween(Pageable p, byte offType, Date begin, Date end) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -330,7 +330,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 			System.out.println("Ststus is " + status + " Date of Public Falsehood is " + d + " with begin " + begin + " and end " + end);
@@ -343,7 +343,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByRegion(Pageable p, Date begin, Date end, Region r) {
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByRegion(Pageable p, byte offType, Date begin, Date end, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -351,7 +351,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -360,7 +360,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByInstitution(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByInstitution(Pageable p, byte offType, Date begin, Date end,
 			Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -369,7 +369,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -378,7 +378,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByRegionAndInst(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByRegionAndInst(Pageable p, byte offType, Date begin, Date end,
 			Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -387,7 +387,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -396,7 +396,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficial(Pageable p, byte offType, Date begin, Date end,
 			PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -405,7 +405,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -414,7 +414,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialRegion(Pageable p, byte offType, Date begin, Date end,
 			PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -423,7 +423,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -432,7 +432,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialInstitution(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialInstitution(Pageable p, byte offType, Date begin, Date end,
 			PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -441,7 +441,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -450,7 +450,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByOfficialRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -459,7 +459,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -468,7 +468,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverity(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverity(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -478,7 +478,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -487,7 +487,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityRegion(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -497,7 +497,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -506,7 +506,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityInstitution(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityInstitution(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -516,7 +516,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -525,7 +525,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -535,7 +535,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -544,7 +544,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficial(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -554,7 +554,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -563,7 +563,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegion(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegion(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -573,7 +573,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -582,7 +582,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialInstitution(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialInstitution(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -592,7 +592,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -601,7 +601,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -611,7 +611,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution())
 					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
@@ -621,7 +621,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverity(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverity(Pageable p, byte offType, Date begin, Date end,
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -631,7 +631,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -640,7 +640,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityRegion(Pageable p, byte offType, Date begin, Date end,
 			byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -650,7 +650,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -659,7 +659,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityInstitution(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityInstitution(Pageable p, byte offType, Date begin,
 			Date end, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -669,7 +669,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -678,7 +678,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -688,7 +688,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -697,7 +697,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficial(Pageable p, byte offType, Date begin, Date end,
 			byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -707,7 +707,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -716,7 +716,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegion(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegion(Pageable p, byte offType, Date begin,
 			Date end, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -726,7 +726,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -735,7 +735,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(Pageable p, byte offType,
 			Date begin, Date end, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -745,7 +745,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -754,7 +754,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			Date begin, Date end, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -764,7 +764,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -773,7 +773,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverity(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverity(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -783,7 +783,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -792,7 +792,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityRegion(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -802,7 +802,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -811,7 +811,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityInstitution(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityInstitution(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -821,7 +821,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -830,7 +830,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -840,7 +840,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -849,7 +849,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficial(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -859,7 +859,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -868,7 +868,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(Pageable p, Date begin,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -878,7 +878,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -887,7 +887,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(Pageable p, byte offType,
 			Date begin, Date end, byte maxSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -897,7 +897,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -906,7 +906,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			Date begin, Date end, byte maxSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -916,7 +916,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -936,7 +936,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	
 	
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBefore(Pageable p, Date end) {
+	public List<PublicFalsehood> getConfirmedFalsehoodsBefore(Pageable p, byte offType, Date end) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -944,7 +944,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && d.getTime() <= end.getTime())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
 		
@@ -952,7 +952,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByRegion(Pageable p, Date end, Region r) {
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByRegion(Pageable p, byte offType, Date end, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -960,7 +960,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5	&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5	&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -968,7 +968,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByInstitution(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByInstitution(Pageable p, byte offType, Date end,
 			Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -977,7 +977,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -986,7 +986,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByRegionAndInst(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByRegionAndInst(Pageable p, byte offType, Date end,
 			Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -995,7 +995,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1004,7 +1004,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficial(Pageable p, byte offType, Date end,
 			PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1013,7 +1013,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5	&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5	&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1021,7 +1021,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficialRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficialRegion(Pageable p, byte offType, Date end,
 			PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1030,7 +1030,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1039,7 +1039,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficialInstitution(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficialInstitution(Pageable p, byte offType, Date end,
 			PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1048,7 +1048,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1057,7 +1057,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByOfficialRegionAndInst(Pageable p, byte offType,
 			Date end, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1066,7 +1066,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1075,7 +1075,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverity(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverity(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1085,7 +1085,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -1094,7 +1094,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityRegion(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1104,7 +1104,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1113,7 +1113,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityInstitution(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityInstitution(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1123,7 +1123,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1132,7 +1132,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityRegionAndInst(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1142,7 +1142,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1151,7 +1151,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficial(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1161,7 +1161,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -1170,7 +1170,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegion(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegion(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1180,7 +1180,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1189,7 +1189,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficialInstitution(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1199,7 +1199,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1208,7 +1208,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1218,7 +1218,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1227,7 +1227,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverity(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverity(Pageable p, byte offType, Date end,
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1237,7 +1237,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -1246,7 +1246,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityRegion(Pageable p, byte offType, Date end,
 			byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1256,7 +1256,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1265,7 +1265,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityInstitution(Pageable p, byte offType,
 			Date end, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1275,7 +1275,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1284,7 +1284,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityRegionAndInst(Pageable p, byte offType,
 			Date end, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1294,7 +1294,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1303,7 +1303,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficial(Pageable p, byte offType, Date end,
 			byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1313,7 +1313,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1321,7 +1321,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegion(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegion(Pageable p, byte offType,
 			Date end, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1331,7 +1331,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion())
 					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -1340,7 +1340,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(Pageable p, byte offType,
 			 Date end, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1350,7 +1350,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1359,7 +1359,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			 Date end, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1369,7 +1369,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1378,7 +1378,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverity(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverity(Pageable p, byte offType, Date end,
 			byte maxSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1388,7 +1388,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() <= end.getTime())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
 		
@@ -1396,7 +1396,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityRegion(Pageable p, byte offType, Date end,
 			byte maxSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1406,7 +1406,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1415,7 +1415,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityInstitution(Pageable p, byte offType,
 			Date end, byte maxSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1425,7 +1425,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1434,7 +1434,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(Pageable p, byte offType,
 			Date end, byte maxSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1444,7 +1444,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1453,7 +1453,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficial(Pageable p, byte offType, Date end,
 			byte maxSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1463,7 +1463,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1471,7 +1471,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(Pageable p, byte offType,
 			Date end, byte maxSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1481,7 +1481,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1490,7 +1490,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(Pageable p, byte offType,
 			 Date end, byte maxSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1500,7 +1500,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1509,7 +1509,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			 Date end, byte maxSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1519,7 +1519,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1540,7 +1540,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByRegion(Pageable p,   Region r) {
+	public List<PublicFalsehood> getConfirmedFalsehoodsByRegion(Pageable p, byte offType,   Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -1548,7 +1548,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -1556,7 +1556,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByInstitution(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByInstitution(Pageable p, byte offType,  
 			Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1564,7 +1564,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1572,7 +1572,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByRegionAndInst(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByRegionAndInst(Pageable p, byte offType,  
 			Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1580,7 +1580,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1588,7 +1588,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficial(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficial(Pageable p, byte offType,  
 			PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1596,7 +1596,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1604,7 +1604,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficialRegion(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficialRegion(Pageable p, byte offType,  
 			PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1612,7 +1612,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1620,7 +1620,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficialInstitution(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficialInstitution(Pageable p, byte offType,  
 			PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1628,7 +1628,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1636,7 +1636,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficialRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByOfficialRegionAndInst(Pageable p, byte offType, 
 			 PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1644,7 +1644,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1652,7 +1652,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverity(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverity(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1661,7 +1661,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity)
 				ret.add(pf);
 		}
 		
@@ -1669,7 +1669,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityRegion(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityRegion(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1678,7 +1678,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -1686,7 +1686,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityInstitution(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityInstitution(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1695,7 +1695,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1703,7 +1703,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityRegionAndInst(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1712,7 +1712,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1720,7 +1720,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficial(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficial(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1729,7 +1729,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1737,7 +1737,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficialRegion(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficialRegion(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1746,7 +1746,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					 && official.equals(pf.getOfficial()) && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -1755,7 +1755,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficialInstitution(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficialInstitution(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1764,7 +1764,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1773,7 +1773,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficialRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsBySeverityOfficialRegionAndInst(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1782,7 +1782,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && sev <= minSeverity
 					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1791,7 +1791,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverity(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverity(Pageable p, byte offType,  
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1800,7 +1800,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity)
 				ret.add(pf);
 		}
 		
@@ -1808,7 +1808,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityRegion(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityRegion(Pageable p, byte offType,  
 			byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1817,7 +1817,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -1825,7 +1825,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityInstitution(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityInstitution(Pageable p, byte offType, 
 			 byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1834,7 +1834,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1842,7 +1842,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityRegionAndInst(Pageable p, byte offType, 
 			 byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1851,7 +1851,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1859,7 +1859,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficial(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficial(Pageable p, byte offType,  
 			byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1868,7 +1868,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -1876,7 +1876,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficialRegion(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficialRegion(Pageable p, byte offType, 
 			 byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1885,7 +1885,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion())
 					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -1894,7 +1894,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficialInstitution(Pageable p, byte offType,
 			  byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1903,7 +1903,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && i.equals(pf.getInstitution())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && i.equals(pf.getInstitution())
 					 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -1912,7 +1912,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMinSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			  byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1921,7 +1921,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()) 
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev <= minSeverity && r.equals(pf.getRegion()) 
 					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -1930,7 +1930,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverity(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverity(Pageable p, byte offType,  
 			byte maxSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1939,7 +1939,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity)
 				ret.add(pf);
 		}
 		
@@ -1947,7 +1947,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityRegion(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityRegion(Pageable p, byte offType,  
 			byte maxSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1957,7 +1957,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -1965,7 +1965,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityInstitution(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityInstitution(Pageable p, byte offType, 
 			 byte maxSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1974,7 +1974,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1982,7 +1982,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityRegionAndInst(Pageable p, byte offType, 
 			 byte maxSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -1991,7 +1991,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -1999,7 +1999,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficial(Pageable p,  
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficial(Pageable p, byte offType,  
 			byte maxSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2008,7 +2008,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2016,7 +2016,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialRegion(Pageable p, 
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialRegion(Pageable p, byte offType, 
 			 byte maxSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2025,7 +2025,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2033,7 +2033,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialInstitution(Pageable p, byte offType,
 			  byte maxSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2042,7 +2042,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2050,7 +2050,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getConfirmedFalsehoodsByMaxSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			  byte maxSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2059,7 +2059,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 1 && status < 5 && sev >= maxSeverity && r.equals(pf.getRegion())
 					 && official.equals(pf.getOfficial()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2077,14 +2077,14 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	
 	
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoods(Pageable p) {
+	public List<PublicFalsehood> getRejectedFalsehoods(Pageable p, byte offType) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4)
 				ret.add(pf);
 		}
 		
@@ -2092,7 +2092,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetween(Pageable p, Date begin, Date end) {
+	public List<PublicFalsehood> getRejectedFalsehoodsBetween(Pageable p, byte offType, Date begin, Date end) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -2100,7 +2100,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 			System.out.println("With status " + status + " and date " + d + " before= " +end+ " after= " + begin);
@@ -2110,7 +2110,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByRegion(Pageable p, Date begin, Date end, Region r) {
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByRegion(Pageable p, byte offType, Date begin, Date end, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -2118,7 +2118,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2127,7 +2127,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByInstitution(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByInstitution(Pageable p, byte offType, Date begin, Date end,
 			Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2136,7 +2136,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2145,7 +2145,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByRegionAndInst(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByRegionAndInst(Pageable p, byte offType, Date begin, Date end,
 			Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2154,7 +2154,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2163,7 +2163,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficial(Pageable p, byte offType, Date begin, Date end,
 			PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2172,7 +2172,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -2181,7 +2181,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialRegion(Pageable p, byte offType, Date begin, Date end,
 			PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2190,7 +2190,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2199,7 +2199,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialInstitution(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialInstitution(Pageable p, byte offType, Date begin, Date end,
 			PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2208,7 +2208,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2217,7 +2217,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByOfficialRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2226,7 +2226,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2235,7 +2235,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverity(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverity(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2245,7 +2245,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -2254,7 +2254,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityRegion(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2264,7 +2264,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2273,7 +2273,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityInstitution(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityInstitution(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2283,7 +2283,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2292,7 +2292,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2302,7 +2302,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2311,7 +2311,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficial(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2321,7 +2321,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2330,7 +2330,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialRegion(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialRegion(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2340,7 +2340,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2349,7 +2349,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialInstitution(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialInstitution(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2359,7 +2359,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2368,7 +2368,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2378,7 +2378,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2387,7 +2387,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverity(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverity(Pageable p, byte offType, Date begin, Date end,
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2397,7 +2397,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -2406,7 +2406,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityRegion(Pageable p, byte offType, Date begin, Date end,
 			byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2416,7 +2416,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2425,7 +2425,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityInstitution(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityInstitution(Pageable p, byte offType, Date begin,
 			Date end, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2435,7 +2435,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2444,7 +2444,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2454,7 +2454,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2463,7 +2463,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficial(Pageable p, byte offType, Date begin, Date end,
 			byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2473,7 +2473,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2482,7 +2482,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegion(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegion(Pageable p, byte offType, Date begin,
 			Date end, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2492,7 +2492,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2501,7 +2501,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(Pageable p, byte offType,
 			Date begin, Date end, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2511,7 +2511,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2520,7 +2520,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			Date begin, Date end, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2530,7 +2530,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2539,7 +2539,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverity(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverity(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2549,7 +2549,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -2558,7 +2558,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityRegion(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityRegion(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2568,7 +2568,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2577,7 +2577,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityInstitution(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityInstitution(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2587,7 +2587,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2596,7 +2596,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2606,7 +2606,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2615,7 +2615,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficial(Pageable p, Date begin, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficial(Pageable p, byte offType, Date begin, Date end,
 			byte maxSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2625,7 +2625,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2634,7 +2634,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(Pageable p, Date begin,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(Pageable p, byte offType, Date begin,
 			Date end, byte maxSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2644,7 +2644,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime()
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2653,7 +2653,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(Pageable p, byte offType,
 			Date begin, Date end, byte maxSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2663,7 +2663,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2672,7 +2672,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			Date begin, Date end, byte maxSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2682,7 +2682,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() >= begin.getTime() && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2702,7 +2702,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	
 	
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBefore(Pageable p, Date end) {
+	public List<PublicFalsehood> getRejectedFalsehoodsBefore(Pageable p, byte offType, Date end) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -2710,7 +2710,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && d.getTime() <= end.getTime())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
 		
@@ -2718,7 +2718,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByRegion(Pageable p, Date end, Region r) {
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByRegion(Pageable p, byte offType, Date end, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -2726,7 +2726,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4	&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4	&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -2734,7 +2734,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByInstitution(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByInstitution(Pageable p, byte offType, Date end,
 			Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2743,7 +2743,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2752,7 +2752,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByRegionAndInst(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByRegionAndInst(Pageable p, byte offType, Date end,
 			Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2761,7 +2761,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2770,7 +2770,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficial(Pageable p, byte offType, Date end,
 			PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2779,7 +2779,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4	&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4	&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -2787,7 +2787,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialRegion(Pageable p, byte offType, Date end,
 			PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2796,7 +2796,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2805,7 +2805,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialInstitution(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialInstitution(Pageable p, byte offType, Date end,
 			PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2814,7 +2814,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2823,7 +2823,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByOfficialRegionAndInst(Pageable p, byte offType,
 			Date end, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2832,7 +2832,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2841,7 +2841,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverity(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverity(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2851,7 +2851,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -2860,7 +2860,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityRegion(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2870,7 +2870,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2879,7 +2879,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityInstitution(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityInstitution(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2889,7 +2889,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2898,7 +2898,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityRegionAndInst(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2908,7 +2908,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2917,7 +2917,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficial(Pageable p, byte offType, Date end,
 			byte maxSeverity, byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2927,7 +2927,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -2936,7 +2936,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialRegion(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialRegion(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2946,7 +2946,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -2955,7 +2955,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialInstitution(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2965,7 +2965,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2974,7 +2974,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(Pageable p, byte offType,
 			Date end, byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -2984,7 +2984,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -2993,7 +2993,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverity(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverity(Pageable p, byte offType, Date end,
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3004,7 +3004,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity
 					&& d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
@@ -3013,7 +3013,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityRegion(Pageable p, byte offType, Date end,
 			byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3023,7 +3023,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -3032,7 +3032,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityInstitution(Pageable p, byte offType,
 			Date end, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3042,7 +3042,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3051,7 +3051,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityRegionAndInst(Pageable p, byte offType,
 			Date end, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3061,7 +3061,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3070,7 +3070,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficial(Pageable p, byte offType, Date end,
 			byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3080,7 +3080,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3088,7 +3088,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegion(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegion(Pageable p, byte offType,
 			Date end, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3098,7 +3098,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3106,7 +3106,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(Pageable p, byte offType,
 			 Date end, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3116,7 +3116,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3125,7 +3125,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			 Date end, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3135,7 +3135,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev <= minSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3144,7 +3144,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverity(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverity(Pageable p, byte offType, Date end,
 			byte maxSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3154,7 +3154,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() <= end.getTime())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(pf);
 		}
 		
@@ -3162,7 +3162,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityRegion(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityRegion(Pageable p, byte offType, Date end,
 			byte maxSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3172,7 +3172,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
@@ -3181,7 +3181,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityInstitution(Pageable p, byte offType,
 			Date end, byte maxSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3191,7 +3191,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3200,7 +3200,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(Pageable p, byte offType,
 			Date end, byte maxSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3210,7 +3210,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3219,7 +3219,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficial(Pageable p, Date end,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficial(Pageable p, byte offType, Date end,
 			byte maxSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3229,7 +3229,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && d.getTime() <= end.getTime() && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3237,7 +3237,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(Pageable p, byte offType,
 			Date end, byte maxSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3247,7 +3247,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
@@ -3256,7 +3256,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(Pageable p, byte offType,
 			 Date end, byte maxSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3266,7 +3266,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3275,7 +3275,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			 Date end, byte maxSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3285,7 +3285,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial())
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial())
 					&& d.getTime() <= end.getTime() && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
@@ -3306,7 +3306,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByRegion(Pageable p,   Region r) {
+	public List<PublicFalsehood> getRejectedFalsehoodsByRegion(Pageable p, byte offType,   Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
 		for(PublicFalsehood pf: appeals)
@@ -3314,7 +3314,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -3322,7 +3322,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByInstitution(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByInstitution(Pageable p, byte offType,  
 			Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3330,7 +3330,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3338,7 +3338,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByRegionAndInst(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByRegionAndInst(Pageable p, byte offType,  
 			Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3346,7 +3346,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3354,7 +3354,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByOfficial(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByOfficial(Pageable p, byte offType,  
 			PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3362,7 +3362,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3370,7 +3370,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByOfficialRegion(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByOfficialRegion(Pageable p, byte offType,  
 			PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3378,7 +3378,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3386,7 +3386,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByOfficialInstitution(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByOfficialInstitution(Pageable p, byte offType,  
 			PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3394,7 +3394,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3402,7 +3402,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByOfficialRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByOfficialRegionAndInst(Pageable p, byte offType, 
 			 PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3410,7 +3410,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 		{
 			byte status = pf.getStatus();
 			
-			if(status > 4 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3418,7 +3418,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverity(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverity(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3427,7 +3427,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity)
 				ret.add(pf);
 		}
 		
@@ -3435,7 +3435,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityRegion(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityRegion(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3444,7 +3444,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -3452,7 +3452,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityInstitution(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityInstitution(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3461,7 +3461,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3469,7 +3469,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityRegionAndInst(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3478,7 +3478,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3486,7 +3486,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficial(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficial(Pageable p, byte offType,  
 			byte maxSeverity, byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3495,7 +3495,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3503,7 +3503,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialRegion(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialRegion(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3512,7 +3512,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3520,7 +3520,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialInstitution(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialInstitution(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3529,7 +3529,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3537,7 +3537,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsBySeverityOfficialRegionAndInst(Pageable p, byte offType, 
 			 byte maxSeverity, byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3546,7 +3546,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3554,7 +3554,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverity(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverity(Pageable p, byte offType,  
 			byte minSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3563,7 +3563,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity)
 				ret.add(pf);
 		}
 		
@@ -3571,7 +3571,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityRegion(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityRegion(Pageable p, byte offType,  
 			byte minSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3580,7 +3580,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -3588,7 +3588,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityInstitution(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityInstitution(Pageable p, byte offType, 
 			 byte minSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3597,7 +3597,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3605,7 +3605,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityRegionAndInst(Pageable p, byte offType, 
 			 byte minSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3614,7 +3614,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3622,7 +3622,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficial(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficial(Pageable p, byte offType,  
 			byte minSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3631,7 +3631,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3639,7 +3639,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialRegion(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialRegion(Pageable p, byte offType, 
 			 byte minSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3648,7 +3648,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3656,7 +3656,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialInstitution(Pageable p, byte offType,
 			  byte minSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3665,7 +3665,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3673,7 +3673,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsByMinSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			  byte minSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3682,7 +3682,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev <= minSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3690,7 +3690,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverity(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverity(Pageable p, byte offType,  
 			byte maxSeverity) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3699,7 +3699,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity)
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity)
 				ret.add(pf);
 		}
 		
@@ -3707,7 +3707,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityRegion(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityRegion(Pageable p, byte offType,  
 			byte maxSeverity, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3717,7 +3717,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte status = pf.getStatus();
 			
 			Date d = pf.getDateMade();
-			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()))
 				ret.add(pf);
 		}
 		
@@ -3725,7 +3725,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityInstitution(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityInstitution(Pageable p, byte offType, 
 			 byte maxSeverity, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3734,7 +3734,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3742,7 +3742,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityRegionAndInst(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityRegionAndInst(Pageable p, byte offType, 
 			 byte maxSeverity, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3751,7 +3751,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()))
 				ret.add(pf);
 		}
 		
@@ -3759,7 +3759,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficial(Pageable p,  
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficial(Pageable p, byte offType,  
 			byte maxSeverity, PublicFigure official) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3768,7 +3768,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3776,7 +3776,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialRegion(Pageable p, 
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialRegion(Pageable p, byte offType, 
 			 byte maxSeverity, PublicFigure official, Region r) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3785,7 +3785,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3793,7 +3793,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialInstitution(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialInstitution(Pageable p, byte offType,
 			  byte maxSeverity, PublicFigure official, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3802,7 +3802,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		
@@ -3810,7 +3810,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 	}
 
 	@Override
-	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialRegionAndInst(Pageable p,
+	public List<PublicFalsehood> getRejectedFalsehoodsByMaxSeverityOfficialRegionAndInst(Pageable p, byte offType,
 			  byte maxSeverity, PublicFigure official, Region r, Institution i) {
 		List<PublicFalsehood> ret = new LinkedList<>();
 		
@@ -3819,7 +3819,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
 			byte sev = pf.getSeverity();
 			byte status = pf.getStatus();
 			
-			if(status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
+			if ((offType > 15 || offType == pf.getOfficialType()) && status > 4 && sev >= maxSeverity && r.equals(pf.getRegion()) && i.equals(pf.getInstitution()) && official.equals(pf.getOfficial()))
 				ret.add(pf);
 		}
 		

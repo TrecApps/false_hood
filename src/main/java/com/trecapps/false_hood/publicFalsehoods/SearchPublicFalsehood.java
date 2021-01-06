@@ -6,6 +6,7 @@ import com.trecapps.false_hood.publicFigure.PublicFigure;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -50,7 +51,14 @@ public class SearchPublicFalsehood
      */
     List<PublicFigure> authors;
     
+    /**
+     * 
+     */
+   
     PublicFigure official;
+    
+     @Value("20")
+    byte officialType;
 
     public SearchPublicFalsehood() {
     	numberOfEntries = 20;
@@ -58,7 +66,7 @@ public class SearchPublicFalsehood
 
     public SearchPublicFalsehood(String terms, Date to, Date from,
         List<Region> regions, List<Institution> institutions, int numberOfEntries,
-        Severity minimum, Severity maximum, List<PublicFigure> authors, PublicFigure official)
+        Severity minimum, Severity maximum, List<PublicFigure> authors, PublicFigure official, byte officialType)
     {
         this.terms = terms;
         this.to = to;
@@ -70,11 +78,26 @@ public class SearchPublicFalsehood
         this.maximum = maximum;
         this.authors = authors;
         this.official = official;
+        this.officialType = officialType;
     }
     
     
 
     /**
+	 * @return the officialType
+	 */
+	public byte getOfficialType() {
+		return officialType;
+	}
+
+	/**
+	 * @param officialType the officialType to set
+	 */
+	public void setOfficialType(byte officialType) {
+		this.officialType = officialType;
+	}
+
+	/**
 	 * @return the official
 	 */
 	public PublicFigure getOfficial() {

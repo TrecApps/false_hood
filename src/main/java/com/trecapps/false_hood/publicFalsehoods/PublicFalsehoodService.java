@@ -131,6 +131,8 @@ public class PublicFalsehoodService {
     	Severity minSev = search.getMinimum();
     	Severity maxSev = search.getMaximum();
     	
+    	byte offType = search.getOfficialType();
+    	
     	Pageable p = PageRequest.of(search.getPage(), search.getNumberOfEntries() == 0 ? 1 : search.getNumberOfEntries());
     	
 
@@ -143,24 +145,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityRegionAndInst(p, begin, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityRegionAndInst(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityRegion(p, begin, end, maxSev.GetValue(), minSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityRegion(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityInstitution(p, begin, end, maxSev.GetValue(), minSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityInstitution(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverity(p, begin, end, maxSev.GetValue(), minSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverity(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegion(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficialRegion(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficialInstitution(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficialInstitution(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficial(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndBySeverityOfficial(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official);
     			}
     		}
     		else if(minSev != null)
@@ -168,24 +170,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityRegionAndInst(p, begin, end, minSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityRegionAndInst(p, offType, begin, end, minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityRegion(p, begin, end, minSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityRegion(p, offType, begin, end, minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityInstitution(p, begin, end, minSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityInstitution(p, offType, begin, end, minSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverity(p, begin, end, minSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverity(p, offType, begin, end, minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(p, begin, end, minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(p, offType, begin, end, minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegion(p, begin, end, minSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialRegion(p, offType, begin, end, minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(p, begin, end, minSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(p, offType, begin, end, minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficial(p, begin, end, minSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMinSeverityOfficial(p, offType, begin, end, minSev.GetValue(), official);
     			}
     		}
     		else if(maxSev != null)
@@ -193,24 +195,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(p, begin, end, maxSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(p, offType, begin, end, maxSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityRegion(p, begin, end, maxSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityRegion(p, offType, begin, end, maxSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityInstitution(p, begin, end, maxSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityInstitution(p, offType, begin, end, maxSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverity(p, begin, end, maxSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverity(p, offType, begin, end, maxSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(p, begin, end, maxSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(p, offType, begin, end, maxSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(p, begin, end, maxSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(p, offType, begin, end, maxSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(p, begin, end, maxSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(p, offType, begin, end, maxSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficial(p, begin, end, maxSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByMaxSeverityOfficial(p, offType, begin, end, maxSev.GetValue(), official);
     			}
     		}
     		else
@@ -218,24 +220,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByRegionAndInst(p, begin, end, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByRegionAndInst(p, offType, begin, end, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByRegion(p, begin, end, reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByRegion(p, offType, begin, end, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByInstitution(p, begin, end, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByInstitution(p, offType, begin, end, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetween(p, begin, end);
+    					return pfRepo.getConfirmedFalsehoodsBetween(p, offType, begin, end);
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficialRegionAndInst(p, begin, end, official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficialRegionAndInst(p, offType, begin, end, official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficialRegion(p, begin, end, official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficialRegion(p, offType, begin, end, official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficialInstitution(p, begin, end, official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficialInstitution(p, offType, begin, end, official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficial(p, begin, end, official);
+    					return pfRepo.getConfirmedFalsehoodsBetweenAndByOfficial(p, offType, begin, end, official);
     			}
     		}
     	}
@@ -246,24 +248,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityRegionAndInst(p, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityRegionAndInst(p, offType, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityRegion(p, end, maxSev.GetValue(), minSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityRegion(p, offType, end, maxSev.GetValue(), minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityInstitution(p, end, maxSev.GetValue(), minSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityInstitution(p, offType, end, maxSev.GetValue(), minSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverity(p, end, maxSev.GetValue(), minSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverity(p, offType, end, maxSev.GetValue(), minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(p, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegion(p, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficialRegion(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficialInstitution(p, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficialInstitution(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficial(p, end, maxSev.GetValue(), minSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndBySeverityOfficial(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official);
     			}
     		}
     		else if(minSev != null)
@@ -271,24 +273,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityRegionAndInst(p, end, minSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityRegionAndInst(p, offType, end, minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityRegion(p, end, minSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityRegion(p, offType, end, minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityInstitution(p, end, minSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityInstitution(p, offType, end, minSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverity(p, end, minSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverity(p, offType, end, minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(p, end, minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(p, offType, end, minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegion(p, end, minSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialRegion(p, offType, end, minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(p, end, minSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(p, offType, end, minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficial(p, end, minSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMinSeverityOfficial(p, offType, end, minSev.GetValue(), official);
     			}
     		}
     		else if(maxSev != null)
@@ -296,24 +298,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(p, end, maxSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(p, offType, end, maxSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityRegion(p, end, maxSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityRegion(p, offType, end, maxSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityInstitution(p, end, maxSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityInstitution(p, offType, end, maxSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverity(p, end, maxSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverity(p, offType, end, maxSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(p, end, maxSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(p, offType, end, maxSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(p, end, maxSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(p, offType, end, maxSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(p, end, maxSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(p, offType, end, maxSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficial(p, end, maxSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByMaxSeverityOfficial(p, offType, end, maxSev.GetValue(), official);
     			}
     		}
     		else
@@ -321,24 +323,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByRegionAndInst(p, end, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByRegionAndInst(p, offType, end, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByRegion(p, end, reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByRegion(p, offType, end, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByInstitution(p, end, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByInstitution(p, offType, end, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBefore(p, end);
+    					return pfRepo.getConfirmedFalsehoodsBefore(p, offType, end);
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficialRegionAndInst(p, end, official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficialRegionAndInst(p, offType, end, official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficialRegion(p, end, official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficialRegion(p, offType, end, official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficialInstitution(p, end, official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficialInstitution(p, offType, end, official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficial(p, end, official);
+    					return pfRepo.getConfirmedFalsehoodsBeforeAndByOfficial(p, offType, end, official);
     			}
     		}
     	}
@@ -349,24 +351,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBySeverityRegionAndInst(p, maxSev.GetValue(), minSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityRegionAndInst(p, offType, maxSev.GetValue(), minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBySeverityRegion(p, maxSev.GetValue(), minSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityRegion(p, offType, maxSev.GetValue(), minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBySeverityInstitution(p, maxSev.GetValue(), minSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityInstitution(p, offType, maxSev.GetValue(), minSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBySeverity(p, maxSev.GetValue(), minSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsBySeverity(p, offType, maxSev.GetValue(), minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficialRegionAndInst(p, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficialRegionAndInst(p, offType, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficialRegion(p, maxSev.GetValue(), minSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficialRegion(p, offType, maxSev.GetValue(), minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficialInstitution(p, maxSev.GetValue(), minSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficialInstitution(p, offType, maxSev.GetValue(), minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficial(p, maxSev.GetValue(), minSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsBySeverityOfficial(p, offType, maxSev.GetValue(), minSev.GetValue(), official);
     			}
     		}
     		else if(minSev != null)
@@ -374,24 +376,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityRegionAndInst(p, minSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityRegionAndInst(p, offType, minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityRegion(p, minSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityRegion(p, offType, minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityInstitution(p, minSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityInstitution(p, offType, minSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverity(p, minSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverity(p, offType, minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficialRegionAndInst(p, minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficialRegionAndInst(p, offType, minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficialRegion(p, minSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficialRegion(p, offType, minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficialInstitution(p, minSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficialInstitution(p, offType, minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficial(p, minSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsByMinSeverityOfficial(p, offType, minSev.GetValue(), official);
     			}
     		}
     		else if(maxSev != null)
@@ -399,24 +401,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityRegionAndInst(p, maxSev.GetValue(), reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityRegionAndInst(p, offType, maxSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityRegion(p, maxSev.GetValue(), reg);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityRegion(p, offType, maxSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityInstitution(p, maxSev.GetValue(), inst);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityInstitution(p, offType, maxSev.GetValue(), inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverity(p, maxSev.GetValue());
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverity(p, offType, maxSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficialRegionAndInst(p, maxSev.GetValue(), official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficialRegionAndInst(p, offType, maxSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficialRegion(p, maxSev.GetValue(), official, reg);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficialRegion(p, offType, maxSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficialInstitution(p, maxSev.GetValue(), official, inst);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficialInstitution(p, offType, maxSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficial(p, maxSev.GetValue(), official);
+    					return pfRepo.getConfirmedFalsehoodsByMaxSeverityOfficial(p, offType, maxSev.GetValue(), official);
     			}
     		}
     		else
@@ -424,24 +426,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByRegionAndInst(p, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsByRegionAndInst(p, offType, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsByRegion(p, reg);
+    					return pfRepo.getConfirmedFalsehoodsByRegion(p, offType, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByInstitution(p, inst);
+    					return pfRepo.getConfirmedFalsehoodsByInstitution(p, offType, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoods(p);
+    					return pfRepo.getConfirmedFalsehoods(p, offType);
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByOfficialRegionAndInst(p, official, reg, inst);
+    					return pfRepo.getConfirmedFalsehoodsByOfficialRegionAndInst(p, offType, official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getConfirmedFalsehoodsByOfficialRegion(p, official, reg);
+    					return pfRepo.getConfirmedFalsehoodsByOfficialRegion(p, offType, official, reg);
     				else if(inst != null)
-    					return pfRepo.getConfirmedFalsehoodsByOfficialInstitution(p, official, inst);
+    					return pfRepo.getConfirmedFalsehoodsByOfficialInstitution(p, offType, official, inst);
     				else
-    					return pfRepo.getConfirmedFalsehoodsByOfficial(p, official);
+    					return pfRepo.getConfirmedFalsehoodsByOfficial(p, offType, official);
     				
     			}
     		}
@@ -463,6 +465,7 @@ public class PublicFalsehoodService {
     	Severity minSev = search.getMinimum();
     	Severity maxSev = search.getMaximum();
     	
+    	byte offType = search.getOfficialType();
     	Pageable p = PageRequest.of(search.getPage(), search.getNumberOfEntries() == 0 ? 1 : search.getNumberOfEntries());
     	
     	if(begin != null && end != null)
@@ -472,24 +475,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityRegionAndInst(p, begin, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityRegionAndInst(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityRegion(p, begin, end, maxSev.GetValue(), minSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityRegion(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityInstitution(p, begin, end, maxSev.GetValue(), minSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityInstitution(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverity(p, begin, end, maxSev.GetValue(), minSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverity(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficialRegionAndInst(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficialRegion(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficialRegion(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficialInstitution(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficialInstitution(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficial(p, begin, end, maxSev.GetValue(), minSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndBySeverityOfficial(p, offType, begin, end, maxSev.GetValue(), minSev.GetValue(), official);
     			}
     		}
     		else if(minSev != null)
@@ -497,24 +500,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityRegionAndInst(p, begin, end, minSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityRegionAndInst(p, offType, begin, end, minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityRegion(p, begin, end, minSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityRegion(p, offType, begin, end, minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityInstitution(p, begin, end, minSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityInstitution(p, offType, begin, end, minSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverity(p, begin, end, minSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverity(p, offType, begin, end, minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(p, begin, end, minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegionAndInst(p, offType, begin, end, minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegion(p, begin, end, minSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficialRegion(p, offType, begin, end, minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(p, begin, end, minSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficialInstitution(p, offType, begin, end, minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficial(p, begin, end, minSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMinSeverityOfficial(p, offType, begin, end, minSev.GetValue(), official);
     			}
     		}
     		else if(maxSev != null)
@@ -522,24 +525,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(p, begin, end, maxSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityRegionAndInst(p, offType, begin, end, maxSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityRegion(p, begin, end, maxSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityRegion(p, offType, begin, end, maxSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityInstitution(p, begin, end, maxSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityInstitution(p, offType, begin, end, maxSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverity(p, begin, end, maxSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverity(p, offType, begin, end, maxSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(p, begin, end, maxSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegionAndInst(p, offType, begin, end, maxSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(p, begin, end, maxSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialRegion(p, offType, begin, end, maxSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(p, begin, end, maxSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficialInstitution(p, offType, begin, end, maxSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficial(p, begin, end, maxSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByMaxSeverityOfficial(p, offType, begin, end, maxSev.GetValue(), official);
     			}
     		}
     		else
@@ -547,24 +550,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByRegionAndInst(p, begin, end, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByRegionAndInst(p, offType, begin, end, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByRegion(p, begin, end, reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByRegion(p, offType, begin, end, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByInstitution(p, begin, end, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByInstitution(p, offType, begin, end, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetween(p, begin, end);
+    					return pfRepo.getRejectedFalsehoodsBetween(p, offType, begin, end);
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficialRegionAndInst(p, begin, end, official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficialRegionAndInst(p, offType, begin, end, official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficialRegion(p, begin, end, official, reg);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficialRegion(p, offType, begin, end, official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficialInstitution(p, begin, end, official, inst);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficialInstitution(p, offType, begin, end, official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficial(p, begin, end, official);
+    					return pfRepo.getRejectedFalsehoodsBetweenAndByOfficial(p, offType, begin, end, official);
     			}
     		}
     	}
@@ -575,24 +578,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityRegionAndInst(p, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityRegionAndInst(p, offType, end, maxSev.GetValue(), minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityRegion(p, end, maxSev.GetValue(), minSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityRegion(p, offType, end, maxSev.GetValue(), minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityInstitution(p, end, maxSev.GetValue(), minSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityInstitution(p, offType, end, maxSev.GetValue(), minSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverity(p, end, maxSev.GetValue(), minSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverity(p, offType, end, maxSev.GetValue(), minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(p, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficialRegionAndInst(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficialRegion(p, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficialRegion(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficialInstitution(p, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficialInstitution(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficial(p, end, maxSev.GetValue(), minSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndBySeverityOfficial(p, offType, end, maxSev.GetValue(), minSev.GetValue(), official);
     			}
     		}
     		else if(minSev != null)
@@ -600,24 +603,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityRegionAndInst(p, end, minSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityRegionAndInst(p, offType, end, minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityRegion(p, end, minSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityRegion(p, offType, end, minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityInstitution(p, end, minSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityInstitution(p, offType, end, minSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverity(p, end, minSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverity(p, offType, end, minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(p, end, minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegionAndInst(p, offType, end, minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegion(p, end, minSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficialRegion(p, offType, end, minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(p, end, minSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficialInstitution(p, offType, end, minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficial(p, end, minSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMinSeverityOfficial(p, offType, end, minSev.GetValue(), official);
     			}
     		}
     		else if(maxSev != null)
@@ -625,24 +628,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(p, end, maxSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityRegionAndInst(p, offType, end, maxSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityRegion(p, end, maxSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityRegion(p, offType, end, maxSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityInstitution(p, end, maxSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityInstitution(p, offType, end, maxSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverity(p, end, maxSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverity(p, offType, end, maxSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(p, end, maxSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegionAndInst(p, offType, end, maxSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(p, end, maxSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialRegion(p, offType, end, maxSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(p, end, maxSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficialInstitution(p, offType, end, maxSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficial(p, end, maxSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByMaxSeverityOfficial(p, offType, end, maxSev.GetValue(), official);
     			}
     		}
     		else
@@ -650,24 +653,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByRegionAndInst(p, end, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByRegionAndInst(p, offType, end, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByRegion(p, end, reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByRegion(p, offType, end, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByInstitution(p, end, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByInstitution(p, offType, end, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBefore(p, end);
+    					return pfRepo.getRejectedFalsehoodsBefore(p, offType, end);
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficialRegionAndInst(p, end, official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficialRegionAndInst(p, offType, end, official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficialRegion(p, end, official, reg);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficialRegion(p, offType, end, official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficialInstitution(p, end, official, inst);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficialInstitution(p, offType, end, official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficial(p, end, official);
+    					return pfRepo.getRejectedFalsehoodsBeforeAndByOfficial(p, offType, end, official);
     			}
     		}
     	}
@@ -678,24 +681,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBySeverityRegionAndInst(p, maxSev.GetValue(), minSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBySeverityRegionAndInst(p, offType, maxSev.GetValue(), minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBySeverityRegion(p, maxSev.GetValue(), minSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsBySeverityRegion(p, offType, maxSev.GetValue(), minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBySeverityInstitution(p, maxSev.GetValue(), minSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsBySeverityInstitution(p, offType, maxSev.GetValue(), minSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBySeverity(p, maxSev.GetValue(), minSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsBySeverity(p, offType, maxSev.GetValue(), minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsBySeverityOfficialRegionAndInst(p, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsBySeverityOfficialRegionAndInst(p, offType, maxSev.GetValue(), minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsBySeverityOfficialRegion(p, maxSev.GetValue(), minSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsBySeverityOfficialRegion(p, offType, maxSev.GetValue(), minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsBySeverityOfficialInstitution(p, maxSev.GetValue(), minSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsBySeverityOfficialInstitution(p, offType, maxSev.GetValue(), minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsBySeverityOfficial(p, maxSev.GetValue(), minSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsBySeverityOfficial(p, offType, maxSev.GetValue(), minSev.GetValue(), official);
     			}
     		}
     		else if(minSev != null)
@@ -703,24 +706,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityRegionAndInst(p, minSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityRegionAndInst(p, offType, minSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityRegion(p, minSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityRegion(p, offType, minSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityInstitution(p, minSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityInstitution(p, offType, minSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsByMinSeverity(p, minSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsByMinSeverity(p, offType, minSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficialRegionAndInst(p, minSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficialRegionAndInst(p, offType, minSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficialRegion(p, minSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficialRegion(p, offType, minSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficialInstitution(p, minSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficialInstitution(p, offType, minSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficial(p, minSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsByMinSeverityOfficial(p, offType, minSev.GetValue(), official);
     			}
     		}
     		else if(maxSev != null)
@@ -728,24 +731,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityRegionAndInst(p, maxSev.GetValue(), reg, inst);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityRegionAndInst(p, offType, maxSev.GetValue(), reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityRegion(p, maxSev.GetValue(), reg);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityRegion(p, offType, maxSev.GetValue(), reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityInstitution(p, maxSev.GetValue(), inst);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityInstitution(p, offType, maxSev.GetValue(), inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverity(p, maxSev.GetValue());
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverity(p, offType, maxSev.GetValue());
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficialRegionAndInst(p, maxSev.GetValue(), official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficialRegionAndInst(p, offType, maxSev.GetValue(), official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficialRegion(p, maxSev.GetValue(), official, reg);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficialRegion(p, offType, maxSev.GetValue(), official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficialInstitution(p, maxSev.GetValue(), official, inst);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficialInstitution(p, offType, maxSev.GetValue(), official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficial(p, maxSev.GetValue(), official);
+    					return pfRepo.getRejectedFalsehoodsByMaxSeverityOfficial(p, offType, maxSev.GetValue(), official);
     			}
     		}
     		else
@@ -753,24 +756,24 @@ public class PublicFalsehoodService {
     			if(official == null)
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsByRegionAndInst(p, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsByRegionAndInst(p, offType, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsByRegion(p, reg);
+    					return pfRepo.getRejectedFalsehoodsByRegion(p, offType, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsByInstitution(p, inst);
+    					return pfRepo.getRejectedFalsehoodsByInstitution(p, offType, inst);
     				else
-    					return pfRepo.getRejectedFalsehoods(p);
+    					return pfRepo.getRejectedFalsehoods(p, offType);
     			}
     			else
     			{
     				if(reg != null && inst != null)
-    					return pfRepo.getRejectedFalsehoodsByOfficialRegionAndInst(p, official, reg, inst);
+    					return pfRepo.getRejectedFalsehoodsByOfficialRegionAndInst(p, offType, official, reg, inst);
     				else if(reg != null)
-    					return pfRepo.getRejectedFalsehoodsByOfficialRegion(p, official, reg);
+    					return pfRepo.getRejectedFalsehoodsByOfficialRegion(p, offType, official, reg);
     				else if(inst != null)
-    					return pfRepo.getRejectedFalsehoodsByOfficialInstitution(p, official, inst);
+    					return pfRepo.getRejectedFalsehoodsByOfficialInstitution(p, offType, official, inst);
     				else
-    					return pfRepo.getRejectedFalsehoodsByOfficial(p, official);
+    					return pfRepo.getRejectedFalsehoodsByOfficial(p, offType, official);
     				
     			}
     		}

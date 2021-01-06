@@ -83,6 +83,7 @@ public class PublicFalsehoodTest {
 	{
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		search.setFrom(new Date(DATE_2017 - 50L));
 		List<PublicFalsehood> f = fController.searchFalsehoodByParams(search);
@@ -110,6 +111,7 @@ public class PublicFalsehoodTest {
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		search.setOfficial(figures.get(1));
 		
@@ -135,6 +137,7 @@ public class PublicFalsehoodTest {
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		search.setMaximum(Severity.OBJECTOVE_FALSEHOOD);
 		
@@ -165,6 +168,7 @@ public class PublicFalsehoodTest {
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		
 		search.setInstitution(institutions.get(0));
@@ -189,6 +193,7 @@ public class PublicFalsehoodTest {
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Start with Minimum
 		search.setMinimum(Severity.OBJECTOVE_FALSEHOOD);
@@ -223,6 +228,7 @@ public class PublicFalsehoodTest {
 		
 		// Blank Slate for Maximum Severity
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		search.setMaximum(Severity.MISLEADING);
 		search.setTo(new Date(DATE_2020 -100));
@@ -241,6 +247,7 @@ public class PublicFalsehoodTest {
 		
 		// Blank Slate for minimum and maximum severity
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		search.setMaximum(Severity.MISLEADING);
 		search.setMinimum(Severity.SUBJECTIVE_FALSEHOOD);
@@ -267,6 +274,7 @@ public class PublicFalsehoodTest {
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Start with Minimum
 		search.setOfficial(figures.get(0));
@@ -302,6 +310,7 @@ public class PublicFalsehoodTest {
 		
 		// Blank Slate for Maximum Severity
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		search.setOfficial(figures.get(0));
 		
 		search.setMaximum(Severity.MISLEADING);
@@ -321,6 +330,7 @@ public class PublicFalsehoodTest {
 		
 		// Blank Slate for minimum and maximum severity
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		search.setOfficial(figures.get(0));
 		
 		search.setMaximum(Severity.MISLEADING);
@@ -344,6 +354,7 @@ public class PublicFalsehoodTest {
 		
 		
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Start with Minimum, No Time Constraints this time
 		search.setOfficial(figures.get(0));
@@ -356,6 +367,7 @@ public class PublicFalsehoodTest {
 		
 		// Blank Slate for Maximum Severity, No Time Constraints this time
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		search.setOfficial(figures.get(0));
 		
 		search.setMaximum(Severity.MISLEADING);
@@ -368,6 +380,7 @@ public class PublicFalsehoodTest {
 		
 		// Blank Slate for minimum and maximum severity, No Time Constraints this time
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		search.setOfficial(figures.get(0));
 		
 		search.setMaximum(Severity.MISLEADING);
@@ -382,6 +395,7 @@ public class PublicFalsehoodTest {
 		
 		// Before, Official
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		search.setOfficial(figures.get(1));
 		search.setTo(new Date(DATE_2014));
 		
@@ -434,6 +448,7 @@ public class PublicFalsehoodTest {
 		
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Region And Public Figure
 		search.setRegion(regions.get(1));
@@ -544,6 +559,7 @@ public class PublicFalsehoodTest {
 		
 		///////// No Public FIgure now //////////////////
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Region
 		search.setRegion(regions.get(1));
@@ -653,6 +669,7 @@ public class PublicFalsehoodTest {
 		
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Region And Public Figure
 		search.setRegion(regions.get(1));
@@ -764,6 +781,7 @@ public class PublicFalsehoodTest {
 		
 		///////// No Public FIgure now //////////////////
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Region
 		search.setRegion(regions.get(1));
@@ -875,6 +893,7 @@ public class PublicFalsehoodTest {
 		
 		
 		SearchPublicFalsehood search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Institution And Public Figure
 		search.setInstitution(institutions.get(2));
@@ -985,6 +1004,7 @@ public class PublicFalsehoodTest {
 		
 		///////// No Public FIgure now //////////////////
 		search = new SearchPublicFalsehood();
+		search.setOfficialType((byte)20);
 		
 		// Institution
 		search.setInstitution(institutions.get(2));
@@ -1171,7 +1191,7 @@ public class PublicFalsehoodTest {
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null));
+		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null,(byte)20));
 		
 		System.out.println("In Test with number of falsehoods: " + localFalsehoods.size());
 		
@@ -1255,7 +1275,7 @@ public class PublicFalsehoodTest {
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null,null, null, null, null, 20, null,null, null,null));
+		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null,null, null, null, null, 20, null,null, null,null, (byte)20));
 		
 		
 		assertEquals(10, localFalsehoods.size());
