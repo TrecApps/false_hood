@@ -35,7 +35,9 @@ public class FalsehoodRepository implements FalsehoodRepo
     	if(tagAtt == null || terms == null)
     		return true;
     	
-    	List<String> from = List.of(tagAtt.split("|"));
+    	List<String> from = List.of(tagAtt.split("\\|"));
+    	
+    	System.out.println("Searching for Terms " + from + " in " + terms);
     	
     	for(int rust = 0; rust < from.size(); rust++)
     	{
@@ -129,6 +131,8 @@ public class FalsehoodRepository implements FalsehoodRepo
         appeals.removeIf((app) -> entity.getId().equals(app.getId()));
         appeals.add(entity);
 
+        System.out.println("Saved Entity to Falsehoods: " + entity);
+        
         return entity;
     }
 

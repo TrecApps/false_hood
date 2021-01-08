@@ -507,7 +507,12 @@ public class FalsehoodService {
 	{
 		f.setId(null);
 		
-		
+		if(f.getTags() != null)
+		{
+			String tags = f.getTags();
+			tags = tags.replace("\n", "|");
+			f.setTags(tags);
+		}
 		
 		f = fRepo.save(f);
 		

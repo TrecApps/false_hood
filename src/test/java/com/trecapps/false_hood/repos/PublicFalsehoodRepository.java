@@ -41,7 +41,7 @@ public class PublicFalsehoodRepository implements PublicFalsehoodRepo
     	if(tagAtt == null || terms == null)
     		return true;
     	
-    	List<String> from = List.of(tagAtt.split("|"));
+    	List<String> from = List.of(tagAtt.split("\\|"));
     	
     	for(int rust = 0; rust < from.size(); rust++)
     	{

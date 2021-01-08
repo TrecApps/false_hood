@@ -91,19 +91,36 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
-		
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setTo(new Date(DATE_2020 - 1L));
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(null);
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(4, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(4, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 	}
 	
 	@Test
@@ -120,6 +137,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Loki");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setAuthor(figures.get(2));
 		
@@ -127,6 +150,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Thor");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 	}
 	
 	@Test
@@ -144,6 +173,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setOutlet(rOutlets.get(1));
 		
@@ -152,6 +187,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 	}
 	
 
@@ -170,6 +211,12 @@ public class FalsehoodTest {
 		assertEquals(4, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(4, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		search.setMinimum(Severity.HYPOCRISY);
 		
@@ -177,6 +224,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		search.setMaximum(null);
 		
@@ -184,6 +237,12 @@ public class FalsehoodTest {
 		assertEquals(3, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(3, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 	}
 	
 	@Test
@@ -202,6 +261,13 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
+		
 		
 		search.setTo(new Date(DATE_2014 - 100));
 		
@@ -210,6 +276,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setTo(new Date(DATE_2014 + 100));
 		
@@ -217,6 +289,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(null);
 		
@@ -224,6 +302,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Blank Slate for Maximum Severity
 		search = new SearchFalsehood();
@@ -235,6 +319,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(new Date(DATE_2014 + 200));
 		
@@ -242,6 +332,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Blank Slate for minimum and maximum severity
 		search = new SearchFalsehood();
@@ -255,6 +351,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(new Date(DATE_2014 + 200));
 		
@@ -262,6 +364,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 	}
 	
 	@Test
@@ -281,6 +389,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setTo(new Date(DATE_2014 - 100));
 		
@@ -289,6 +403,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setTo(new Date(DATE_2014 + 100));
 		
@@ -296,6 +416,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(null);
 		
@@ -303,6 +429,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Blank Slate for Maximum Severity
 		search = new SearchFalsehood();
@@ -315,6 +447,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(new Date(DATE_2014 + 200));
 		
@@ -322,6 +460,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Blank Slate for minimum and maximum severity
 		search = new SearchFalsehood();
@@ -336,6 +480,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		search.setFrom(new Date(DATE_2014 + 200));
 		
@@ -343,6 +493,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Public Figure, Before
 		search = new SearchFalsehood();
@@ -353,6 +509,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// Public Figure, Between
 		search.setFrom(new Date(DATE_2014));
@@ -361,6 +523,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Public Figure, Min Severity
 		search.setTo(null);
@@ -372,6 +540,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Public Figure, Severity
 		search.setMaximum(Severity.OBJECTOVE_FALSEHOOD);
@@ -380,6 +554,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Public Figure, Max Severity
 		search.setMinimum(null);
@@ -388,6 +568,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 	}
 
 	@Test
@@ -406,6 +592,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 
 		// now do Before, Outlet
 		search.setFrom(null);
@@ -415,6 +607,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 
 		// now do Max Severity, Outlet
 		search.setOutlet(rOutlets.get(1));
@@ -425,6 +623,17 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms("Thanos");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Min Severity, Outlet
 		search.setMinimum(Severity.OBJECTOVE_FALSEHOOD);
@@ -434,6 +643,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// Severity, Outlet
 		search.setMinimum(Severity.FAULTY_LOGIC);
@@ -443,6 +658,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Max Severity, Outlet, and Before
 		search.setOutlet(rOutlets.get(1));
@@ -454,6 +675,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// Max Severity, Outlet, and Between
 		search.setFrom(new Date(DATE_2010));
@@ -465,6 +692,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// Min Severity, Outlet, Before
 		search.setMinimum(Severity.SUBJECTIVE_FALSEHOOD);
@@ -476,6 +709,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Min Severity, Outlet, Between
 		search.setFrom(new Date(2010));
@@ -486,6 +725,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Severity, Outlet, Before
 		search.setMaximum(Severity.OBJECTOVE_FALSEHOOD);
@@ -495,6 +740,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 		
 		// Severity, Outlet, Between
 		search.setFrom(new Date(2010));
@@ -502,6 +753,12 @@ public class FalsehoodTest {
 		assertEquals(1, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(1, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(1, f.size());
+		search.setTerms(null);
 	}
 	
 	@Test
@@ -585,6 +842,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// By Max Severity
 		search.setMaximum(Severity.HYPOCRISY);
@@ -593,6 +856,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// By Severity
 		search.setMinimum(Severity.FAULTY_LOGIC);
@@ -601,6 +870,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// By Min Severity
 		search.setMaximum(null);
@@ -609,6 +884,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// Start Before
 		search.setTo(new Date(DATE_2020));
@@ -618,6 +899,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// Before, Min Severity
 		search.setMinimum(Severity.FAULTY_LOGIC);
@@ -626,6 +913,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// Before, Severity
 		search.setMaximum(Severity.HYPOCRISY);
@@ -634,6 +927,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// Before, Max Severity
 		search.setMinimum(null);
@@ -642,6 +941,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// Between
 		search.setFrom(new Date(DATE_2010));
@@ -651,6 +956,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// Before, Min Severity
 		search.setMinimum(Severity.FAULTY_LOGIC);
@@ -659,6 +970,12 @@ public class FalsehoodTest {
 		assertEquals(2, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(2, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(2, f.size());
+		search.setTerms(null);
 		
 		// Before, Severity
 		search.setMaximum(Severity.HYPOCRISY);
@@ -667,6 +984,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 		
 		// Before, Max Severity
 		search.setMinimum(null);
@@ -675,6 +998,12 @@ public class FalsehoodTest {
 		assertEquals(0, f.size());
 		f = fController.searchRFalsehoodByParams(search);
 		assertEquals(0, f.size());
+		search.setTerms("Vader");
+		f = fController.searchFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		f = fController.searchRFalsehoodByParams(search);
+		assertEquals(0, f.size());
+		search.setTerms(null);
 	}
 	
 	public static void initializeOutlets(FalsehoodApp app) throws URISyntaxException
@@ -699,31 +1028,31 @@ public class FalsehoodTest {
 		if(falsehoods[0] == null)
 		{
 			falsehoods[0] = new FullFalsehood("The first Falsehood Detected", // Wed Nov 17 2010 06:20:00
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2010),"","Vader;Palpatine;Empire"),
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2010),"","Vader|Palpatine|Empire"),
 					"Vader;Palpatine;Empire");
 		}
 		if(falsehoods[1] == null)
 		{
 			falsehoods[1] = new FullFalsehood("The Second Falsehood Detected", // Fri Oct 13 2017 07:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2017),"","Vader;Voldemort;Thanos"),
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2017),"","Vader|Voldemort|Thanos"),
 					"Vader;Voldemort;Thanos");
 		}
 		if(falsehoods[2] == null)
 		{
 			falsehoods[2] = new FullFalsehood("The Third Falsehood Detected", // Tue Jun 17 2014 04:13:20
-					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2014),"","Voldemort;Dumbledore;Ministry"),
+					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2014),"","Voldemort|Dumbledore;|Ministry"),
 					"Voldemort;Dumbledore;Ministry");
 		}
 		if(falsehoods[3] == null)
 		{
 			falsehoods[3] = new FullFalsehood("The Fourth Falsehood Detected", // Sat Oct 17 2020 23:46:40
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2020),"","Thanos;Ironman;Thor;Serena"),
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2020),"","Thanos|Ironman|Thor|Serena"),
 					"Thanos;Ironman;Thor;Serena");
 		}
 		if(falsehoods[4] == null)
 		{
 			falsehoods[4] = new FullFalsehood("The Fifth Falsehood Detected", // Mon May 05 2008 09:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2008),"","Loki;Sif;Serena"),
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2008),"","Loki|Sif|Serena"),
 					"Loki;Sif;Serena");
 		}
 		
@@ -731,31 +1060,31 @@ public class FalsehoodTest {
 		if(falsehoods[5] == null)
 		{
 			falsehoods[5] = new FullFalsehood("The first Falsehood Detected", // Wed Nov 17 2010 06:20:00
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2017),"","Vader;Palpatine;Empire"),
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)1, figures.get(0), null, "source1", new Date(DATE_2017),"","Vader|Palpatine|Empire"),
 					"Vader;Palpatine;Empire");
 		}
 		if(falsehoods[6] == null)
 		{
 			falsehoods[6] = new FullFalsehood("The Second Falsehood Detected", // Fri Oct 13 2017 07:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2014),"","Vader;Voldemort;Thanos"),
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)3, figures.get(0), null, "source2", new Date(DATE_2014),"","Vader|Voldemort|Thanos"),
 					"Vader;Voldemort;Thanos");
 		}
 		if(falsehoods[7] == null)
 		{
 			falsehoods[7] = new FullFalsehood("The Third Falsehood Detected", // Tue Jun 17 2014 04:13:20
-					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2010),"","Voldemort;Dumbledore;Ministry"),
+					new Falsehood(null, outlet3, (byte)0, (byte)0, null, (byte)4, figures.get(2), null, "source3", new Date(DATE_2010),"","Voldemort|Dumbledore|Ministry"),
 					"Voldemort;Dumbledore;Ministry");
 		}
 		if(falsehoods[8] == null)
 		{
 			falsehoods[8] = new FullFalsehood("The Fourth Falsehood Detected", // Sat Oct 17 2020 23:46:40
-					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2008),"","Thanos;Ironman;Thor;Serena"),
+					new Falsehood(null, outlet1, (byte)0, (byte)0, null, (byte)5, figures.get(2), null, "source4", new Date(DATE_2008),"","Thanos|Ironman|Thor|Serena"),
 					"Thanos;Ironman;Thor;Serena");
 		}
 		if(falsehoods[9] == null)
 		{
 			falsehoods[9] = new FullFalsehood("The Fifth Falsehood Detected", // Mon May 05 2008 09:06:40
-					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2020),"","Loki;Sif;Serena"),
+					new Falsehood(null, outlet2, (byte)0, (byte)0, null, (byte)0, figures.get(1), null, "source5", new Date(DATE_2020),"","Loki|Sif|Serena"),
 					"Loki;Sif;Serena");
 		}
 		
