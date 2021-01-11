@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.trecapps.false_hood.commonLie.CommonLie;
+import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
 import com.trecapps.false_hood.publicFigure.PublicFigure;
 
 
@@ -148,6 +149,7 @@ public class Falsehood implements Comparable<Falsehood>{
 		if(!canUpgrade())
 			return false;
 		severity--;
+		status = FalsehoodStatus.MODIFIED.GetValue();
 		return true;
 	}
 	

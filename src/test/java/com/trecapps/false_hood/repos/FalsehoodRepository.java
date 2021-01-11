@@ -248,7 +248,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		for(Falsehood f: appeals)
 		{
 			int stat = f.getStatus();
-			if(stat > 1 && stat < 5)
+			if(((stat > 1 && stat < 5) || stat > 11))
 				ret.add(f);
 		}
 		
@@ -262,7 +262,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		for(Falsehood f: appeals)
 		{
 			int stat = f.getStatus();
-			if(stat > 1 && stat < 5 && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
+			if(((stat > 1 && stat < 5) || stat > 11) && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
 				ret.add(f);
 		}
 		
@@ -277,7 +277,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			byte sev = f.getSeverity();
-			if(stat > 1 && stat < 5 && sev >= maxSeverity && sev <= minSeverity)
+			if(((stat > 1 && stat < 5) || stat > 11) && sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -292,7 +292,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			byte sev = f.getSeverity();
-			if(stat > 1 && stat < 5 && sev <= minSeverity)
+			if(((stat > 1 && stat < 5) || stat > 11) && sev <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -307,7 +307,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			byte sev = f.getSeverity();
-			if(stat > 1 && stat < 5 & sev >= maxSeverity)
+			if(((stat > 1 && stat < 5) || stat > 11) & sev >= maxSeverity)
 				ret.add(f);
 		}
 		
@@ -394,7 +394,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
-			if(stat > 1 && stat < 5 && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		ret = cullList(p,ret);
@@ -408,7 +408,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		for(Falsehood f: appeals)
 		{
 			int stat = f.getStatus();
-			if(stat > 1 && stat < 5 && f.getDateMade().getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && f.getDateMade().getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -423,7 +423,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId))
 				ret.add(f);
 		}
 		
@@ -440,7 +440,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			byte sev = f.getSeverity();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && sev >= maxSeverity && sev <= minSeverity)
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -456,7 +456,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity)
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -472,7 +472,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity)
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity)
 				ret.add(f);
 		}
 		
@@ -489,7 +489,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			Date d = f.getDateMade();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -504,7 +504,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getDateMade().getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getDateMade().getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -521,7 +521,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
 				ret.add(f);
 		}
 		
@@ -681,7 +681,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			
 			MediaOutlet mo = f.getOutlet();
 			byte sev = f.getSeverity();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 				&& sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
@@ -699,7 +699,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 				&& f.getSeverity() <= minSeverity)
 				ret.add(f);
 		}
@@ -717,7 +717,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 				&& f.getSeverity() >= maxSeverity)
 				ret.add(f);
 		}
@@ -735,7 +735,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			Date d = f.getDateMade();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -752,7 +752,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			Date d = f.getDateMade();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -771,7 +771,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			
 			MediaOutlet mo = f.getOutlet();
 			byte sev = f.getSeverity();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())) 
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())) 
 					&& sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
@@ -789,7 +789,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity)
 				ret.add(f);
 		}
@@ -807,7 +807,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity)
 				ret.add(f);
 		}
@@ -975,7 +975,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity
 					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -993,7 +993,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1010,7 +1010,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1027,7 +1027,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1043,7 +1043,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1059,7 +1059,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1076,7 +1076,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1094,7 +1094,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1112,7 +1112,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null  &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null  &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1130,7 +1130,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1148,7 +1148,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1166,7 +1166,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1184,7 +1184,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId)
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId)
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1202,7 +1202,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1219,7 +1219,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) 
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) 
 					&& f.getSeverity() >= maxSeverity  && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1237,7 +1237,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) 
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) 
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1255,7 +1255,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1272,7 +1272,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity  && d.getTime() <= end.getTime())
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity  && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -1289,7 +1289,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1307,7 +1307,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1325,7 +1325,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1343,7 +1343,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1361,7 +1361,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1379,7 +1379,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1397,7 +1397,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1415,7 +1415,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -1895,7 +1895,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		for(Falsehood f: appeals)
 		{
 			int stat = f.getStatus();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11))
 				ret.add(f);
 		}
 		
@@ -1909,7 +1909,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		for(Falsehood f: appeals)
 		{
 			int stat = f.getStatus();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
 				ret.add(f);
 		}
 		
@@ -1924,7 +1924,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			byte sev = f.getSeverity();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && sev >= maxSeverity && sev <= minSeverity)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -1939,7 +1939,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			byte sev = f.getSeverity();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && sev <= minSeverity)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && sev <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -1954,7 +1954,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			byte sev = f.getSeverity();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 & sev >= maxSeverity)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) & sev >= maxSeverity)
 				ret.add(f);
 		}
 		
@@ -2041,7 +2041,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		ret = cullList(p,ret);
@@ -2055,7 +2055,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		for(Falsehood f: appeals)
 		{
 			int stat = f.getStatus();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && f.getDateMade().getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && f.getDateMade().getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2070,7 +2070,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId))
 				ret.add(f);
 		}
 		
@@ -2087,7 +2087,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			byte sev = f.getSeverity();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && sev >= maxSeverity && sev <= minSeverity)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -2103,7 +2103,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity)
 				ret.add(f);
 		}
 		
@@ -2119,7 +2119,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity)
 				ret.add(f);
 		}
 		
@@ -2136,7 +2136,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			Date d = f.getDateMade();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2151,7 +2151,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 		{
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getDateMade().getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getDateMade().getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2168,7 +2168,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())))
 				ret.add(f);
 		}
 		
@@ -2328,7 +2328,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			
 			MediaOutlet mo = f.getOutlet();
 			byte sev = f.getSeverity();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 				&& sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
@@ -2346,7 +2346,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 				&& f.getSeverity() <= minSeverity)
 				ret.add(f);
 		}
@@ -2364,7 +2364,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 				&& f.getSeverity() >= maxSeverity)
 				ret.add(f);
 		}
@@ -2382,7 +2382,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			Date d = f.getDateMade();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2399,7 +2399,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			MediaOutlet mo = f.getOutlet();
 			Date d = f.getDateMade();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2418,7 +2418,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			
 			MediaOutlet mo = f.getOutlet();
 			byte sev = f.getSeverity();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())) 
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2())) 
 					&& sev >= maxSeverity && sev <= minSeverity)
 				ret.add(f);
 		}
@@ -2436,7 +2436,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity)
 				ret.add(f);
 		}
@@ -2454,7 +2454,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity)
 				ret.add(f);
 		}
@@ -2622,7 +2622,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity
 					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2640,7 +2640,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2657,7 +2657,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2674,7 +2674,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2690,7 +2690,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2706,7 +2706,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2723,7 +2723,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2741,7 +2741,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2759,7 +2759,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null  &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null  &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2777,7 +2777,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2795,7 +2795,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2813,7 +2813,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && (author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2831,7 +2831,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId)
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId)
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2849,7 +2849,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2866,7 +2866,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) 
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) 
 					&& f.getSeverity() >= maxSeverity  && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2884,7 +2884,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) 
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) 
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2902,7 +2902,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2919,7 +2919,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity  && d.getTime() <= end.getTime())
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) && f.getSeverity() >= maxSeverity  && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
 		
@@ -2936,7 +2936,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2954,7 +2954,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2972,7 +2972,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -2990,7 +2990,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -3008,7 +3008,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() <= minSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -3026,7 +3026,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& f.getSeverity() >= maxSeverity && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -3044,7 +3044,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() >= begin.getTime() && d.getTime() <= end.getTime())
 				ret.add(f);
 		}
@@ -3062,7 +3062,7 @@ public class FalsehoodRepository implements FalsehoodRepo
 			int stat = f.getStatus();
 			Date d = f.getDateMade();
 			MediaOutlet mo = f.getOutlet();
-			if(foundTerm(f.getTags(), terms) && stat > 1 && stat < 5 && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
+			if(foundTerm(f.getTags(), terms) && ((stat > 1 && stat < 5) || stat > 11) && mo != null && mo.equals(outletId) &&(author.equals(f.getAuthor1()) || author.equals(f.getAuthor2()))
 					&& d.getTime() <= end.getTime())
 				ret.add(f);
 		}

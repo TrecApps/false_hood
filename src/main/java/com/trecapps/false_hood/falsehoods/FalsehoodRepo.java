@@ -18,181 +18,181 @@ public interface FalsehoodRepo extends JpaRepository<Falsehood, BigInteger> {
 	
 	//// Queries where Falsehoods are merely submitted
 	
-	@Query("select f from Falsehood f where f.status = 0 or f.status = 2")
+	@Query("select f from Falsehood f where f.status = 10 or f.status = 11 or f.status < 2")
 	List<Falsehood> getSubmittedFalsehood(Pageable p);
 	
 	//// Queries where Falsehoods are considered confirmed and active
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11)")
 	List<Falsehood> getConfirmedFalsehoods(Pageable p);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficial(Pageable p, @Param("author")PublicFigure author);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBySeverity(Pageable p, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodByMinSeverity(Pageable p, @Param("minSeverity")byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodByMaxSeverity(Pageable p, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBetween(Pageable p, @Param("begin") Date begin, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBefore(Pageable p, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId")
 	List<Falsehood> getConfirmedFalsehoodsByOutlet(Pageable p, @Param("outletId") MediaOutlet outletId);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByOutletAndSeverity(Pageable p, @Param("outletId") MediaOutlet outletId,
 			@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByOutletAndMinSeverity(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByOutletAndMaxSeverity(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and f.dateMade >= :begin and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and f.dateMade >= :begin and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndOutlet(Pageable p, @Param("author")PublicFigure author, @Param("outletId") MediaOutlet outletId);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndSeverity(Pageable p, @Param("author")PublicFigure author, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndMinSeverity(Pageable p, @Param("author")PublicFigure author, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndMaxSeverity(Pageable p, @Param("author")PublicFigure author, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and (f.author1 = :author or f.author2 = :author) and f.dateMade >= :begin and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and (f.author1 = :author or f.author2 = :author) and f.dateMade >= :begin and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByPublicOfficial(Pageable p, @Param("author")PublicFigure author, @Param("begin") Date begin, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and (f.author1 = :author or f.author2 = :author) and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and (f.author1 = :author or f.author2 = :author) and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByPublicOfficial(Pageable p, @Param("author")PublicFigure author, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndSeverity(Pageable p, @Param("author")PublicFigure author,
 			@Param("outletId") MediaOutlet outletId,@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndMinSeverity(Pageable p, @Param("author")PublicFigure author,
 			@Param("outletId") MediaOutlet outletId, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndMaxSeverity(Pageable p, @Param("author")PublicFigure author,
 			@Param("outletId") MediaOutlet outletId,@Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverity(Pageable p, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverity(Pageable p, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverity(Pageable p, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverity(Pageable p, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverity(Pageable p, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverity(Pageable p, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.dateMade <= :end and f.outlet = :outletId  and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.dateMade <= :end and f.outlet = :outletId  and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end);
 	
 	//// Queries where Falsehoods are considered Rejected
@@ -374,176 +374,176 @@ public interface FalsehoodRepo extends JpaRepository<Falsehood, BigInteger> {
 	
 	//// Now Adding Search Terms to the List
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms%")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms%")
 	List<Falsehood> getConfirmedFalsehoods(Pageable p, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficial(Pageable p, @Param("author")PublicFigure author, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBySeverity(Pageable p, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodByMinSeverity(Pageable p, @Param("minSeverity")byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodByMaxSeverity(Pageable p, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBetween(Pageable p, @Param("begin") Date begin, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBefore(Pageable p, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId")
 	List<Falsehood> getConfirmedFalsehoodsByOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByOutletAndSeverity(Pageable p, @Param("outletId") MediaOutlet outletId,
 			@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByOutletAndMinSeverity(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByOutletAndMaxSeverity(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and f.dateMade >= :begin and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and f.dateMade >= :begin and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndOutlet(Pageable p, @Param("author")PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndSeverity(Pageable p, @Param("author")PublicFigure author, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndMinSeverity(Pageable p, @Param("author")PublicFigure author, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialAndMaxSeverity(Pageable p, @Param("author")PublicFigure author, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.dateMade >= :begin and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.dateMade >= :begin and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByPublicOfficial(Pageable p, @Param("author")PublicFigure author, @Param("begin") Date begin, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.dateMade <= :end")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and (f.author1 = :author or f.author2 = :author) and f.dateMade <= :end")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByPublicOfficial(Pageable p, @Param("author")PublicFigure author, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndSeverity(Pageable p, @Param("author")PublicFigure author,
 			@Param("outletId") MediaOutlet outletId,@Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndMinSeverity(Pageable p, @Param("author")PublicFigure author,
 			@Param("outletId") MediaOutlet outletId, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsByPublicOfficialOutletAndMaxSeverity(Pageable p, @Param("author")PublicFigure author,
 			@Param("outletId") MediaOutlet outletId,@Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverity(Pageable p, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverity(Pageable p, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverity(Pageable p, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverity(Pageable p, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverity(Pageable p, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverity(Pageable p, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and (f.author1 = :author or f.author2 = :author) and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOutlet(Pageable p, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndBySeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMinSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByMaxSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.outlet = :outletId and f.severity >= :maxSeverity and f.severity <= :minSeverity and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndBySeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity <= :minSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMinSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("minSeverity") byte minSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.severity >= :maxSeverity and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByMaxSeverityOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end
 			, @Param("maxSeverity") byte maxSeverity, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade >= :begin and f.dateMade <= :end and f.outlet = :outletId and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBetweenAndByOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("begin") Date begin, @Param("end") Date end, @Param("terms")String terms);
 	
-	@Query("select f from Falsehood f where f.status > 1 and f.status < 5 and f.tags like %:terms% and f.dateMade <= :end and f.outlet = :outletId  and (f.author1 = :author or f.author2 = :author)")
+	@Query("select f from Falsehood f where ((f.status > 1 and f.status < 5) or f.status > 11) and f.tags like %:terms% and f.dateMade <= :end and f.outlet = :outletId  and (f.author1 = :author or f.author2 = :author)")
 	List<Falsehood> getConfirmedFalsehoodsBeforeAndByOutletPublicFigure(Pageable p, @Param("author") PublicFigure author, @Param("outletId") MediaOutlet outletId, @Param("end") Date end, @Param("terms")String terms);
 	
 	//// Queries where Falsehoods are considered Rejected

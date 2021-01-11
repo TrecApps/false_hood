@@ -189,9 +189,9 @@ final int RANDOM_STRING_LENGTH = 30;
 					sign.setVerificationString("");
 					signatureRepo.save(sign);
 					
-					scanSignatures(signatures, appeal);
 					
-					return "";
+					
+					return scanSignatures(signatures, appeal);
 				}
 				else
 				{
@@ -206,7 +206,7 @@ final int RANDOM_STRING_LENGTH = 30;
 	}
 	
 	
-	private void scanSignatures(List<FalsehoodAppealSignature> signatures, FalsehoodAppeal appeal)
+	private String scanSignatures(List<FalsehoodAppealSignature> signatures, FalsehoodAppeal appeal)
 	{
 		int signatureCount = 0;
 		for(FalsehoodAppealSignature sign: signatures)
@@ -262,8 +262,33 @@ final int RANDOM_STRING_LENGTH = 30;
 					this.pFalsehoodRepo.save(pf);
 				}
 				break;
+			case "Corrected":
+				if(f != null)
+				{
+					int curStatus = f.getStatus();
+					if(curStatus > 4)
+					{
+						
+						return "Cannot allow falsehood to be 'corrected' if it is considered Rejected!";
+					}
+					f.setStatus((byte) (f.getStatus() + (byte)10));
+					this.falsehoodRepo.save(f);
+				}
+				else
+				{
+					int curStatus = pf.getStatus();
+					if(curStatus > 4)
+					{
+					
+						return "Cannot allow falsehood to be 'corrected' if it is considered Rejected!";
+					}
+					pf.setStatus((byte) (pf.getStatus() + (byte)10));
+					this.pFalsehoodRepo.save(pf);
+				}
+				break;
 			}
 		}
+		return "";
 	}
 	
 	private String generateRandomString()
