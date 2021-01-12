@@ -1849,7 +1849,8 @@ public class PublicFalsehoodTest {
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null,null, null, regions, null, 20, null,null, null, null,(byte)20));
+		List<PublicFalsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchPublicFalsehood(null, null, null, null, null,
+				20, 0, null, null, null));
 		
 		System.out.println("In Test with number of falsehoods: " + localFalsehoods.size());
 		
@@ -1933,7 +1934,8 @@ public class PublicFalsehoodTest {
 		
 		PublicFalsehoodController fController = sharedApp.getpFalsehoodController();
 		
-		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null,null, null, null, null, 20, null,null, null,null, (byte)20));
+		List<PublicFalsehood> localFalsehoods = fController.searchRFalsehoodByParams(new SearchPublicFalsehood(null, null, null, null, null,
+				20, 0, null, null, null));
 		
 		
 		assertEquals(10, localFalsehoods.size());

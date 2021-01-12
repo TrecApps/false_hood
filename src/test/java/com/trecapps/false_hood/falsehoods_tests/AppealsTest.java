@@ -89,7 +89,7 @@ public class AppealsTest {
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
-		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, null, 0, 20, null,null,null, null));
+		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, 0, 20, null,null,null));
 		
 		FalsehoodAppeal appeal = new FalsehoodAppeal(null, localFalsehoods.get(0), null, "Some Reason", sharedApp.getUserService().getUserFromToken(UserTokens.userToken3));
 		
@@ -120,11 +120,11 @@ public class AppealsTest {
 		// Now Attempt appeal with both a media and a public falsehood
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
-		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, null, 0, 20, null,null,null, null));
+		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, 0, 20, null,null,null));
 		
 		PublicFalsehoodController pfController = sharedApp.getpFalsehoodController();
 		List<PublicFalsehood> localPubFalsehood = pfController.searchFalsehoodByParams(new SearchPublicFalsehood(null, null, null, null, null,
-				null, null, 20, 0, null, null, null));
+				20, 0, null, null, null));
 		
 		appeal.setFalsehood(localFalsehoods.get(0));
 		appeal.setpFalsehood(localPubFalsehood.get(0));
@@ -212,7 +212,7 @@ public class AppealsTest {
 		
 		FalsehoodController fController = sharedApp.getFalsehoodController();
 		
-		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, null, 0, 20, null,null,null, null));
+		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, 0, 20, null,null,null));
 		
 		FalsehoodAppeal appeal = new FalsehoodAppeal(null, localFalsehoods.get(0), null, "Some Reason", sharedApp.getUserService().getUserFromToken(UserTokens.userToken3));
 		

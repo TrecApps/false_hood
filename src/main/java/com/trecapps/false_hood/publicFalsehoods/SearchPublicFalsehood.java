@@ -21,18 +21,8 @@ public class SearchPublicFalsehood
      * Limit hits via date
      */
     Date to, from;
-
-    /**
-     * Regions
-     */
-    List<Region> regions;
     
     Region region;
-
-    /**
-     * Institution
-     */
-    List<Institution> institutions;
     
     Institution institution;
 
@@ -45,11 +35,6 @@ public class SearchPublicFalsehood
      * Minimum Severity vs Maximum severity
      */
     Severity minimum, maximum;
-
-    /**
-     * Authors involved in the list
-     */
-    List<PublicFigure> authors;
     
     /**
      * 
@@ -64,23 +49,6 @@ public class SearchPublicFalsehood
     	numberOfEntries = 20;
     }
 
-    public SearchPublicFalsehood(String terms, Date to, Date from,
-        List<Region> regions, List<Institution> institutions, int numberOfEntries,
-        Severity minimum, Severity maximum, List<PublicFigure> authors, PublicFigure official, byte officialType)
-    {
-        this.terms = terms;
-        this.to = to;
-        this.from = from;
-        this.regions = regions;
-        this.institutions = institutions;
-        this.numberOfEntries = numberOfEntries;
-        this.minimum = minimum;
-        this.maximum = maximum;
-        this.authors = authors;
-        this.official = official;
-        this.officialType = officialType;
-    }
-    
     
 
     /**
@@ -168,22 +136,21 @@ public class SearchPublicFalsehood
 	 * @param maximum
 	 * @param authors
 	 */
-	public SearchPublicFalsehood(String terms, Date to, Date from, List<Region> regions, Region region,
-			List<Institution> institutions, Institution institution, int numberOfEntries, int page, Severity minimum,
-			Severity maximum, List<PublicFigure> authors) {
+	public SearchPublicFalsehood(String terms, Date to, Date from, Region region,
+			Institution institution, int numberOfEntries, int page, Severity minimum,
+			Severity maximum, PublicFigure official) {
 		super();
 		this.terms = terms;
 		this.to = to;
 		this.from = from;
-		this.regions = regions;
 		this.region = region;
-		this.institutions = institutions;
 		this.institution = institution;
 		this.numberOfEntries = numberOfEntries;
 		this.page = page;
 		this.minimum = minimum;
 		this.maximum = maximum;
-		this.authors = authors;
+		this.official = official;
+		this.officialType = 20;
 	}
 
 	public String getTerms() {
@@ -210,21 +177,6 @@ public class SearchPublicFalsehood
         this.from = from;
     }
 
-    public List<Region> getRegions() {
-        return regions;
-    }
-
-    public void setRegions(List<Region> regions) {
-        this.regions = regions;
-    }
-
-    public List<Institution> getInstitutions() {
-        return institutions;
-    }
-
-    public void setInstitutions(List<Institution> institutions) {
-        this.institutions = institutions;
-    }
 
     public int getNumberOfEntries() {
         return numberOfEntries;
@@ -250,11 +202,4 @@ public class SearchPublicFalsehood
         this.maximum = maximum;
     }
 
-    public List<PublicFigure> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<PublicFigure> authors) {
-        this.authors = authors;
-    }
 }

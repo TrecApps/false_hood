@@ -21,10 +21,7 @@ public class SearchFalsehood
 	 */
 	Date to, from;
 	
-	/**
-	 * List of Media Outlets to restrict falsehoods to
-	 */
-	List<String> outlets;
+
 	
 	MediaOutlet outlet;
 	
@@ -38,10 +35,6 @@ public class SearchFalsehood
 	 */
 	Severity minimum, maximum;
 	
-	/**
-	 * Authors involved in the list
-	 */
-	List<PublicFigure> authors;
 	
 	PublicFigure author;
 	
@@ -63,20 +56,17 @@ public class SearchFalsehood
 	 * @param authors
 	 * @param author
 	 */
-	public SearchFalsehood(String terms, Date to, Date from, List<String> outlets, MediaOutlet outlet,
-			int numberOfEntries, int page, Severity minimum, Severity maximum, List<PublicFigure> authors,
-			PublicFigure author) {
+	public SearchFalsehood(String terms, Date to, Date from, MediaOutlet outlet,
+			int numberOfEntries, int page, Severity minimum, Severity maximum, PublicFigure author) {
 		super();
 		this.terms = terms;
 		this.to = to;
 		this.from = from;
-		this.outlets = outlets;
 		this.outlet = outlet;
 		this.numberOfEntries = numberOfEntries;
 		this.page = page;
 		this.minimum = minimum;
 		this.maximum = maximum;
-		this.authors = authors;
 		this.author = author;
 	}
 	
@@ -183,19 +173,6 @@ public class SearchFalsehood
 		this.from = from;
 	}
 
-	/**
-	 * @return the outlets
-	 */
-	public List<String> getOutlets() {
-		return outlets;
-	}
-
-	/**
-	 * @param outlets the outlets to set
-	 */
-	public void setOutlets(List<String> outlets) {
-		this.outlets = outlets;
-	}
 
 	/**
 	 * @return the numberOfEntries
@@ -239,19 +216,7 @@ public class SearchFalsehood
 		this.maximum = maximum;
 	}
 
-	/**
-	 * @return the authors
-	 */
-	public List<PublicFigure> getAuthors() {
-		return authors;
-	}
 
-	/**
-	 * @param authors the authors to set
-	 */
-	public void setAuthors(List<PublicFigure> authors) {
-		this.authors = authors;
-	}
 	
 	
 }
