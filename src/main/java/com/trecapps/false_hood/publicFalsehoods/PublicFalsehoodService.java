@@ -1,5 +1,6 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
+import com.trecapps.false_hood.json.EventObj;
 import com.trecapps.false_hood.json.VerdictListObj;
 import com.trecapps.false_hood.json.VerdictObj;
 import com.trecapps.false_hood.miscellanous.FalsehoodStatus;
@@ -985,16 +986,34 @@ public class PublicFalsehoodService {
     		return null;
         PublicFalsehood obj = pfRepo.getOne(id);
         String contents = "";
+		List<VerdictObj> verdicts = null;
+		List<EventObj> events = null;
         try
         {
         	contents = s3BucketManager.retrieveContents("publicFalsehood-" + obj.getId());
+			JSONObject jObj = s3BucketManager.getJSONObj("publicFalsehood-" + obj.getId());
+			
+			VerdictListObj verList = new VerdictListObj();
+			verList.initializeFromJson(jObj);
+			
+			verdicts = verList.getVerdicts();
+			events = verList.getEvents();
+			
+			for(VerdictObj v : verdicts)
+			{
+				v.setIpAddress((String)null);
+			}
+			for(EventObj e : events)
+			{
+				e.setIpAddress((String)null);
+			}
         }
         catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
-		return new FullPublicFalsehood(contents, obj, null);
+		return new FullPublicFalsehood(contents, obj, verdicts, events);
     }
 
     public List<PublicFalsehood> getFalsehoodsByAuthor(PublicFigure author)

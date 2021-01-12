@@ -1767,53 +1767,53 @@ public class PublicFalsehoodTest {
 			falsehoods[0] = new FullPublicFalsehood("Public Falsehood 1",
 					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.POLITICIAN, regions.get(1),
 							institutions.get(2), (byte)1, new Date(DATE_2010),"Vader|Palpatine|Empire"),
-					"Vader;Palpatine;Empire");
+					null, null);
 		if(falsehoods[1] == null)
 			falsehoods[1] = new FullPublicFalsehood("Public Falsehood 2",
 					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.LAW_ENFORCEMENT, regions.get(2),
 							institutions.get(0), (byte)3, new Date(DATE_2017),"Vader|Voldemort|Thanos"),
-					"Vader;Voldemort;Thanos");
+					null, null);
 		if(falsehoods[2] == null)
 			falsehoods[2] = new FullPublicFalsehood("Public Falsehood 3",
 					new PublicFalsehood(null, null, (byte)0, figures.get(2), PublicFalsehood.ECONOMIST, regions.get(0),
 							institutions.get(1), (byte)4, new Date(DATE_2014),"Voldemort|Dumbledore|Ministry"),
-					"Voldemort;Dumbledore;Ministry");
+					null, null);
 		if(falsehoods[3] == null)
 			falsehoods[3] = new FullPublicFalsehood("Public Falsehood 4",
 					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.ENVIRONMENTALIST, regions.get(1),
 							institutions.get(2), (byte)5, new Date(DATE_2020),"Thanos|Ironman|Thor|Serena"),
-					"Thanos;Ironman;Thor;Serena");
+					null, null);
 		if(falsehoods[4] == null)
 			falsehoods[4] = new FullPublicFalsehood("Public Falsehood 5",
 					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.INTELLIGENCE, regions.get(2),
 							institutions.get(0), (byte)0, new Date(DATE_2008),"Loki|Sif|Serena"),
-					"Loki;Sif;Serena");
+					null, null);
 		
 		if(falsehoods[5] == null)
 			falsehoods[5] = new FullPublicFalsehood("Public Falsehood 6",
 					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.POLITICIAN, regions.get(1),
 							institutions.get(2), (byte)1, new Date(DATE_2020),"Vader|Palpatine|Empire"),
-					"Vader;Palpatine;Empire");
+					null, null);
 		if(falsehoods[6] == null)
 			falsehoods[6] = new FullPublicFalsehood("Public Falsehood 7",
 					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.LAW_ENFORCEMENT, regions.get(2),
 							institutions.get(1), (byte)3, new Date(DATE_2014),"Vader|Voldemort|Thanos"),
-					"Vader;Voldemort;Thanos");
+					null, null);
 		if(falsehoods[7] == null)
 			falsehoods[7] = new FullPublicFalsehood("Public Falsehood 8",
 					new PublicFalsehood(null, null, (byte)0, figures.get(2), PublicFalsehood.ECONOMIST, regions.get(0),
 							institutions.get(0), (byte)4, new Date(DATE_2017),"Voldemort|Dumbledore|Ministry"),
-					"Voldemort;Dumbledore;Ministry");
+					null, null);
 		if(falsehoods[8] == null)
 			falsehoods[8] = new FullPublicFalsehood("Public Falsehood 9",
 					new PublicFalsehood(null, null, (byte)0, figures.get(0), PublicFalsehood.ENVIRONMENTALIST, regions.get(1),
 							institutions.get(2), (byte)5, new Date(DATE_2008),"Thanos|Ironman|Thor|Serena"),
-					"Thanos;Ironman;Thor;Serena");
+					null, null);
 		if(falsehoods[9] == null)
 			falsehoods[9] = new FullPublicFalsehood("Public Falsehood 10",
 					new PublicFalsehood(null, null, (byte)0, figures.get(1), PublicFalsehood.INTELLIGENCE, regions.get(2),
 							institutions.get(0), (byte)0, new Date(DATE_2010),"Loki|Sif|Serena"),
-					"Loki;Sif;Serena");
+					null, null);
 		
 		AuthPublicFalsehoodController afController = app.getAuthPFalsehoodController();
 		

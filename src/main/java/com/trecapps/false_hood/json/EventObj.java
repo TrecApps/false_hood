@@ -2,9 +2,11 @@ package com.trecapps.false_hood.json;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
+@Component
 public class EventObj extends JsonMarker implements FalsehoodJsonObj
 {
     public EventObj() {

@@ -492,14 +492,33 @@ public class FalsehoodService {
 		
 		Falsehood obj = fRepo.getOne(id);
 		String contents = "";
+		List<VerdictObj> verdicts = null;
+		List<EventObj> events = null;
 		try {
 			contents = s3BucketManager.retrieveContents(obj.getContentId());
+			JSONObject jObj = s3BucketManager.getJSONObj(obj.getContentId());
+			
+			VerdictListObj verList = new VerdictListObj();
+			verList.initializeFromJson(jObj);
+			
+			verdicts = verList.getVerdicts();
+			events = verList.getEvents();
+			
+			for(VerdictObj v : verdicts)
+			{
+				v.setIpAddress((String)null);
+			}
+			for(EventObj e : events)
+			{
+				e.setIpAddress((String)null);
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
-		return new FullFalsehood(contents, obj, null);
+		return new FullFalsehood(contents, obj, verdicts, events);
 	}
 	
 	

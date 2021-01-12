@@ -2,9 +2,11 @@ package com.trecapps.false_hood.json;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
+@Component
 public class VerdictObj extends JsonMarker implements FalsehoodJsonObj
 {
     public VerdictObj(boolean approve, long userId, Date made, String explaination, String ipAddress) {

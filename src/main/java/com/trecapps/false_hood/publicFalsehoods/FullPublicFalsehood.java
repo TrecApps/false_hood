@@ -1,6 +1,11 @@
 package com.trecapps.false_hood.publicFalsehoods;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.trecapps.false_hood.json.EventObj;
+import com.trecapps.false_hood.json.VerdictObj;
 
 @Component
 public class FullPublicFalsehood {
@@ -9,20 +14,30 @@ public class FullPublicFalsehood {
 
     PublicFalsehood metadata;
 
-    String keywords;
+	List<VerdictObj> verdicts;
+	List<EventObj> events;
 
     public FullPublicFalsehood() {
     }
-
-    public FullPublicFalsehood(String contents, PublicFalsehood metadata, String keywords) {
-        this.contents = contents;
-        this.metadata = metadata;
-        this.keywords = keywords;
-    }
     
-    public FullPublicFalsehood clone()
+    /**
+	 * @param contents
+	 * @param metadata
+	 * @param keywords
+	 * @param events
+	 */
+	public FullPublicFalsehood(String contents, PublicFalsehood metadata, List<VerdictObj> verdicts,
+			List<EventObj> events) {
+		super();
+		this.contents = contents;
+		this.metadata = metadata;
+		this.verdicts = verdicts;
+		this.events = events;
+	}
+
+	public FullPublicFalsehood clone()
     {
-    	return new FullPublicFalsehood(contents, metadata.clone(), keywords);
+    	return new FullPublicFalsehood(contents, metadata.clone(), verdicts, events);
     }
 
     public String getContents() {
@@ -41,11 +56,33 @@ public class FullPublicFalsehood {
         this.metadata = metadata;
     }
 
-    public String getKeywords() {
-        return keywords;
-    }
+	/**
+	 * @return the verdicts
+	 */
+	public List<VerdictObj> getVerdicts() {
+		return verdicts;
+	}
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
+	/**
+	 * @param verdicts the verdicts to set
+	 */
+	public void setVerdicts(List<VerdictObj> verdicts) {
+		this.verdicts = verdicts;
+	}
+
+	/**
+	 * @return the events
+	 */
+	public List<EventObj> getEvents() {
+		return events;
+	}
+
+	/**
+	 * @param events the events to set
+	 */
+	public void setEvents(List<EventObj> events) {
+		this.events = events;
+	}
+
+    
 }

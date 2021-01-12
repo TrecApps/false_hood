@@ -1,6 +1,11 @@
 package com.trecapps.false_hood.falsehoods;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.trecapps.false_hood.json.EventObj;
+import com.trecapps.false_hood.json.VerdictObj;
 
 @Component
 public class FullFalsehood {
@@ -9,22 +14,28 @@ public class FullFalsehood {
 	
 	Falsehood metadata;
 	
-	String keywords;
+	List<VerdictObj> verdicts;
+	List<EventObj> events;
 
+
+	
 	/**
 	 * @param contents
 	 * @param metadata
+	 * @param keywords
+	 * @param events
 	 */
-	public FullFalsehood(String contents, Falsehood metadata, String keywords) {
+	public FullFalsehood(String contents, Falsehood metadata, List<VerdictObj> verdicts, List<EventObj> events) {
 		super();
 		this.contents = contents;
 		this.metadata = metadata;
-		this.keywords = keywords;
+		this.verdicts = verdicts;
+		this.events = events;
 	}
-	
+
 	public FullFalsehood clone()
 	{
-		return new FullFalsehood(contents, metadata.clone(), keywords);
+		return new FullFalsehood(contents, metadata.clone(), verdicts, events);
 	}
 
 	/**
@@ -66,16 +77,31 @@ public class FullFalsehood {
 	/**
 	 * @return the keywords
 	 */
-	public String getKeywords() {
-		return keywords;
+	public List<VerdictObj> getVerdicts() {
+		return verdicts;
 	}
 
 	/**
 	 * @param keywords the keywords to set
 	 */
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+	public void setVerdicts(List<VerdictObj> verdicts) {
+		this.verdicts = verdicts;
 	}
-	
+
+	/**
+	 * @return the events
+	 */
+	public List<EventObj> getEvents() {
+		return events;
+	}
+
+	/**
+	 * @param events the events to set
+	 */
+	public void setEvents(List<EventObj> events) {
+		this.events = events;
+	}
+
+
 	
 }
