@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -1033,10 +1034,33 @@ public class PublicFalsehoodService {
         return pfRepo.save(f);
     }
 
-    public boolean insertEntryToStorage(PublicFalsehood f, String contents)
+    public boolean insertEntryToStorage(PublicFalsehood f, String contents,FalsehoodUser user,HttpServletRequest ip)
     {
         String objectId = "publicFalsehood-" + f.getId();
+        
+        VerdictListObj verdicts = new VerdictListObj();
+		verdicts.setApproversAvailable(uServe.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
 
+		EventObj event = new EventObj(true, user.getUserId(),
+				new Date(Calendar.getInstance().getTime().getTime()), null, null);
+
+		event.setIpAddress(ip);
+
+		List<EventObj> eventList = verdicts.getEvents();
+		if(eventList == null)
+		{
+			eventList = new LinkedList<>();
+			System.out.println("Detected Null EventList Somehow!");
+		}
+		eventList.add(event);
+		verdicts.setEvents(eventList);
+
+		JSONObject insertJson = verdicts.toJsonObject();
+
+		if(!"Success".equals(s3BucketManager.addJsonFile(objectId, insertJson)))
+		{
+			return false;
+		}
         return "Success".equals(s3BucketManager.addNewFile(objectId, contents));
 
     }

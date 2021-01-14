@@ -49,7 +49,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
     }
 
     @PostMapping("/Insert")
-    public ResponseEntity<String> insertFalsehood(RequestEntity<FullPublicFalsehood> entity)
+    public ResponseEntity<String> insertFalsehood(RequestEntity<FullPublicFalsehood> entity, HttpServletRequest req)
     {
         FalsehoodUser user = super.getUser(entity);
 
@@ -82,7 +82,7 @@ public class AuthPublicFalsehoodController extends AuthenticationControllerBase
 
 
 
-        if(!service.insertEntryToStorage(meta, falsehood.getContents()))
+        if(!service.insertEntryToStorage(meta, falsehood.getContents(),user, req))
         {
             return new ResponseEntity<String>("Failed to Write Falsehood to Storage!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
