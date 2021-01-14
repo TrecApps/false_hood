@@ -11,11 +11,11 @@ In order to avoid leaking credentials the Spring Application Properties file uti
 * ${DB_DIALECT} - the Hibernate Dialect to use  (For MySQL, "org.hibernate.dialect.MySQL57Dialect" is recommended)
 
 * ${TREC_PUBLIC_KEY} - File Path for the public Key used to verify JWT Authorization tokens
-${FALSEHOOD_CLIENT_ID} - the ID of this instance of the Service (can be anything for now, but when using a production version of the trec-apps-user-service should be what string the service gave you when registering)
-${USER_SERVICE_URL} - the URL of the Falsehood Service to connect to
+* ${FALSEHOOD_CLIENT_ID} - the ID of this instance of the Service (can be anything for now, but when using a production version of the trec-apps-user-service should be what string the service gave you when registering)
+* ${USER_SERVICE_URL} - the URL of the Falsehood Service to connect to
 
-${EM_USERNAME} - the Email Address to send (currently expects a gmail address)
-${EM_PASSWORD} - The Password for the Email Address (For Gmail, this would be a special app password, not the user password)
+* ${EM_USERNAME} - the Email Address to send (currently expects a gmail address)
+* ${EM_PASSWORD} - The Password for the Email Address (For Gmail, this would be a special app password, not the user password)
 
 ## Building
 
