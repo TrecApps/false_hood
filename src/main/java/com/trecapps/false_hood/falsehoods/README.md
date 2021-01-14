@@ -50,7 +50,8 @@ Object also comes with
     },
     "source": "Name of the Article or Name of the Show",
     "dateMade": date indicating when the falsehood was made,
-    "contentId": (might become depricated)
+    "contentId": (might become depricated),
+    "tags": "Keywords separated by new line or by '|'"
 }
 ```
 
@@ -64,11 +65,22 @@ Note: the "commonLie" and "author2" can be null (commonLie might not exist yet).
     "metadata": {
         // the Falsehood seen above
     },
-    "keywords": "Terms;;that;;can;;be;;used;;to;;search;;for;;the;;falsehood"
+    "verdicts": [{
+        "approve": true/false,
+        "userId": number indicating Relevant User,
+        "made": Date Documented,
+        "explaination": "Comment indicating what this event is or why it was made"
+    },...],
+    "events": [{
+        "approve": true/false,
+        "userId": number indicating Relevant User,
+        "made": Date Documented,
+        "explaination": "Comment indicating what this event is or why it was made"
+    },...]
 }
 ```
 
-Note: "keywords" are separated by a double semicolon ";;"
+Note: For "approve" in verdict objects, true equates to the string "approve" and false equates to "reject". In event Objects, true equates to "Created" and false to "Updated". 
 
 #### SearchFalsehood
 
@@ -79,16 +91,10 @@ Used to perform searches of the Media Falsehoods
     "terms": "search terms \"terms that are together\""
     "to": "2020-01-01T18:25:43.511Z",
     "from": null (same format as "to" if provided),
-    "outlets": [
-        {"outletId": 1},
-        {"outlerId": 2}
-    ],
+    "outlet": {"outletId": 1},
     "numberOfEntries": number of entries to retrieve
     "minimum": "OBJECTIVE_FALSEHOOD",
     "maximum": null,
-    "authors": [
-    	{ "id": 5},
-    	{ "id": 7}
-    ]
+    "authors": { "id": 5}
 }
 ```
