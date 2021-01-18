@@ -99,8 +99,6 @@ Used to perform searches of the Public Falsehoods
     "terms": "search terms \"terms that are together\""
     "to": "2020-01-01T18:25:43.511Z",
     "from": null (same format as "to" if provided),
-    "region": {"id": 1},
-    "institution": {"id": 7},
     "numberOfEntries": number of entries to retrieve
     "minimum": "OBJECTIVE_FALSEHOOD",
     "maximum": null,
@@ -109,3 +107,5 @@ Used to perform searches of the Public Falsehoods
 ```
 
 Note: "Region" and "Institution" might be removed soon to reduce SQL Search complexity and thus risk of a DoS attack
+
+Update: Region and Institution HAS been removed to reduce complexity in Public Falsehoods search

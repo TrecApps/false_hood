@@ -123,7 +123,7 @@ public class AppealsTest {
 		List<Falsehood> localFalsehoods = fController.searchFalsehoodByParams(new SearchFalsehood(null,null, null, null, 0, 20, null,null,null));
 		
 		PublicFalsehoodController pfController = sharedApp.getpFalsehoodController();
-		List<PublicFalsehood> localPubFalsehood = pfController.searchFalsehoodByParams(new SearchPublicFalsehood(null, null, null, null, null,
+		List<PublicFalsehood> localPubFalsehood = pfController.searchFalsehoodByParams(new SearchPublicFalsehood(null, null, null, 
 				20, 0, null, null, null));
 		
 		appeal.setFalsehood(localFalsehoods.get(0));

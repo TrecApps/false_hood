@@ -22,9 +22,7 @@ public class SearchPublicFalsehood
      */
     Date to, from;
     
-    Region region;
-    
-    Institution institution;
+
 
     /**
      * Max Number of Entries to attempt to retrieve
@@ -79,33 +77,6 @@ public class SearchPublicFalsehood
 		this.official = official;
 	}
 
-	/**
-	 * @return the region
-	 */
-	public Region getRegion() {
-		return region;
-	}
-
-	/**
-	 * @param region the region to set
-	 */
-	public void setRegion(Region region) {
-		this.region = region;
-	}
-
-	/**
-	 * @return the institution
-	 */
-	public Institution getInstitution() {
-		return institution;
-	}
-
-	/**
-	 * @param institution the institution to set
-	 */
-	public void setInstitution(Institution institution) {
-		this.institution = institution;
-	}
 
 	
 	/**
@@ -136,15 +107,12 @@ public class SearchPublicFalsehood
 	 * @param maximum
 	 * @param authors
 	 */
-	public SearchPublicFalsehood(String terms, Date to, Date from, Region region,
-			Institution institution, int numberOfEntries, int page, Severity minimum,
+	public SearchPublicFalsehood(String terms, Date to, Date from, int numberOfEntries, int page, Severity minimum,
 			Severity maximum, PublicFigure official) {
 		super();
 		this.terms = terms;
 		this.to = to;
 		this.from = from;
-		this.region = region;
-		this.institution = institution;
 		this.numberOfEntries = numberOfEntries;
 		this.page = page;
 		this.minimum = minimum;
