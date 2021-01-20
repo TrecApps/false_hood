@@ -51,6 +51,26 @@ public class PublicFalsehoodController
     	return attService.getRegion(id);
     }
     
+    @GetMapping("/ByRegion/{id}")
+    public List<PublicFalsehood> searchFalseoodsByRegion(@PathVariable("id") Long id, @RequestParam(value="size", defaultValue="20", required=false)int size,
+			@RequestParam(value="page", defaultValue="0", required=false)int page)
+    {
+    	RegionEntry r = attService.getRegion(id);
+    	if(r == null || r.getRegion() == null)
+    		return null;
+    	return service.searchByRegion(r.getRegion(), size, page);
+    }
+    
+    @GetMapping("/ByInstitution/{id}")
+    public List<PublicFalsehood> searchFalseoodsByInstitution(@PathVariable("id") Long id, @RequestParam(value="size", defaultValue="20", required=false)int size,
+			@RequestParam(value="page", defaultValue="0", required=false)int page)
+    {
+    	InstitutionEntry r = attService.getInstitution(id);
+    	if(r == null || r.getInstitution() == null)
+    		return null;
+    	return service.searchByInstitution(r.getInstitution(), size, page);
+    }
+    
     @GetMapping("/Institution/{id}")
     public InstitutionEntry getInstitutionById(@PathVariable("id") Long id)
     {

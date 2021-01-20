@@ -118,6 +118,16 @@ public class PublicFalsehoodService {
 		return pfRepo.getSubmittedFalsehoods(PageRequest.of(page, size));
 	}
     
+	public List<PublicFalsehood> searchByRegion(Region id, int size, int page)
+	{
+		return pfRepo.getConfirmedFalsehoodsByRegion(PageRequest.of(page, size), (byte) 20, id);
+	}
+	
+	public List<PublicFalsehood> searchByInstitution(Institution id, int size, int page)
+	{
+		return pfRepo.getConfirmedFalsehoodsByInstitution(PageRequest.of(page, size), (byte) 20, id);
+	}
+	
     public List<PublicFalsehood> searchConfirmedFalsehoodsByAttribte(SearchPublicFalsehood search)
     {
     	
