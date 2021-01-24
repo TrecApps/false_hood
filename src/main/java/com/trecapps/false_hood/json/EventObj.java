@@ -50,8 +50,13 @@ public class EventObj extends JsonMarker implements FalsehoodJsonObj
         {
             userId = (Long)o;
         }
+        else if(o instanceof Integer)
+        {
+        	Integer oi = (Integer)o;
+        	userId = oi.longValue();
+        }
         else
-            throw new JSONException("'User' field needed to be a number castable to 'Long'");
+            throw new JSONException("'User' field needed to be a number castable to 'Long', got type " + o.getClass());
 
         o = obj.get("IpAddress");
 
@@ -69,8 +74,12 @@ public class EventObj extends JsonMarker implements FalsehoodJsonObj
         }
         else throw new JSONException("'Date' field needed to be a number castable to 'Long'");
 
-        o = obj.get("Explaination");
-
+        try {
+        	o = obj.get("Explaination");
+        }catch(JSONException e)
+        {
+        	o = null;
+        }
         if(o instanceof String)
         {
             explaination = o.toString();
