@@ -33,7 +33,7 @@ public class VerdictListObj implements FalsehoodJsonObj
         for(VerdictObj verdict: verdicts)
         {
             totalCount++;
-            if(verdict.isApprove())
+            if(verdict.isApprove() > 0)
                 approveCount++;
         }
 
@@ -41,7 +41,7 @@ public class VerdictListObj implements FalsehoodJsonObj
         if(totalCount == 0)
             return false;
 
-        return (float)approveCount / (float)totalCount > 0.66f;
+        return ((float)approveCount / (float)totalCount) > 0.66f;
     }
 
     public boolean isRejected()
@@ -51,11 +51,12 @@ public class VerdictListObj implements FalsehoodJsonObj
 
         int totalCount = 0;
         int approveCount = 0;
+        
 
         for(VerdictObj verdict: verdicts)
         {
             totalCount++;
-            if(!verdict.isApprove())
+            if(verdict.isApprove() < 1)
                 approveCount++;
         }
 
@@ -63,7 +64,29 @@ public class VerdictListObj implements FalsehoodJsonObj
         if(totalCount == 0)
             return false;
 
-        return (float)approveCount / (float)totalCount > 0.66f;
+        return ((float)approveCount / (float)totalCount) > 0.66f;
+    }
+    
+    public boolean shouldStrike()
+    {
+    	int totalReject = 0;
+    	int strikeReject = 0;
+    	
+    	for(VerdictObj verdict: verdicts)
+    	{
+    		switch(verdict.isApprove())
+    		{
+    		case -1:
+    			strikeReject++;
+    		case 0:
+    			totalReject++;
+    		}
+    	}
+    	
+    	if(totalReject == 0)
+    		return false;
+    	
+    	return ((float)strikeReject / (float)totalReject) > 0.6f;
     }
 
     public List<EventObj> getEvents() {

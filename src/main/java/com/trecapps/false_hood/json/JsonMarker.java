@@ -19,7 +19,7 @@ public class JsonMarker
             "REMOTE_ADDR"
     };
 
-    boolean approve;
+    int approve;
 
     long userId;
 
@@ -32,7 +32,7 @@ public class JsonMarker
     public JsonMarker() {
     }
 
-    public JsonMarker(boolean approve, long userId, Date made, String explaination, String ipAddress) {
+    public JsonMarker(int approve, long userId, Date made, String explaination, String ipAddress) {
         this.approve = approve;
         this.userId = userId;
         this.made = made;
@@ -67,11 +67,11 @@ public class JsonMarker
         this.ipAddress = ipAddress;
     }
 
-    public boolean isApprove() {
+    public int isApprove() {
         return approve;
     }
 
-    public void setApprove(boolean approve) {
+    public void setApprove(int approve) {
         this.approve = approve;
     }
 

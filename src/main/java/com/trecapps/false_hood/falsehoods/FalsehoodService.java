@@ -575,7 +575,7 @@ public class FalsehoodService {
 
 		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
 
-		EventObj event = new EventObj(true, user.getUserId(),
+		EventObj event = new EventObj(1, user.getUserId(),
 				new Date(Calendar.getInstance().getTime().getTime()), null, null);
 
 		event.setIpAddress(ip);
@@ -600,7 +600,7 @@ public class FalsehoodService {
 		
 	}
 
-	public String addVerdict(BigInteger id, boolean approve, String comment, FalsehoodUser user, HttpServletRequest ip)
+	public String addVerdict(BigInteger id, int approve, String comment, FalsehoodUser user, HttpServletRequest ip)
 	{
 		if(user.getCredit() < MIN_CREDIT_APPROVE_REJECT)
 			return "Not Enough Credit";
@@ -661,6 +661,10 @@ public class FalsehoodService {
 		{
 			f.setStatus(FalsehoodStatus.REJECTED.GetValue());
 			fRepo.save(f);
+			if(verdicts.shouldStrike())
+			{
+				// To-Do: Get the User
+			}
 		}
 
 
@@ -697,7 +701,7 @@ public class FalsehoodService {
 
 		verdicts.setApproversAvailable(userService.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
 
-		EventObj event = new EventObj(false, user.getUserId(),
+		EventObj event = new EventObj(1, user.getUserId(),
 				new Date(Calendar.getInstance().getTime().getTime()), null, null);
 
 		event.setIpAddress(ip);

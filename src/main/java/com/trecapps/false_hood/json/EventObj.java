@@ -12,7 +12,7 @@ public class EventObj extends JsonMarker implements FalsehoodJsonObj
     public EventObj() {
     }
 
-    public EventObj(boolean approve, long userId, Date made, String explaination, String ipAddress) {
+    public EventObj(int approve, long userId, Date made, String explaination, String ipAddress) {
         super(approve, userId, made, explaination, ipAddress);
     }
 
@@ -20,7 +20,7 @@ public class EventObj extends JsonMarker implements FalsehoodJsonObj
     public JSONObject toJsonObject() {
         JSONObject ret = new JSONObject();
 
-        ret.accumulate("EventType", (approve) ? "Created": "Updated");
+        ret.accumulate("EventType", (approve > 0) ? "Created": "Updated");
         ret.accumulate("User", (Long)userId);
         ret.accumulate("IpAddress", ipAddress);
         ret.accumulate("Date", (Long)made.getTime());
@@ -35,11 +35,11 @@ public class EventObj extends JsonMarker implements FalsehoodJsonObj
 
         if(o instanceof String)
         {
-            approve = "Created".equalsIgnoreCase((String)o);
+            approve = "Created".equalsIgnoreCase((String)o) ? 1 : 0;
         }
         else if(o instanceof Boolean)
         {
-            approve = (Boolean)o;
+            approve = (Boolean)o ? 1 : 0;
         }
         else
             throw new JSONException("'Verdict' field needed to be a String or a boolean value");

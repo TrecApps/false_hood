@@ -9,7 +9,7 @@ import java.sql.Date;
 @Component
 public class VerdictObj extends JsonMarker implements FalsehoodJsonObj
 {
-    public VerdictObj(boolean approve, long userId, Date made, String explaination, String ipAddress) {
+    public VerdictObj(int approve, long userId, Date made, String explaination, String ipAddress) {
         super(approve, userId, made, explaination, ipAddress);
     }
 
@@ -20,7 +20,14 @@ public class VerdictObj extends JsonMarker implements FalsehoodJsonObj
     public JSONObject toJsonObject() {
         JSONObject ret = new JSONObject();
 
-        ret.accumulate("Verdict", (approve) ? "approve": "reject");
+        String verdict;
+        if(approve > 0)
+        	verdict = "approve";
+        else if( approve < 0)
+        	verdict = "reject:Prejudice";
+        else
+        	verdict = "reject:Mercy";
+        ret.accumulate("Verdict", verdict);
         ret.accumulate("User", (Long)userId);
         ret.accumulate("IpAddress", ipAddress);
         ret.accumulate("Date", (Long)made.getTime());
@@ -35,11 +42,7 @@ public class VerdictObj extends JsonMarker implements FalsehoodJsonObj
 
         if(o instanceof String)
         {
-            approve = "approve".equalsIgnoreCase((String)o);
-        }
-        else if(o instanceof Boolean)
-        {
-            approve = (Boolean)o;
+            approve = "approve".equalsIgnoreCase((String)o) ? 1 : ("reject:Prejudice".equalsIgnoreCase((String)o) ? -1 : 0);
         }
         else
             throw new JSONException("'Verdict' field needed to be a String or a boolean value");

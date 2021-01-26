@@ -45,7 +45,7 @@ public class PublicFalsehoodService {
         this.uServe = uServe;
     }
     
-	public String addVerdict(BigInteger id, boolean approve, String comment, FalsehoodUser user, HttpServletRequest ip)
+	public String addVerdict(BigInteger id, int approve, String comment, FalsehoodUser user, HttpServletRequest ip)
 	{
 		if(user.getCredit() < MIN_CREDIT_APPROVE_REJECT)
 			return "Not Enough Credit";
@@ -107,6 +107,11 @@ public class PublicFalsehoodService {
 			System.out.println("Rejecting Public Falsehood!");
 			f.setStatus(FalsehoodStatus.REJECTED.GetValue());
 			pfRepo.save(f);
+			
+			if(verdicts.shouldStrike())
+			{
+				// To-Do: Retrieve User that created the falsehood
+			}
 		}
 
 
@@ -562,7 +567,7 @@ public class PublicFalsehoodService {
         VerdictListObj verdicts = new VerdictListObj();
 		verdicts.setApproversAvailable(uServe.getUserCountAboveCredibility(MIN_CREDIT_APPROVE_REJECT));
 
-		EventObj event = new EventObj(true, user.getUserId(),
+		EventObj event = new EventObj(1, user.getUserId(),
 				new Date(Calendar.getInstance().getTime().getTime()), null, null);
 
 		event.setIpAddress(ip);
