@@ -8,6 +8,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,12 @@ public class FalsehoodUserService {
 								@Autowired FalsehoodUserRepo userRepo)
 	{
 		this(publicKeyStr, userRepo, false);
+	}
+	
+	public FalsehoodUser getUserById(long id)
+	{
+		Optional<FalsehoodUser> u = userRepo.findById(id);
+		return u.isPresent() ? u.get() : null;
 	}
 	
 	private boolean setKeys()

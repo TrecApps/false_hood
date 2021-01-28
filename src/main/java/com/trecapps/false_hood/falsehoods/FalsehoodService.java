@@ -664,6 +664,16 @@ public class FalsehoodService {
 			if(verdicts.shouldStrike())
 			{
 				// To-Do: Get the User
+				var events = verdicts.getEvents();
+				for(EventObj event: events)
+				{
+					if(event.isApprove() > 0)
+					{
+						FalsehoodUser createrUser = userService.getUserById(event.getUserId());
+						userService.adjustCredibility(createrUser, -5);
+						break;
+					}
+				}
 			}
 		}
 

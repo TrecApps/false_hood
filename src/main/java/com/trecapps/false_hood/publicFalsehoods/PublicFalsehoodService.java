@@ -111,6 +111,16 @@ public class PublicFalsehoodService {
 			if(verdicts.shouldStrike())
 			{
 				// To-Do: Retrieve User that created the falsehood
+				var events = verdicts.getEvents();
+				for(EventObj event: events)
+				{
+					if(event.isApprove() > 0)
+					{
+						FalsehoodUser createrUser = uServe.getUserById(event.getUserId());
+						uServe.adjustCredibility(createrUser, -5);
+						break;
+					}
+				}
 			}
 		}
 
